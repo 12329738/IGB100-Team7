@@ -1,0 +1,78 @@
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+
+public abstract class Entity : MonoBehaviour, IDamageable
+{
+    public float currentHealth;
+    //public GameObject deathEffect;
+    [HideInInspector] public bool canBeDamaged = true;
+    [SerializeField] public FlashWhite flashScript;
+
+    public Stats _stats;
+    public virtual Stats stats { get => _stats; set => _stats = value; }
+    public Team _team;
+    public virtual Team team { get => _team; set => _team = value; }
+    public float _hitCooldown;
+    public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
+
+    public float lastHitTime { get; set; }
+
+   
+
+
+    public void Awake()
+    {
+        SetupStats();
+    }
+
+    private void SetupStats()
+    {
+        stats.Initialize();
+        currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
+    }
+
+    public bool IsDamageable()
+    {
+        if (canBeDamaged == false)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        if (Time.time - lastHitTime < hitCooldown)
+            return;
+
+        lastHitTime = Time.time;
+
+        currentHealth -= damage;
+        if (flashScript != null)
+        {
+            flashScript.TriggerFlash();
+        }
+
+        if (currentHealth <= 0)
+        {
+            canBeDamaged = false;
+            Die();
+        }
+    }
+
+    internal abstract void Die();
+
+
+    public void AddStatModifier(float amount, StatType statType)
+    {
+        StatModifier modifier = new StatModifier();
+        modifier.stat = statType;
+        modifier.amount = amount;
+        stats.modifiers.Add(modifier);
+    }
+}
