@@ -77,4 +77,16 @@ public abstract class Entity : MonoBehaviour, IDamageable
         modifier.amount = amount;
         stats.modifiers.Add(modifier);
     }
+
+    public float GetCurrentHealthPercent()
+    {
+        return currentHealth / stats.GetStat(StatType.MaxHealth).currentValue;
+    }
+
+    public float[] GetCurrentHealth()
+    {
+        float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth).currentValue };
+    
+        return healthAmount;
+    }
 }

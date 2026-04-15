@@ -17,21 +17,6 @@ public class Upgrade : ScriptableObject
     public List<int> levelsAvaliable;
 }
 
-[CreateAssetMenu(menuName = "Upgrade/Item")]
-public class Item : Upgrade
-{
-    [HideInInspector]
-    public List<int> levelsAvaliable = new List<int> { 0 };
-}
-
-[CreateAssetMenu(menuName = "Upgrade/Item upgrade")]
-public class ItemUpgrade : Upgrade
-{
-    public List<StatModifier> modifiers;
-    [HideInInspector]
-    public UpgradeRarity rarity;
-    public List<int> levelsAvaliable;
-}
 
 
 

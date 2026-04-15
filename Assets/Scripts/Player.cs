@@ -8,10 +8,10 @@ public class Player : Entity
 {
 
     
-    public float level = 1;
+    public int level = 1;
     Vector3 position;
     public float currentExperience = 0;
-    public float experienceForNextLevel = 100;
+
 
     public List<Weapon> startingWeapons;
     SphereCollider pickupCollider;
@@ -38,7 +38,7 @@ public class Player : Entity
 
         pickupCollider = GetComponent<SphereCollider>();
         levelUps = new Queue<int>();
-    }
+}
 
     private void AddWeapon(Weapon weaponData)
     {
@@ -113,7 +113,7 @@ public class Player : Entity
 
     private IEnumerator LevelUp()
     {
-        level++;
+
 
         Time.timeScale = 0f;
 
@@ -193,14 +193,21 @@ public class Player : Entity
     {
         currentExperience += amount;
 
-        while (currentExperience >= experienceForNextLevel)
+        while (currentExperience >= GameManager.instance.GetExperienceAtLevel(level))
         {
-            experienceForNextLevel += 100;
-            levelUps.Enqueue(1);
+            QueueLevelUp();
+
         }
 
         if (!levelUpRoutineRunning)
             StartCoroutine(ProcessLevelUps());
+    }
+
+    private void QueueLevelUp()
+    {
+        levelUps.Enqueue(1);
+        currentExperience -= GameManager.instance.GetExperienceAtLevel(level);
+        level++;
     }
 
     internal override void Die()
