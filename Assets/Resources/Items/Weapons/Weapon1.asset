@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
+  m_Name: Weapon1
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  _upgrades:
+  - {fileID: 11400000, guid: 8e99b7e418dcfe544b334f2aa436e34f, type: 2}
+  - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
+  _itemType: 0
+  _name: Weapon1
+  _description: Shoots projectiles
+  stats:
+    preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
+    modifiers: []
+  baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
+  prefab: {fileID: 999691352028456364, guid: e185f3531a4be3d4aa1280894cbaf651, type: 3}
+  angleVariance: 0
+  direction: 0
+  isPiercing: 1
+  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
+  baseUpgrade: {fileID: 0}

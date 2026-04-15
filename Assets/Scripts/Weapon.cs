@@ -3,21 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 [Serializable]
-public class Weapon     
+[CreateAssetMenu(menuName = "Item/Weapon")]
+public class Weapon : Item
 {
-    public WeaponData baseData;
-    //WeaponData currentData;
-    public List<List<Upgrade>> upgradeList;
-    public int currentLevel = 1;
+    [HideInInspector]
     public Stats stats;
-    public List<StatModifier> modifiers;
-
+    public StatsPreset baseStats;
+    public GameObject prefab;
+    [UnityEngine.Range(0f, 360f)]
+    public float angleVariance;
+    [UnityEngine.Range(0f, 360f)]
+    public float direction;
+    public bool isPiercing;
+    public WeaponBehaviour behaviour;
+    [HideInInspector]
+    public Upgrade baseUpgrade;
+    public virtual List<StatModifier> modifiers { get; set; }
     float cooldownTimer;
 
     public void Initialize()
     {
-        stats = baseData.stats;
+        stats.preset = baseStats;
         stats.Initialize();      
         modifiers = new List<StatModifier>();
 
@@ -27,11 +35,21 @@ public class Weapon
         }
     }
 
+    public void CreateBaseUpgrade()
+    {
+        baseUpgrade = new Upgrade();
+        baseUpgrade.itemType = itemType;
+        baseUpgrade.name = name;
+        baseUpgrade.description = description;
+
+    }
+
     public void AddModifier(StatModifier modifier)
     {
         modifiers.Add(modifier);
         ApplyModifiers();
     }
+
 
     private void ApplyModifiers()
     {
@@ -69,16 +87,16 @@ public class Weapon
     internal void Attack()
     {
 
-        for (int i = 0; i < stats.GetStat(StatType.Projectiles).currentValue; i++)
+        for (int i = 0; i < stats.GetStat(StatType.ProjectileCount).currentValue; i++)
         {
-            GameObject obj = ObjectPool.instance.GetObject(baseData.prefab);
+            GameObject obj = ObjectPool.instance.GetObject(prefab);
 
             obj.transform.position = GameManager.instance.player.transform.position;
             obj.transform.rotation = Quaternion.identity;
 
 
             Projectile proj = obj.GetComponent<Projectile>();
-            proj.Activate(baseData, stats, Team.Player);
+            proj.Activate(this, Team.Player);
         }
 
     }

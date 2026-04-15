@@ -22,28 +22,31 @@ public class UpgradeUI : MonoBehaviour
         
     }
 
-    public void Initialize(Upgrade u)
+    public void Initialize(Upgrade upgrade)
     {
-        upgrade = u;
+        this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine($"{upgrade.itemType.ToString()}");
+        sb.AppendLine($"{this.upgrade.itemType.ToString()}");
+        sb.AppendLine($"{this.upgrade.itemType.ToString()}");
 
-        if (u is ItemUpgrade itemUpgrade)
+        if (upgrade.description != "")
         {
-            
-            sb.AppendLine($"{itemUpgrade.rarity.ToString()}");
-            foreach (StatModifier modifier in itemUpgrade.modifiers)
-            {
-                
-                sb.AppendLine($"Increases {modifier.stat.ToString()} by {modifier.amount}");
-            }
+            sb.AppendLine($"{this.upgrade.description}");
         }
 
         else
         {
-            sb.AppendLine($"{upgrade.Description}");
+
+            sb.AppendLine($"{upgrade.rarity.ToString()}");
+            foreach (StatModifier modifier in upgrade.modifiers)
+            {
+
+                sb.AppendLine($"Increases {modifier.stat.ToString()} by {modifier.amount}");
+            }
         }
+
+        
 
 
         string text = sb.ToString();
@@ -53,8 +56,8 @@ public class UpgradeUI : MonoBehaviour
 
     public void SelectUpgrade()
     {
-        GameManager.instance.player.AddUpgrade(upgrade);
         GameManager.instance.gameUI.HideLevelUpScreen();
+        GameManager.instance.player.AddUpgrade(upgrade);
         GameManager.instance.player.upgradeChosen = true;
     }
 }

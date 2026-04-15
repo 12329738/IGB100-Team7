@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Stats/Stats Preset")]
+[Serializable]
 public class StatsPreset : ScriptableObject
 {
     public List<StatConfig> statConfigs = new List<StatConfig>
@@ -14,9 +16,9 @@ public class StatsPreset : ScriptableObject
         new StatConfig { stat = StatType.CritChance },
         new StatConfig { stat = StatType.CritDamage },
         new StatConfig { stat = StatType.Duration },
-        new StatConfig { stat = StatType.Projectiles },
+        new StatConfig { stat = StatType.ProjectileCount },
         new StatConfig { stat = StatType.Cooldown },
-        new StatConfig { stat = StatType.PickupRadius },
+        new StatConfig { stat = StatType.Collection },
     };
     
 }

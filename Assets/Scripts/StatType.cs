@@ -10,7 +10,7 @@ public enum StatType
     CritChance,
     CritDamage,
     Duration,
-    Projectiles,
+    ProjectileCount,
     Cooldown,
-    PickupRadius
+    Collection
 }

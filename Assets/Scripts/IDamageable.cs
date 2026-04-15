@@ -7,4 +7,7 @@ public interface IDamageable
     Team team { get; }
     float lastHitTime { get; }
     float hitCooldown {  get; }
+
+    float GetCurrentHealthPercent();
+    float[] GetCurrentHealth();
 }

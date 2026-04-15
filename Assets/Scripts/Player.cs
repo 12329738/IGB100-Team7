@@ -8,53 +8,54 @@ public class Player : Entity
 {
 
     
-    public float level = 1;
+    public int level = 1;
     Vector3 position;
     public float currentExperience = 0;
-    public float experienceForNextLevel = 100;
-    //[SerializeField] private Team _team;
-    //public override Team team => _team;
 
-    //[SerializeField] private Stats _stats;
-    //public override Stats stats => _stats;
 
-    //[SerializeField] private float _hitCooldown;
-    //public override float hitCooldown => _hitCooldown;
-    public List<WeaponData> weaponData;
+    public List<Weapon> startingWeapons;
     SphereCollider pickupCollider;
-    public List<Weapon> weapons = new List<Weapon>();
-    public Dictionary<ItemList, Weapon> weaponDictionary = new Dictionary<ItemList, Weapon>();
-    List<List<Upgrade>> currentUpgrades = new List<List<Upgrade>>();
+    [HideInInspector]
+    public List<Weapon> weapons;
+    [HideInInspector]
+    public List<Passive> passives;
+    [HideInInspector]
+    public List<StatModifier> modifiers;
+    public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
+
     Queue<int> levelUps;
+    [HideInInspector]
     public bool upgradeChosen;
     private bool levelUpRoutineRunning;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-    
-        foreach (var weaponData in weaponData) 
+        foreach (Weapon weapon in startingWeapons) 
         {
-            AddUpgrade(weaponData.upgradeList[0][0]);
+            AddWeapon(weapon);
         }
 
         pickupCollider = GetComponent<SphereCollider>();
         levelUps = new Queue<int>();
-    }
+}
 
-    private void AddWeapon(WeaponData weaponData)
+    private void AddWeapon(Weapon weaponData)
     {
-        Weapon weapon = new Weapon();
-        weapon.baseData = weaponData;
+        if (itemDictionary.ContainsKey(weaponData.itemType))
+            return;
+
+        Weapon weapon = Instantiate(weaponData);
         weapons.Add(weapon);
-        weaponDictionary.Add(weaponData.itemType, weapon);
+        itemDictionary.Add(weaponData.itemType, weapon);
         weapon.Initialize();
     }
 
-    public Weapon TryGetWeapon(ItemList itemType)
+
+    public Item TryGetItem(ItemList itemType)
     {
-        weaponDictionary.TryGetValue(itemType, out var weapon);
-        return weapon;
+        itemDictionary.TryGetValue(itemType, out var item);
+        return item;
     }
 
     // Update is called once per frame
@@ -80,7 +81,7 @@ public class Player : Entity
 
     private void UpdatePickupRange()
     {
-        pickupCollider.radius = stats.GetStat(StatType.PickupRadius).currentValue;
+        pickupCollider.radius = stats.GetStat(StatType.Collection).currentValue;
     }
 
 
@@ -112,62 +113,101 @@ public class Player : Entity
 
     private IEnumerator LevelUp()
     {
-        level++;
+
 
         Time.timeScale = 0f;
 
         List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
 
-        GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
+        if (chosenUpgrades.Count > 0)
+        {
+            GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
 
-        yield return new WaitUntil(() => upgradeChosen == true);
-        upgradeChosen = false;
+            yield return new WaitUntil(() => upgradeChosen == true);
+            upgradeChosen = false;
+        }
+        
 
         Time.timeScale = 1f;
 
     }
 
     public void AddUpgrade(Upgrade upgrade)
-    {
-        if (upgrade is ItemUpgrade itemUpgrade)
+    {    
+        Item item = TryGetItem(upgrade.itemType);
+
+        if (item == null)
+        {         
+             AddItem(upgrade.itemType);
+        }
+
+
+        if (upgrade.modifiers != null) 
         {
-            Weapon weapon = TryGetWeapon(itemUpgrade.itemType);
-
-
-            foreach (StatModifier modifier in itemUpgrade.modifiers)
+            if (item is Weapon weapon)
             {
-                weapon.AddModifier(modifier);
+                AddWeaponModifiers(upgrade.modifiers, weapon);
+                
+
             }
 
-            weapon.currentLevel++;
+            else if (item is Passive passive)
+            {
+                foreach (StatModifier modifier in upgrade.modifiers)
+                {
+                    modifiers.Add(modifier);
+                }
 
-        }
+                stats.ApplyModifiers(modifiers);
+            }
 
-        if (upgrade is Item item)
+            item.currentLevel++;
+        }     
+    }
+
+    private void AddWeaponModifiers(List<StatModifier> modifiers, Weapon weapon)
+    {
+        foreach (StatModifier modifier in modifiers)
         {
-            AddWeapon(GameManager.instance.database.GetItem(item.itemType));
+            weapon.AddModifier(modifier);
         }
-        
+    }
 
-        foreach (KeyValuePair<StatType, Stat> stat in stats.statDictionary)
+
+    private void AddItem(ItemList type)
+    {
+        Item item = GameManager.instance.database.GetItem(type);
+
+        if (item is Weapon weapon)
         {
-            Debug.Log($"{stat.Key.ToString()} {stat.Value.currentValue}");
+            AddWeapon(weapon);
         }
 
+        else if (item is Passive passive)
+        {
+            passives.Add(passive);
+        }
     }
 
     public void AddExperience(float amount)
     {
         currentExperience += amount;
 
-        while (currentExperience >= experienceForNextLevel)
+        while (currentExperience >= GameManager.instance.GetExperienceAtLevel(level))
         {
-            experienceForNextLevel += 100;
-            levelUps.Enqueue(1);
+            QueueLevelUp();
+
         }
 
         if (!levelUpRoutineRunning)
             StartCoroutine(ProcessLevelUps());
+    }
+
+    private void QueueLevelUp()
+    {
+        levelUps.Enqueue(1);
+        currentExperience -= GameManager.instance.GetExperienceAtLevel(level);
+        level++;
     }
 
     internal override void Die()
