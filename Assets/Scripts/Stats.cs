@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Stats 
 {
+
     public StatsPreset preset;
     [HideInInspector]
     public List<StatModifier> modifiers;

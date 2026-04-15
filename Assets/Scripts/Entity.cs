@@ -8,15 +8,17 @@ using static UnityEngine.GraphicsBuffer;
 public abstract class Entity : MonoBehaviour, IDamageable
 {
     public float currentHealth;
-    //public GameObject deathEffect;
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
 
-    public Stats _stats;
+    [SerializeField]
+    private Stats _stats;
     public virtual Stats stats { get => _stats; set => _stats = value; }
-    public Team _team;
+    [SerializeField]
+    private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
-    public float _hitCooldown;
+    [SerializeField]    
+    private float _hitCooldown;
     public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
 
     public float lastHitTime { get; set; }

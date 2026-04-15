@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    //float damage;
-    //float lifetime;
-    //float speed;
-    //float direction = 0;
-    //float angle = 0;
+
     Vector3 moveDirection;
     Team team;
     WeaponBehaviour weaponBehaviour;
-    WeaponData weaponData;
     Stats stats;
-
+    bool isPiercing;
+    float direction;
+    float angleVariance;
     GameObject prefabReference;
 
 
@@ -28,13 +25,15 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void Activate(WeaponData data, Stats s, Team t)
+    public void Activate(Weapon weapon, Team t)
     {
-        stats = s;
-        weaponData = data;
-        prefabReference = data.prefab;
-        weaponBehaviour = data.behaviour;
+        stats = weapon.stats;
+        prefabReference = weapon.prefab;
+        weaponBehaviour = weapon.behaviour;
+        isPiercing = weapon.isPiercing;
         team = t;
+        direction = weapon.direction;
+        angleVariance = weapon.angleVariance;
 
         moveDirection = CalculateDirection();
 
@@ -51,7 +50,7 @@ public class Projectile : MonoBehaviour
     private Vector3 CalculateDirection()
     {
 
-        float finalAngle = weaponData.direction + UnityEngine.Random.Range(-weaponData.angleVariance * 0.5f, weaponData.angleVariance * 0.5f);
+        float finalAngle = direction + UnityEngine.Random.Range(-angleVariance * 0.5f, angleVariance * 0.5f);
 
         return Quaternion.Euler(0f, finalAngle, 0f) * Vector3.forward;
     }
@@ -77,7 +76,7 @@ public class Projectile : MonoBehaviour
             if (target.IsDamageable())
             {
                 target.TakeDamage(stats.GetStat(StatType.Damage).currentValue);
-                if (!weaponData.isPiercing)
+                if (!isPiercing)
                 {
                     Deactivate();
                 }

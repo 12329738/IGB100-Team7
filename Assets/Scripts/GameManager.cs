@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        database = new ItemDatabase();
         database.Initialize();
     }
 
@@ -54,21 +55,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
-    {
 
-    }
-
-
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
 
     internal void SetSceneReferences(SceneReference sceneReference)
     {

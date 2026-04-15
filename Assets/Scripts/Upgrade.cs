@@ -1,13 +1,20 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Upgrade : ScriptableObject
+[CreateAssetMenu(menuName = "Upgrade")]
+[Serializable]
+public class Upgrade : ScriptableObject
 {
-
-    public virtual string Name { get; set; }
-    public virtual string Description { get; set; }
-    public ItemList itemType { get; set; }
-
+    [HideInInspector]
+    public string name;
+    [HideInInspector]
+    public string description;
+    public List<StatModifier> modifiers;
+    [HideInInspector]
+    public UpgradeRarity rarity;
+    public ItemList itemType;
+    public List<int> levelsAvaliable;
 }
 
 [CreateAssetMenu(menuName = "Upgrade/Item")]

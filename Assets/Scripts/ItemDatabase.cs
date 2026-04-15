@@ -1,32 +1,42 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Overlays;
 using UnityEngine;
+using static UnityEditor.Progress;
 
-[CreateAssetMenu(menuName = "Item Database")]
-public class ItemDatabase : ScriptableObject
+public class ItemDatabase 
 {
-    public List<WeaponData> items;
+    public List<Item> itemDatabase;
 
-    public Dictionary<ItemList, WeaponData> itemDictionary;
+    public Dictionary<ItemList, Item> itemDictionary;
 
 
     public void Initialize()
     {
+        CreateItemDatabase();
         CreateDictionary();      
         CreateItemUpgrades();
+
     }
+
+    private void CreateItemDatabase()
+    {
+        Item[] items = Resources.LoadAll<Item>("Items");
+        itemDatabase = new List<Item>(items);
+    }
+
     public void CreateDictionary()
     {
-        itemDictionary = new Dictionary<ItemList, WeaponData>();
-        foreach (WeaponData weaponData in items)
+        itemDictionary = new Dictionary<ItemList, Item>();
+        foreach (Item item in itemDatabase)
         {
-            itemDictionary[weaponData.itemType] = weaponData;
+            itemDictionary[item.itemType] = item;
         }
     }
 
-    public WeaponData GetItem(ItemList itemType)
+    public Item GetItem(ItemList itemType)
     {
         return itemDictionary[itemType];
     }
@@ -39,15 +49,23 @@ public class ItemDatabase : ScriptableObject
         int upgradeChoices = GameManager.instance.upgradesPerLevel;
 
 
-        foreach (WeaponData weaponData in items)
+        foreach (Item item in itemDatabase)
         {
-            Weapon weapon = GameManager.instance.player.TryGetWeapon(weaponData.itemType);
+            Item playerItem = GameManager.instance.player.TryGetItem(item.itemType);
 
-            int level = (weapon != null) ? weapon.currentLevel : 0;
+            if (playerItem == null && item is Weapon weapon)
+            {
+                avaliableUpgrades.Add(weapon.baseUpgrade);
+            }
 
-            level = Mathf.Clamp(level, 0, weaponData.upgradeList.Count);
+            else
+            {
+                int level = (playerItem != null) ? playerItem.currentLevel : 1;
 
-            avaliableUpgrades.AddRange(weaponData.upgradeList[level]);
+                avaliableUpgrades.AddRange(item.upgradeTree[level-1]);
+            }
+
+
         }
 
  
@@ -70,7 +88,7 @@ public class ItemDatabase : ScriptableObject
 
     private void CreateItemUpgrades()
     {
-        foreach (WeaponData weaponData in items)
+        foreach (Item item in itemDatabase)
         {
             List<List<Upgrade>> upgradeList = new List<List<Upgrade>>();
 
@@ -79,30 +97,28 @@ public class ItemDatabase : ScriptableObject
                 upgradeList.Add(new List<Upgrade>());
             }
 
-            Item item = new Item();
-            item.itemType = weaponData.itemType;
-            item.Name = weaponData.name;
-            item.Description = weaponData.weaponDescription;
-
-            upgradeList[0].Add(item);
-
-            // Distribute upgrades into levels
-            foreach (ItemUpgrade upgrade in weaponData.upgrades)
+            if (item is Weapon weapon)
             {
-                if (upgrade != null)
+                weapon.CreateBaseUpgrade();
+            }
+      
+
+            foreach (Upgrade itemUpgrade in item.upgrades)
+            {
+                if (itemUpgrade != null)
                 {
-                    foreach (int level in upgrade.levelsAvaliable)
+                    foreach (int level in itemUpgrade.levelsAvaliable)
                     {
                         if (level < upgradeList.Count)
                         {
-                            upgradeList[level].Add(upgrade);
+                            upgradeList[level-1].Add(itemUpgrade);
                         }
                     }
                 }
                 
             }
 
-            weaponData.upgradeList = upgradeList;
+            item.upgradeTree = upgradeList;
         }
     }
 
