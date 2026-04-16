@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     public GameObject levelUpScreenPrefab;
     public GameObject levelUpScreen;
     public Image playerHealthBar;
+    public Image miniHealthBar;
     public Image playerExperienceBar;
     public UpgradeUI upgradeUI;
     public TextMeshProUGUI displayedPlayerHealth;
@@ -54,6 +55,7 @@ public class GameUI : MonoBehaviour
 
     public void DisplayHealthAmount()
     {
+        miniHealthBar.fillAmount = trackedDamageablePlayer.GetCurrentHealthPercent();
         playerHealthBar.fillAmount = trackedDamageablePlayer.GetCurrentHealthPercent();
         int currentHealth = Convert.ToInt32(Math.Floor(trackedDamageablePlayer.GetCurrentHealth()[0]));
         int maxHealth = Convert.ToInt32(Math.Floor(trackedDamageablePlayer.GetCurrentHealth()[1]));
