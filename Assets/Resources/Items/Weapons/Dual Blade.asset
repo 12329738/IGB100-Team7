@@ -10,21 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
-  m_Name: Weapon2
+  m_Name: Dual Blade
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades:
-  - {fileID: 11400000, guid: 7ed41691073d66e42ab0fde55c48cfbe, type: 2}
-  _itemType: 1
-  _name: Weapon2
+  - {fileID: 11400000, guid: 8e99b7e418dcfe544b334f2aa436e34f, type: 2}
+  - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
+  _itemType: 0
+  _name: Weapon1
   _description: Shoots projectiles
   stats:
     preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
     modifiers: []
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   prefab: {fileID: 999691352028456364, guid: e185f3531a4be3d4aa1280894cbaf651, type: 3}
-  angleVariance: 0
-  direction: 0
+  randomAngleVariance: 0
+  direction: 110
+  hasKnockback: 0
+  knockbackMagnitute: 0
   isPiercing: 1
-  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
+  behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
+  pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   baseUpgrade: {fileID: 0}

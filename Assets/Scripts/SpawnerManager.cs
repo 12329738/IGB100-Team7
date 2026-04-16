@@ -7,7 +7,7 @@ public class SpawnerManager : MonoBehaviour
     public float spawnRate;
     public float spawnModifier;
     public GameObject[] enemies;
-    public GameObject[] pickups;
+    public GameObject experienceGem;
     public float padding;
     float timer;
     Camera cam;
@@ -94,14 +94,14 @@ public class SpawnerManager : MonoBehaviour
         return new Vector3(x, 0, z);
     }
 
-    public void SpawnExperienceGem(Vector3 location)
+    public void SpawnExperienceGem(Vector3 location, float amount)
     {
-        foreach (GameObject pickupPrefab in pickups)
-        {
-            GameObject pickup = ObjectPool.instance.GetObject(pickupPrefab);
-            pickup.transform.position = location;
-            pickup.transform.rotation = Quaternion.identity;   
-        }
+        GameObject obj = ObjectPool.instance.GetObject(experienceGem);
+        ExperienceGem exp = obj.GetComponent<ExperienceGem>();
+        exp.transform.position = location;
+        exp.transform.rotation = Quaternion.identity;   
+        exp.experienceValue = amount;
+        
     }
 
 }
