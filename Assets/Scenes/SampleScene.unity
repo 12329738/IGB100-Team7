@@ -613,7 +613,7 @@ MonoBehaviour:
   spawnModifier: 0
   enemies:
   - {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
-  experienceGem: {fileID: 0}
+  experienceGem: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
   padding: 5
 --- !u!4 &570029839
 Transform:
