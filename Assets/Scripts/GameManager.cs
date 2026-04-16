@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Camera camera;
     public GameUI gameUI;
     public ItemDatabase database;
+    public ProjectileSpawner projectileSpawner;
     public int weaponLimit;
     public int passiveLimit;
     public int upgradesPerLevel;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
         database = new ItemDatabase();
         database.Initialize();    
+        projectileSpawner = new ProjectileSpawner();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

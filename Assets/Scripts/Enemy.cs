@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public float contactDamage;
+    public float expAmount;
     Player player;
     //[SerializeField] private Team _team;
     //public override Team team => _team;
@@ -43,7 +44,7 @@ public class Enemy : Entity
 
     internal override void Die()
     {
-        SpawnerManager.instance.SpawnExperienceGem(transform.position);
+        SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         Destroy(gameObject);
     }
 }

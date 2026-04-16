@@ -13,11 +13,15 @@ public class Weapon : Item
     public StatsPreset baseStats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
-    public float angleVariance;
+    public float randomAngleVariance;
     [UnityEngine.Range(0f, 360f)]
     public float direction;
+
+    public bool hasKnockback;
+    public float knockbackMagnitute;
     public bool isPiercing;
     public WeaponBehaviour behaviour;
+    public ProjectilePattern pattern;
     [HideInInspector]
     public Upgrade baseUpgrade;
     public virtual List<StatModifier> modifiers { get; set; }
@@ -86,19 +90,30 @@ public class Weapon : Item
 
     internal void Attack()
     {
+        ProjectileData data = BuildProjectileData();
 
-        for (int i = 0; i < stats.GetStat(StatType.ProjectileCount).currentValue; i++)
-        {
-            GameObject obj = ObjectPool.instance.GetObject(prefab);
-
-            obj.transform.position = GameManager.instance.player.transform.position;
-            obj.transform.rotation = Quaternion.identity;
-
-
-            Projectile proj = obj.GetComponent<Projectile>();
-            proj.Activate(this, Team.Player);
-        }
-
+        GameManager.instance.projectileSpawner.CreateProjectile(data);
     }
 
+
+    public ProjectileData BuildProjectileData()
+    {
+        return new ProjectileData
+        {
+            stats = stats,
+            prefab = prefab,
+            randomAngleVariance = randomAngleVariance,
+            baseDirection = direction,
+            hasKnockback = hasKnockback,
+            knockbackMagnitude = knockbackMagnitute,
+            isPiercing = isPiercing,
+            behaviour = behaviour,
+            pattern = pattern,
+            team = Team.Player,
+        };
+        
+    }
 }
+
+
+

@@ -10,7 +10,7 @@ public class Stats
     public StatsPreset preset;
     [HideInInspector]
     public List<StatModifier> modifiers;
-
+    
     public Dictionary<StatType, Stat> statDictionary;
 
     public void Initialize()

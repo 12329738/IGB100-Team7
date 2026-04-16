@@ -17,13 +17,13 @@ public abstract class Entity : MonoBehaviour, IDamageable
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
-    [SerializeField]    
+    [SerializeField]
     private float _hitCooldown;
     public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
 
     public float lastHitTime { get; set; }
 
-   
+
 
 
     public void Awake()
@@ -86,7 +86,12 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public float[] GetCurrentHealth()
     {
         float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth).currentValue };
-    
+
         return healthAmount;
+    }
+
+    public void KnockBack(float magnitude)
+    {
+
     }
 }
