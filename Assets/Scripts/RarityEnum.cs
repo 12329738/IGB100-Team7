@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public enum UpgradeRarity 
+public enum RarityEnum 
 {
     Common,
     Rare,

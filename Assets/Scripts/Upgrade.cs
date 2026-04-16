@@ -12,7 +12,7 @@ public class Upgrade : ScriptableObject
     public string description;
     public List<StatModifier> modifiers;
     [HideInInspector]
-    public UpgradeRarity rarity;
+    public RarityEnum rarity;
     public ItemList itemType;
     public List<int> levelsAvaliable;
 }

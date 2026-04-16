@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Weapon1 Damage Upgrade
+  m_Script: {fileID: 11500000, guid: 2e4008b8e549fda4ea1a99667edb67e6, type: 3}
+  m_Name: Rare
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  modifiers:
-  - stat: 2
-    amount: 20
-    isPercentage: 1
-  rarity: 0
-  itemType: 0
-  levelsAvaliable: 010000000300000005000000
+  rarity: 1
+  chance: 30
+  valueModifier: 1.25

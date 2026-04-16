@@ -1109,6 +1109,7 @@ MonoBehaviour:
   levelUpScreenPrefab: {fileID: 881984285233351309, guid: 32438ac1205678a47a843d0f4a4a56e4, type: 3}
   levelUpScreen: {fileID: 0}
   playerHealthBar: {fileID: 730481096}
+  miniHealthBar: {fileID: 1861717847}
   playerExperienceBar: {fileID: 66805086}
   upgradeUI: {fileID: 5753614876361699065, guid: 8b32fdb1d803c4847984bbb94c9e9b5c, type: 3}
   displayedPlayerHealth: {fileID: 719554159}
