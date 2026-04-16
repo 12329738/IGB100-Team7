@@ -46,14 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b216f4aa02ab948953e01210fc4a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  currentHealth: 0
   canBeDamaged: 1
   flashScript: {fileID: 0}
-  contactDamage: 20
-  _team: 1
   _stats:
     preset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
     modifiers: []
+  _team: 1
+  _hitCooldown: 0
+  contactDamage: 20
+  expAmount: 100
 --- !u!65 &6092473958964533532
 BoxCollider:
   m_ObjectHideFlags: 0
