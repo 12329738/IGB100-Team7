@@ -2,6 +2,7 @@
 using System;
 using System.Buffers.Text;
 using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -26,15 +27,9 @@ public class GameManager : MonoBehaviour
     public float maxExp = 1000000;
     public float maxLevel = 100;
 
-    public float commonChance;
-    public float uncommonChance;
-    public float epicChance;
-    public float legendaryChange;
 
-    public float commonModifier;
-    public float uncommonModifier;
-    public float epicModifier;
-    public float legendaryModifier;
+    public List<Rarity> rarities;
+
 
     public AnimationCurve experienceCurve;
     void Awake()
@@ -51,7 +46,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         database = new ItemDatabase();
-        database.Initialize();
+        database.Initialize();    
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

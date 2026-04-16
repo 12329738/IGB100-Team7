@@ -6,7 +6,7 @@ using UnityEditor.Overlays;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class ItemDatabase 
+public class ItemDatabase : MonoBehaviour
 {
     public List<Item> itemDatabase;
 
@@ -76,15 +76,51 @@ public class ItemDatabase
         {
             int index = Random.Range(0, pool.Count);
 
-            int rarity = Random.Range(0, 10);
+            Upgrade chosenUpgrade = Instantiate(pool[index]);
 
-            chosenUpgrades.Add(pool[index]);
+            List<Rarity> rarities = GameManager.instance.rarities;
+            Rarity rarity = GenerateRarity(rarities);
+
+
+
+            chosenUpgrade.rarity = rarity.rarity;
+
+
+            if (chosenUpgrade.modifiers != null)
+            {
+                foreach (StatModifier modifier in chosenUpgrade.modifiers)
+                {
+                    modifier.amount *= rarity.valueModifier;
+                }
+            }
+            
+
+            chosenUpgrades.Add(chosenUpgrade);
             pool.RemoveAt(index); 
         }
 
         return chosenUpgrades;
     }
 
+    public Rarity GenerateRarity(List<Rarity> rarities)
+    {
+        float total = 0f;
+        foreach (Rarity rarity in rarities)
+            total += rarity.chance;
+
+        float random = Random.Range(0, total);
+
+        float cumulative = 0f;
+
+        for (int i = 0; i < rarities.Count; i++)
+        {
+            cumulative += rarities[i].chance;
+            if (random < cumulative)
+                return rarities[i];
+        }
+
+        return rarities[rarities.Count-1];
+    }
 
     private void CreateItemUpgrades()
     {

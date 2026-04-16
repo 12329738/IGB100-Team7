@@ -138,11 +138,11 @@ public class Player : Entity
 
         if (item == null)
         {         
-             AddItem(upgrade.itemType);
+            AddItem(upgrade.itemType);          
         }
 
 
-        if (upgrade.modifiers != null) 
+        else if (upgrade.modifiers != null) 
         {
             if (item is Weapon weapon)
             {
