@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Dual Blade Damage Upgrade
+  m_Name: Blunt Hammer Slow Up
   m_EditorClassIdentifier: 
   name: 
   description: 
@@ -19,5 +19,5 @@ MonoBehaviour:
     amount: 20
     isPercentage: 1
   rarity: 0
-  itemType: 0
-  levelsAvaliable: 0100000002000000030000000400000005000000
+  itemType: 3
+  levelsAvaliable: 

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public enum ItemList 
 {
-    DualBlade,
+    PhantomBlade,
     BoltShot,
     BlazeBoots,
     BluntHammer,
     HolyWater,
-    Gunsword,
+    EternalSword,
     VitalityPotion,
     Adrenaline,
     BeserkersRing,

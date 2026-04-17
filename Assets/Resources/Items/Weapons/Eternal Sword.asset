@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
-  m_Name: Gunsword
+  m_Name: Eternal Sword
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
   _itemType: 5
-  _name: Gunsword
+  _name: Eternal Sword
   _description: 
   stats:
     preset: {fileID: 0}
     modifiers: []
-  baseStats: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: 6fc24c2416afb274ab1ce6859621f52f, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
   direction: 0

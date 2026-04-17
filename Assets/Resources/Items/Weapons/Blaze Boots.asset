@@ -20,7 +20,7 @@ MonoBehaviour:
   stats:
     preset: {fileID: 0}
     modifiers: []
-  baseStats: {fileID: 0}
+  baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
   direction: 0
