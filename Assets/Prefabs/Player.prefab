@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7126441801414183815}
   - component: {fileID: 4967002423649952269}
   - component: {fileID: 555609383459478792}
+  - component: {fileID: 6179458345900098053}
+  - component: {fileID: -5530915616236386464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -56,10 +58,11 @@ MonoBehaviour:
   _hitCooldown: 0
   level: 1
   currentExperience: 0
-  experienceForNextLevel: 100
-  weaponData:
-  - {fileID: 11400000, guid: 46d355423e3df2949a02e900852064b8, type: 2}
+  startingWeapons: []
   weapons: []
+  passives: []
+  modifiers: []
+  transformation: {fileID: 0}
   upgradeChosen: 0
 --- !u!65 &555609383459478792
 BoxCollider:
@@ -82,6 +85,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 0, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6179458345900098053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e431cd33e80d845a57073285fcefa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5530915616236386464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7535302806152510063
 GameObject:
   m_ObjectHideFlags: 0

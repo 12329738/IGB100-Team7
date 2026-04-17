@@ -17,8 +17,10 @@ public class ProjectileData
     public WeaponBehaviour behaviour;
     public ProjectilePattern pattern;
     public Team team;
+    public GameObject owner;
+    public float hitInterval;
 
-    public ProjectileData(ProjectileData original)
+    public ProjectileData(Weapon original)
     {
         stats = original.stats; 
         prefab = original.prefab;
@@ -28,7 +30,8 @@ public class ProjectileData
         hasKnockback = original.hasKnockback;
         knockbackMagnitude = original.knockbackMagnitude;
         isPiercing = original.isPiercing;
-        team = original.team;
+        owner = original.owner;
+        hitInterval = original.hitInterval;
     }
 
     public ProjectileData()

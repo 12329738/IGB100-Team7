@@ -11,8 +11,10 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public float currentHealth;
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
+
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
+
 
     [SerializeField]
     private Stats _stats;
@@ -35,6 +37,8 @@ public abstract class Entity : MonoBehaviour, IDamageable
     {
         stats.Initialize();
         currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
+        Combat = GetComponent<Combat>();
+        Status = GetComponent<StatusEffectManager>();
     }
 
     public bool IsDamageable()
