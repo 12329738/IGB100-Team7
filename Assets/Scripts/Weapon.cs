@@ -16,19 +16,21 @@ public class Weapon : Item
     public float randomAngleVariance;
     [UnityEngine.Range(0f, 360f)]
     public float direction;
-
+    public float hitInterval = 1f;
     public bool hasKnockback;
-    public float knockbackMagnitute;
+    public float knockbackMagnitude;
     public bool isPiercing;
     public WeaponBehaviour behaviour;
     public ProjectilePattern pattern;
     [HideInInspector]
     public Upgrade baseUpgrade;
+    public GameObject owner; 
     public virtual List<StatModifier> modifiers { get; set; }
     float cooldownTimer;
 
     public void Initialize()
     {
+        owner = GameManager.instance.player.gameObject;
         stats.preset = baseStats;
         stats.Initialize();      
         modifiers = new List<StatModifier>();
@@ -98,20 +100,7 @@ public class Weapon : Item
 
     public ProjectileData BuildProjectileData()
     {
-        return new ProjectileData
-        {
-            stats = stats,
-            prefab = prefab,
-            randomAngleVariance = randomAngleVariance,
-            baseDirection = direction,
-            hasKnockback = hasKnockback,
-            knockbackMagnitude = knockbackMagnitute,
-            isPiercing = isPiercing,
-            behaviour = behaviour,
-            pattern = pattern,
-            team = Team.Player,
-        };
-        
+        return new ProjectileData(this);        
     }
 }
 

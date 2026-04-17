@@ -848,6 +848,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: vampire
+      value: 
+      objectReference: {fileID: 11400000, guid: d77e4f50fc5fe6d46b4cc3c5f506b533, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: _hitCooldown
       value: 1
       objectReference: {fileID: 0}

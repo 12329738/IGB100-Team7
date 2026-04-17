@@ -22,6 +22,8 @@ public class Player : Entity
     [HideInInspector]
     public List<StatModifier> modifiers;
     public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
+    public Transformation transformation;
+    public StatusEffectData vampire;
 
     Queue<int> levelUps;
     [HideInInspector]
@@ -31,6 +33,8 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        StatusEffectManager manager = GetComponent<StatusEffectManager>();
+        manager.ApplyEffect(vampire, gameObject);
         foreach (Weapon weapon in startingWeapons) 
         {
             AddWeapon(weapon);

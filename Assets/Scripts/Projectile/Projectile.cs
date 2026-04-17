@@ -1,23 +1,17 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class Projectile : MonoBehaviour
 {
-
-
-    //Team team;
-    //public WeaponBehaviour weaponBehaviour;
-    //public Stats stats;
-    //bool isPiercing;
-    //bool hasKnockback;
-    //float knockbackMagnitude;
-    //public Vector3 moveDirection;
-    //public float angleVariance;
-    //GameObject prefabReference;
     public IProjectileState state;
     public ProjectileData projectileData;
+    private Combat ownerCombat;
+    private IDamageable ownerDamageable;
+    private Dictionary<GameObject, float> lastHitTimes = new();
 
 
     public void Update()
@@ -31,13 +25,14 @@ public class Projectile : MonoBehaviour
 
     public void Initialize(ProjectileData data)
     {
-        projectileData = new ProjectileData(data); 
+        this.projectileData = data;
 
-        //CalculateDirection();
+        ownerCombat = this.projectileData.owner.GetComponent<Combat>();
+        ownerDamageable = this.projectileData.owner.GetComponent<IDamageable>();
 
         StopAllCoroutines();
 
-        if (projectileData.stats.GetStat(StatType.Duration).currentValue > 0)
+        if (this.projectileData.stats.GetStat(StatType.Duration).currentValue > 0)
         {
             StartCoroutine(LifetimeRoutine());
         }
@@ -60,11 +55,17 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        IDamageable target = other.GetComponentInParent<IDamageable>();
-        if (target == null) return;
+        TryHit(other.gameObject);         
+    }
 
-        if (target.team != projectileData.team)
+    private void TryHit(GameObject target)
+    {
+        if (target == projectileData.owner)
+            return;
+
+        if (lastHitTimes.TryGetValue(target, out float lastHit))
         {
+<<<<<<< Updated upstream
             if (target.IsDamageable())
             {
                 target.TakeDamage(projectileData.stats.GetStat(StatType.Damage).currentValue);
@@ -73,12 +74,29 @@ public class Projectile : MonoBehaviour
                 {
                     target.KnockBack(projectileData.knockbackMagnitude);
                 }
+=======
+            if (Time.time - lastHit < projectileData.hitInterval)
+                return;
+        }
+>>>>>>> Stashed changes
 
-                if (!projectileData.isPiercing)
-                {
-                    Deactivate();
-                }
-            }         
-        }           
+
+        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
+            return;
+
+        var context = new EffectContext
+        {
+            source = gameObject,
+            target = target,
+            damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
+            hitInterval = 1f
+        };
+
+        ownerCombat.Hit(context);
+
+        if (!projectileData.isPiercing)
+        {
+            Deactivate();
+        }
     }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Bleed
+  m_EditorClassIdentifier: 
+  name: Bleed
+  description: 
+  duration: 0
+  maxStacks: 3
+  entries:
+  - trigger: 5
+    nodes:
+    - rid: 6460871455805538378
+  references:
+    version: 2
+    RefIds:
+    - rid: 6460871455805538378
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 0
+        node:
+          rid: 6460871455805538380
+    - rid: 6460871455805538380
+      type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
+      data:
+        value: 10
