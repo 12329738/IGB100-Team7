@@ -17,8 +17,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e99b7e418dcfe544b334f2aa436e34f, type: 2}
   - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
   _itemType: 0
-  _name: Weapon1
-  _description: Shoots projectiles
+  _name: Dual Blade
+  _description: Summons blades that orbit the player
   stats:
     preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
     modifiers: []

@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54de09a5538e7b45a71ea5096187dd0, type: 3}
-  m_Name: Passive1
+  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
+  m_Name: Boltshot Projectile Count Up
   m_EditorClassIdentifier: 
-  _upgrades:
-  - {fileID: 11400000, guid: 8ac5cca7e44cf334491c53af515a4b99, type: 2}
-  _itemType: 2
-  _name: Passive1
-  _description: 
+  name: 
+  description: 
+  modifiers:
+  - stat: 8
+    amount: 1
+    isPercentage: 0
+  rarity: 1
+  itemType: 1
+  levelsAvaliable: 0100000002000000030000000400000005000000

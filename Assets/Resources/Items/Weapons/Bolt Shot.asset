@@ -16,8 +16,8 @@ MonoBehaviour:
   _upgrades:
   - {fileID: 11400000, guid: 7ed41691073d66e42ab0fde55c48cfbe, type: 2}
   _itemType: 1
-  _name: Weapon2
-  _description: Shoots projectiles
+  _name: Boltshot
+  _description: Shoots projectiles that knockback enemies
   stats:
     preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
     modifiers: []
