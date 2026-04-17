@@ -31,15 +31,27 @@ public class DamagePopup : MonoBehaviour
     {
         GameObject target = context.target;
 
-        Renderer renderer = target.GetComponentInChildren<Renderer>();
+        SpriteRenderer renderer = target.GetComponentInChildren<SpriteRenderer>();
 
-        Vector3 worldPosition = renderer.bounds.max + Vector3.up * textHeightOffset;
+        Vector3 topCenter = new Vector3(
+            renderer.bounds.center.x,
+            renderer.bounds.center.y,
+            renderer.bounds.max.z
+        );
+        Vector3 worldPosition = topCenter + target.transform.up * textHeightOffset;
 
         GameObject damageText = Instantiate(damageTextPrefab, damageCanvas.transform);
 
         RectTransform rt = damageText.GetComponent<RectTransform>();
         rt.position = worldPosition;
         damageText.transform.forward = Camera.main.transform.forward;
+
+        Vector3 position = damageText.transform.position;
+        float posx = position.x;
+        float posy = 0;
+        float posz = position.z;
+        Vector3 newPosition = new Vector3 (posx, posy, posz);
+        damageText.transform.position = newPosition;
 
         TextMeshProUGUI text = damageText.GetComponent<TextMeshProUGUI>();
         text.text = context.damage.ToString();

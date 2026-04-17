@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDamageable 
 {
-    void TakeDamage(float damage);
+    void TakeDamage(EffectContext context);
     bool IsDamageable();
     Team team { get; }
     float lastHitTime { get; }

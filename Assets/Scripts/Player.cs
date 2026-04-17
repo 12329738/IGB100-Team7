@@ -9,10 +9,7 @@ public class Player : Entity
 
     
     public int level = 1;
-    Vector3 position;
     public float currentExperience = 0;
-
-
     public List<Weapon> startingWeapons;
     SphereCollider pickupCollider;
     [HideInInspector]
@@ -24,6 +21,7 @@ public class Player : Entity
     public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
     public Transformation transformation;
     public StatusEffectData vampire;
+    StatusEffectManager statusManager;
 
     Queue<int> levelUps;
     [HideInInspector]
@@ -33,8 +31,8 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StatusEffectManager manager = GetComponent<StatusEffectManager>();
-        manager.ApplyEffect(vampire, gameObject);
+        statusManager = GetComponent<StatusEffectManager>();
+        statusManager.ApplyEffect(vampire, gameObject);
         foreach (Weapon weapon in startingWeapons) 
         {
             AddWeapon(weapon);
@@ -217,5 +215,10 @@ public class Player : Entity
     internal override void Die()
     {
         throw new NotImplementedException();
+    }
+
+    internal void Transform(StatusEffectData effect)
+    {
+        statusManager.ApplyEffect(effect, gameObject);
     }
 }

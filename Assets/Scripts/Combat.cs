@@ -24,8 +24,8 @@ public class Combat : MonoBehaviour
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        damageable.TakeDamage(context.damage);
-        DamagePopup.instance.ShowCombatText(context);
+        damageable.TakeDamage(context);
+        
 
 
         CombatEventBus.Raise(CombatEvent.Hit, context);

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : Entity
 {
@@ -46,11 +47,23 @@ public class Enemy : Entity
 
     private void OnTriggerStay(Collider other)
     {
-        Player player = other.GetComponentInParent<Player>();
-        if (player != null)
+        if (other is BoxCollider)
         {
-            player.TakeDamage(contactDamage);
+            Player player = other.GetComponentInParent<Player>();
+            if (player != null)
+            {
+                var context = new EffectContext
+                {
+                    source = gameObject,
+                    target = other.gameObject,
+                    damage = contactDamage,
+                    hitInterval = 1f
+                };
+
+                combat.Hit(context);
+            }
         }
+        
     }
 
     internal override void Die()

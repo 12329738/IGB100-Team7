@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour
             source = gameObject,
             target = target,
             damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
-            hitInterval = 1f
+            hitInterval = projectileData.hitInterval
         };
 
         ownerCombat.Hit(context);

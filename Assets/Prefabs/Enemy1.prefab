@@ -58,12 +58,6 @@ MonoBehaviour:
   _hitCooldown: 1
   contactDamage: 20
   expAmount: 100
-
-  _team: 1
-  _hitCooldown: 0
-  contactDamage: 20
-  expAmount: 100
-
 --- !u!65 &6092473958964533532
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83,7 +77,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 0}
+  m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1620644656706330053
 MonoBehaviour:

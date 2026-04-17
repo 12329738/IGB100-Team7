@@ -8,5 +8,10 @@ public class Transformation : ScriptableObject
     public string name;
     public string description;
     public List<Upgrade> upgrades;
-    //public StatusEffect transformationEffect;
+    public StatusEffectData effect;
+    
+    public void ApplyTransformation()
+    {
+        GameManager.instance.player.Transform(effect);
+    }
 }

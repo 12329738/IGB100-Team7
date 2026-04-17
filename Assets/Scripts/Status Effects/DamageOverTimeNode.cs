@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [Serializable]
 public class DamageOverTimeConfig : EffectNodeConfig
@@ -9,8 +10,9 @@ public class DamageOverTimeConfig : EffectNodeConfig
     float lastTimeDamaged;
     public override void Execute(EffectContext ctx)
     {
+        ctx.damage = value * ctx.deltaTime;
         ctx.target.GetComponent<IDamageable>()
-            ?.TakeDamage(value * ctx.deltaTime);
+            ?.TakeDamage(ctx);
         Debug.Log($"{ctx.target} took {value} dmg");
     }
 }
