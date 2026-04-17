@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Weapon1 Damage Upgrade
+  m_Name: CD Down
   m_EditorClassIdentifier: 
   name: 
   description: 
   modifiers:
-  - stat: 2
-    amount: 20
+  - stat: 9
+    amount: -10
     isPercentage: 1
   rarity: 0
-  itemType: 0
-  levelsAvaliable: 010000000300000005000000
+  itemType: 4
+  levelsAvaliable: 0100000002000000030000000400000005000000

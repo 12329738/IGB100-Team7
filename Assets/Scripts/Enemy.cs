@@ -6,11 +6,7 @@ public class Enemy : Entity
     public float contactDamage;
     public float expAmount;
     Player player;
-    //[SerializeField] private Team _team;
-    //public override Team team => _team;
-    //[SerializeField] private Stats _stats;
-    //public override Stats stats => _stats;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         player = GameManager.instance.player;
@@ -19,7 +15,22 @@ public class Enemy : Entity
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (knockbackRemaining > 0)
+        {
+            float step = GameManager.instance.knockBackSpeed * Time.deltaTime;
+
+            if (step > knockbackRemaining)
+                step = knockbackRemaining;
+
+            transform.position += knockbackDirection * step;
+            knockbackRemaining -= step;
+        }
+
+        else
+        {
+            Move();
+        }
+            
     }
 
     void Move()
@@ -46,5 +57,15 @@ public class Enemy : Entity
     {
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         Destroy(gameObject);
+    }
+
+    void OnEnable()
+    {
+        SpawnerManager.instance.RegisterEnemy();
+    }
+
+    void OnDisable()
+    {
+        SpawnerManager.instance.UnregisterEnemy();
     }
 }

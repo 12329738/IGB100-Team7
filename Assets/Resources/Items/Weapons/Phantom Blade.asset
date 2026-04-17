@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
-  m_Name: Dual Blade
+  m_Name: Phantom Blade
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades:
   - {fileID: 11400000, guid: 8e99b7e418dcfe544b334f2aa436e34f, type: 2}
   - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
   _itemType: 0
-  _name: Weapon1
-  _description: Shoots projectiles
+  _name: Phantom Blade
+  _description: Summons blades that orbit the player
   stats:
     preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
     modifiers: []

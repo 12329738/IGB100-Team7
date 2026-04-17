@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -10,14 +11,10 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public float currentHealth;
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
-<<<<<<< Updated upstream
-=======
+
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
-    public Combat Combat { get; private set; }
-    public StatusEffectManager Status { get; private set; }
 
->>>>>>> Stashed changes
 
     [SerializeField]
     private Stats _stats;
@@ -30,9 +27,6 @@ public abstract class Entity : MonoBehaviour, IDamageable
     public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
 
     public float lastHitTime { get; set; }
-
-
-
 
     public void Awake()
     {
@@ -100,8 +94,9 @@ public abstract class Entity : MonoBehaviour, IDamageable
         return healthAmount;
     }
 
-    public void KnockBack(float magnitude)
+    public void KnockBack(float magnitude, Vector3 attackerPosition)
     {
-
+        knockbackDirection = (transform.position - attackerPosition).normalized;
+        knockbackRemaining = magnitude;
     }
 }

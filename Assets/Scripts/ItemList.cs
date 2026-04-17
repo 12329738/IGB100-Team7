@@ -2,7 +2,16 @@ using UnityEngine;
 
 public enum ItemList 
 {
-    Weapon1,
-    Weapon2, 
-    Passive1
+    PhantomBlade,
+    BoltShot,
+    BlazeBoots,
+    BluntHammer,
+    HolyWater,
+    EternalSword,
+    VitalityPotion,
+    Adrenaline,
+    BeserkersRing,
+    DamageRing,
+    EnchantedQuiver,
+    SwiftWalkers,
 }

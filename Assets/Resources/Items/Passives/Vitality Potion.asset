@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54de09a5538e7b45a71ea5096187dd0, type: 3}
+  m_Name: Vitality Potion
+  m_EditorClassIdentifier: 
+  _upgrades:
+  - {fileID: 11400000, guid: 8ac5cca7e44cf334491c53af515a4b99, type: 2}
+  _itemType: 2
+  _name: Passive1
+  _description: 
