@@ -63,23 +63,7 @@ public class Projectile : MonoBehaviour
         if (target == projectileData.owner)
             return;
 
-        if (lastHitTimes.TryGetValue(target, out float lastHit))
-        {
-<<<<<<< Updated upstream
-            if (target.IsDamageable())
-            {
-                target.TakeDamage(projectileData.stats.GetStat(StatType.Damage).currentValue);
-                
-                if (projectileData.hasKnockback)
-                {
-                    target.KnockBack(projectileData.knockbackMagnitude, transform.position);
-                }
-=======
-            if (Time.time - lastHit < projectileData.hitInterval)
-                return;
-        }
->>>>>>> Stashed changes
-
+       
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
             return;
