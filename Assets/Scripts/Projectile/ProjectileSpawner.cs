@@ -17,9 +17,15 @@ public class ProjectileSpawner
             proj.Initialize(data);
             proj.transform.position = GameManager.instance.player.transform.position;
 
-            proj.projectileData.finalDirection = data.pattern.ConfigureBase(i, count, data);
+            if (data.pattern != null)
+            {
+                proj.projectileData.finalDirection = data.pattern.ConfigureBase(i, count, data);
+            }
 
-            proj.projectileData.behaviour.OnProjectileCreated(proj);
+            if  (proj.projectileData.behaviour != null)
+            {
+                proj.projectileData.behaviour.OnProjectileCreated(proj);
+            }          
         }
     }
 

@@ -10,6 +10,6 @@ public interface IDamageable
 
     float GetCurrentHealthPercent();
     float[] GetCurrentHealth();
-    public void KnockBack(float magnitude);
+    public void KnockBack(float magnitude, Vector3 attackerPosition);
 
 }

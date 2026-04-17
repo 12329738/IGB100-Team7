@@ -47,6 +47,7 @@ MonoBehaviour:
   player: {fileID: 0}
   camera: {fileID: 0}
   gameUI: {fileID: 0}
+  database: {fileID: 0}
   weaponLimit: 3
   passiveLimit: 0
   upgradesPerLevel: 3
@@ -55,19 +56,12 @@ MonoBehaviour:
   minExp: 0
   maxExp: 1000000
   maxLevel: 100
-  commonChance: 0.5
-  rareChance: 0
-  epicChance: 0.15
-  legendaryChance: 0
+  knockBackSpeed: 20
   rarities:
   - {fileID: 11400000, guid: 25085ca443515f64d916ed0f3987392d, type: 2}
   - {fileID: 11400000, guid: 2afd744753b755d40a2f5c7c7887387b, type: 2}
   - {fileID: 11400000, guid: d6c30d1f4f339404dbaa67af06c8fcbe, type: 2}
   - {fileID: 11400000, guid: 311f1533db1ee6f408dd7275a4f36f4a, type: 2}
-  commonModifier: 1
-  rareModifier: 0
-  epicModifier: 1.5
-  legendaryModifier: 2
   experienceCurve:
     serializedVersion: 2
     m_Curve:

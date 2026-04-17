@@ -1,11 +1,13 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
 {
     public static SpawnerManager instance;
-    public float spawnRate;
-    public float spawnModifier;
+    public float spawninterval;
+    public int minimumEnemyNumber;
+    public int currentEnemies;
     public GameObject[] enemies;
     public GameObject experienceGem;
     public float padding;
@@ -31,12 +33,30 @@ public class SpawnerManager : MonoBehaviour
 
     }
 
+    public void RegisterEnemy()
+    {
+        currentEnemies++;
+    }
+
+    public void UnregisterEnemy()
+    {
+        currentEnemies--;
+    }
+
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= spawnRate)
+        while (currentEnemies < minimumEnemyNumber)
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                SpawnEnemy(enemy);
+            }
+        }
+
+        if (timer >= spawninterval)
         {
             timer = 0f;
 

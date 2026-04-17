@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public float minExp = 0;
     public float maxExp = 1000000;
     public float maxLevel = 100;
+    public float knockBackSpeed;
 
 
     public List<Rarity> rarities;

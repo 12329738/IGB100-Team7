@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour
                 
                 if (projectileData.hasKnockback)
                 {
-                    target.KnockBack(projectileData.knockbackMagnitude);
+                    target.KnockBack(projectileData.knockbackMagnitude, transform.position);
                 }
 
                 if (!projectileData.isPiercing)

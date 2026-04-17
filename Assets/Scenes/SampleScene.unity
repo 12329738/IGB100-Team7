@@ -609,8 +609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02450c52ed3104ca372995ac8c9f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 1
-  spawnModifier: 0
+  spawninterval: 1
+  minimumEnemyNumber: 16
+  currentEnemies: 0
   enemies:
   - {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
   experienceGem: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
