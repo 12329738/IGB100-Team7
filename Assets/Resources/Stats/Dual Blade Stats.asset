@@ -16,9 +16,9 @@ MonoBehaviour:
   - stat: 0
     value: 1
   - stat: 1
-    value: 1
+    value: 3
   - stat: 2
-    value: 100
+    value: 30
   - stat: 3
     value: 5
   - stat: 4
@@ -28,10 +28,10 @@ MonoBehaviour:
   - stat: 6
     value: 1
   - stat: 7
-    value: 3
+    value: 4
   - stat: 8
-    value: 3
-  - stat: 9
     value: 2
+  - stat: 9
+    value: 8
   - stat: 10
-    value: 1
+    value: 0
