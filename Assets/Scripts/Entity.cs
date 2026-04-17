@@ -14,6 +14,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
 
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
+
     private Combat combat;
     private StatusEffectManager status;
 

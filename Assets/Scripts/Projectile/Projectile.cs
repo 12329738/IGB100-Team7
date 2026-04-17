@@ -63,8 +63,6 @@ public class Projectile : MonoBehaviour
         if (target == projectileData.owner)
             return;
 
-       
-
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
             return;
 
@@ -82,5 +80,6 @@ public class Projectile : MonoBehaviour
         {
             Deactivate();
         }
+        
     }
 }
