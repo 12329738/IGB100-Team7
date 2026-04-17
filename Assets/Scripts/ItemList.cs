@@ -8,5 +8,10 @@ public enum ItemList
     BluntHammer,
     HolyWater,
     Gunsword,
-    Passive1
+    VitalityPotion,
+    Adrenaline,
+    BeserkersRing,
+    DamageRing,
+    EnchantedQuiver,
+    SwiftWalkers,
 }
