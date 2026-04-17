@@ -8,6 +8,7 @@ public class StatusEffectInstance
     private GameObject target;
     private GameObject source;
     private float duration;
+    public HashSet<CombatEvent> subscribedEvents = new();
 
     public StatusEffectInstance(StatusEffectData data, GameObject source, GameObject target)
     {
@@ -15,7 +16,12 @@ public class StatusEffectInstance
         this.source = source;
         this.target = target;
         this.duration = data.duration;
-        
+
+        foreach (var entry in data.entries)
+        {          
+             subscribedEvents.Add(entry.trigger);          
+        }
+
     }
 
     public void OnApply()
@@ -52,13 +58,14 @@ public class StatusEffectInstance
 
         foreach (var entry in data.entries)
         {
-            if (entry.trigger == CombatEvent.Tick)
-            {
-                foreach (var node in entry.nodes)
+            if (entry.trigger != CombatEvent.Tick)
+                continue;
+
+            foreach (var node in entry.nodes)
                 {
                     node.Execute(ctx);
                 }
-            }          
+                    
         }
         
     }

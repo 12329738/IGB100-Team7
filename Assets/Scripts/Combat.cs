@@ -25,6 +25,8 @@ public class Combat : MonoBehaviour
             return;
 
         damageable.TakeDamage(context.damage);
+        DamagePopup.instance.ShowCombatText(context);
+
 
         CombatEventBus.Raise(CombatEvent.Hit, context);
     }

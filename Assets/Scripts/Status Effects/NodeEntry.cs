@@ -9,6 +9,7 @@ public class NodeEntry
     [SerializeReference]
     public List<EffectNodeData> nodes;
 
+
     public void Validate()
     {
         if (nodes == null) return;

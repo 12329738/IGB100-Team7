@@ -5,6 +5,8 @@ using UnityEngine;
 public class DamageOverTimeConfig : EffectNodeConfig
 {
     public float value;
+    public float damageInterval;
+    float lastTimeDamaged;
     public override void Execute(EffectContext ctx)
     {
         ctx.target.GetComponent<IDamageable>()

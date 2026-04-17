@@ -6,29 +6,31 @@ public class StatusEffectManager : MonoBehaviour
 {
 
     private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new();
+    Dictionary<CombatEvent, List<StatusEffectInstance>> eventMap = new();
 
     public void ApplyEffect(StatusEffectData data, GameObject source)
     {
+        var instance = new StatusEffectInstance(data, source, gameObject);
+        instance.OnApply();
+
         if (!activeEffects.TryGetValue(data, out var list))
         {
             list = new List<StatusEffectInstance>();
             activeEffects[data] = list;
         }
 
-
-        if (data.maxStacks > 1)
-        {
-            if (list.Count >= data.maxStacks)
-            {
-                list[0].Remove();
-                list.RemoveAt(0);
-            }
-        }
-
-        var instance = new StatusEffectInstance(data, source, gameObject);
-        instance.OnApply();
-
         list.Add(instance);
+
+        foreach (var e in instance.subscribedEvents)
+        {
+            if (!eventMap.TryGetValue(e, out var handlers))
+            {
+                handlers = new List<StatusEffectInstance>();
+                eventMap[e] = handlers;
+            }
+
+            handlers.Add(instance);
+        }
     }
 
     public float GetTotalValue(StatusEffectData data)
@@ -86,12 +88,12 @@ public class StatusEffectManager : MonoBehaviour
 
     private void HandleEvent(CombatEvent type, EffectContext ctx)
     {
-        foreach (var effects in activeEffects.Values)
+        if (!eventMap.TryGetValue(type, out var list))
+            return;
+
+        for (int i = 0; i < list.Count; i++)
         {
-            foreach (var instance in effects)
-            {
-                instance.HandleEvent(type, ctx);
-            }
+            list[i].HandleEvent(type, ctx);
         }
     }
 }
