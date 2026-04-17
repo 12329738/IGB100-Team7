@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Weapon1 Damage Upgrade
+  m_Name: Dual Blade Damage Upgrade
   m_EditorClassIdentifier: 
   name: 
   description: 
