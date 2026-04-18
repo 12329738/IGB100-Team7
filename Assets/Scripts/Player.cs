@@ -21,7 +21,6 @@ public class Player : Entity
     public List<StatModifier> modifiers;
     public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
     public Transformation transformation;
-    public StatusEffectData vampire;
     public float currentTransformationAmount;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
@@ -36,7 +35,6 @@ public class Player : Entity
     void Start()
     {
         statusManager = GetComponent<StatusEffectManager>();
-        statusManager.ApplyEffect(vampire, gameObject);
         foreach (Weapon weapon in startingWeapons) 
         {
             AddWeapon(weapon);
