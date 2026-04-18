@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
-  m_Name: Bleed
+  m_Name: Burn
   m_EditorClassIdentifier: 
-  name: Bleed
-  description: 
-  duration: 3
-  maxStacks: 3
+  name: Burn
+  description: Damages enemies over time
+  duration: 5
+  maxStacks: 1
   entries:
   - trigger: 5
     nodes:
-    - rid: 6460871455805538378
+    - rid: 6974428066332803072
   references:
     version: 2
     RefIds:
-    - rid: 6460871455805538378
+    - rid: 6974428066332803072
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 0
         node:
-          rid: 6460871455805538380
-    - rid: 6460871455805538380
+          rid: 6974428066332803074
+    - rid: 6974428066332803074
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        value: 5
-        damageInterval: 0.5
+        value: 15
+        damageInterval: 1

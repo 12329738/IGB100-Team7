@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 0
+  _itemType: 10
   _name: 
   _description: 
