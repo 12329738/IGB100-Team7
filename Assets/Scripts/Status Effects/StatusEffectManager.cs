@@ -31,6 +31,8 @@ public class StatusEffectManager : MonoBehaviour
 
             handlers.Add(instance);
         }
+
+        Debug.Log($"{source} gained status {data.name}");
     }
 
     public float GetTotalValue(StatusEffectData data)
