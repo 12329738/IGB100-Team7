@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54de09a5538e7b45a71ea5096187dd0, type: 3}
   m_Name: Vitality Potion
   m_EditorClassIdentifier: 
+  currentLevel: 1
   _upgrades:
   - {fileID: 11400000, guid: 8ac5cca7e44cf334491c53af515a4b99, type: 2}
-  _itemType: 2
-  _name: Passive1
+  _itemType: 6
+  _name: Vitality Potion
   _description: 

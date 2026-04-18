@@ -14,4 +14,5 @@ public enum ItemList
     DamageRing,
     EnchantedQuiver,
     SwiftWalkers,
+    HuntingRifle,
 }

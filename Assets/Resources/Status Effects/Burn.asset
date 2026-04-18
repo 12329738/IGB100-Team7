@@ -12,11 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
   m_Name: Burn
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  duration: 0
-  maxStacks: 0
-  entries: []
+  name: Burn
+  description: Damages enemies over time
+  duration: 5
+  maxStacks: 1
+  entries:
+  - trigger: 5
+    nodes:
+    - rid: 6974428066332803072
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6974428066332803072
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 0
+        node:
+          rid: 6974428066332803074
+    - rid: 6974428066332803074
+      type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
+      data:
+        value: 15
+        damageInterval: 1

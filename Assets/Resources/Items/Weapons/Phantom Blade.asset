@@ -26,9 +26,11 @@ MonoBehaviour:
   prefab: {fileID: 999691352028456364, guid: e185f3531a4be3d4aa1280894cbaf651, type: 3}
   randomAngleVariance: 0
   direction: 110
+  hitInterval: 1
   hasKnockback: 0
-  knockbackMagnitute: 0
+  knockbackMagnitude: 0
   isPiercing: 1
   behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
   pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}

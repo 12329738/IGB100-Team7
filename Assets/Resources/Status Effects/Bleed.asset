@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bleed
   description: 
-  duration: 0
+  duration: 3
   maxStacks: 3
   entries:
   - trigger: 5
@@ -32,4 +32,5 @@ MonoBehaviour:
     - rid: 6460871455805538380
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        value: 10
+        value: 5
+        damageInterval: 0.5

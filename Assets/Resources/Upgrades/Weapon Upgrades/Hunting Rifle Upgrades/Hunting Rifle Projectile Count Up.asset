@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54de09a5538e7b45a71ea5096187dd0, type: 3}
-  m_Name: Beserkers Ring
+  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
+  m_Name: Hunting Rifle Projectile Count Up
   m_EditorClassIdentifier: 
-  currentLevel: 1
-  _upgrades: []
-  _itemType: 8
-  _name: 
-  _description: 
+  name: 
+  description: 
+  modifiers:
+  - stat: 2
+    amount: 15
+    isPercentage: 1
+  rarity: 0
+  itemType: 12
+  levelsAvaliable: 0100000002000000030000000400000005000000
