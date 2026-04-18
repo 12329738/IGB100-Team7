@@ -71,10 +71,12 @@ public class Projectile : MonoBehaviour
             source = gameObject,
             target = target,
             damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
-            hitInterval = projectileData.hitInterval
+            hitInterval = projectileData.hitInterval,
+            damageId = this
+
         };
 
-        ownerCombat.Hit(context);
+        ownerCombat.Damage(context);
 
         if (!projectileData.isPiercing)
         {

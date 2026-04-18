@@ -57,10 +57,11 @@ public class Enemy : Entity
                     source = gameObject,
                     target = other.gameObject,
                     damage = contactDamage,
-                    hitInterval = 1f
+                    hitInterval = 1f,
+                    damageId = this
                 };
 
-                combat.Hit(context);
+                combat.Damage(context);
             }
         }
         

@@ -7,6 +7,7 @@ public class StatusEffectManager : MonoBehaviour
 
     private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new();
     Dictionary<CombatEvent, List<StatusEffectInstance>> eventMap = new();
+    Combat combat;
 
     public void ApplyEffect(StatusEffectData data, GameObject source)
     {
@@ -32,7 +33,7 @@ public class StatusEffectManager : MonoBehaviour
             handlers.Add(instance);
         }
 
-        Debug.Log($"{source} gained status {data.name}");
+        Debug.Log($"{gameObject.GetComponent<Entity>()} gained status {data.name}");
     }
 
     public float GetTotalValue(StatusEffectData data)
@@ -65,6 +66,7 @@ public class StatusEffectManager : MonoBehaviour
                 if (instance.IsExpired())
                 {
                     instance.Remove();
+                    Debug.Log($"Status effect {instance} expired on {gameObject.name}");
                     keysToRemove.Add(kvp.Key);
                 }
             }
@@ -80,12 +82,13 @@ public class StatusEffectManager : MonoBehaviour
 
     private void OnEnable()
     {
-        CombatEventBus.OnEvent += HandleEvent;
+        combat = GetComponent<Combat>();
+        combat.OnEvent += HandleEvent;
     }
 
     private void OnDisable()
     {
-        CombatEventBus.OnEvent -= HandleEvent;
+        combat.OnEvent -= HandleEvent;
     }
 
     private void HandleEvent(CombatEvent type, EffectContext ctx)

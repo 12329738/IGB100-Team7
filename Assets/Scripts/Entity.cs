@@ -15,7 +15,8 @@ public abstract class Entity : MonoBehaviour, IDamageable
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
 
-    internal Combat combat;
+    
+    public Combat combat {  get; private set; }
     private StatusEffectManager status;
 
     [SerializeField]
@@ -55,10 +56,10 @@ public abstract class Entity : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(EffectContext context)
     {
-        if (Time.time - lastHitTime < hitCooldown)
-            return;
+        //if (Time.time - lastHitTime < hitCooldown)
+        //    return;
 
-        lastHitTime = Time.time;
+        //lastHitTime = Time.time;
 
         currentHealth -= context.damage;
         DamagePopup.instance.ShowCombatText(context);

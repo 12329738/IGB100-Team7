@@ -5,17 +5,24 @@ using UnityEngine;
 public class StatusEffectInstance
 {
     public StatusEffectData data;
-    private GameObject target;
-    private GameObject source;
+    public EffectContext context;
     private float duration;
+    private float startTime;
     public HashSet<CombatEvent> subscribedEvents = new();
 
-    public StatusEffectInstance(StatusEffectData data, GameObject source, GameObject target)
+    public StatusEffectInstance(StatusEffectData data, GameObject _source, GameObject _target)
     {
         this.data = data;
-        this.source = source;
-        this.target = target;
+        context = new EffectContext
+        {
+            source = _source,
+            target = _target,
+            damageId = this
+        };
+
         this.duration = data.duration;
+        startTime = Time.time;
+
 
         foreach (var entry in data.entries)
         {          
@@ -30,15 +37,10 @@ public class StatusEffectInstance
         {
             if (entry.trigger == CombatEvent.OnApply)
             {
-                var ctx = new EffectContext
-                {
-                    source = source,
-                    target = target
-                };
 
                 foreach (var node in entry.nodes)
                 {
-                    node.Execute(ctx);
+                    node.Execute(context);
                 }
                 
             }
@@ -49,13 +51,6 @@ public class StatusEffectInstance
     public void Tick(float dt)
     {
 
-        var ctx = new EffectContext
-        {
-            source = target,
-            target = target,
-            deltaTime = dt
-        };
-
         foreach (var entry in data.entries)
         {
             if (entry.trigger != CombatEvent.Tick)
@@ -63,7 +58,7 @@ public class StatusEffectInstance
 
             foreach (var node in entry.nodes)
                 {
-                    node.Execute(ctx);
+                    node.Execute(context);
                 }
                     
         }
@@ -87,7 +82,7 @@ public class StatusEffectInstance
     }
 
 
-    public bool IsExpired() => duration <= 0;
+    public bool IsExpired() => startTime + duration <= Time.time;
 
     public void Remove() { }
 
