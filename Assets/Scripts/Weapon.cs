@@ -80,16 +80,6 @@ public class Weapon : Item
         }
     }
 
-    private IEnumerator AttackCoroutine(float cooldown)
-    {
-        while (true)
-        {
-            Attack();
-
-            yield return new WaitForSeconds(cooldown);
-        }
-    }
-
     internal void Attack()
     {
         ProjectileData data = BuildProjectileData();

@@ -12,7 +12,8 @@ public class Projectile : MonoBehaviour
     private Combat ownerCombat;
     private IDamageable ownerDamageable;
     private Dictionary<GameObject, float> lastHitTimes = new();
-
+    private EventHandler eventHandler;
+    private EffectHandler effectHandler;
 
     public void Update()
     {      
@@ -25,6 +26,9 @@ public class Projectile : MonoBehaviour
 
     public void Initialize(ProjectileData data)
     {
+        eventHandler = GetComponent<EventHandler>();
+        effectHandler = GetComponent<EffectHandler>();
+
         this.projectileData = data;
 
         ownerCombat = this.projectileData.owner.GetComponent<Combat>();
@@ -41,7 +45,6 @@ public class Projectile : MonoBehaviour
 
 
 
-
     IEnumerator LifetimeRoutine()
     {
         yield return new WaitForSeconds(projectileData.stats.GetStat(StatType.Duration).currentValue);
@@ -50,7 +53,13 @@ public class Projectile : MonoBehaviour
 
     void Deactivate()
     {
+        EffectContext context = new EffectContext
+        {
+            source = this.gameObject
+        };
+        eventHandler.RaiseEvent(CombatEvent.OnExpire, context);
         ObjectPool.instance.ReturnObject(projectileData.prefab, gameObject);
+
     }
 
     private void OnTriggerStay(Collider other)

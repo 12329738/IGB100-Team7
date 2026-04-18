@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class FlashWhite : MonoBehaviour
 {
-    public float flashDuration = 0.05f; // duration of the white flash
+    public float flashDuration = 0.05f; 
 
     private SpriteRenderer spriteRenderer;
     private Material originalMaterial;
@@ -17,7 +17,7 @@ public class FlashWhite : MonoBehaviour
         originalMaterial = spriteRenderer.material;
 
         whiteMaterial = new Material(Shader.Find("GUI/Text Shader"));
-        whiteMaterial.color = Color.white; // full white
+        whiteMaterial.color = Color.white; 
     }
 
     public void TriggerFlash()

@@ -12,4 +12,5 @@ public class EffectContext
     public float damage;
     public bool isCrit;
 
+
 }

@@ -3,5 +3,9 @@ public enum EffectNodeType
     DamageOverTime,
     Knockback,
     ApplyStatusEffect,
-    DealDamage
+    DealDamage,
+    Stun,
+    Slow,
+    Heal,
+    SpawnProjectile
 }
