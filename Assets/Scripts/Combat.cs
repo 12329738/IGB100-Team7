@@ -6,12 +6,17 @@ using static Unity.VisualScripting.Member;
 public class Combat : MonoBehaviour
 {
     public event Action<CombatEvent, EffectContext> OnEvent;
-    private Dictionary<(GameObject source, GameObject target), float> lastHitTimes = new();
+    private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
 
-    public void Hit(EffectContext context)
+    public void Damage(EffectContext context)
     {
-        var key = (context.source, context.target);
+        var key = (context.damageId, context.target);
+        Debug.Log(
+    $"DamageID: {context.damageId.GetHashCode()} | Target: {context.target.GetInstanceID()}"
 
+);
+        int source = context.damageId.GetHashCode();
+        int target = context.target.GetInstanceID();
         if (lastHitTimes.TryGetValue(key, out float lastHit))
         {
             if (Time.time - lastHit < context.hitInterval)
@@ -28,6 +33,11 @@ public class Combat : MonoBehaviour
         
 
 
-        CombatEventBus.Raise(CombatEvent.Hit, context);
+        //CombatEventBus.Raise(CombatEvent.Hit, context);
+        if (context.isHit)
+        {
+            OnEvent?.Invoke(CombatEvent.Hit, context);
+        }
+        
     }
 }
