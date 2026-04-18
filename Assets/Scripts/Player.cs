@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,6 +22,9 @@ public class Player : Entity
     public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
     public Transformation transformation;
     public StatusEffectData vampire;
+    public float currentTransformationAmount;
+    bool isTransformed = false;
+    Coroutine transformationCoroutine;
     StatusEffectManager statusManager;
 
     Queue<int> levelUps;
@@ -51,6 +55,7 @@ public class Player : Entity
         weapons.Add(weapon);
         itemDictionary.Add(weaponData.itemType, weapon);
         weapon.Initialize();
+        transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
 
 
@@ -66,8 +71,66 @@ public class Player : Entity
         CheckMovement();
         UpdateWeapons();
         UpdatePickupRange();
+        //UpdateTransformationAmount();
     }
 
+    private void UpdateTransformationAmount()
+    {
+        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation).currentValue && transformationCoroutine == null)
+        {
+            transformationCoroutine = StartCoroutine(TransformationCoroutine());
+        }
+    }
+
+    private IEnumerator TransformationCoroutine()
+    {
+        float regenAccumulator = 0f;
+
+        while (true)
+        {
+            if (!isTransformed)
+            {
+                regenAccumulator += stats.GetStat(StatType.TransformationGainRate).currentValue * Time.deltaTime;
+            }
+
+
+            else if (isTransformed)
+            {
+                regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate).currentValue * Time.deltaTime;
+            }
+
+            //int regenAmount = Mathf.FloorToInt(regenAccumulator);
+
+            //if (regenAmount > 1)
+            //{
+                AddTransformationPoints(regenAccumulator);
+                regenAccumulator -= regenAccumulator;
+            //}
+            yield return null;
+        }
+        
+
+        
+        
+    }
+
+    private void AddTransformationPoints(float regenAmount)
+    {
+        currentTransformationAmount += regenAmount;
+
+        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation).currentValue)
+        {
+            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation).currentValue;
+        }
+
+        if (currentTransformationAmount < 0)
+        {
+            currentTransformationAmount = 0;
+            StopTransformation();
+        }
+    }
+
+   
     private IEnumerator ProcessLevelUps()
     {
         levelUpRoutineRunning = true;
@@ -107,7 +170,7 @@ public class Player : Entity
 
         if (Input.GetKeyDown("t"))
         {
-            LevelUp();
+            Transform();
         }
 
         transform.position += movement * stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
@@ -217,8 +280,15 @@ public class Player : Entity
         throw new NotImplementedException();
     }
 
-    internal void Transform(StatusEffectData effect)
+    internal void Transform()
     {
-        statusManager.ApplyEffect(effect, gameObject);
+        statusManager.ApplyEffect(transformation.effect, gameObject);
+        isTransformed = true;
     }
+
+    private void StopTransformation()
+    {
+        isTransformed = false;
+    }
+
 }

@@ -12,5 +12,8 @@ public enum StatType
     Duration,
     ProjectileCount,
     Cooldown,
-    Collection
+    Collection,
+    MaxTransformation,
+    TransformationGainRate,
+    TransformationDecayRate
 }

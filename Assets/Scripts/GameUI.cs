@@ -10,6 +10,7 @@ public class GameUI : MonoBehaviour
     public GameObject levelUpScreenPrefab;
     public GameObject levelUpScreen;
     public Image playerHealthBar;
+    public Image transformationBar;
     public Image miniHealthBar;
     public Image playerExperienceBar;
     public UpgradeUI upgradeUI;
@@ -44,7 +45,13 @@ public class GameUI : MonoBehaviour
     private void LateUpdate()
     {
         DisplayHealthAmount();
+        DisplayTransformationAmount();
         DisplayExperienceAmount();
+    }
+
+    private void DisplayTransformationAmount()
+    {
+        transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxTransformation).currentValue;
     }
 
     private void DisplayExperienceAmount()

@@ -12,6 +12,6 @@ public class Transformation : ScriptableObject
     
     public void ApplyTransformation()
     {
-        GameManager.instance.player.Transform(effect);
+        GameManager.instance.player.Transform();
     }
 }

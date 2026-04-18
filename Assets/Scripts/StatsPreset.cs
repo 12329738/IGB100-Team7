@@ -19,6 +19,9 @@ public class StatsPreset : ScriptableObject
         new StatConfig { stat = StatType.ProjectileCount },
         new StatConfig { stat = StatType.Cooldown },
         new StatConfig { stat = StatType.Collection },
+        new StatConfig { stat = StatType.MaxTransformation },
+        new StatConfig { stat = StatType.TransformationGainRate },
+        new StatConfig { stat = StatType.TransformationDecayRate },
     };
     
 }
