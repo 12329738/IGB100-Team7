@@ -38,7 +38,7 @@ public class StatusEffectInstance
             if (entry.trigger == CombatEvent.OnApply)
             {
 
-                foreach (var node in entry.nodes)
+                foreach (var node in entry.effectData)
                 {
                     node.Execute(context);
                 }
@@ -48,15 +48,14 @@ public class StatusEffectInstance
     }
 
 
-    public void Tick(float dt)
+    public void Tick()
     {
-
         foreach (var entry in data.entries)
         {
-            if (entry.trigger != CombatEvent.Tick)
+            if (entry.trigger != CombatEvent.OnTIck)
                 continue;
 
-            foreach (var node in entry.nodes)
+            foreach (var node in entry.effectData)
                 {
                     node.Execute(context);
                 }
@@ -68,16 +67,11 @@ public class StatusEffectInstance
 
     public void HandleEvent(CombatEvent type, EffectContext ctx)
     {
-
         Debug.Log($"Status effect {data.name} trigger event {type}");
+
         for (int i = 0; i < data.entries.Count; i++)
         {
-            var entry = data.entries[i];
-
-            if (entry.trigger != type)
-                continue;
-
-            entry.Execute(ctx);
+            data.entries[i].Execute(ctx);
         }
     }
 
@@ -85,6 +79,8 @@ public class StatusEffectInstance
     public bool IsExpired() => startTime + duration <= Time.time;
 
     public void Remove() { }
+
+    public void OnExpire() { }
 
 
 }

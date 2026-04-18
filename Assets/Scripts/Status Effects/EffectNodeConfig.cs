@@ -3,6 +3,6 @@
 [System.Serializable]
 public abstract class EffectNodeConfig
 {
+    public abstract EffectNodeType Type { get; }
     public abstract void Execute(EffectContext ctx);
-
 }
