@@ -9,10 +9,10 @@ using Color = UnityEngine.Color;
 
 public class DamagePopup : MonoBehaviour
 {
-    public GameObject damageTextPrefab; // Reference to the prefab of the damage text
-    public float textHeightOffset = 2f;  // Height above the enemy to show the damage
-    public float floatSpeed = 1f;        // Speed at which the damage text floats upwards
-    public float fadeTime = 5f;          // Time for the text to fade out
+    public GameObject damageTextPrefab; 
+    public float textHeightOffset = 2f;  
+    public float floatSpeed = 1f;        
+    public float fadeTime = 5f;         
     public static DamagePopup instance;
     public Canvas damageCanvas;
     public enum CombatTextType { EnemyDamage,PlayerDamage,Healing}
@@ -81,13 +81,13 @@ public class DamagePopup : MonoBehaviour
             text.color = new Color(startColor.r, startColor.g, startColor.b, Mathf.Lerp(1, 0, elapsedTime / fadeTime));
 
 
-            // Move the text upwards in world space
+
             damageText.transform.position += Vector3.up * floatSpeed * Time.deltaTime;
 
             yield return null;
         }
 
-        // Destroy the damage text after fading
+
         Destroy(damageText);
     }
 

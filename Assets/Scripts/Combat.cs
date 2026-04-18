@@ -5,13 +5,17 @@ using static Unity.VisualScripting.Member;
 
 public class Combat : MonoBehaviour
 {
-    public event Action<CombatEvent, EffectContext> OnEvent;
-    private Dictionary<(GameObject source, GameObject target), float> lastHitTimes = new();
+    private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
 
-    public void Hit(EffectContext context)
+    public void Damage(EffectContext context)
     {
-        var key = (context.source, context.target);
+        var key = (context.damageId, context.target);
+        Debug.Log(
+    $"DamageID: {context.damageId.GetHashCode()} | Target: {context.target.GetInstanceID()}"
 
+);
+        int source = context.damageId.GetHashCode();
+        int target = context.target.GetInstanceID();
         if (lastHitTimes.TryGetValue(key, out float lastHit))
         {
             if (Time.time - lastHit < context.hitInterval)
@@ -24,10 +28,27 @@ public class Combat : MonoBehaviour
         if (damageable == null || !damageable.IsDamageable())
             return;
 
+        context.target.RaiseEvent(CombatEvent.OnDamageTaken, context);
         damageable.TakeDamage(context);
         
 
+        if (context.isHit)
+        {
+            context.source.RaiseEvent(CombatEvent.OnHit, context);
+        }
+        
+    }
 
-        CombatEventBus.Raise(CombatEvent.Hit, context);
+    public void Heal(EffectContext context, float amount)
+    {
+        var damageable = context.target.GetComponent<IDamageable>();
+        damageable.Heal(amount);
+        context.target.RaiseEvent(CombatEvent.OnHeal, context);
+    }
+
+    public void KnockBack(EffectContext context, float magnitude)
+    {
+        var damageable = context.target.GetComponent<IDamageable>();
+        damageable.KnockBack(magnitude, context.source.transform.position);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -7,9 +8,26 @@ public class StatusEffectManager : MonoBehaviour
 
     private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new();
     Dictionary<CombatEvent, List<StatusEffectInstance>> eventMap = new();
+    EventHandler handler;
+    private void OnEnable()
+    {
+        handler = GetComponent<EventHandler>();
+        handler.OnEvent += HandleEvent;     
+    }
+
+    private void OnDisable()
+    {
+        handler.OnEvent -= HandleEvent;
+    }
+
 
     public void ApplyEffect(StatusEffectData data, GameObject source)
     {
+
+        if (source.GetComponent<Weapon>() != null)
+        {
+            source = GameManager.instance.player.gameObject;
+        }
         var instance = new StatusEffectInstance(data, source, gameObject);
         instance.OnApply();
 
@@ -32,7 +50,7 @@ public class StatusEffectManager : MonoBehaviour
             handlers.Add(instance);
         }
 
-        Debug.Log($"{source} gained status {data.name}");
+        Debug.Log($"{gameObject.GetComponent<Entity>()} gained status {data.name}");
     }
 
     public float GetTotalValue(StatusEffectData data)
@@ -43,50 +61,68 @@ public class StatusEffectManager : MonoBehaviour
         float total = 0;
 
         foreach (var e in list)
-            total++; // if you support per-stack strength
+            total++; 
 
         return total;
     }
 
     private void Update()
     {
-        float dt = Time.deltaTime;
+        CheckStatusEffectDurations();     
+    }
 
+    private void CheckStatusEffectDurations()
+    {
         var keysToRemove = new List<StatusEffectData>();
 
         foreach (var kvp in activeEffects)
         {
             var effect = kvp.Value;
 
-            foreach (StatusEffectInstance instance in effect)
+            for (int i = effect.Count - 1; i >= 0; i--)
             {
-                instance.Tick(dt);
+                var instance = effect[i];
+
+                instance.Tick();
 
                 if (instance.IsExpired())
                 {
-                    instance.Remove();
-                    keysToRemove.Add(kvp.Key);
+                    instance.OnExpire();
+                    Debug.Log($"Status effect {instance} expired on {gameObject.name}");
+                    effect.RemoveAt(i);
+
+                    UnsubscribeFromEvents(instance);
                 }
             }
 
-           
+            if (effect.Count == 0)
+            {
+                keysToRemove.Add(kvp.Key);
+            }
         }
 
-        for (int i = 0; i < keysToRemove.Count; i++)
+        foreach (var key in keysToRemove)
         {
-            activeEffects.Remove(keysToRemove[i]);
+            activeEffects.Remove(key);
         }
     }
 
-    private void OnEnable()
+    private void UnsubscribeFromEvents(StatusEffectInstance instance)
     {
-        CombatEventBus.OnEvent += HandleEvent;
+        foreach (var e in instance.subscribedEvents)
+        {
+            if (eventMap.TryGetValue(e, out var handlers))
+            {
+                handlers.Remove(instance);
+
+                if (handlers.Count == 0)
+                {
+                    eventMap.Remove(e);
+                }
+            }
+        }
     }
 
-    private void OnDisable()
-    {
-        CombatEventBus.OnEvent -= HandleEvent;
-    }
 
     private void HandleEvent(CombatEvent type, EffectContext ctx)
     {

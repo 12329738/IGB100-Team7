@@ -32,5 +32,6 @@ MonoBehaviour:
     - rid: 6460871455805538380
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        value: 5
+        damage: 5
         damageInterval: 0.5
+        isHit: 0

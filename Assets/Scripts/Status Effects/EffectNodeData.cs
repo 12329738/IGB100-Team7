@@ -8,33 +8,28 @@ public class EffectNodeData
     public EffectNodeType type;
 
     [SerializeReference]
-    public EffectNodeConfig node;
+    public EffectNodeConfig effectConfig;
     [System.NonSerialized]
-    public EffectNodeConfig runtimeNode;
+    public EffectNodeConfig runtimeNodeConfig;
 
     public void Validate()
     {
-        var expected = GetExpectedType(type);
+        var expectedType = EffectNodeDatabase.Get(type);
 
-        if (node == null || node.GetType() != expected)
+        if (effectConfig == null || effectConfig.GetType() != expectedType)
         {
-            node = EffectNodeFactory.Create(type);
+            effectConfig = EffectNodeDatabase.Create(type);
         }
     }
 
 
     public void Execute(EffectContext ctx)
     {
-        node?.Execute(ctx);
+        effectConfig?.Execute(ctx);
     }
 
-    private System.Type GetExpectedType(EffectNodeType type)
+    private EffectNodeConfig GetExpectedType(EffectNodeType type)
     {
-        return type switch
-        {
-            EffectNodeType.ApplyStatusEffect => typeof(ApplyStatusConfig),
-            EffectNodeType.DamageOverTime => typeof(DamageOverTimeConfig),
-            _ => typeof(EffectNodeConfig)
-        };
+        return EffectNodeDatabase.Create(type);
     }
 }

@@ -18,18 +18,18 @@ MonoBehaviour:
   maxStacks: 1
   entries:
   - trigger: 0
-    nodes:
-    - rid: 6460871455805538370
+    effectData:
+    - rid: 6460871478165110901
   references:
     version: 2
     RefIds:
-    - rid: 6460871455805538370
+    - rid: 6460871478165110901
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
-        node:
-          rid: 6460871455805538377
-    - rid: 6460871455805538377
+        effectConfig:
+          rid: 6460871478165110902
+    - rid: 6460871478165110902
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}

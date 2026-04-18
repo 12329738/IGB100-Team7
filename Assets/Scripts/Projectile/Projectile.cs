@@ -12,7 +12,8 @@ public class Projectile : MonoBehaviour
     private Combat ownerCombat;
     private IDamageable ownerDamageable;
     private Dictionary<GameObject, float> lastHitTimes = new();
-
+    private EventHandler eventHandler;
+    private EffectHandler effectHandler;
 
     public void Update()
     {      
@@ -25,6 +26,14 @@ public class Projectile : MonoBehaviour
 
     public void Initialize(ProjectileData data)
     {
+        eventHandler = GetComponent<EventHandler>();
+        effectHandler = GetComponent<EffectHandler>();
+
+        foreach (EffectEntryNode node in data.effects)
+        {
+            effectHandler.AddToMap(node);
+        }
+
         this.projectileData = data;
 
         ownerCombat = this.projectileData.owner.GetComponent<Combat>();
@@ -41,7 +50,6 @@ public class Projectile : MonoBehaviour
 
 
 
-
     IEnumerator LifetimeRoutine()
     {
         yield return new WaitForSeconds(projectileData.stats.GetStat(StatType.Duration).currentValue);
@@ -50,7 +58,13 @@ public class Projectile : MonoBehaviour
 
     void Deactivate()
     {
+        EffectContext context = new EffectContext
+        {
+            source = this.gameObject
+        };
+        eventHandler.RaiseEvent(CombatEvent.OnExpire, context);
         ObjectPool.instance.ReturnObject(projectileData.prefab, gameObject);
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -71,10 +85,12 @@ public class Projectile : MonoBehaviour
             source = gameObject,
             target = target,
             damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
-            hitInterval = projectileData.hitInterval
+            hitInterval = projectileData.hitInterval,
+            damageId = this
+
         };
 
-        ownerCombat.Hit(context);
+        ownerCombat.Damage(context);
 
         if (!projectileData.isPiercing)
         {

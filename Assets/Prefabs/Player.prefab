@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 555609383459478792}
   - component: {fileID: 6179458345900098053}
   - component: {fileID: -5530915616236386464}
+  - component: {fileID: 3406533331299266337}
+  - component: {fileID: -5726179540076852593}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -63,7 +65,7 @@ MonoBehaviour:
   passives: []
   modifiers: []
   transformation: {fileID: 0}
-  vampire: {fileID: 0}
+  currentTransformationAmount: 0
   upgradeChosen: 0
 --- !u!65 &555609383459478792
 BoxCollider:
@@ -108,6 +110,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3406533331299266337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2746253b9374e47a7548e939b60ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5726179540076852593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fbfddd8af313e4eb6af5c1c349581b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7535302806152510063
