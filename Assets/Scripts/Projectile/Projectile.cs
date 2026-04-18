@@ -29,6 +29,11 @@ public class Projectile : MonoBehaviour
         eventHandler = GetComponent<EventHandler>();
         effectHandler = GetComponent<EffectHandler>();
 
+        foreach (EffectEntryNode node in data.effects)
+        {
+            effectHandler.AddToMap(node);
+        }
+
         this.projectileData = data;
 
         ownerCombat = this.projectileData.owner.GetComponent<Combat>();
