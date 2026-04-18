@@ -1321,6 +1321,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 55aa42f8c2b05af4ba96190dafe1beb1, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: transformation
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cf3d55c62a980c47b559011081361f9, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: weapons.Array.size
       value: 0
       objectReference: {fileID: 0}
