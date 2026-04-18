@@ -23,7 +23,7 @@ MonoBehaviour:
     preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
     modifiers: []
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
-  prefab: {fileID: 999691352028456364, guid: e185f3531a4be3d4aa1280894cbaf651, type: 3}
+  prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
   randomAngleVariance: 0
   direction: 110
   hitInterval: 1
