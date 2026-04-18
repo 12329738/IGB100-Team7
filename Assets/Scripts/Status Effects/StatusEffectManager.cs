@@ -23,6 +23,11 @@ public class StatusEffectManager : MonoBehaviour
 
     public void ApplyEffect(StatusEffectData data, GameObject source)
     {
+
+        if (source.GetComponent<Weapon>() != null)
+        {
+            source = GameManager.instance.player.gameObject;
+        }
         var instance = new StatusEffectInstance(data, source, gameObject);
         instance.OnApply();
 

@@ -17,14 +17,13 @@ public class Weapon : Item
     [UnityEngine.Range(0f, 360f)]
     public float direction;
     public float hitInterval = 1f;
-    public bool hasKnockback;
-    public float knockbackMagnitude;
     public bool isPiercing;
     public WeaponBehaviour behaviour;
     public ProjectilePattern pattern;
     [HideInInspector]
     public Upgrade baseUpgrade;
     public GameObject owner; 
+    public List<EffectEntryNode> effects;
     public virtual List<StatModifier> modifiers { get; set; }
     float cooldownTimer;
 
@@ -91,6 +90,18 @@ public class Weapon : Item
     public ProjectileData BuildProjectileData()
     {
         return new ProjectileData(this);        
+    }
+
+    private void OnValidate()
+    {
+        if (effects == null) return;
+
+        foreach (var entry in effects)
+        {
+            if (entry == null) continue;
+
+            entry.Validate();
+        }
     }
 }
 
