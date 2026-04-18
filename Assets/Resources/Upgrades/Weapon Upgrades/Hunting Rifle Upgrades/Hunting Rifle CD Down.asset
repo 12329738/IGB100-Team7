@@ -15,8 +15,8 @@ MonoBehaviour:
   name: 
   description: 
   modifiers:
-  - stat: 2
-    amount: 15
+  - stat: 9
+    amount: -10
     isPercentage: 1
   rarity: 0
   itemType: 12
