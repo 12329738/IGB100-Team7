@@ -98,6 +98,7 @@ public class Weapon : Item, IEventHandler
         float total = stats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
+        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount).currentValue}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
     }
 
