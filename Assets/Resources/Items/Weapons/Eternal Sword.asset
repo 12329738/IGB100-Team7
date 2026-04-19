@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Eternal Sword
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: f75fb0df78a7dd7499b1b345d1274f1d, type: 2}
+  - {fileID: 11400000, guid: 2aa0668e126e7824e82b9806be09883b, type: 2}
+  - {fileID: 11400000, guid: c0668fa778b3b474daa21bf573970111, type: 2}
+  - {fileID: 11400000, guid: e75f8c266632b474ca7e3cb80dba0d72, type: 2}
   _itemType: 5
   _name: Eternal Sword
   _description: 
@@ -25,10 +29,13 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  hasKnockback: 0
-  knockbackMagnitude: 0
   isPiercing: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  effects: []
+  isHit: 0
+  references:
+    version: 2
+    RefIds: []
