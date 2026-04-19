@@ -36,4 +36,5 @@ public class Stats
             GetStat(modifier.stat).ApplyModifiers(modifiers);
         }
     }
+
 }

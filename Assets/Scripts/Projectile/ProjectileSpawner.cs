@@ -6,9 +6,8 @@ using UnityEngine;
 public class ProjectileSpawner
 {
 
-    public void CreateProjectile(ProjectileData data)
+    public void CreateProjectile(ProjectileData data, int count)
     {
-        int count = (int)data.stats.GetStat(StatType.ProjectileCount).currentValue;
 
         for (int i = 0; i < count; i++)
         {

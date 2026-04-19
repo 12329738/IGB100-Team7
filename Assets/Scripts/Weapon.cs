@@ -25,6 +25,7 @@ public class Weapon : Item, IEventHandler
     public Upgrade baseUpgrade;
     public GameObject owner; 
     public List<EffectEntryNode> effects;
+    float projectileRemainder = 0f;
     public virtual List<StatModifier> modifiers { get; set; }
     public EventHandler eventHandler {  get; set; }
     private EffectHandler effectHandler;
@@ -94,7 +95,10 @@ public class Weapon : Item, IEventHandler
     {
         ProjectileData data = BuildProjectileData();
 
-        GameManager.instance.projectileSpawner.CreateProjectile(data);
+        float total = stats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
+        int count = Mathf.FloorToInt(total);
+        projectileRemainder = total - count;
+        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
     }
 
 

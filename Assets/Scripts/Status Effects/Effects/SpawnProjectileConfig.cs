@@ -13,6 +13,6 @@ public class SpawnProjectileConfig : EffectNodeConfig
 
         ProjectileData data = new ProjectileData(projectile);
 
-        GameManager.instance.projectileSpawner.CreateProjectile(data);
+        GameManager.instance.projectileSpawner.CreateProjectile(data, 1);
     }
 }
