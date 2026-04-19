@@ -97,6 +97,7 @@ public class Projectile : MonoBehaviour, IEventHandler
 
         if (!projectileData.isPiercing)
         {
+            Debug.Log($"Deactivating {this} because it collided with {target}");
             Deactivate();
         }
         
