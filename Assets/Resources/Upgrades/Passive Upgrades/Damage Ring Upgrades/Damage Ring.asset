@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
-  modifiers: []
+  modifiers:
+  - stat: 2
+    amount: 10
+    isPercentage: 1
   rarity: 0
-  itemType: 0
-  levelsAvaliable: 
+  itemType: 9
+  levelsAvaliable: 0100000002000000030000000400000005000000

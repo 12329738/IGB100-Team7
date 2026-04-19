@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Beserkers Ring
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: 3da486f8d6728c64e9ad4c70340e6988, type: 2}
   _itemType: 8
   _name: 
   _description: 

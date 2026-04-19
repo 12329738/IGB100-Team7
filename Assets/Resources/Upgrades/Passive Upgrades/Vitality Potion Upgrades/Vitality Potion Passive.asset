@@ -19,5 +19,5 @@ MonoBehaviour:
     amount: 20
     isPercentage: 1
   rarity: 1
-  itemType: 2
-  levelsAvaliable: 010000000200000003000000
+  itemType: 6
+  levelsAvaliable: 0100000002000000030000000400000005000000

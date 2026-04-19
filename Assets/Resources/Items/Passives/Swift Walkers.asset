@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Swift Walkers
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: 106209807d0455c4cb495ea1c0637f30, type: 2}
   _itemType: 11
   _name: 
   _description: 
