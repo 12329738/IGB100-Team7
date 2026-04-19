@@ -9,25 +9,20 @@ public class StatusEffectManager : MonoBehaviour
     private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new();
     Dictionary<CombatEvent, List<StatusEffectInstance>> eventMap = new();
     EventHandler handler;
-    private void OnEnable()
+    public void Initialize(EventHandler eventHandler)
     {
-        handler = GetComponent<EventHandler>();
-        handler.OnEvent += HandleEvent;     
+        handler = eventHandler;
+        handler.OnEvent += HandleEvent;
     }
-
-    private void OnDisable()
-    {
-        handler.OnEvent -= HandleEvent;
-    }
-
 
     public void ApplyEffect(StatusEffectData data, GameObject source)
     {
 
-        if (source.GetComponent<Weapon>() != null)
+        if (source.GetComponent<IEventHandler>() is Weapon)
         {
             source = GameManager.instance.player.gameObject;
         }
+
         var instance = new StatusEffectInstance(data, source, gameObject);
         instance.OnApply();
 

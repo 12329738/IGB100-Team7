@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 6092473958964533532}
   - component: {fileID: 1620644656706330053}
   - component: {fileID: -5139355339428780303}
-  - component: {fileID: 6882834673963706766}
-  - component: {fileID: 8023780911770596350}
   m_Layer: 3
   m_Name: Enemy1
   m_TagString: Untagged
@@ -53,6 +51,7 @@ MonoBehaviour:
   currentHealth: 0
   canBeDamaged: 1
   flashScript: {fileID: 0}
+  effects: []
   _stats:
     preset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
     modifiers: []
@@ -60,6 +59,9 @@ MonoBehaviour:
   _hitCooldown: 1
   contactDamage: 20
   expAmount: 100
+  references:
+    version: 2
+    RefIds: []
 --- !u!65 &6092473958964533532
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,30 +105,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6882834673963706766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512271440442089338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2fbfddd8af313e4eb6af5c1c349581b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8023780911770596350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512271440442089338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a2746253b9374e47a7548e939b60ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8520254631157217528

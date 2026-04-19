@@ -1,18 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
-public class Projectile : MonoBehaviour
+using System.Collections;
+using UnityEngine;
+
+
+public class Projectile : MonoBehaviour, IEventHandler
 {
     public IProjectileState state;
     public ProjectileData projectileData;
     private Combat ownerCombat;
-    private IDamageable ownerDamageable;
-    private Dictionary<GameObject, float> lastHitTimes = new();
-    private EventHandler eventHandler;
+    public EventHandler eventHandler {  get; set; } 
     private EffectHandler effectHandler;
 
     public void Update()
@@ -26,18 +22,18 @@ public class Projectile : MonoBehaviour
 
     public void Initialize(ProjectileData data)
     {
-        eventHandler = GetComponent<EventHandler>();
-        effectHandler = GetComponent<EffectHandler>();
+
 
         foreach (EffectEntryNode node in data.effects)
         {
             effectHandler.AddToMap(node);
         }
 
-        this.projectileData = data;
-
+        this.projectileData = new ProjectileData(data);
         ownerCombat = this.projectileData.owner.GetComponent<Combat>();
-        ownerDamageable = this.projectileData.owner.GetComponent<IDamageable>();
+
+        eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
 
         StopAllCoroutines();
 
@@ -58,11 +54,17 @@ public class Projectile : MonoBehaviour
 
     void Deactivate()
     {
-        EffectContext context = new EffectContext
+        foreach (EffectEntryNode node in projectileData.effects)
         {
-            source = this.gameObject
-        };
-        eventHandler.RaiseEvent(CombatEvent.OnExpire, context);
+            if (node.trigger == CombatEvent.OnExpire)
+            {
+                EffectContext context = new EffectContext
+                {
+                    source = this.gameObject
+                };
+                node.Execute(context);
+            }
+        }
         ObjectPool.instance.ReturnObject(projectileData.prefab, gameObject);
 
     }
@@ -86,11 +88,12 @@ public class Projectile : MonoBehaviour
             target = target,
             damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
             hitInterval = projectileData.hitInterval,
-            damageId = this
+            damageId = this,
+            isHit = projectileData.isHit
 
         };
 
-        ownerCombat.Damage(context);
+        ownerCombat.DealDamage(context);
 
         if (!projectileData.isPiercing)
         {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EventHandler : MonoBehaviour
+public class EventHandler 
 {
     public event Action<CombatEvent, EffectContext> OnEvent;
 

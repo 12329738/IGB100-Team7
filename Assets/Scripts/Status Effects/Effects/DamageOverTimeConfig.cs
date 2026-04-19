@@ -14,7 +14,7 @@ public class DamageOverTimeConfig : EffectNodeConfig
         ctx.isHit = isHit;
         ctx.damage = damage;
         ctx.hitInterval = damageInterval;
-        ctx.target.GetComponent<Entity>().combat.Damage(ctx);
+        ctx.target.GetComponent<Entity>().combat.DealDamage(ctx);
         Debug.Log($"{ctx.target} took {damage} dmg");
     }
 }

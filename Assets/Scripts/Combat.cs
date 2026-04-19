@@ -7,7 +7,7 @@ public class Combat : MonoBehaviour
 {
     private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
 
-    public void Damage(EffectContext context)
+    public void DealDamage(EffectContext context)
     {
         var key = (context.damageId, context.target);
         Debug.Log(

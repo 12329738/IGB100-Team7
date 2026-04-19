@@ -7,8 +7,6 @@ public class ProjectileData
     public Stats stats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
-    public float randomAngleVariance;
-    [UnityEngine.Range(0f, 360f)]
     public float baseDirection;
     public Vector3 finalDirection;
     public bool isPiercing;
@@ -18,6 +16,7 @@ public class ProjectileData
     public GameObject owner;
     public float hitInterval;
     public List<EffectEntryNode> effects;
+    public bool isHit;
 
     public ProjectileData(Weapon original)
     {
@@ -25,16 +24,25 @@ public class ProjectileData
         prefab = original.prefab;
         pattern = original.pattern;
         behaviour = original.behaviour;
-        randomAngleVariance = original.randomAngleVariance;
         isPiercing = original.isPiercing;
         owner = original.owner;
         hitInterval = original.hitInterval;
         effects = original.effects;
+        isHit = original.isHit;
+
     }
 
-    public ProjectileData()
+    public ProjectileData(ProjectileData original)
     {
-
+        stats = original.stats;
+        prefab = original.prefab;
+        pattern = original.pattern;
+        behaviour = original.behaviour;
+        isPiercing = original.isPiercing;
+        owner = original.owner;
+        hitInterval = original.hitInterval;
+        effects = original.effects;
+        isHit = original.isHit;
     }
 
 }

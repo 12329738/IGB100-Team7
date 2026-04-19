@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
+using static UnityEngine.Video.VideoPlayer;
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
-public class Weapon : Item
+public class Weapon : Item, IEventHandler
 {
     [HideInInspector]
     public Stats stats;
@@ -25,7 +26,10 @@ public class Weapon : Item
     public GameObject owner; 
     public List<EffectEntryNode> effects;
     public virtual List<StatModifier> modifiers { get; set; }
+    public EventHandler eventHandler {  get; set; }
+    private EffectHandler effectHandler;
     float cooldownTimer;
+    public bool isHit;
 
     public void Initialize()
     {
@@ -33,6 +37,13 @@ public class Weapon : Item
         stats.preset = baseStats;
         stats.Initialize();      
         modifiers = new List<StatModifier>();
+        eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
+
+        foreach (EffectEntryNode node in effects)
+        {
+            effectHandler.AddToMap(node);
+        }
 
         if (stats.GetStat(StatType.Duration).currentValue <= 0)
         {
@@ -42,7 +53,7 @@ public class Weapon : Item
 
     public void CreateBaseUpgrade()
     {
-        baseUpgrade = new Upgrade();
+        baseUpgrade = CreateInstance<Upgrade>();
         baseUpgrade.itemType = itemType;
         baseUpgrade.name = name;
         baseUpgrade.description = description;

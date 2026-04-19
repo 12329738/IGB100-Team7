@@ -6,7 +6,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
-public abstract class Entity : MonoBehaviour, IDamageable
+public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
 {
     public float currentHealth;
     [HideInInspector] public bool canBeDamaged = true;
@@ -14,11 +14,12 @@ public abstract class Entity : MonoBehaviour, IDamageable
 
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
-    private EventHandler eventHandler;
     private EffectHandler effectHandler;
+    public EventHandler eventHandler {  get; set; }
 
     public Combat combat {  get; private set; }
     private StatusEffectManager status;
+    public List<EffectEntryNode> effects;
 
     [SerializeField]
     private Stats _stats;
@@ -34,17 +35,24 @@ public abstract class Entity : MonoBehaviour, IDamageable
 
     public void Awake()
     {
+
+        combat = GetComponent<Combat>();
+        eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
+        status = GetComponent<StatusEffectManager>();
+        status.Initialize(eventHandler);
         SetupStats();
-        eventHandler = GetComponent<EventHandler>();
-        effectHandler = GetComponent<EffectHandler>();
+        foreach (EffectEntryNode node in effects)
+        {
+            effectHandler.AddToMap(node);
+        }
     }
 
     private void SetupStats()
     {
         stats.Initialize();
         currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
-        combat = GetComponent<Combat>();
-        status = GetComponent<StatusEffectManager>();
+
     }
 
     public bool IsDamageable()

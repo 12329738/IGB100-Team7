@@ -1,24 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectHandler : MonoBehaviour
+public class EffectHandler 
 {
     Dictionary<CombatEvent, List<EffectEntryNode>> eventMap = new();
     private EventHandler eventHandler;
 
-    private void Awake()
+    public EffectHandler(EventHandler eventHandler)
     {
-        eventHandler = GetComponent<EventHandler>();
-    }
-
-    private void OnEnable()
-    {
+        this.eventHandler = eventHandler;
         eventHandler.OnEvent += HandleEvent;
-    }
-
-    private void OnDisable()
-    {
-        eventHandler.OnEvent -= HandleEvent;
     }
 
     public void HandleEvent(CombatEvent type, EffectContext ctx)

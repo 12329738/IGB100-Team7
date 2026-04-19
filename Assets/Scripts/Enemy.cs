@@ -61,7 +61,7 @@ public class Enemy : Entity
                     damageId = this
                 };
 
-                combat.Damage(context);
+                combat.DealDamage(context);
             }
         }
         
