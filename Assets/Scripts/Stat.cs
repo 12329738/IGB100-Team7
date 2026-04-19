@@ -19,28 +19,26 @@ public class Stat
 
     public void ApplyModifiers(List<StatModifier> modifiers)
     {
-        currentValue = baseValue * CalculateModifiers(modifiers);
+        currentValue = CalculateModifiers(modifiers);
     }
 
     public float CalculateModifiers(List<StatModifier> modifiers)
     {
-        float percentageModifiers = 1;
-        float additiveModifiers = 0;
-        float finalModifier;
+        if (modifiers == null || modifiers.Count == 0)
+            return 1f;
+
+        float multiplier = 1f;
+        float additive = baseValue;
+
         foreach (StatModifier modifier in modifiers)
         {
             if (modifier.isPercentage)
-            {
-                percentageModifiers += modifier.amount / 100;
-            }
-
+                multiplier += modifier.amount / 100f;
             else
-            {
-                additiveModifiers += modifier.amount;
-            }
+                additive += modifier.amount;
         }
-        finalModifier = percentageModifiers + additiveModifiers;
-        return finalModifier;
+
+        return (additive) * multiplier;
     }
 
     public void ResetStat()
