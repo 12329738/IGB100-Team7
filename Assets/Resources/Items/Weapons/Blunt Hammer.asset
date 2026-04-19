@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Blunt Hammer
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: 87435486d3e7af64bbfce5aa855cb156, type: 2}
+  - {fileID: 11400000, guid: 9edde51530885874482ee37b97c43f07, type: 2}
+  - {fileID: 11400000, guid: 28333695d28bbdc40b0925606a7d57de, type: 2}
   _itemType: 3
   _name: Blunt Hammer
   _description: 
@@ -25,10 +28,13 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  hasKnockback: 0
-  knockbackMagnitude: 0
   isPiercing: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  effects: []
+  isHit: 0
+  references:
+    version: 2
+    RefIds: []

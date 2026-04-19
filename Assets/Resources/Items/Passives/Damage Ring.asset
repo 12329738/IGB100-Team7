@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Damage Ring
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: ba801ebdbef9540429b9c4183de031d6, type: 2}
   _itemType: 9
   _name: 
   _description: 

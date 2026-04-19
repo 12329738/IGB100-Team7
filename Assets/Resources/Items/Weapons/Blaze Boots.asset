@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Blaze Boots
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: db85e29002485944ba16a341d956c885, type: 2}
+  - {fileID: 11400000, guid: bb90154720951ad4da558b7790c38d7a, type: 2}
+  - {fileID: 11400000, guid: 97e82bf4e85660b4e8df7d5045b66a26, type: 2}
+  - {fileID: 11400000, guid: 0aa0ac4095a583f4cb28ddcb9e23e62a, type: 2}
+  - {fileID: 11400000, guid: 2aafe11b73ab05f4cbf3cf599b936a1f, type: 2}
   _itemType: 2
   _name: Blaze Boots
   _description: 
@@ -25,10 +30,13 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  hasKnockback: 0
-  knockbackMagnitude: 0
   isPiercing: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  effects: []
+  isHit: 0
+  references:
+    version: 2
+    RefIds: []

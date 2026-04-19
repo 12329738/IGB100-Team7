@@ -15,6 +15,8 @@ MonoBehaviour:
   currentLevel: 1
   _upgrades:
   - {fileID: 11400000, guid: 7ed41691073d66e42ab0fde55c48cfbe, type: 2}
+  - {fileID: 11400000, guid: 625c4ee4466033945ac12d0717f82449, type: 2}
+  - {fileID: 11400000, guid: 9f5e526cdb79ea54897f30a31ee11d2f, type: 2}
   _itemType: 1
   _name: Boltshot
   _description: Shoots projectiles that knockback enemies
@@ -32,7 +34,7 @@ MonoBehaviour:
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
-  isHit: 1
+  isHit: 0
   references:
     version: 2
     RefIds: []

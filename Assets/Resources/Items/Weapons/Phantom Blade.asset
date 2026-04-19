@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades:
+  - {fileID: 11400000, guid: e10cf84d751b1a7428cf56d53d0e62b5, type: 2}
   - {fileID: 11400000, guid: 8e99b7e418dcfe544b334f2aa436e34f, type: 2}
+  - {fileID: 11400000, guid: 020e71670f825d64889cbd14aceb2efd, type: 2}
   - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
   _itemType: 0
   _name: Phantom Blade
@@ -26,7 +28,7 @@ MonoBehaviour:
   prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
   randomAngleVariance: 0
   direction: 110
-  hitInterval: 1
+  hitInterval: 0.5
   isPiercing: 1
   behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
   pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}

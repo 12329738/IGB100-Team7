@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Hunting Rifle
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: dc0cdfc540cf9034b96bab79bba82571, type: 2}
+  - {fileID: 11400000, guid: 71d2aedc9ce54cd469018100e98a9314, type: 2}
+  - {fileID: 11400000, guid: f562f058c2c612249b35ede429ae992d, type: 2}
   _itemType: 12
   _name: 
   _description: 
@@ -25,10 +28,13 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  hasKnockback: 1
-  knockbackMagnitude: 0.5
   isPiercing: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  effects: []
+  isHit: 0
+  references:
+    version: 2
+    RefIds: []
