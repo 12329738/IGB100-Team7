@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.Video.VideoPlayer;
+
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
 public class Weapon : Item, IEventHandler
 {
     [HideInInspector]
-    public Stats stats;
+    public Stats weaponStats;
     public StatsPreset baseStats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
@@ -26,7 +25,7 @@ public class Weapon : Item, IEventHandler
     public GameObject owner; 
     public List<EffectEntryNode> effects;
     float projectileRemainder = 0f;
-    public virtual List<StatModifier> modifiers { get; set; }
+    public virtual List<StatModifier> weaponModifiers { get; set; }
     public EventHandler eventHandler {  get; set; }
     private EffectHandler effectHandler;
     float cooldownTimer;
@@ -35,9 +34,9 @@ public class Weapon : Item, IEventHandler
     public void Initialize()
     {
         owner = GameManager.instance.player.gameObject;
-        stats.preset = baseStats;
-        stats.Initialize();      
-        modifiers = new List<StatModifier>();
+        weaponStats.preset = baseStats;
+        weaponStats.Initialize();      
+        weaponModifiers = new List<StatModifier>();
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
@@ -46,7 +45,7 @@ public class Weapon : Item, IEventHandler
             effectHandler.AddToMap(node);
         }
 
-        if (stats.GetStat(StatType.Duration).currentValue <= 0)
+        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
         {
             Attack();
         }
@@ -63,21 +62,26 @@ public class Weapon : Item, IEventHandler
 
     public void AddModifier(StatModifier modifier)
     {
-        modifiers.Add(modifier);
+        weaponModifiers.Add(modifier);
         ApplyModifiers();
     }
 
 
-    private void ApplyModifiers()
+    public void ApplyModifiers()
     {
-        stats.ApplyModifiers(modifiers);
+        List<StatModifier> combined = new List<StatModifier>();
+
+        combined.AddRange(weaponModifiers);
+        combined.AddRange(GameManager.instance.player.modifiers);
+
+        weaponStats.ApplyModifiers(combined);
     }
 
 
 
     public void Tick(float deltaTime)
     {
-        if (stats.GetStat(StatType.Duration).currentValue <= 0)
+        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
         {
             return;
         }
@@ -87,7 +91,7 @@ public class Weapon : Item, IEventHandler
         if (cooldownTimer <= 0f)
         {
             Attack();
-            cooldownTimer = stats.GetStat(StatType.Cooldown).currentValue;
+            cooldownTimer = weaponStats.GetStat(StatType.Cooldown).currentValue;
         }
     }
 
@@ -95,10 +99,10 @@ public class Weapon : Item, IEventHandler
     {
         ProjectileData data = BuildProjectileData();
 
-        float total = stats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
+        float total = weaponStats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount).currentValue}, spawning {count} projectiles");
+        Debug.Log($"{this} has a projectile count of {weaponStats.GetStat(StatType.ProjectileCount).currentValue}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
     }
 

@@ -20,7 +20,7 @@ public class ProjectileData
 
     public ProjectileData(Weapon original)
     {
-        stats = original.stats; 
+        stats = original.weaponStats; 
         prefab = original.prefab;
         pattern = original.pattern;
         behaviour = original.behaviour;

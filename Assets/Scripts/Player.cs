@@ -207,9 +207,9 @@ public class Player : Entity
 
         else if (upgrade.modifiers != null) 
         {
-            if (item is Weapon weapon)
+            if (item is Weapon upgradeWeapon)
             {
-                AddWeaponModifiers(upgrade.modifiers, weapon);
+                AddWeaponModifiers(upgrade.modifiers, upgradeWeapon);
                 
 
             }
@@ -222,6 +222,11 @@ public class Player : Entity
                 }
 
                 stats.ApplyModifiers(modifiers);
+
+                foreach (Weapon weapon in weapons)
+                {
+                    weapon.ApplyModifiers();
+                }
             }
 
             item.currentLevel++;
