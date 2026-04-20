@@ -20,4 +20,8 @@ public abstract class Item : ScriptableObject
 
     public string _description;
     public virtual string description { get => _description; set => _description = value; }
+
+    public List<StatModifier> modifiers = new List<StatModifier>();
+
+
 }

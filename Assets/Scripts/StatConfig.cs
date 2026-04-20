@@ -4,6 +4,6 @@ using UnityEngine;
 [Serializable]
 public class StatConfig 
 {
-    public StatType stat;
+    public StatType statType;
     public float value;
 }

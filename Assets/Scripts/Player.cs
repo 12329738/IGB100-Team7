@@ -34,6 +34,7 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         statusManager = GetComponent<StatusEffectManager>();
         foreach (Weapon weapon in startingWeapons) 
         {
@@ -74,7 +75,7 @@ public class Player : Entity
 
     private void UpdateTransformationAmount()
     {
-        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation).currentValue && transformationCoroutine == null)
+        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation) && transformationCoroutine == null)
         {
             transformationCoroutine = StartCoroutine(TransformationCoroutine());
         }
@@ -88,13 +89,13 @@ public class Player : Entity
         {
             if (!isTransformed)
             {
-                regenAccumulator += stats.GetStat(StatType.TransformationGainRate).currentValue * Time.deltaTime;
+                regenAccumulator += stats.GetStat(StatType.TransformationGainRate) * Time.deltaTime;
             }
 
 
             else if (isTransformed)
             {
-                regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate).currentValue * Time.deltaTime;
+                regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate) * Time.deltaTime;
             }
 
             //int regenAmount = Mathf.FloorToInt(regenAccumulator);
@@ -116,9 +117,9 @@ public class Player : Entity
     {
         currentTransformationAmount += regenAmount;
 
-        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation).currentValue)
+        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation))
         {
-            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation).currentValue;
+            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation);
         }
 
         if (currentTransformationAmount < 0)
@@ -144,7 +145,7 @@ public class Player : Entity
 
     private void UpdatePickupRange()
     {
-        pickupCollider.radius = stats.GetStat(StatType.Collection).currentValue;
+        pickupCollider.radius = stats.GetStat(StatType.Collection);
     }
 
 
@@ -171,7 +172,7 @@ public class Player : Entity
             Transform();
         }
 
-        transform.position += movement * stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
+        transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
     }
 
     private IEnumerator LevelUp()
@@ -201,39 +202,22 @@ public class Player : Entity
 
         if (item == null)
         {         
-            AddItem(upgrade.itemType);          
+            AddItem(upgrade.itemType);
+            item = TryGetItem(upgrade.itemType);
+            stats.AddSource(item, upgrade.modifiers);
         }
 
 
-        else if (upgrade.modifiers != null) 
+        if (upgrade.modifiers != null) 
         {
-            if (item is Weapon weapon)
+
+            foreach (StatModifier modifier in upgrade.modifiers)
             {
-                AddWeaponModifiers(upgrade.modifiers, weapon);
-                
-
-            }
-
-            else if (item is Passive passive)
-            {
-                foreach (StatModifier modifier in upgrade.modifiers)
-                {
-                    modifiers.Add(modifier);
-                }
-
-                stats.ApplyModifiers(modifiers);
+                item.modifiers.Add(modifier);
             }
 
             item.currentLevel++;
         }     
-    }
-
-    private void AddWeaponModifiers(List<StatModifier> modifiers, Weapon weapon)
-    {
-        foreach (StatModifier modifier in modifiers)
-        {
-            weapon.AddModifier(modifier);
-        }
     }
 
 
