@@ -18,8 +18,8 @@ public class Player : Entity
     [HideInInspector]
     public List<Passive> passives;
     [HideInInspector]
-    public List<StatModifier> modifiers;
-    public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
+    public Dictionary<ItemList, Item> itemDictionary = new Dictionary<ItemList, Item>();
+    Dictionary<Passive, List<StatModifier>> passiveModifiers = new Dictionary<Passive, List<StatModifier>>();
     public Transformation transformation;
     public float currentTransformationAmount;
     bool isTransformed = false;
@@ -51,6 +51,16 @@ public class Player : Entity
             return;
 
         Weapon weapon = Instantiate(weaponData);
+        weapon.weaponStats.AddSource(weapon, new List<StatModifier>());
+
+        foreach (Passive passive in passives)
+        {
+            if (!passiveModifiers.ContainsKey(passive))
+                passiveModifiers[passive] = new List<StatModifier>();
+
+            weapon.weaponStats.AddSource(passive, passiveModifiers[passive]);
+        }
+
         weapons.Add(weapon);
         itemDictionary.Add(weaponData.itemType, weapon);
         weapon.Initialize();
@@ -201,20 +211,55 @@ public class Player : Entity
         Item item = TryGetItem(upgrade.itemType);
 
         if (item == null)
-        {         
+        {
             AddItem(upgrade.itemType);
             item = TryGetItem(upgrade.itemType);
-            stats.AddSource(item, upgrade.modifiers);
+
+            if (item is Passive passive)
+            {
+                
+                if (!passiveModifiers.ContainsKey(passive))
+                    passiveModifiers[passive] = new List<StatModifier>();
+
+                stats.AddSource(passive, passiveModifiers[passive]);
+
+                foreach (var weapon in weapons)
+                {
+                    weapon.weaponStats.AddSource(passive, passiveModifiers[passive]);
+                    weapon.weaponStats.MarkDirty();
+                }
+
+                stats.MarkDirty();
+            }
+
         }
 
 
         if (upgrade.modifiers != null) 
         {
 
-            foreach (StatModifier modifier in upgrade.modifiers)
+            if (item is Passive passive)
             {
-                item.modifiers.Add(modifier);
+                stats.sources[passive].AddRange(upgrade.modifiers);
+
+                foreach (var weapon in weapons)
+                {
+                    weapon.weaponStats.MarkDirty();
+                }
+
+                stats.MarkDirty();
             }
+
+            else if (item is Weapon weapon)
+            {
+                weapon.weaponStats.AddSource(weapon, upgrade.modifiers);
+            }
+
+            foreach(var weapon in weapons)
+{
+                weapon.weaponStats.MarkDirty();
+            }
+
 
             item.currentLevel++;
         }     
