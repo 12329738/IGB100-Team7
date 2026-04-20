@@ -28,21 +28,20 @@ public class UpgradeUI : MonoBehaviour
         StringBuilder sb = new StringBuilder();
 
         sb.AppendLine($"{this.upgrade.itemType.ToString()}");
-        sb.AppendLine($"{this.upgrade.itemType.ToString()}");
 
         if (upgrade.description != "")
         {
             sb.AppendLine($"{this.upgrade.description}");
         }
 
-        else
+        if (upgrade.modifiers  != null) 
         {
 
             sb.AppendLine($"{upgrade.rarity.ToString()}");
             foreach (StatModifier modifier in upgrade.modifiers)
             {
 
-                sb.AppendLine($"Increases {modifier.stat.ToString()} by {modifier.amount}");
+                sb.AppendLine($"Increases {modifier.statType.ToString()} by {modifier.value}");
             }
         }
 

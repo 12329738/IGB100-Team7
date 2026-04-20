@@ -15,9 +15,9 @@ MonoBehaviour:
   name: 
   description: 
   modifiers:
-  - stat: 8
-    amount: 1
-    isPercentage: 0
+  - statType: 8
+    value: 1
+    type: 0
   rarity: 1
   itemType: 1
   levelsAvaliable: 0100000002000000030000000400000005000000
