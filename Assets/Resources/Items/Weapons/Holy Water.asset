@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Holy Water
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: 10432460f4504a34e8a15915ee772c3c, type: 2}
+  - {fileID: 11400000, guid: 82b576e5a66861f41800788d46e1d409, type: 2}
+  - {fileID: 11400000, guid: 1ffb33a9975366d49a3937b01b1523d7, type: 2}
+  - {fileID: 11400000, guid: 3019414870ea27c4f827627da306f3c9, type: 2}
+  - {fileID: 11400000, guid: 2685ffab1baee0a4e9ae3bf4d4b7f505, type: 2}
   _itemType: 4
   _name: Holy Water
   _description: 
@@ -25,10 +30,26 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  hasKnockback: 0
-  knockbackMagnitude: 0
   isPiercing: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  effects:
+  - trigger: 0
+    effectData:
+    - rid: 6974428087888642110
+  isHit: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6974428087888642110
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 2
+        effectConfig:
+          rid: 6974428087888642111
+    - rid: 6974428087888642111
+      type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
+      data:
+        effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}

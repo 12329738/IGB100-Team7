@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.Video.VideoPlayer;
+
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
 public class Weapon : Item, IEventHandler

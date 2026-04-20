@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Adrenaline
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: a6c705cb2975d8f4c8aa4a1cbda236fa, type: 2}
   _itemType: 7
   _name: 
   _description: 
