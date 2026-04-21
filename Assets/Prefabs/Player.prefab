@@ -53,7 +53,7 @@ MonoBehaviour:
   flashScript: {fileID: 0}
   effects: []
   _stats:
-    baseStats: {fileID: 11400000, guid: 55aa42f8c2b05af4ba96190dafe1beb1, type: 2}
+    preset: {fileID: 11400000, guid: 55aa42f8c2b05af4ba96190dafe1beb1, type: 2}
     modifiers: []
   _team: 0
   _hitCooldown: 0

@@ -52,9 +52,8 @@ MonoBehaviour:
   canBeDamaged: 1
   flashScript: {fileID: 0}
   effects: []
-  _statPreset: {fileID: 11400000, guid: 4dcc6ee83153dd84d9cc5c2e79a77a6d, type: 2}
-  stats:
-    baseStats: {fileID: 0}
+  _stats:
+    preset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
     modifiers: []
   _team: 1
   _hitCooldown: 1

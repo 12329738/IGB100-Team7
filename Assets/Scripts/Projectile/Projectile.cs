@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour, IEventHandler
 
         StopAllCoroutines();
 
-        if (this.projectileData.stats.GetStat(StatType.Duration) > 0)
+        if (this.projectileData.stats.GetStat(StatType.Duration).currentValue > 0)
         {
             StartCoroutine(LifetimeRoutine());
         }
@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour, IEventHandler
 
     IEnumerator LifetimeRoutine()
     {
-        yield return new WaitForSeconds(projectileData.stats.GetStat(StatType.Duration));
+        yield return new WaitForSeconds(projectileData.stats.GetStat(StatType.Duration).currentValue);
         Deactivate();
     }
 
@@ -86,7 +86,7 @@ public class Projectile : MonoBehaviour, IEventHandler
         {
             source = gameObject,
             target = target,
-            damage = projectileData.stats.GetStat(StatType.Damage),
+            damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
             hitInterval = projectileData.hitInterval,
             damageId = this,
             isHit = projectileData.isHit

@@ -24,20 +24,19 @@ public class Weapon : Item, IEventHandler
     public Upgrade baseUpgrade;
     public GameObject owner; 
     public List<EffectEntryNode> effects;
+    float projectileRemainder = 0f;
     public virtual List<StatModifier> weaponModifiers { get; set; }
     public EventHandler eventHandler {  get; set; }
     private EffectHandler effectHandler;
     float cooldownTimer;
     public bool isHit;
-    float projectileRemainder;
 
     public void Initialize()
     {
         owner = GameManager.instance.player.gameObject;
-
-        weaponStats.Initialize(baseStats);
+        weaponStats.preset = baseStats;
+        weaponStats.Initialize();      
         weaponModifiers = new List<StatModifier>();
-
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
@@ -46,9 +45,7 @@ public class Weapon : Item, IEventHandler
             effectHandler.AddToMap(node);
         }
 
-
-        if (weaponStats.GetStat(StatType.Duration) <= 0)
-
+        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
         {
             Attack();
         }
@@ -63,12 +60,28 @@ public class Weapon : Item, IEventHandler
 
     }
 
+    public void AddModifier(StatModifier modifier)
+    {
+        weaponModifiers.Add(modifier);
+        ApplyModifiers();
+    }
+
+
+    public void ApplyModifiers()
+    {
+        List<StatModifier> combined = new List<StatModifier>();
+
+        combined.AddRange(weaponModifiers);
+        combined.AddRange(GameManager.instance.player.modifiers);
+
+        weaponStats.ApplyModifiers(combined);
+    }
+
+
 
     public void Tick(float deltaTime)
     {
-
-        if (weaponStats.GetStat(StatType.Duration) <= 0)
-
+        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
         {
             return;
         }
@@ -78,9 +91,7 @@ public class Weapon : Item, IEventHandler
         if (cooldownTimer <= 0f)
         {
             Attack();
-
-            cooldownTimer = weaponStats.GetStat(StatType.Cooldown);
-
+            cooldownTimer = weaponStats.GetStat(StatType.Cooldown).currentValue;
         }
     }
 
@@ -88,13 +99,11 @@ public class Weapon : Item, IEventHandler
     {
         ProjectileData data = BuildProjectileData();
 
-
-        float total = weaponStats.GetStat(StatType.ProjectileCount) + projectileRemainder;
+        float total = weaponStats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {weaponStats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
+        Debug.Log($"{this} has a projectile count of {weaponStats.GetStat(StatType.ProjectileCount).currentValue}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
-
     }
 
 

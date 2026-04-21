@@ -20,13 +20,10 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     public Combat combat {  get; private set; }
     private StatusEffectManager status;
     public List<EffectEntryNode> effects;
+
     [SerializeField]
-    private StatsPreset _statPreset;
-
-    public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
-    [HideInInspector]
-    public Stats stats;
-
+    private Stats _stats;
+    public virtual Stats stats { get => _stats; set => _stats = value; }
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
@@ -38,7 +35,7 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
 
     public void Awake()
     {
-        this.stats.Initialize(statPreset);
+
         combat = GetComponent<Combat>();
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
@@ -53,7 +50,9 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
 
     private void SetupStats()
     {
-        currentHealth = stats.GetStat(StatType.MaxHealth);
+        stats.Initialize();
+        currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
+
     }
 
     public bool IsDamageable()
@@ -89,19 +88,19 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     public void AddStatModifier(float amount, StatType statType)
     {
         StatModifier modifier = new StatModifier();
-        modifier.statType = statType;
-        modifier.value = amount;
+        modifier.stat = statType;
+        modifier.amount = amount;
         stats.modifiers.Add(modifier);
     }
 
     public float GetCurrentHealthPercent()
     {
-        return currentHealth / stats.GetStat(StatType.MaxHealth);
+        return currentHealth / stats.GetStat(StatType.MaxHealth).currentValue;
     }
 
     public float[] GetCurrentHealth()
     {
-        float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth) };
+        float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth).currentValue };
 
         return healthAmount;
     }
@@ -115,9 +114,9 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     public void Heal(float amount)
     {
         currentHealth += amount;
-        if (currentHealth > stats.GetStat(StatType.MaxHealth))
+        if (currentHealth > stats.GetStat(StatType.MaxHealth).currentValue)
         {
-            currentHealth = stats.GetStat(StatType.MaxHealth);
+            currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
         }
 
     }

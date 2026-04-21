@@ -90,7 +90,7 @@ public class ItemDatabase : MonoBehaviour
             {
                 foreach (StatModifier modifier in chosenUpgrade.modifiers)
                 {
-                    modifier.value *= rarity.valueModifier;
+                    modifier.amount *= rarity.valueModifier;
                 }
             }
             

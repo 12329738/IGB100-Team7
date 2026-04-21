@@ -40,7 +40,7 @@ public class Enemy : Entity
         {
 
             Vector3 dir = player.transform.position - transform.position;
-            transform.position += dir.normalized * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+            transform.position += dir.normalized * stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
         }
 
     }
