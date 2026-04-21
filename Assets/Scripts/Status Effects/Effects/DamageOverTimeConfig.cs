@@ -13,10 +13,10 @@ public class DamageOverTimeConfig : EffectNodeConfig
     {
         ctx.isHit = isHit;
         IModifierReceiver receiver = ctx.source.GetComponent<IModifierReceiver>();
-        //if (receiver != null)
-        //{
-        //    ctx.damage *= receiver.stats.GetStat(StatType.Damage);
-        //}
+        if (receiver != null)
+        {
+            ctx.damage = receiver.stats.GetMultiplierFor(StatType.Damage) * damage;
+        }
 
         ctx.hitInterval = damageInterval;
         ctx.target.GetComponent<Entity>().combat.DealDamage(ctx);

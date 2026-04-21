@@ -148,7 +148,7 @@ public class Stats
     HashSet<IModifierProvider> visited)
     {
         if (!visited.Add(provider))
-            yield break; // 🛑 already processed
+            yield break; 
 
         if (provider is ModifierProvider mp)
         {
@@ -166,6 +166,22 @@ public class Stats
             foreach (var mod in provider.Modifiers)
                 yield return mod;
         }
+    }
+
+    public float GetMultiplierFor(StatType stat)
+    {
+        float mult = 1f;
+
+        foreach (var provider in modifierProviders)
+        {
+            foreach (var mod in GetModifiersSafe(provider, new HashSet<IModifierProvider>()))
+            {
+                if (mod.stat == stat && mod.type == ModifierType.Percentage)
+                    mult *= (1 + mod.amount / 100f);
+            }
+        }
+
+        return mult;
     }
 
 
