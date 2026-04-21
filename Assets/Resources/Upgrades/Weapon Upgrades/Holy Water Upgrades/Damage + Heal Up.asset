@@ -18,6 +18,7 @@ MonoBehaviour:
   - stat: 2
     amount: 15
     isPercentage: 1
+    type: 1
   rarity: 0
   itemType: 4
   levelsAvaliable: 0100000002000000030000000400000005000000
