@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 625c4ee4466033945ac12d0717f82449, type: 2}
   - {fileID: 11400000, guid: 9f5e526cdb79ea54897f30a31ee11d2f, type: 2}
   _itemType: 1
-  _name: Boltshot
+  _name: 
   _description: Shoots projectiles that knockback enemies
   baseStats: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   prefab: {fileID: 999691352028456364, guid: 7a3fcaf5940cd2446bf02ac72b761d7a, type: 3}
@@ -27,7 +27,7 @@ MonoBehaviour:
   hitInterval: 1
   isPiercing: 0
   trackEnemy: 0
-  aimAtEnemy: 0
+  aimAtEnemy: 1
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 11400000, guid: 1af918db992704748928efa5fa0c2747, type: 2}
   baseUpgrade: {fileID: 0}

@@ -13,27 +13,15 @@ MonoBehaviour:
   m_Name: Boltshot Stats
   m_EditorClassIdentifier: 
   statPresets:
-  - statType: 0
-    value: 1
-  - statType: 1
-    value: 4
   - statType: 2
-    value: 1
-  - statType: 3
-    value: 1
+    value: 30
+  - statType: 1
+    value: 10
+  - statType: 9
+    value: 4
   - statType: 4
-    value: 1
+    value: 5
   - statType: 7
     value: 1
   - statType: 8
-    value: 1
-  - statType: 9
-    value: 1
-  - statType: 10
-    value: 1
-  - statType: 10
-    value: 1
-  - statType: 10
-    value: 1
-  - statType: 10
-    value: 1
+    value: 3
