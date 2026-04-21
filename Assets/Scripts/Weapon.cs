@@ -48,13 +48,10 @@ public class Weapon : Item, IEventHandler, IStats
         owner = GameManager.instance.player.gameObject;
         stats = new Stats();
         stats.Initialize(baseStats);
+        stats.modifierSources = GameManager.instance.player.stats.modifierSources;
         Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
-        dict.Add(this, new List<StatModifier>());
         stats.AddModifierSource(this, dict);
-        foreach (var kvp in GameManager.instance.player.stats.modifierSources)
-        {
-            stats.AddModifierSource(GameManager.instance.player, kvp.Value);
-        }
+        
         
   
         eventHandler = new EventHandler();
