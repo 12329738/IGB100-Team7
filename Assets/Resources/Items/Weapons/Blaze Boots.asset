@@ -22,21 +22,23 @@ MonoBehaviour:
   _itemType: 2
   _name: Blaze Boots
   _description: 
-  stats:
-    preset: {fileID: 0}
-    modifiers: []
   baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 0
+  trackEnemy: 0
+  aimAtEnemy: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
   isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  _statPreset: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
   references:
     version: 2
     RefIds: []

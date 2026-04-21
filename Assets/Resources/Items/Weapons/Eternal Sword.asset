@@ -21,21 +21,23 @@ MonoBehaviour:
   _itemType: 5
   _name: Eternal Sword
   _description: 
-  stats:
-    preset: {fileID: 0}
-    modifiers: []
   baseStats: {fileID: 11400000, guid: 6fc24c2416afb274ab1ce6859621f52f, type: 2}
   prefab: {fileID: 999691352028456364, guid: e188fdd92d348254c839a6dc8246b985, type: 3}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 0
+  trackEnemy: 0
+  aimAtEnemy: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
   isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  _statPreset: {fileID: 11400000, guid: 6fc24c2416afb274ab1ce6859621f52f, type: 2}
   references:
     version: 2
     RefIds: []

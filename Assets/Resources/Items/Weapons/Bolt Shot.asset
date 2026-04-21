@@ -20,21 +20,23 @@ MonoBehaviour:
   _itemType: 1
   _name: Boltshot
   _description: Shoots projectiles that knockback enemies
-  stats:
-    preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
-    modifiers: []
   baseStats: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   prefab: {fileID: 999691352028456364, guid: 7a3fcaf5940cd2446bf02ac72b761d7a, type: 3}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 0
+  trackEnemy: 0
+  aimAtEnemy: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 11400000, guid: 1af918db992704748928efa5fa0c2747, type: 2}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
   isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  _statPreset: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   references:
     version: 2
     RefIds: []

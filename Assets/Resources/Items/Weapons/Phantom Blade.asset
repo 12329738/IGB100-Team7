@@ -21,21 +21,23 @@ MonoBehaviour:
   _itemType: 0
   _name: Phantom Blade
   _description: Summons blades that orbit the player
-  stats:
-    preset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
-    modifiers: []
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
   randomAngleVariance: 0
   direction: 110
   hitInterval: 0.5
   isPiercing: 1
+  trackEnemy: 0
+  aimAtEnemy: 0
   behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
   pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
   isHit: 1
+  stickToPlayer: 0
+  randomDirection: 0
+  _statPreset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   references:
     version: 2
     RefIds: []
