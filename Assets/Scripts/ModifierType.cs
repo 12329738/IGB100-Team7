@@ -1,6 +1,5 @@
 public enum ModifierType
 {
-    Additive,
-    Flat,          
-    Multiplicative 
+    Flat,        
+    Percentage 
 }

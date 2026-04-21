@@ -56,9 +56,8 @@ public class Player : Entity, IDamageable
         weapon.Initialize();
 
         weapons.Add(weapon);
-        itemDictionary.Add(weapon.itemType, weapon); 
+        itemDictionary.Add(weapon.itemType, weapon);
 
-        provider.AddChild(weapon.provider);
     }
 
 

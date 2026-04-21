@@ -37,7 +37,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
 
     [SerializeField]
     private StatsPreset _statPreset;
-    private bool initialized;
+
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
     private Stats _stats;
@@ -47,16 +47,14 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
 
     public void Initialize()
     {
-        if (initialized) return;
-        initialized = true;
-
+        if (stats != null) return; 
         stats = new Stats();
         stats.Initialize(statPreset);
+
         owner = GameManager.instance.player.gameObject;
+
         stats.AddModifierProvider(GameManager.instance.player.provider);
-
-
-        stats.AddModifierProvider(this);
+        stats.AddModifierProvider(this.provider);
 
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);

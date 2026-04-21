@@ -25,7 +25,11 @@ public abstract class Item : ScriptableObject, IModifierProvider
     public readonly ModifierProvider provider = new ModifierProvider();
 
     public void AddModifier(StatModifier mod)
-        => provider.AddModifier(mod);
+    {
+        Debug.Log($"ADDING MOD: {mod.stat} {mod.amount} TO {this}");
+        provider.AddModifier(mod);
+    }
+       
 
     public void RemoveModifier(StatModifier mod)
         => provider.RemoveModifier(mod);

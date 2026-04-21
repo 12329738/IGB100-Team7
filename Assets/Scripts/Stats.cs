@@ -1,6 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor.VersionControl;
 using UnityEngine;
 [Serializable]
 
@@ -38,10 +40,17 @@ public class Stats
 
     public void AddModifierProvider(IModifierProvider provider)
     {
+        Debug.Log($"Adding provider: {provider}");
+
         if (modifierProviders.Add(provider))
         {
+            provider.OnDirty -= MarkDirty;
             provider.OnDirty += MarkDirty;
             MarkDirty();
+        }
+        else
+        {
+            Debug.LogWarning($"Provider already added: {provider}");
         }
     }
 
@@ -58,9 +67,7 @@ public class Stats
 
     public void MarkDirty()
     {
-        if (isInitializing) return;
-
-        if (isDirty) return;
+        if (isInitializing || isRecalculating) return;
 
         isDirty = true;
     }
@@ -81,78 +88,87 @@ public class Stats
     {
         if (isRecalculating)
             return;
+
         isRecalculating = true;
 
-        while (pendingChanges.Count > 0)
-        {
-            var changesToApply = new List<Action>(pendingChanges);
-            pendingChanges.Clear();
-
-            foreach (var action in changesToApply)
-            {
-                action();
-            }
-        }
-
-        foreach (StatConfig stat in baseStats.statPresets)
+        // Reset base values
+        foreach (var stat in baseStats.statPresets)
         {
             cachedStats[stat.statType] = stat.value;
         }
 
-        Dictionary<StatType, float> additive = new Dictionary<StatType, float>();
-        Dictionary<StatType, float> multiplicative = new Dictionary<StatType, float>();
+        var flat = new Dictionary<StatType, float>();
+        var multiplicative = new Dictionary<StatType, float>();
 
-
-        foreach (StatConfig stat in baseStats.statPresets)
+        foreach (var stat in baseStats.statPresets)
         {
-            additive[stat.statType] = 0f;
+            flat[stat.statType] = 0f;
             multiplicative[stat.statType] = 1f;
         }
 
 
-        foreach (var provider in modifierProviders)
+        HashSet<IModifierProvider> visited = new();
+
+        foreach (IModifierProvider provider in modifierProviders)
         {
-            IEnumerable<StatModifier> mods;
-
-            if (provider is ModifierProvider mp)
-                mods = mp.GetAllModifiers();
-            else
-                mods = provider.Modifiers;
-
-            foreach (var mod in mods)
+            foreach (var mod in GetModifiersSafe(provider, visited))
             {
                 if (!cachedStats.ContainsKey(mod.stat))
                     continue;
 
                 switch (mod.type)
                 {
+
                     case ModifierType.Flat:
-                        cachedStats[mod.stat] += mod.amount;
+                        flat[mod.stat] += mod.amount;
                         break;
 
-                    case ModifierType.Additive:
-                        additive[mod.stat] += mod.amount;
-                        break;
-
-                    case ModifierType.Multiplicative:
-                        multiplicative[mod.stat] *= (1 + mod.amount);
+                    case ModifierType.Percentage:
+                        multiplicative[mod.stat] += mod.amount/100;
                         break;
                 }
             }
         }
 
-
-
-
-        foreach (var stat in new List<StatType>(cachedStats.Keys))
+        foreach (var stat in cachedStats.Keys.ToList())
         {
-            cachedStats[stat] *= (1 + additive[stat]);
-            cachedStats[stat] *= multiplicative[stat];
-        }
+            float baseValue = cachedStats[stat];
 
+            float value = baseValue + flat[stat];
+            value *=  multiplicative[stat];                  
+
+            cachedStats[stat] = value;
+        }
         isDirty = false;
         isRecalculating = false;
     }
+
+    private IEnumerable<StatModifier> GetModifiersSafe(
+    IModifierProvider provider,
+    HashSet<IModifierProvider> visited)
+    {
+        if (!visited.Add(provider))
+            yield break; // 🛑 already processed
+
+        if (provider is ModifierProvider mp)
+        {
+            foreach (var mod in mp.Modifiers)
+                yield return mod;
+
+            foreach (var child in mp.children)
+            {
+                foreach (var mod in GetModifiersSafe(child, visited))
+                    yield return mod;
+            }
+        }
+        else
+        {
+            foreach (var mod in provider.Modifiers)
+                yield return mod;
+        }
+    }
+
+
 
 }
 

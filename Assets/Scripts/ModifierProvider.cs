@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class ModifierProvider : IModifierProvider
@@ -6,7 +6,7 @@ public class ModifierProvider : IModifierProvider
     public event Action OnDirty;
 
     protected List<StatModifier> modifiers = new();
-    protected List<IModifierProvider> children = new();
+    public List<IModifierProvider> children = new();
 
     
     public List<StatModifier> Modifiers { get => modifiers; set => modifiers = value; } 
@@ -60,6 +60,14 @@ public class ModifierProvider : IModifierProvider
 
     public IEnumerable<StatModifier> GetAllModifiers()
     {
+        return GetAllModifiersInternal(new HashSet<IModifierProvider>());
+    }
+
+    private IEnumerable<StatModifier> GetAllModifiersInternal(HashSet<IModifierProvider> visited)
+    {
+        if (!visited.Add(this))
+            yield break; 
+
         foreach (var mod in modifiers)
             yield return mod;
 
@@ -67,7 +75,7 @@ public class ModifierProvider : IModifierProvider
         {
             if (child is ModifierProvider mp)
             {
-                foreach (var mod in mp.GetAllModifiers())
+                foreach (var mod in mp.GetAllModifiersInternal(visited))
                     yield return mod;
             }
             else
