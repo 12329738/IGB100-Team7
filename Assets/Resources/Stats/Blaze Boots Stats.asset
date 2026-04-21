@@ -12,26 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
   m_Name: Blaze Boots Stats
   m_EditorClassIdentifier: 
-  statConfigs:
-  - stat: 0
-    value: 1
-  - stat: 1
+  statPresets:
+  - statType: 2
     value: 0
-  - stat: 2
-    value: 15
-  - stat: 3
-    value: 10
-  - stat: 4
+  - statType: 3
     value: 0
-  - stat: 5
-    value: 1
-  - stat: 6
-    value: 1
-  - stat: 7
-    value: 4
-  - stat: 8
-    value: 1
-  - stat: 9
-    value: 2
-  - stat: 10
+  - statType: 5
+    value: 0
+  - statType: 6
+    value: 0
+  - statType: 7
+    value: 0
+  - statType: 9
     value: 0
