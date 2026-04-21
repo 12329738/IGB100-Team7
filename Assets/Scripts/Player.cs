@@ -217,10 +217,17 @@ public class Player : Entity
 
         if (upgrade.modifiers != null) 
         {
+            Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
+            dict.Add(item, new List<StatModifier>());
+            foreach (StatModifier modifier in upgrade.modifiers)
+            {
+                dict[item].Add(modifier);
+            }
 
-             if (item is Passive passive)
-                {
-                stats.AddModifierSource(passive, upgrade.modifiers);
+            if (item is Passive passive)
+             {
+                
+                stats.AddModifierSource(passive, dict);
 
                     foreach (var weapon in weapons)
                     {
@@ -228,11 +235,11 @@ public class Player : Entity
                     }
 
                     stats.MarkDirty();
-                }
+             }
 
                 else if (item is Weapon weapon)
                 {
-                    weapon.stats.AddModifierSource(weapon, upgrade.modifiers);
+                    weapon.stats.AddModifierSource(weapon, dict);
 
                 }
             
@@ -255,6 +262,7 @@ public class Player : Entity
         else if (item is Passive passive)
         {
             passives.Add(passive);
+            itemDictionary.Add(item.itemType, passive);
         }
     }
 

@@ -43,19 +43,20 @@ public class Weapon : Item, IEventHandler, IStats
     private Stats _stats;
     [HideInInspector]
     public Stats stats { get => _stats; set => _stats = value; }
-
     public void Initialize()
     {
         owner = GameManager.instance.player.gameObject;
         stats = new Stats();
         stats.Initialize(baseStats);
-
-        stats.AddModifierSource(this, new List<StatModifier>());
+        Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
+        dict.Add(this, new List<StatModifier>());
+        stats.AddModifierSource(this, dict);
         foreach (var kvp in GameManager.instance.player.stats.modifierSources)
         {
-            stats.AddModifierSource(kvp.Key, kvp.Value);
+            stats.AddModifierSource(GameManager.instance.player, kvp.Value);
         }
-
+        
+  
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 

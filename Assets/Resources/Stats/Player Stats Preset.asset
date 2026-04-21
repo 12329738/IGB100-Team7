@@ -12,32 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
   m_Name: Player Stats Preset
   m_EditorClassIdentifier: 
-  statConfigs:
-  - stat: 0
-    value: 100
-  - stat: 1
-    value: 5
-  - stat: 2
+  statPresets:
+  - statType: 0
     value: 1
-  - stat: 3
+  - statType: 1
+    value: 4
+  - statType: 2
     value: 1
-  - stat: 4
+  - statType: 3
     value: 1
-  - stat: 5
+  - statType: 4
     value: 1
-  - stat: 6
+  - statType: 7
     value: 1
-  - stat: 7
+  - statType: 8
     value: 1
-  - stat: 8
+  - statType: 9
     value: 1
-  - stat: 9
-    value: 2
-  - stat: 10
-    value: 2
-  - stat: 11
-    value: 100
-  - stat: 12
-    value: 2
-  - stat: 13
-    value: 2
+  - statType: 10
+    value: 1
+  - statType: 10
+    value: 1
+  - statType: 10
+    value: 1
+  - statType: 10
+    value: 1

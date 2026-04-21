@@ -14,9 +14,11 @@ public class ModifyStatConfig : EffectNodeConfig
     public override void Execute(EffectContext ctx)
     {
         IStats stats = ctx.source.GetComponent<IStats>();
+        Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
+        dict.Add(this, modifiers);
         if (stats != null)
         {
-             stats.stats.AddModifierSource(ctx.source, modifiers);
+             stats.stats.AddModifierSource(ctx.source, dict);
              stats.stats.MarkDirty();
         }
     }

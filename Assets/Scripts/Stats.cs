@@ -10,7 +10,7 @@ public class Stats
     public StatsPreset baseStats;
     private List<Action> pendingChanges = new List<Action>();
     [HideInInspector]
-    public Dictionary<object, List<StatModifier>> modifierSources = new Dictionary<object, List<StatModifier>>();
+    public Dictionary<object, Dictionary<object, List<StatModifier>>> modifierSources = new Dictionary<object, Dictionary<object, List<StatModifier>>>();
 
     public Dictionary<StatType, float> cachedStats = new Dictionary<StatType, float>();
     bool isDirty;
@@ -30,7 +30,7 @@ public class Stats
         Recalculate();
     }
 
-    public void AddModifierSource(object source, List<StatModifier> modifiers)
+    public void AddModifierSource(object source, Dictionary<object, List<StatModifier>> modifiers)
     {
         if (isRecalculating)
         {
@@ -38,14 +38,27 @@ public class Stats
             return;
         }
 
+
         if (!modifierSources.ContainsKey(source))
         {
-            modifierSources.Add(source, modifiers);
+            modifierSources[source] = modifiers;
         }
 
         else
         {
-            modifierSources[source].AddRange(modifiers);
+            foreach (var kvp in modifiers)
+            {
+                if (!modifierSources[source].ContainsKey(kvp.Key))
+                {
+                    modifierSources[source] = modifiers;
+                }
+
+                else
+                {
+                    modifierSources[source][kvp.Key].AddRange(kvp.Value);
+                }
+            }
+
         }
 
 
@@ -108,34 +121,37 @@ public class Stats
             multiplicative[stat.statType] = 1f;
         }
 
-
-        foreach (List<StatModifier> modifiers in modifierSources.Values)
+        foreach (var dict in modifierSources)
         {
-            if (modifiers == null) continue;
-        
-            foreach(StatModifier mod in modifiers)
+            foreach (var modifiers in dict.Value)
             {
-                if (!cachedStats.ContainsKey(mod.stat))
-                    continue;
 
-                switch (mod.type)
+                foreach (StatModifier mod in modifiers.Value)
                 {
-                    case ModifierType.Flat:
-                        cachedStats[mod.stat] += mod.amount;
-                        break;
+                    if (!cachedStats.ContainsKey(mod.stat))
+                        continue;
 
-                    case ModifierType.Additive:
-                        additive[mod.stat] += mod.amount;
-                        break;
+                    switch (mod.type)
+                    {
+                        case ModifierType.Flat:
+                            cachedStats[mod.stat] += mod.amount;
+                            break;
 
-                    case ModifierType.Multiplicative:
-                        multiplicative[mod.stat] *= (1 + mod.amount);
-                        break;
+                        case ModifierType.Additive:
+                            additive[mod.stat] += mod.amount;
+                            break;
+
+                        case ModifierType.Multiplicative:
+                            multiplicative[mod.stat] *= (1 + mod.amount);
+                            break;
+                    }
                 }
+
+
             }
-            
-            
         }
+
+        
 
 
         foreach (var stat in new List<StatType>(cachedStats.Keys))

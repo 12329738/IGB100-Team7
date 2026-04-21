@@ -53,8 +53,10 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler, IStats
         combat = GetComponent<Combat>();
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
-        
-        stats.modifierSources.Add(this, new List<StatModifier>());
+
+        Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
+        dict.Add(this, new List<StatModifier>());
+        stats.modifierSources.Add(this, dict);
 
         status = GetComponent<StatusEffectManager>();
         status.Initialize(eventHandler);

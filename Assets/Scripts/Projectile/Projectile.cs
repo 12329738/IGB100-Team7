@@ -30,17 +30,17 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
     }
 
 
-    public void Initialize(ProjectileData data)
+    public void Initialize(ProjectileData d)
     {
         visual = GetComponentInChildren<SpriteRenderer>().transform;
+        data = d;
+        stats = new Stats();
         stats.cachedStats = data.stats;
 
         foreach (EffectEntryNode node in data.effects)
         {
             effectHandler.AddToMap(node);
         }
-
-        this.data = data;
         ownerCombat = this.data.owner.GetComponent<Combat>();
 
         eventHandler = new EventHandler();
