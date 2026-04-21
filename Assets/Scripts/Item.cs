@@ -23,6 +23,7 @@ public abstract class Item : ScriptableObject, IModifierProvider
     public virtual string description { get => _description; set => _description = value; }
 
     public readonly ModifierProvider provider = new ModifierProvider();
+    public Sprite icon;
 
     public void AddModifier(StatModifier mod)
     {
