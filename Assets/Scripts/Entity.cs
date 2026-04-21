@@ -86,13 +86,13 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     internal abstract void Die();
 
 
-    //public void AddStatModifier(float amount, StatType statType)
-    //{
-    //    StatModifier modifier = new StatModifier();
-    //    modifier.statType = statType;
-    //    modifier.value = amount;
-    //    stats.modifiers.Add(modifier);
-    //}
+    public void AddStatModifier(float amount, StatType statType)
+    {
+        StatModifier modifier = new StatModifier();
+        modifier.statType = statType;
+        modifier.value = amount;
+        stats.modifiers.Add(modifier);
+    }
 
     public float GetCurrentHealthPercent()
     {

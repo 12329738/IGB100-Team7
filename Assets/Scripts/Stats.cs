@@ -10,8 +10,8 @@ public class Stats
     public StatsPreset baseStats;
     private List<Action> pendingChanges = new List<Action>();
     [HideInInspector]
-    //public List<StatModifier> modifiers;
-    public Dictionary<object, List<StatModifier>> sources = new Dictionary<object, List<StatModifier>>();
+    public List<StatModifier> modifiers;
+    private Dictionary<object, List<StatModifier>> sources = new Dictionary<object, List<StatModifier>>();
 
     public Dictionary<StatType, float> cachedStats = new Dictionary<StatType, float>();
     bool isDirty;
@@ -36,11 +36,7 @@ public class Stats
             return;
         }
 
-        if (!sources.ContainsKey(source))
-            sources[source] = new List<StatModifier>();
-
-        sources[source].AddRange(modifiers);
-
+        sources[source] = modifiers;
         MarkDirty();
     }
 
