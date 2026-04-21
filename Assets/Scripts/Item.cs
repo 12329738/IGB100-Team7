@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,4 +21,8 @@ public abstract class Item : ScriptableObject
 
     public string _description;
     public virtual string description { get => _description; set => _description = value; }
+
+    public Dictionary<Guid, StatModifier> modifiers = new Dictionary<Guid, StatModifier>();
+
+
 }

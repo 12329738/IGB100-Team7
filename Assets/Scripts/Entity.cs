@@ -6,9 +6,9 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
-public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
+public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler, IStats
 {
-    public float currentHealth;
+    public float currentHealth = 1;
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
 
@@ -20,40 +20,50 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     public Combat combat {  get; private set; }
     private StatusEffectManager status;
     public List<EffectEntryNode> effects;
-
     [SerializeField]
+    private StatsPreset _statPreset;
+
+    public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
+
     private Stats _stats;
-    public virtual Stats stats { get => _stats; set => _stats = value; }
+    [HideInInspector]
+    public Stats stats { get => _stats; set => _stats = value; }
+
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
     [SerializeField]
-    private float _hitCooldown;
-    public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
+    //private float _hitCooldown;
+    //public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
 
-    public float lastHitTime { get; set; }
+    //public float lastHitTime { get; set; }
+
+    //[HideInInspector]
+
 
     public void Awake()
     {
-
+        if (statPreset == null)
+        {
+            statPreset = new StatsPreset(); 
+        }
+        stats = new Stats();
+        this.stats.Initialize(statPreset);
+        currentHealth = stats.GetStat(StatType.MaxHealth);
         combat = GetComponent<Combat>();
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
+        
+        stats.modifierSources.Add(this, new List<StatModifier>());
+
         status = GetComponent<StatusEffectManager>();
         status.Initialize(eventHandler);
-        SetupStats();
         foreach (EffectEntryNode node in effects)
         {
             effectHandler.AddToMap(node);
         }
     }
 
-    private void SetupStats()
-    {
-        stats.Initialize();
-        currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
-
-    }
 
     public bool IsDamageable()
     {
@@ -85,22 +95,22 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     internal abstract void Die();
 
 
-    public void AddStatModifier(float amount, StatType statType)
-    {
-        StatModifier modifier = new StatModifier();
-        modifier.stat = statType;
-        modifier.amount = amount;
-        stats.modifiers.Add(modifier);
-    }
+    //public void AddStatModifier(float amount, StatType statType)
+    //{
+    //    StatModifier modifier = new StatModifier();
+    //    modifier.statType = statType;
+    //    modifier.value = amount;
+    //    stats.modifiers.Add(modifier);
+    //}
 
     public float GetCurrentHealthPercent()
     {
-        return currentHealth / stats.GetStat(StatType.MaxHealth).currentValue;
+        return currentHealth / stats.GetStat(StatType.MaxHealth);
     }
 
     public float[] GetCurrentHealth()
     {
-        float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth).currentValue };
+        float[] healthAmount = { currentHealth, stats.GetStat(StatType.MaxHealth) };
 
         return healthAmount;
     }
@@ -114,10 +124,11 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler
     public void Heal(float amount)
     {
         currentHealth += amount;
-        if (currentHealth > stats.GetStat(StatType.MaxHealth).currentValue)
+        if (currentHealth > stats.GetStat(StatType.MaxHealth))
         {
-            currentHealth = stats.GetStat(StatType.MaxHealth).currentValue;
+            currentHealth = stats.GetStat(StatType.MaxHealth);
         }
 
     }
+
 }

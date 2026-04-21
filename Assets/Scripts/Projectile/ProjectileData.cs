@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileData 
 {
-    public Stats stats;
+    public Dictionary<StatType, float> stats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
     public float baseDirection;
@@ -17,10 +17,20 @@ public class ProjectileData
     public float hitInterval;
     public List<EffectEntryNode> effects;
     public bool isHit;
+    public bool trackEnemy;
+    public bool aimAtEnemy;
+    public bool randomDirection;
+
 
     public ProjectileData(Weapon original)
     {
-        stats = original.weaponStats; 
+        stats = new Dictionary<StatType, float>();
+
+        foreach (var kvp in original.stats.cachedStats)
+        {
+            stats.Add(kvp.Key, kvp.Value);
+        }
+
         prefab = original.prefab;
         pattern = original.pattern;
         behaviour = original.behaviour;
@@ -29,6 +39,9 @@ public class ProjectileData
         hitInterval = original.hitInterval;
         effects = original.effects;
         isHit = original.isHit;
+        trackEnemy = original.trackEnemy;
+        aimAtEnemy = original.aimAtEnemy;
+        randomDirection = original.randomDirection;
 
     }
 
@@ -43,6 +56,9 @@ public class ProjectileData
         hitInterval = original.hitInterval;
         effects = original.effects;
         isHit = original.isHit;
+        trackEnemy = original.trackEnemy;   
+        aimAtEnemy = original.aimAtEnemy;
+        randomDirection = original.randomDirection;
     }
 
 }

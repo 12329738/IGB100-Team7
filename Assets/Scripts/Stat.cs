@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
@@ -7,42 +8,102 @@ public class Stat
 {
     public float baseValue;
     [HideInInspector]
-    public float currentValue;
+    public float cachedValue;
     [HideInInspector]
+    public bool isDirty;
+
+    private readonly List<StatModifier> modifiers = new List<StatModifier>();
+
+    //public void Recalculate()
+    //{
+    //    float finalValue = baseValue;
+    //}
 
 
-    public void Initialize(float value)
-    {
-        baseValue = value;
-        currentValue = value;
-    }
+    //public void ApplyModifiers(List<StatModifier> modifiers)
+    //{
+    //    currentValue = baseValue * CalculateModifiers(modifiers);
+    //}
 
-    public void ApplyModifiers(List<StatModifier> modifiers)
-    {
-        currentValue = CalculateModifiers(modifiers);
-    }
+    //public float CalculateModifiers(List<StatModifier> modifiers)
+    //{
+    //    float percentageModifiers = 1;
+    //    float additiveModifiers = 0;
+    //    float finalModifier;
+    //    foreach (StatModifier modifier in modifiers)
+    //    {
+    //        if (modifier.isPercentage)
+    //        {
+    //            percentageModifiers += modifier.amount / 100;
+    //        }
 
-    public float CalculateModifiers(List<StatModifier> modifiers)
-    {
-        if (modifiers == null || modifiers.Count == 0)
-            return 1f;
+    //        else
+    //        {
+    //            additiveModifiers += modifier.amount;
+    //        }
+    //    }
+    //    finalModifier = percentageModifiers + additiveModifiers;
+    //    return finalModifier;
+    //}
 
-        float multiplier = 1f;
-        float additive = baseValue;
+    //public void ResetStat()
+    //{
+    //    currentValue = baseValue;
 
-        foreach (StatModifier modifier in modifiers)
-        {
-            if (modifier.isPercentage)
-                multiplier += modifier.amount / 100f;
-            else
-                additive += modifier.amount;
-        }
+    //    float additive = 0f;
+    //    float multiplicative = 1f;
 
-        return (additive) * multiplier;
-    }
+    //    foreach (var mod in modifiers)
+    //    {
+    //        switch (mod.type)
+    //        {
+    //            case ModifierType.Flat:
+    //                finalValue += mod.value;
+    //                break;
 
-    public void ResetStat()
-    {
-        currentValue = baseValue;
-    }
+    //            case ModifierType.Additive:
+    //                additive += mod.value;
+    //                break;
+
+    //            case ModifierType.Multiplicative:
+    //                multiplicative *= (1 + mod.value);
+    //                break;
+    //        }
+    //    }
+    //}
+
+    //public Stat(float baseValue)
+    //{
+    //    this.baseValue = baseValue;
+    //}
+
+    //public void AddModifier(StatModifier mod)
+    //{
+    //    modifiers.Add(mod);
+    //    isDirty = true;
+    //}
+
+    //public void RemoveModifier(StatModifier mod)
+    //{
+    //    modifiers.Remove(mod);
+    //    isDirty = true;
+    //}
+
+    //public void ClearModifiers()
+    //{
+    //    modifiers.Clear();
+    //    isDirty = true;
+    //}
+
+    //public float GetValue()
+    //{
+    //    if (isDirty)
+    //    {
+    //        Recalculate();
+    //        isDirty = false;
+    //    }
+
+    //    return cachedValue;
+
+    //}
 }

@@ -5,8 +5,8 @@ public interface IDamageable
     void TakeDamage(EffectContext context);
     bool IsDamageable();
     Team team { get; }
-    float lastHitTime { get; }
-    float hitCooldown {  get; }
+    //float lastHitTime { get; }
+    //float hitCooldown {  get; }
     Combat combat { get; }
     float GetCurrentHealthPercent();
     float[] GetCurrentHealth();

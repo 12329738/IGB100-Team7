@@ -3,41 +3,52 @@ using System.Collections;
 using UnityEngine;
 
 
-public class Projectile : MonoBehaviour, IEventHandler
+public class Projectile : MonoBehaviour, IEventHandler, IStats
 {
     public IProjectileState state;
-    public ProjectileData projectileData;
+    public ProjectileData data;
     private Combat ownerCombat;
     public EventHandler eventHandler {  get; set; } 
     private EffectHandler effectHandler;
+    public Transform visual;
+
+    [SerializeField]
+    private StatsPreset _statPreset;
+
+    public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
+
+    private Stats _stats;
+    [HideInInspector]
+    public Stats stats { get => _stats; set => _stats = value; }
 
     public void Update()
     {      
-        if (projectileData.behaviour != null)
+        if (data.behaviour != null)
         {
-            projectileData.behaviour.Move(this, state);
+            data.behaviour.Move(this, state);
         }
     }
 
 
     public void Initialize(ProjectileData data)
     {
-
+        visual = GetComponentInChildren<SpriteRenderer>().transform;
+        stats.cachedStats = data.stats;
 
         foreach (EffectEntryNode node in data.effects)
         {
             effectHandler.AddToMap(node);
         }
 
-        this.projectileData = new ProjectileData(data);
-        ownerCombat = this.projectileData.owner.GetComponent<Combat>();
+        this.data = data;
+        ownerCombat = this.data.owner.GetComponent<Combat>();
 
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
         StopAllCoroutines();
 
-        if (this.projectileData.stats.GetStat(StatType.Duration).currentValue > 0)
+        if (stats.GetStat(StatType.Duration) > 0)
         {
             StartCoroutine(LifetimeRoutine());
         }
@@ -48,13 +59,13 @@ public class Projectile : MonoBehaviour, IEventHandler
 
     IEnumerator LifetimeRoutine()
     {
-        yield return new WaitForSeconds(projectileData.stats.GetStat(StatType.Duration).currentValue);
+        yield return new WaitForSeconds(this.stats.GetStat(StatType.Duration));
         Deactivate();
     }
 
-    void Deactivate()
+    public void Deactivate()
     {
-        foreach (EffectEntryNode node in projectileData.effects)
+        foreach (EffectEntryNode node in data.effects)
         {
             if (node.trigger == CombatEvent.OnExpire)
             {
@@ -65,7 +76,7 @@ public class Projectile : MonoBehaviour, IEventHandler
                 node.Execute(context);
             }
         }
-        ObjectPool.instance.ReturnObject(projectileData.prefab, gameObject);
+        ObjectPool.instance.ReturnObject(data.prefab, gameObject);
 
     }
 
@@ -76,7 +87,7 @@ public class Projectile : MonoBehaviour, IEventHandler
 
     private void TryHit(GameObject target)
     {
-        if (target == projectileData.owner)
+        if (target == data.owner)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -86,16 +97,16 @@ public class Projectile : MonoBehaviour, IEventHandler
         {
             source = gameObject,
             target = target,
-            damage = projectileData.stats.GetStat(StatType.Damage).currentValue,
-            hitInterval = projectileData.hitInterval,
+            damage = stats.GetStat(StatType.Damage),
+            hitInterval = data.hitInterval,
             damageId = this,
-            isHit = projectileData.isHit
+            isHit = data.isHit
 
         };
 
         ownerCombat.DealDamage(context);
 
-        if (!projectileData.isPiercing)
+        if (!data.isPiercing)
         {
             Debug.Log($"Deactivating {this} because it collided with {target}");
             Deactivate();

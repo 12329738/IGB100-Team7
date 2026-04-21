@@ -7,7 +7,7 @@ public static class EventExtensions
         obj.GetComponent<IEventHandler>()?.eventHandler.RaiseEvent(type, ctx);
         if (obj.GetComponent<IEventHandler>() is Projectile projectile && type == CombatEvent.OnHit)
         {
-            projectile.projectileData.owner.GetComponent<IEventHandler>().eventHandler.RaiseEvent(type, ctx);
+            projectile.data.owner.GetComponent<IEventHandler>().eventHandler.RaiseEvent(type, ctx);
         }
     }
 }

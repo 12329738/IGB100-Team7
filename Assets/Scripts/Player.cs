@@ -18,13 +18,15 @@ public class Player : Entity
     [HideInInspector]
     public List<Passive> passives;
     [HideInInspector]
-    public List<StatModifier> modifiers;
-    public Dictionary<ItemList, Weapon> itemDictionary = new Dictionary<ItemList, Weapon>();
+    public Dictionary<ItemList, Item> itemDictionary = new Dictionary<ItemList, Item>();
     public Transformation transformation;
     public float currentTransformationAmount;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
     StatusEffectManager statusManager;
+    public Sprite regularSprite;
+    public SpriteRenderer sr;
+
 
     Queue<int> levelUps;
     [HideInInspector]
@@ -34,6 +36,7 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         statusManager = GetComponent<StatusEffectManager>();
         foreach (Weapon weapon in startingWeapons) 
         {
@@ -50,9 +53,15 @@ public class Player : Entity
             return;
 
         Weapon weapon = Instantiate(weaponData);
+        weapon.Initialize();
+
+        foreach (var kvp in stats.modifierSources)
+        {
+            weapon.stats.AddModifierSource(kvp.Key, kvp.Value);
+        }
+
         weapons.Add(weapon);
         itemDictionary.Add(weaponData.itemType, weapon);
-        weapon.Initialize();
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
 
@@ -69,12 +78,12 @@ public class Player : Entity
         CheckMovement();
         UpdateWeapons();
         UpdatePickupRange();
-        //UpdateTransformationAmount();
+        UpdateTransformationAmount();
     }
 
     private void UpdateTransformationAmount()
     {
-        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation).currentValue && transformationCoroutine == null)
+        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation) && transformationCoroutine == null)
         {
             transformationCoroutine = StartCoroutine(TransformationCoroutine());
         }
@@ -88,13 +97,13 @@ public class Player : Entity
         {
             if (!isTransformed)
             {
-                regenAccumulator += stats.GetStat(StatType.TransformationGainRate).currentValue * Time.deltaTime;
+                regenAccumulator += stats.GetStat(StatType.TransformationGainRate) * Time.deltaTime;
             }
 
 
             else if (isTransformed)
             {
-                regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate).currentValue * Time.deltaTime;
+                regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate) * Time.deltaTime;
             }
 
             //int regenAmount = Mathf.FloorToInt(regenAccumulator);
@@ -116,9 +125,9 @@ public class Player : Entity
     {
         currentTransformationAmount += regenAmount;
 
-        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation).currentValue)
+        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation))
         {
-            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation).currentValue;
+            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation);
         }
 
         if (currentTransformationAmount < 0)
@@ -144,7 +153,7 @@ public class Player : Entity
 
     private void UpdatePickupRange()
     {
-        pickupCollider.radius = stats.GetStat(StatType.Collection).currentValue;
+        pickupCollider.radius = stats.GetStat(StatType.Collection);
     }
 
 
@@ -171,7 +180,7 @@ public class Player : Entity
             Transform();
         }
 
-        transform.position += movement * stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
+        transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
     }
 
     private IEnumerator LevelUp()
@@ -200,45 +209,37 @@ public class Player : Entity
         Item item = TryGetItem(upgrade.itemType);
 
         if (item == null)
-        {         
-            AddItem(upgrade.itemType);          
+        {
+            AddItem(upgrade.itemType);
+            item = TryGetItem(upgrade.itemType);
         }
 
 
-        else if (upgrade.modifiers != null) 
+        if (upgrade.modifiers != null) 
         {
-            if (item is Weapon upgradeWeapon)
-            {
-                AddWeaponModifiers(upgrade.modifiers, upgradeWeapon);
-                
 
-            }
-
-            else if (item is Passive passive)
-            {
-                foreach (StatModifier modifier in upgrade.modifiers)
+             if (item is Passive passive)
                 {
-                    modifiers.Add(modifier);
+                stats.AddModifierSource(passive, upgrade.modifiers);
+
+                    foreach (var weapon in weapons)
+                    {
+                        weapon.stats.MarkDirty();
+                    }
+
+                    stats.MarkDirty();
                 }
 
-                stats.ApplyModifiers(modifiers);
-
-                foreach (Weapon weapon in weapons)
+                else if (item is Weapon weapon)
                 {
-                    weapon.ApplyModifiers();
+                    weapon.stats.AddModifierSource(weapon, upgrade.modifiers);
+
                 }
-            }
+            
+            
 
             item.currentLevel++;
         }     
-    }
-
-    private void AddWeaponModifiers(List<StatModifier> modifiers, Weapon weapon)
-    {
-        foreach (StatModifier modifier in modifiers)
-        {
-            weapon.AddModifier(modifier);
-        }
     }
 
 
@@ -246,9 +247,9 @@ public class Player : Entity
     {
         Item item = GameManager.instance.database.GetItem(type);
 
-        if (item is Weapon weapon)
+        if (item is Weapon w)
         {
-            AddWeapon(weapon);
+            AddWeapon(w);
         }
 
         else if (item is Passive passive)
@@ -286,11 +287,14 @@ public class Player : Entity
     internal void Transform()
     {
         statusManager.ApplyEffect(transformation.effect, gameObject);
+        sr.sprite = transformation.transformationSprite;
         isTransformed = true;
+        
     }
 
     private void StopTransformation()
     {
+        sr.sprite = regularSprite;
         isTransformed = false;
     }
 

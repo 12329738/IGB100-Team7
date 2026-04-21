@@ -9,7 +9,7 @@ public class Orbit : WeaponBehaviour
 
     public override void OnProjectileCreated(Projectile proj)
     {
-        float angle = Mathf.Atan2(proj.projectileData.finalDirection.z, proj.projectileData.finalDirection.x);
+        float angle = Mathf.Atan2(proj.data.finalDirection.z, proj.data.finalDirection.x);
 
         proj.state = new OrbitState
         {
@@ -23,7 +23,7 @@ public class Orbit : WeaponBehaviour
     {
         OrbitState s = (OrbitState)state;
 
-        s.angle += proj.projectileData.stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
+        s.angle += proj.stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
 
         float x = Mathf.Cos(s.angle) * radius;
         float z = Mathf.Sin(s.angle) * radius;

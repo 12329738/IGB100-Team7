@@ -40,7 +40,10 @@ public class SpawnerManager : MonoBehaviour
 
     public void UnregisterEnemy()
     {
-        currentEnemies--;
+        if (currentEnemies == 0)
+            return;
+            currentEnemies--;
+       
     }
 
     // Update is called once per frame
@@ -87,6 +90,8 @@ public class SpawnerManager : MonoBehaviour
         
 
         GameObject enemy = ObjectPool.instance.GetObject(enemyPrefab);
+        if (enemy == null)
+            return;
         enemy.transform.position = spawnLocation;
         enemy.transform.rotation = Quaternion.identity;
     }

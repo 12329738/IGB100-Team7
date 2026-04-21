@@ -1,4 +1,5 @@
 using System;
+using Unity.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -10,9 +11,15 @@ public class SpawnProjectileConfig : EffectNodeConfig
     public override void Execute(EffectContext ctx)
     {
         projectile.Initialize();
-
-        ProjectileData data = new ProjectileData(projectile);
-
-        GameManager.instance.projectileSpawner.CreateProjectile(data, 1);
-    }
+        Entity owner;
+        owner = projectile.owner.GetComponent<Entity>();
+        if (owner != null)
+        {
+            foreach (var kvp in owner.stats.modifierSources)
+            {
+                projectile.stats.AddModifierSource(kvp.Key, kvp.Value);
+            }
+        }    
+        projectile.Spawnprojectiles();
+    }   
 }

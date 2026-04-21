@@ -6,10 +6,10 @@ using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
-public class Weapon : Item, IEventHandler
+public class Weapon : Item, IEventHandler, IStats
 {
     [HideInInspector]
-    public Stats weaponStats;
+
     public StatsPreset baseStats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
@@ -18,25 +18,44 @@ public class Weapon : Item, IEventHandler
     public float direction;
     public float hitInterval = 1f;
     public bool isPiercing;
+    public bool trackEnemy;
+    public bool aimAtEnemy;
     public WeaponBehaviour behaviour;
     public ProjectilePattern pattern;
     [HideInInspector]
     public Upgrade baseUpgrade;
     public GameObject owner; 
     public List<EffectEntryNode> effects;
-    float projectileRemainder = 0f;
-    public virtual List<StatModifier> weaponModifiers { get; set; }
+
     public EventHandler eventHandler {  get; set; }
     private EffectHandler effectHandler;
     float cooldownTimer;
     public bool isHit;
+    float projectileRemainder;
+    public bool stickToPlayer;
+    public bool randomDirection;
+
+    [SerializeField]
+    private StatsPreset _statPreset;
+
+    public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
+
+    private Stats _stats;
+    [HideInInspector]
+    public Stats stats { get => _stats; set => _stats = value; }
 
     public void Initialize()
     {
         owner = GameManager.instance.player.gameObject;
-        weaponStats.preset = baseStats;
-        weaponStats.Initialize();      
-        weaponModifiers = new List<StatModifier>();
+        stats = new Stats();
+        stats.Initialize(baseStats);
+
+        stats.AddModifierSource(this, new List<StatModifier>());
+        foreach (var kvp in GameManager.instance.player.stats.modifierSources)
+        {
+            stats.AddModifierSource(kvp.Key, kvp.Value);
+        }
+
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
@@ -45,9 +64,11 @@ public class Weapon : Item, IEventHandler
             effectHandler.AddToMap(node);
         }
 
-        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
+
+        if (stats.GetStat(StatType.Duration) <= 0)
+
         {
-            Attack();
+            Spawnprojectiles();
         }
     }
 
@@ -60,28 +81,12 @@ public class Weapon : Item, IEventHandler
 
     }
 
-    public void AddModifier(StatModifier modifier)
-    {
-        weaponModifiers.Add(modifier);
-        ApplyModifiers();
-    }
-
-
-    public void ApplyModifiers()
-    {
-        List<StatModifier> combined = new List<StatModifier>();
-
-        combined.AddRange(weaponModifiers);
-        combined.AddRange(GameManager.instance.player.modifiers);
-
-        weaponStats.ApplyModifiers(combined);
-    }
-
-
 
     public void Tick(float deltaTime)
     {
-        if (weaponStats.GetStat(StatType.Duration).currentValue <= 0)
+
+        if (stats.GetStat(StatType.Duration) <= 0)
+
         {
             return;
         }
@@ -90,20 +95,24 @@ public class Weapon : Item, IEventHandler
 
         if (cooldownTimer <= 0f)
         {
-            Attack();
-            cooldownTimer = weaponStats.GetStat(StatType.Cooldown).currentValue;
+            Spawnprojectiles();
+
+            cooldownTimer = stats.GetStat(StatType.Cooldown);
+
         }
     }
 
-    internal void Attack()
+    internal void Spawnprojectiles()
     {
         ProjectileData data = BuildProjectileData();
 
-        float total = weaponStats.GetStat(StatType.ProjectileCount).currentValue + projectileRemainder;
+
+        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {weaponStats.GetStat(StatType.ProjectileCount).currentValue}, spawning {count} projectiles");
+        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+
     }
 
 
@@ -122,6 +131,12 @@ public class Weapon : Item, IEventHandler
 
             entry.Validate();
         }
+    }
+
+    internal void AddModifier(Guid id, StatModifier modifier)
+    {
+        modifiers.Add(id, modifier);
+        stats.MarkDirty();
     }
 }
 

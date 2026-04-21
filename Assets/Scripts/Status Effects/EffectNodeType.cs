@@ -7,5 +7,6 @@ public enum EffectNodeType
     Stun,
     Slow,
     Heal,
-    SpawnProjectile
+    SpawnProjectile,
+    ModifyStat
 }

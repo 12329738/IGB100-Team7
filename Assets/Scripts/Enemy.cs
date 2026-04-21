@@ -40,7 +40,7 @@ public class Enemy : Entity
         {
 
             Vector3 dir = player.transform.position - transform.position;
-            transform.position += dir.normalized * stats.GetStat(StatType.MoveSpeed).currentValue * Time.deltaTime;
+            transform.position += dir.normalized * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
         }
 
     }
@@ -56,7 +56,7 @@ public class Enemy : Entity
                 {
                     source = gameObject,
                     target = other.gameObject,
-                    damage = contactDamage,
+                    damage = stats.GetStat(StatType.Damage),
                     hitInterval = 1f,
                     damageId = this
                 };
@@ -70,7 +70,7 @@ public class Enemy : Entity
     internal override void Die()
     {
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 
     void OnEnable()
@@ -81,5 +81,6 @@ public class Enemy : Entity
     void OnDisable()
     {
         SpawnerManager.instance.UnregisterEnemy();
+        ObjectPool.instance.ReturnObject(this.gameObject, gameObject);
     }
 }

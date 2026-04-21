@@ -60,9 +60,9 @@ public class GameUI : MonoBehaviour
         foreach (Weapon weapon in GameManager.instance.player.weapons)
         {
             sb.AppendLine($"{weapon.itemType}");
-            foreach (var kvp in weapon.weaponStats.statDictionary)
+            foreach (var kvp in weapon.stats.cachedStats)
             {
-                sb.AppendLine($"{kvp.Key}: {kvp.Value.currentValue}");
+                sb.AppendLine($"{kvp.Key}: {kvp.Value}");
             }
         }
         weaponStats.text = sb.ToString();
@@ -71,16 +71,17 @@ public class GameUI : MonoBehaviour
     private void DisplayPlayerStats()
     {
         StringBuilder sb = new StringBuilder();
-        foreach (var kvp in GameManager.instance.player.stats.statDictionary)
+        foreach (var kvp in GameManager.instance.player.stats.cachedStats)
         {
-            sb.AppendLine($"{kvp.Key}: {kvp.Value.currentValue}");
+            sb.AppendLine($"{kvp.Key}: {kvp.Value}");
         }
         playerStats.text = sb.ToString();
+
     }
 
     private void DisplayTransformationAmount()
     {
-        transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxTransformation).currentValue;
+        transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxTransformation);
     }
 
     private void DisplayExperienceAmount()

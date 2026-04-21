@@ -7,34 +7,147 @@ using UnityEngine;
 public class Stats 
 {
 
-    public StatsPreset preset;
+    public StatsPreset baseStats;
+    private List<Action> pendingChanges = new List<Action>();
     [HideInInspector]
-    public List<StatModifier> modifiers;
-    
-    public Dictionary<StatType, Stat> statDictionary;
+    public Dictionary<object, List<StatModifier>> modifierSources = new Dictionary<object, List<StatModifier>>();
 
-    public void Initialize()
+    public Dictionary<StatType, float> cachedStats = new Dictionary<StatType, float>();
+    bool isDirty;
+    private bool isRecalculating = false;
+
+
+    public void Initialize(StatsPreset preset)
     {
-        statDictionary = new Dictionary<StatType, Stat>();
-        foreach (StatConfig statConfig in preset.statConfigs)
+        if (preset == null)
+        preset = new StatsPreset(); 
+        baseStats = preset;
+        foreach (StatConfig config in baseStats.statPresets)
         {
-            Stat newStat = new Stat();
-            newStat.Initialize(statConfig.value);
-            statDictionary[statConfig.stat] = newStat;
+            cachedStats[config.statType] = config.value;
+        }
+
+        Recalculate();
+    }
+
+    public void AddModifierSource(object source, List<StatModifier> modifiers)
+    {
+        if (isRecalculating)
+        {
+            pendingChanges.Add(() => AddModifierSource(source, modifiers));
+            return;
+        }
+
+        if (!modifierSources.ContainsKey(source))
+        {
+            modifierSources.Add(source, modifiers);
+        }
+
+        else
+        {
+            modifierSources[source].AddRange(modifiers);
+        }
+
+
+         MarkDirty();
+    }
+
+
+    public void RemoveModifier(object source)
+    {
+        if (modifierSources.Remove(source))
+        {
+            MarkDirty();
         }
     }
 
-    public Stat GetStat(StatType type)
+    public void MarkDirty()
     {
-        return statDictionary[type];
+        isDirty = true;
     }
 
-    public void ApplyModifiers(List<StatModifier> modifiers)
+
+
+    public float GetStat(StatType type)
     {
-        foreach (StatModifier modifier in modifiers)
+        if (isDirty)
         {
-            GetStat(modifier.stat).ApplyModifiers(modifiers);
+            Recalculate();
         }
+
+        return cachedStats.TryGetValue(type, out var value) ? value : 0f;
+    }
+
+    private void Recalculate()
+    {
+        isRecalculating = true;
+
+        while (pendingChanges.Count > 0)
+        {
+            var changesToApply = new List<Action>(pendingChanges);
+            pendingChanges.Clear();
+
+            foreach (var action in changesToApply)
+            {
+                action();
+            }
+        }
+
+        foreach (StatConfig stat in baseStats.statPresets)
+        {
+            cachedStats[stat.statType] = stat.value;
+        }
+
+        Dictionary<StatType, float> additive = new Dictionary<StatType, float>();
+        Dictionary<StatType, float> multiplicative = new Dictionary<StatType, float>();
+
+
+        foreach (StatConfig stat in baseStats.statPresets)
+        {
+            additive[stat.statType] = 0f;
+            multiplicative[stat.statType] = 1f;
+        }
+
+
+        foreach (List<StatModifier> modifiers in modifierSources.Values)
+        {
+            if (modifiers == null) continue;
+        
+            foreach(StatModifier mod in modifiers)
+            {
+                if (!cachedStats.ContainsKey(mod.stat))
+                    continue;
+
+                switch (mod.type)
+                {
+                    case ModifierType.Flat:
+                        cachedStats[mod.stat] += mod.amount;
+                        break;
+
+                    case ModifierType.Additive:
+                        additive[mod.stat] += mod.amount;
+                        break;
+
+                    case ModifierType.Multiplicative:
+                        multiplicative[mod.stat] *= (1 + mod.amount);
+                        break;
+                }
+            }
+            
+            
+        }
+
+
+        foreach (var stat in new List<StatType>(cachedStats.Keys))
+        {
+            cachedStats[stat] *= (1 + additive[stat]);
+            cachedStats[stat] *= multiplicative[stat];
+        }
+
+        isDirty = false;
+        isRecalculating = false;
     }
 
 }
+
+
