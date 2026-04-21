@@ -6,7 +6,7 @@ using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
-public class Weapon : Item, IEventHandler, IStats
+public class Weapon : Item, IEventHandler, IModifierReceiver
 {
     [HideInInspector]
 
@@ -37,36 +37,33 @@ public class Weapon : Item, IEventHandler, IStats
 
     [SerializeField]
     private StatsPreset _statPreset;
-
+    private bool initialized;
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
     private Stats _stats;
     [HideInInspector]
     public Stats stats { get => _stats; set => _stats = value; }
+
+
     public void Initialize()
     {
-        owner = GameManager.instance.player.gameObject;
+        if (initialized) return;
+        initialized = true;
+
         stats = new Stats();
-        stats.Initialize(baseStats);
-        stats.modifierSources = GameManager.instance.player.stats.modifierSources;
-        Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
-        stats.AddModifierSource(this, dict);
-        
-        
-  
+        stats.Initialize(statPreset);
+        owner = GameManager.instance.player.gameObject;
+        stats.AddModifierProvider(GameManager.instance.player.provider);
+
+
+        stats.AddModifierProvider(this);
+
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
         foreach (EffectEntryNode node in effects)
         {
             effectHandler.AddToMap(node);
-        }
-
-
-        if (stats.GetStat(StatType.Duration) <= 0)
-
-        {
-            Spawnprojectiles();
         }
     }
 
@@ -93,9 +90,10 @@ public class Weapon : Item, IEventHandler, IStats
 
         if (cooldownTimer <= 0f)
         {
+            cooldownTimer = stats.GetStat(StatType.Cooldown);
             Spawnprojectiles();
 
-            cooldownTimer = stats.GetStat(StatType.Cooldown);
+            
 
         }
     }
@@ -129,12 +127,6 @@ public class Weapon : Item, IEventHandler, IStats
 
             entry.Validate();
         }
-    }
-
-    internal void AddModifier(Guid id, StatModifier modifier)
-    {
-        modifiers.Add(id, modifier);
-        stats.MarkDirty();
     }
 }
 

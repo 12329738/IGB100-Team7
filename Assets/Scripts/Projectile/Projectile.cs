@@ -1,11 +1,15 @@
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Projectile : MonoBehaviour, IEventHandler, IStats
+public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider, IModifierReceiver
 {
     public IProjectileState state;
+    public Dictionary<StatType, float> stats;
+    StatsPreset preset;
     public ProjectileData data;
     private Combat ownerCombat;
     public EventHandler eventHandler {  get; set; } 
@@ -17,9 +21,19 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
 
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
-    private Stats _stats;
-    [HideInInspector]
-    public Stats stats { get => _stats; set => _stats = value; }
+    //private Stats _stats;
+    //[HideInInspector]
+    //public Stats stats { get => _stats; set => _stats = value; }
+
+
+    public void AddModifier(StatModifier mod)
+        => provider.AddModifier(mod);
+
+    public void RemoveModifier(StatModifier mod)
+        => provider.RemoveModifier(mod);
+
+    public List<StatModifier> Modifiers => provider.Modifiers;
+    private readonly ModifierProvider provider = new ModifierProvider();
 
     public void Update()
     {      
@@ -28,14 +42,17 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
             data.behaviour.Move(this, state);
         }
     }
-
+    public event Action OnDirty
+    {
+        add => provider.OnDirty += value;
+        remove => provider.OnDirty -= value;
+    }
 
     public void Initialize(ProjectileData d)
     {
         visual = GetComponentInChildren<SpriteRenderer>().transform;
         data = d;
-        stats = new Stats();
-        stats.cachedStats = data.stats;
+        stats =data.stats;
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -48,7 +65,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
 
         StopAllCoroutines();
 
-        if (stats.GetStat(StatType.Duration) > 0)
+        if (stats[StatType.Duration] > 0)
         {
             StartCoroutine(LifetimeRoutine());
         }
@@ -59,7 +76,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
 
     IEnumerator LifetimeRoutine()
     {
-        yield return new WaitForSeconds(this.stats.GetStat(StatType.Duration));
+        yield return new WaitForSeconds(stats[StatType.Duration]);
         Deactivate();
     }
 
@@ -97,7 +114,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IStats
         {
             source = gameObject,
             target = target,
-            damage = stats.GetStat(StatType.Damage),
+            damage = stats[StatType.Damage],
             hitInterval = data.hitInterval,
             damageId = this,
             isHit = data.isHit

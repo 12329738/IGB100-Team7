@@ -12,7 +12,12 @@ public class DamageOverTimeConfig : EffectNodeConfig
     public override void Execute(EffectContext ctx)
     {
         ctx.isHit = isHit;
-        ctx.damage = damage * ctx.source.GetComponent<IStats>().stats.GetStat(StatType.Damage);
+        IModifierReceiver receiver = ctx.source.GetComponent<IModifierReceiver>();
+        //if (receiver != null)
+        //{
+        //    ctx.damage *= receiver.stats.GetStat(StatType.Damage);
+        //}
+
         ctx.hitInterval = damageInterval;
         ctx.target.GetComponent<Entity>().combat.DealDamage(ctx);
         Debug.Log($"{ctx.target} took {damage} dmg");

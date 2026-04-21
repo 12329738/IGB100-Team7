@@ -23,7 +23,7 @@ public class Orbit : WeaponBehaviour
     {
         OrbitState s = (OrbitState)state;
 
-        s.angle += proj.stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+        s.angle += proj.stats[StatType.MoveSpeed] * Time.deltaTime;
 
         float x = Mathf.Cos(s.angle) * radius;
         float z = Mathf.Sin(s.angle) * radius;

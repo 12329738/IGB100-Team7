@@ -8,6 +8,7 @@ public interface IDamageable
     //float lastHitTime { get; }
     //float hitCooldown {  get; }
     Combat combat { get; }
+    float currentHealth { get; }
     float GetCurrentHealthPercent();
     float[] GetCurrentHealth();
     public void KnockBack(float magnitude, Vector3 attackerPosition);

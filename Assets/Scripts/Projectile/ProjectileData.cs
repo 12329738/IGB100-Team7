@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileData 
 {
     public Dictionary<StatType, float> stats;
+    public StatsPreset preset;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
     public float baseDirection;
@@ -25,6 +26,7 @@ public class ProjectileData
     public ProjectileData(Weapon original)
     {
         stats = new Dictionary<StatType, float>();
+        preset = original.statPreset;
 
         foreach (var kvp in original.stats.cachedStats)
         {
@@ -59,6 +61,11 @@ public class ProjectileData
         trackEnemy = original.trackEnemy;   
         aimAtEnemy = original.aimAtEnemy;
         randomDirection = original.randomDirection;
+    }
+
+    public ProjectileData Clone()
+    {
+        return (ProjectileData)this.MemberwiseClone();
     }
 
 }

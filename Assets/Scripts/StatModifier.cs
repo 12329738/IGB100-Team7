@@ -8,6 +8,7 @@ public class StatModifier
     public bool isPercentage = true;
     public ModifierType type;
     public Guid id;
+    public IModifierProvider source;
 
     public StatModifier()
     {

@@ -11,15 +11,11 @@ public class SpawnProjectileConfig : EffectNodeConfig
     public override void Execute(EffectContext ctx)
     {
         projectile.Initialize();
-        Entity owner;
-        owner = projectile.owner.GetComponent<Entity>();
-        if (owner != null)
-        {
-            foreach (var kvp in owner.stats.modifierSources)
-            {
-                projectile.stats.AddModifierSource(kvp.Key, kvp.Value);
-            }
-        }    
+        IModifierProvider provider;
+        provider = projectile.owner.GetComponent<IModifierProvider>();
+
+        projectile.stats.AddModifierProvider(provider);
+  
         projectile.Spawnprojectiles();
     }   
 }

@@ -9,74 +9,59 @@ public class Stats
 
     public StatsPreset baseStats;
     private List<Action> pendingChanges = new List<Action>();
-    [HideInInspector]
-    public Dictionary<object, Dictionary<object, List<StatModifier>>> modifierSources = new Dictionary<object, Dictionary<object, List<StatModifier>>>();
+
+    public HashSet<IModifierProvider> modifierProviders = new HashSet<IModifierProvider>();
 
     public Dictionary<StatType, float> cachedStats = new Dictionary<StatType, float>();
     bool isDirty;
     private bool isRecalculating = false;
-
+    private bool isInitializing = false;
 
     public void Initialize(StatsPreset preset)
     {
-        if (preset == null)
-        preset = new StatsPreset(); 
-        baseStats = preset;
-        foreach (StatConfig config in baseStats.statPresets)
+        isInitializing = true;
+
+        baseStats = preset ?? new StatsPreset();
+
+        cachedStats.Clear();
+
+        foreach (var config in baseStats.statPresets)
         {
             cachedStats[config.statType] = config.value;
         }
 
-        Recalculate();
+        MarkDirty();
+
+        isInitializing = false;
     }
 
-    public void AddModifierSource(object source, Dictionary<object, List<StatModifier>> modifiers)
+
+    public void AddModifierProvider(IModifierProvider provider)
     {
-        if (isRecalculating)
+        if (modifierProviders.Add(provider))
         {
-            pendingChanges.Add(() => AddModifierSource(source, modifiers));
-            return;
+            provider.OnDirty += MarkDirty;
+            MarkDirty();
         }
-
-
-        if (!modifierSources.ContainsKey(source))
-        {
-            modifierSources[source] = modifiers;
-        }
-
-        else
-        {
-            foreach (var kvp in modifiers)
-            {
-                if (!modifierSources[source].ContainsKey(kvp.Key))
-                {
-                    modifierSources[source] = modifiers;
-                }
-
-                else
-                {
-                    modifierSources[source][kvp.Key].AddRange(kvp.Value);
-                }
-            }
-
-        }
-
-
-         MarkDirty();
     }
 
 
 
-    public void RemoveModifier(object source)
+    public void RemoveModifierProvider(IModifierProvider provider)
     {
-        if (modifierSources.Remove(source))
+        if (modifierProviders.Remove(provider))
         {
+            provider.OnDirty -= MarkDirty;
             MarkDirty();
         }
     }
 
     public void MarkDirty()
     {
+        if (isInitializing) return;
+
+        if (isDirty) return;
+
         isDirty = true;
     }
 
@@ -94,6 +79,8 @@ public class Stats
 
     private void Recalculate()
     {
+        if (isRecalculating)
+            return;
         isRecalculating = true;
 
         while (pendingChanges.Count > 0)
@@ -122,37 +109,39 @@ public class Stats
             multiplicative[stat.statType] = 1f;
         }
 
-        foreach (var dict in modifierSources)
+
+        foreach (var provider in modifierProviders)
         {
-            foreach (var modifiers in dict.Value)
+            IEnumerable<StatModifier> mods;
+
+            if (provider is ModifierProvider mp)
+                mods = mp.GetAllModifiers();
+            else
+                mods = provider.Modifiers;
+
+            foreach (var mod in mods)
             {
+                if (!cachedStats.ContainsKey(mod.stat))
+                    continue;
 
-                foreach (StatModifier mod in modifiers.Value)
+                switch (mod.type)
                 {
-                    if (!cachedStats.ContainsKey(mod.stat))
-                        continue;
+                    case ModifierType.Flat:
+                        cachedStats[mod.stat] += mod.amount;
+                        break;
 
-                    switch (mod.type)
-                    {
-                        case ModifierType.Flat:
-                            cachedStats[mod.stat] += mod.amount;
-                            break;
+                    case ModifierType.Additive:
+                        additive[mod.stat] += mod.amount;
+                        break;
 
-                        case ModifierType.Additive:
-                            additive[mod.stat] += mod.amount;
-                            break;
-
-                        case ModifierType.Multiplicative:
-                            multiplicative[mod.stat] *= (1 + mod.amount);
-                            break;
-                    }
+                    case ModifierType.Multiplicative:
+                        multiplicative[mod.stat] *= (1 + mod.amount);
+                        break;
                 }
-
-
             }
         }
 
-        
+
 
 
         foreach (var stat in new List<StatType>(cachedStats.Keys))

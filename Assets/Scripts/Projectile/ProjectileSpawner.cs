@@ -15,7 +15,9 @@ public class ProjectileSpawner
         {
             GameObject obj = ObjectPool.instance.GetObject(baseData.prefab);
             Projectile proj = obj.GetComponent<Projectile>();
-            proj.Initialize(baseData);
+
+            ProjectileData data = baseData.Clone();
+            proj.Initialize(data);
 
             Vector3 origin = proj.data.owner.transform.position;
 
@@ -24,13 +26,13 @@ public class ProjectileSpawner
 
             
             Vector3 finalDirection = proj.data.finalDirection;
-            Enemy target = GetClosestEnemy(origin, proj.stats.GetStat(StatType.Range));
+            Enemy target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
 
             if (target != null)
             {
                 if (proj.data.trackEnemy)
                 {
-                    target = GetClosestEnemy(origin, proj.stats.GetStat(StatType.Range));
+                    target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
 
                     {
                         Vector3 direction = target.transform.position - origin;
@@ -40,7 +42,7 @@ public class ProjectileSpawner
 
                 else if (proj.data.aimAtEnemy)
                 {
-                    target = GetClosestEnemy(origin, proj.stats.GetStat(StatType.Range));
+                    target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
 
 
                     Vector3 direction = target.transform.position - origin;
@@ -53,7 +55,7 @@ public class ProjectileSpawner
 
             if (proj.data.randomDirection)
             {
-                Vector2 random = Random.insideUnitCircle * proj.stats.GetStat(StatType.Range);
+                Vector2 random = Random.insideUnitCircle * proj.stats[StatType.Range];
 
                 finalDirection = origin + new Vector3(random.x, 0f, random.y);
             }

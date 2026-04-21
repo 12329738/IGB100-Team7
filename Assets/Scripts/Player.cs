@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Player : Entity
+public class Player : Entity, IDamageable
 {
 
     
@@ -27,7 +27,6 @@ public class Player : Entity
     public Sprite regularSprite;
     public SpriteRenderer sr;
 
-
     Queue<int> levelUps;
     [HideInInspector]
     public bool upgradeChosen;
@@ -36,7 +35,7 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         statusManager = GetComponent<StatusEffectManager>();
         foreach (Weapon weapon in startingWeapons) 
         {
@@ -45,24 +44,21 @@ public class Player : Entity
 
         pickupCollider = GetComponent<SphereCollider>();
         levelUps = new Queue<int>();
-}
+        transformationCoroutine = StartCoroutine(TransformationCoroutine());
+    }
 
     private void AddWeapon(Weapon weaponData)
     {
         if (itemDictionary.ContainsKey(weaponData.itemType))
             return;
 
-        Weapon weapon = Instantiate(weaponData);
+        Weapon weapon = Instantiate(weaponData); 
         weapon.Initialize();
 
-        foreach (var kvp in stats.modifierSources)
-        {
-            weapon.stats.AddModifierSource(kvp.Key, kvp.Value);
-        }
-
         weapons.Add(weapon);
-        itemDictionary.Add(weaponData.itemType, weapon);
-        transformationCoroutine = StartCoroutine(TransformationCoroutine());
+        itemDictionary.Add(weapon.itemType, weapon); 
+
+        provider.AddChild(weapon.provider);
     }
 
 
@@ -217,34 +213,11 @@ public class Player : Entity
 
         if (upgrade.modifiers != null) 
         {
-            Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
-            dict.Add(item, new List<StatModifier>());
             foreach (StatModifier modifier in upgrade.modifiers)
             {
-                dict[item].Add(modifier);
-            }
-
-            if (item is Passive passive)
-             {
-                
-                stats.AddModifierSource(passive, dict);
-
-                    foreach (var weapon in weapons)
-                    {
-                        weapon.stats.MarkDirty();
-                    }
-
-                    stats.MarkDirty();
-             }
-
-                else if (item is Weapon weapon)
-                {
-                    weapon.stats.AddModifierSource(weapon, dict);
-
-                }
-            
-            
-
+                item.AddModifier(modifier);
+            }         
+      
             item.currentLevel++;
         }     
     }
@@ -261,9 +234,22 @@ public class Player : Entity
 
         else if (item is Passive passive)
         {
-            passives.Add(passive);
-            itemDictionary.Add(item.itemType, passive);
+
+            AddPassive(passive);
+
         }
+
+        
+    }
+
+    private void AddPassive(Passive passive)
+    {
+        Passive passiveInstance = Instantiate(passive);
+
+        passives.Add(passiveInstance);
+        itemDictionary.Add(passiveInstance.itemType, passiveInstance);
+
+        provider.AddChild(passiveInstance.provider);
     }
 
     public void AddExperience(float amount)

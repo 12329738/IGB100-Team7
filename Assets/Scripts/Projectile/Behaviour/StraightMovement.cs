@@ -10,7 +10,7 @@ public class StraightMovement : WeaponBehaviour
 
     internal override void Move(Projectile proj, IProjectileState state)
     {
-        proj.transform.position += proj.data.finalDirection.normalized * proj.stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+        proj.transform.position += proj.data.finalDirection * proj.stats[StatType.MoveSpeed] * Time.deltaTime;
     }
 
 

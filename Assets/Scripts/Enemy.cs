@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Enemy : Entity
+public class Enemy : Entity, IDamageable
 {
     public float contactDamage;
     public float expAmount;

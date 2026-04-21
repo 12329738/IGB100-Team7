@@ -6,9 +6,8 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
-public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler, IStats
+public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, IModifierReceiver
 {
-    public float currentHealth = 1;
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
 
@@ -32,31 +31,34 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler, IStats
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
+
+    public float currentHealth { get; set; } = 1;
+
+    public readonly ModifierProvider provider = new ModifierProvider();
+
+    public void AddModifier(StatModifier mod)
+        => provider.AddModifier(mod);
+
+    public void RemoveModifier(StatModifier mod)
+        => provider.RemoveModifier(mod);
+
+    public List<StatModifier> Modifiers => provider.Modifiers;
+
     [SerializeField]
-    //private float _hitCooldown;
-    //public virtual float hitCooldown { get => _hitCooldown; set => hitCooldown = value; }
-
-    //public float lastHitTime { get; set; }
-
-    //[HideInInspector]
-
 
     public void Awake()
     {
-        if (statPreset == null)
-        {
-            statPreset = new StatsPreset(); 
-        }
         stats = new Stats();
-        this.stats.Initialize(statPreset);
+        stats.Initialize(statPreset);
+
+        stats.AddModifierProvider(this.provider); 
+
         currentHealth = stats.GetStat(StatType.MaxHealth);
         combat = GetComponent<Combat>();
         eventHandler = new EventHandler();
         effectHandler = new EffectHandler(eventHandler);
 
-        Dictionary<object, List<StatModifier>> dict = new Dictionary<object, List<StatModifier>>();
-        dict.Add(this, new List<StatModifier>());
-        stats.modifierSources.Add(this, dict);
+
 
         status = GetComponent<StatusEffectManager>();
         status.Initialize(eventHandler);
@@ -66,7 +68,11 @@ public abstract class Entity : MonoBehaviour, IDamageable, IEventHandler, IStats
         }
     }
 
-
+    public event Action OnDirty
+    {
+        add => provider.OnDirty += value;
+        remove => provider.OnDirty -= value;
+    }
     public bool IsDamageable()
     {
         if (canBeDamaged == false)
