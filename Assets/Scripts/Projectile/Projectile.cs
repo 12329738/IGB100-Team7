@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider, IModifierReceiver
+public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 {
     public IProjectileState state;
     public Dictionary<StatType, float> stats;
