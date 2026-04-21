@@ -36,7 +36,7 @@ public class Player : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         statusManager = GetComponent<StatusEffectManager>();
         foreach (Weapon weapon in startingWeapons) 
         {
