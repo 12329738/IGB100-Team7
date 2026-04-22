@@ -24,7 +24,7 @@ MonoBehaviour:
   _description: 
   icon: {fileID: 21300000, guid: 9c46ebde711ca374f816e59a555ba0ab, type: 3}
   baseStats: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
-  prefab: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
+  prefab: {fileID: 3701630665075148746, guid: b4d39d7f4d8df4e4bae2fe12b7c2e964, type: 3}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
