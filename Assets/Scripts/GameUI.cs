@@ -134,10 +134,8 @@ public class GameUI : MonoBehaviour
             if (passives[i].icon != null)
             {
                 SetVisible(true, passiveInventory[i]);
-                passiveInventory[i].sprite = weapons[i].icon;
-            }
-                
-
+                passiveInventory[i].sprite = passives[i].icon;
+            }        
         }
     }
 
