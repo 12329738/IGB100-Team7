@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Legendary
   m_EditorClassIdentifier: 
   rarity: 3
-  chance: 0.05
+  chance: 5
   valueModifier: 2
   color: {r: 1, g: 0.63676953, b: 0, a: 1}
