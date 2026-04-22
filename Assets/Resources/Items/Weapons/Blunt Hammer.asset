@@ -22,7 +22,7 @@ MonoBehaviour:
   _description: 
   icon: {fileID: 21300000, guid: 72fd216d7720df44f91d17a5c50e4a65, type: 3}
   baseStats: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
-  prefab: {fileID: 7093265425650852159, guid: 3a36536592a6cb04f83f81c9b2b6da69, type: 3}
+  prefab: {fileID: 0}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
