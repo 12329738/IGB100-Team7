@@ -55,4 +55,4 @@ MonoBehaviour:
       data:
         onlyAffectEnemies: 0
         onlyAffectAllies: 0
-        magnitude: 5
+        magnitude: 2
