@@ -11,13 +11,17 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
 
+
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
     private EffectHandler effectHandler;
+    [HideInInspector]
     public EventHandler eventHandler {  get; set; }
 
+    [HideInInspector]
     public Combat combat {  get; private set; }
     private StatusEffectManager status;
+    [HideInInspector]
     public List<EffectEntryNode> effects;
     [SerializeField]
     private StatsPreset _statPreset;
@@ -31,9 +35,9 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
-
+    [HideInInspector]
     public float currentHealth { get; set; } = 1;
-
+    [HideInInspector]
     public readonly ModifierProvider provider = new ModifierProvider();
 
     public void AddModifier(StatModifier mod)
@@ -41,7 +45,7 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     public void RemoveModifier(StatModifier mod)
         => provider.RemoveModifier(mod);
-
+    [HideInInspector]
     public List<StatModifier> Modifiers => provider.Modifiers;
 
     [SerializeField]

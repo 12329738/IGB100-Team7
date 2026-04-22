@@ -20,13 +20,13 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     public bool isPiercing;
     public bool trackEnemy;
     public bool aimAtEnemy;
-    public WeaponBehaviour behaviour;
-    public ProjectilePattern pattern;
+    
     [HideInInspector]
     public Upgrade baseUpgrade;
+    [HideInInspector]
     public GameObject owner; 
-    public List<EffectEntryNode> effects;
-
+    
+    [HideInInspector]
     public EventHandler eventHandler {  get; set; }
     private EffectHandler effectHandler;
     float cooldownTimer;
@@ -34,7 +34,8 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     float projectileRemainder;
     public bool stickToPlayer;
     public bool randomDirection;
-
+    public WeaponBehaviour behaviour;
+    public ProjectilePattern pattern;
     [SerializeField]
     private StatsPreset _statPreset;
 
@@ -44,7 +45,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     [HideInInspector]
     public Stats stats { get => _stats; set => _stats = value; }
 
-
+    public List<EffectEntryNode> effects;
     public void Initialize()
     {
         if (stats != null) return; 

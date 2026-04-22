@@ -7,18 +7,22 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 {
+    [HideInInspector]
     public IProjectileState state;
+    [HideInInspector]
     public Dictionary<StatType, float> stats;
-    StatsPreset preset;
+    [HideInInspector]
     public ProjectileData data;
     private Combat ownerCombat;
+    [HideInInspector]
     public EventHandler eventHandler {  get; set; } 
     private EffectHandler effectHandler;
+    [HideInInspector]
     public Transform visual;
 
     [SerializeField]
     private StatsPreset _statPreset;
-
+    [HideInInspector]
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
 

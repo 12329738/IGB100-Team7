@@ -10,7 +10,7 @@ public abstract class Item : ScriptableObject, IModifierProvider
 
     public List<Upgrade> _upgrades;
     public virtual List<Upgrade> upgrades { get => _upgrades; set => _upgrades = value; }
-
+    [HideInInspector]
     public virtual List<List<Upgrade>> upgradeTree { get; set; }
     public ItemList _itemType;
     
@@ -21,7 +21,7 @@ public abstract class Item : ScriptableObject, IModifierProvider
 
     public string _description;
     public virtual string description { get => _description; set => _description = value; }
-
+    [HideInInspector]
     public readonly ModifierProvider provider = new ModifierProvider();
     public Sprite icon;
 

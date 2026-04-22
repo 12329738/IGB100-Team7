@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28333695d28bbdc40b0925606a7d57de, type: 2}
   _itemType: 3
   _name: Blunt Hammer
-  _description: 
+  _description: Hit enemies around you in a circle and knock them back
   icon: {fileID: 21300000, guid: 72fd216d7720df44f91d17a5c50e4a65, type: 3}
   baseStats: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   prefab: {fileID: 999691352028456364, guid: b5c84459c25f7b64bade0c22e6438b07, type: 3}
@@ -29,18 +29,18 @@ MonoBehaviour:
   isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
-  behaviour: {fileID: 11400000, guid: 421035d2ae701c84d903dccab449e7e6, type: 2}
-  pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  isHit: 1
+  stickToPlayer: 0
+  randomDirection: 0
+  behaviour: {fileID: 11400000, guid: 421035d2ae701c84d903dccab449e7e6, type: 2}
+  pattern: {fileID: 0}
+  _statPreset: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   effects:
   - trigger: 0
     effectData:
     - rid: 6460871561430433869
-  isHit: 1
-  stickToPlayer: 0
-  randomDirection: 0
-  _statPreset: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   references:
     version: 2
     RefIds:

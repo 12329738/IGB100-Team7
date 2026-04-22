@@ -11,6 +11,7 @@ public class Upgrade : ScriptableObject
     [HideInInspector]
     public string description;
     public List<StatModifier> modifiers;
+    public List<EffectNodeConfig> effects;
     [HideInInspector]
     public RarityEnum rarity;
     public ItemList itemType;

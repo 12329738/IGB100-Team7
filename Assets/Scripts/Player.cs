@@ -10,6 +10,7 @@ public class Player : Entity, IDamageable
 
     
     public int level = 1;
+    [HideInInspector]
     public float currentExperience = 0;
     public List<Weapon> startingWeapons;
     SphereCollider pickupCollider;
@@ -20,6 +21,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public Dictionary<ItemList, Item> itemDictionary = new Dictionary<ItemList, Item>();
     public Transformation transformation;
+    [HideInInspector]
     public float currentTransformationAmount;
     bool isTransformed = false;
     Coroutine transformationCoroutine;

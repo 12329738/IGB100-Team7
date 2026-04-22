@@ -4,7 +4,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : Entity, IDamageable
 {
-    public float contactDamage;
     public float expAmount;
     Player player;
 
