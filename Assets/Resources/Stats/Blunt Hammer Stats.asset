@@ -22,6 +22,6 @@ MonoBehaviour:
   - statType: 7
     value: 0.2
   - statType: 8
-    value: 2
+    value: 1
   - statType: 1
     value: 2000
