@@ -43,6 +43,7 @@ public class Player : Entity, IDamageable
         }
 
         pickupCollider = GetComponent<SphereCollider>();
+        pickupCollider.radius = stats.GetStat(StatType.Collection);
         levelUps = new Queue<int>();
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
@@ -72,7 +73,6 @@ public class Player : Entity, IDamageable
     {
         CheckMovement();
         UpdateWeapons();
-        UpdatePickupRange();
         UpdateTransformationAmount();
     }
 
@@ -145,12 +145,6 @@ public class Player : Entity, IDamageable
 
         levelUpRoutineRunning = false;
     }
-
-    private void UpdatePickupRange()
-    {
-        pickupCollider.radius = stats.GetStat(StatType.Collection);
-    }
-
 
     private void UpdateWeapons()
     {

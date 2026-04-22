@@ -21,6 +21,7 @@ public class ProjectileData
     public bool trackEnemy;
     public bool aimAtEnemy;
     public bool randomDirection;
+    public GameObject source;
 
 
     public ProjectileData(Weapon original)
@@ -44,23 +45,7 @@ public class ProjectileData
         trackEnemy = original.trackEnemy;
         aimAtEnemy = original.aimAtEnemy;
         randomDirection = original.randomDirection;
-
-    }
-
-    public ProjectileData(ProjectileData original)
-    {
-        stats = original.stats;
-        prefab = original.prefab;
-        pattern = original.pattern;
-        behaviour = original.behaviour;
-        isPiercing = original.isPiercing;
-        owner = original.owner;
-        hitInterval = original.hitInterval;
-        effects = original.effects;
-        isHit = original.isHit;
-        trackEnemy = original.trackEnemy;   
-        aimAtEnemy = original.aimAtEnemy;
-        randomDirection = original.randomDirection;
+        source = original.owner;
     }
 
     public ProjectileData Clone()

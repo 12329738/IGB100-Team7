@@ -22,6 +22,7 @@ MonoBehaviour:
   _itemType: 4
   _name: Holy Water
   _description: 
+  icon: {fileID: 0}
   baseStats: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
@@ -30,28 +31,28 @@ MonoBehaviour:
   isPiercing: 0
   trackEnemy: 0
   aimAtEnemy: 0
-  behaviour: {fileID: 0}
+  behaviour: {fileID: 11400000, guid: 535d81d4ae3dac440ace6f4f5a3c47ff, type: 2}
   pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects:
-  - trigger: 0
+  - trigger: 8
     effectData:
-    - rid: 6974428087888642110
+    - rid: 6460871561430433861
   isHit: 0
   stickToPlayer: 0
-  randomDirection: 0
+  randomDirection: 1
   _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   references:
     version: 2
     RefIds:
-    - rid: 6974428087888642110
+    - rid: 6460871561430433861
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 2
+        type: 7
         effectConfig:
-          rid: 6974428087888642111
-    - rid: 6974428087888642111
-      type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
+          rid: 6460871561430433863
+    - rid: 6460871561430433863
+      type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
-        effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}
+        projectile: {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}

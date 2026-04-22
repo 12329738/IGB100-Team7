@@ -9,6 +9,7 @@ public class HealConfig : EffectNodeConfig
     public override EffectNodeType Type => EffectNodeType.Heal;
     public override void Execute(EffectContext ctx)
     {
+
         ctx.target.GetComponent<Entity>().combat.Heal(ctx,amount);
     }
 }

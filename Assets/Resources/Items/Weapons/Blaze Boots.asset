@@ -22,12 +22,13 @@ MonoBehaviour:
   _itemType: 2
   _name: Blaze Boots
   _description: 
+  icon: {fileID: 0}
   baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
-  prefab: {fileID: 0}
+  prefab: {fileID: 999691352028456364, guid: f810c45529bf31c4e947e6900349504b, type: 3}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  isPiercing: 0
+  isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
   behaviour: {fileID: 0}
@@ -35,7 +36,7 @@ MonoBehaviour:
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   effects: []
-  isHit: 0
+  isHit: 1
   stickToPlayer: 0
   randomDirection: 0
   _statPreset: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}

@@ -21,9 +21,6 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
-    //private Stats _stats;
-    //[HideInInspector]
-    //public Stats stats { get => _stats; set => _stats = value; }
 
 
     public void AddModifier(StatModifier mod)
@@ -54,14 +51,16 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
         data = d;
         stats =data.stats;
 
+        transform.localScale *= TryGetStat(StatType.Area);
+
+        eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
+
         foreach (EffectEntryNode node in data.effects)
         {
             effectHandler.AddToMap(node);
         }
         ownerCombat = this.data.owner.GetComponent<Combat>();
-
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
 
         StopAllCoroutines();
 
@@ -76,7 +75,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     IEnumerator LifetimeRoutine()
     {
-        yield return new WaitForSeconds(stats[StatType.Duration]);
+        yield return new WaitForSeconds(TryGetStat(StatType.Duration));
         Deactivate();
     }
 
@@ -99,7 +98,8 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     private void OnTriggerStay(Collider other)
     {
-        TryHit(other.gameObject);         
+        TryHit(other.gameObject);
+
     }
 
     private void TryHit(GameObject target)
@@ -114,7 +114,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
         {
             source = gameObject,
             target = target,
-            damage = stats[StatType.Damage],
+            damage = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
             damageId = this,
             isHit = data.isHit
@@ -129,5 +129,11 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
             Deactivate();
         }
         
+    }
+
+    public float TryGetStat(StatType stat)
+    {
+        stats.TryGetValue(stat, out var value);
+        return value;
     }
 }

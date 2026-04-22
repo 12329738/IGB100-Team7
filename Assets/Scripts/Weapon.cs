@@ -89,17 +89,30 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
         if (cooldownTimer <= 0f)
         {
             cooldownTimer = stats.GetStat(StatType.Cooldown);
-            Spawnprojectiles();
+            SpawnProjectiles();
 
             
 
         }
     }
 
-    internal void Spawnprojectiles()
+    internal void SpawnProjectiles()
     {
         ProjectileData data = BuildProjectileData();
 
+
+        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
+        int count = Mathf.FloorToInt(total);
+        projectileRemainder = total - count;
+        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
+        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+
+    }
+
+    public void SpawnProjectiles(EffectContext context)
+    {
+        ProjectileData data = BuildProjectileData();
+        data.source = context.source;
 
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);

@@ -9,17 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
-  m_Name: Blaze Boots Stats
+  m_Script: {fileID: 11500000, guid: 6a9f1cd2f40c6b849bcb62614eb065f1, type: 3}
+  m_Name: New Arc Behaviour
   m_EditorClassIdentifier: 
-  statPresets:
-  - statType: 2
-    value: 15
-  - statType: 3
-    value: 4
-  - statType: 7
-    value: 4
-  - statType: 9
-    value: 2
-  - statType: 8
-    value: 1
+  height: 5
+  duration: 2

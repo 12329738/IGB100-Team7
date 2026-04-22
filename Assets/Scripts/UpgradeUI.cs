@@ -26,6 +26,7 @@ public class UpgradeUI : MonoBehaviour
     {
         this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();
+        
 
         sb.AppendLine($"{this.upgrade.itemType.ToString()}");
 
@@ -40,8 +41,9 @@ public class UpgradeUI : MonoBehaviour
             sb.AppendLine($"{upgrade.rarity.ToString()}");
             foreach (StatModifier modifier in upgrade.modifiers)
             {
-
-                sb.AppendLine($"Increases {modifier.stat.ToString()} by {modifier.amount}");
+                string symbol = modifier.type == ModifierType.Percentage ? "%" : "";
+                string direction = modifier.amount > 0 ? "Increases" : "Decreases";
+                sb.AppendLine($"{direction} {modifier.stat.ToString()} by {modifier.amount}{symbol}");
             }
         }
 

@@ -17,22 +17,27 @@ public class ProjectileSpawner
             Projectile proj = obj.GetComponent<Projectile>();
 
             ProjectileData data = baseData.Clone();
+            proj.transform.localScale = baseData.prefab.transform.localScale;
             proj.Initialize(data);
 
-            Vector3 origin = proj.data.owner.transform.position;
+            Vector3 origin = proj.data.source.transform.position;
 
             proj.transform.position = origin;
             proj.transform.rotation = Quaternion.identity;
 
-            
+            Enemy target = null;
             Vector3 finalDirection = proj.data.finalDirection;
-            Enemy target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
+            if (proj.data.trackEnemy || proj.data.aimAtEnemy)
+            {
+                 target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
+            }
+            
 
             if (target != null)
             {
                 if (proj.data.trackEnemy)
                 {
-                    target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
+                    target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
 
                     {
                         Vector3 direction = target.transform.position - origin;
@@ -42,7 +47,7 @@ public class ProjectileSpawner
 
                 else if (proj.data.aimAtEnemy)
                 {
-                    target = GetClosestEnemy(origin, proj.stats[StatType.Range]);
+                    target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
 
 
                     Vector3 direction = target.transform.position - origin;
@@ -55,7 +60,7 @@ public class ProjectileSpawner
 
             if (proj.data.randomDirection)
             {
-                Vector2 random = Random.insideUnitCircle * proj.stats[StatType.Range];
+                Vector2 random = Random.insideUnitCircle * proj.TryGetStat(StatType.Range);
 
                 finalDirection = origin + new Vector3(random.x, 0f, random.y);
             }

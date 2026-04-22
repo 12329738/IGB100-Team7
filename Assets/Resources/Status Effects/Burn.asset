@@ -18,19 +18,20 @@ MonoBehaviour:
   maxStacks: 1
   entries:
   - trigger: 5
-    nodes:
-    - rid: 6974428066332803072
+    effectData:
+    - rid: 6460871561430433858
   references:
     version: 2
     RefIds:
-    - rid: 6974428066332803072
+    - rid: 6460871561430433858
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 0
-        node:
-          rid: 6974428066332803074
-    - rid: 6974428066332803074
+        effectConfig:
+          rid: 6460871561430433860
+    - rid: 6460871561430433860
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        value: 15
-        damageInterval: 1
+        damage: 5
+        damageInterval: 0.5
+        isHit: 0

@@ -13,9 +13,14 @@ public class SpawnProjectileConfig : EffectNodeConfig
         projectile.Initialize();
         IModifierProvider provider;
         provider = projectile.owner.GetComponent<IModifierProvider>();
+        if (provider != null)
+        {
+            projectile.stats.AddModifierProvider(provider);
 
-        projectile.stats.AddModifierProvider(provider);
-  
-        projectile.Spawnprojectiles();
+            projectile.SpawnProjectiles(ctx);
+        }
+
+
+        
     }   
 }
