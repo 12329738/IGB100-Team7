@@ -20,7 +20,7 @@ MonoBehaviour:
   _itemType: 3
   _name: Blunt Hammer
   _description: 
-  icon: {fileID: 21300000, guid: 72fd216d7720df44f91d17a5c50e4a65, type: 3}
+  parent of 56b4f43 (Updated hammer, sword and boots)
   baseStats: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
