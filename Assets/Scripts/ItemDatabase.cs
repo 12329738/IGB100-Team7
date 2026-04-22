@@ -44,6 +44,7 @@ public class ItemDatabase : MonoBehaviour
 
     public List<Upgrade> GetAvaliableUpgrades()
     {
+        Player player = GameManager.instance.player;
         List<Upgrade> avaliableUpgrades = new List<Upgrade>();
 
         int upgradeChoices = GameManager.instance.upgradesPerLevel;
@@ -51,24 +52,41 @@ public class ItemDatabase : MonoBehaviour
 
         foreach (Item item in itemDatabase)
         {
-            Item playerItem = GameManager.instance.player.TryGetItem(item.itemType);
+            Item playerItem = player.TryGetItem(item.itemType);
 
-            if (playerItem == null && item is Weapon weapon)
+            if (playerItem == null)
             {
-                avaliableUpgrades.Add(weapon.baseUpgrade);
+                if (item is Weapon weapon)
+                {
+                    if (player.weapons.Count < GameManager.instance.weaponLimit)
+                    {
+                        avaliableUpgrades.Add(weapon.baseUpgrade);
+                    }
+
+                    continue;
+                }
+
+                if (item is Passive)
+                {
+                    if (player.passives.Count >= GameManager.instance.passiveLimit)
+                    {
+                        continue;
+                    }
+                    int level = (playerItem != null) ? playerItem.currentLevel : 1;
+
+                    avaliableUpgrades.AddRange(item.upgradeTree[level - 1]);
+                    continue;
+                }
             }
 
-            else
+            else if (playerItem != null)
             {
-                int level = (playerItem != null) ? playerItem.currentLevel : 1;
-
-                avaliableUpgrades.AddRange(item.upgradeTree[level-1]);
+                int level = playerItem.currentLevel;
+                avaliableUpgrades.AddRange(item.upgradeTree[level - 1]);
             }
-
-
         }
 
- 
+
         List<Upgrade> chosenUpgrades = new List<Upgrade>();
         List<Upgrade> pool = new List<Upgrade>(avaliableUpgrades);
 

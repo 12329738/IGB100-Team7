@@ -49,7 +49,7 @@ MonoBehaviour:
   gameUI: {fileID: 0}
   database: {fileID: 0}
   weaponLimit: 3
-  passiveLimit: 0
+  passiveLimit: 3
   upgradesPerLevel: 3
   weaponUpgradeLimit: 5
   passiveUpgradeLimit: 0
