@@ -20,7 +20,7 @@ MonoBehaviour:
   _itemType: 1
   _name: 
   _description: Shoots projectiles that knockback enemies
-  icon: {fileID: 21300000, guid: fc73b1ca352ad9b4bb2eb830eab5ee20, type: 3}
+  icon: {fileID: 21300000, guid: ed109a88c2ee6354880996aa8af5f526, type: 3}
   baseStats: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   prefab: {fileID: 999691352028456364, guid: 7a3fcaf5940cd2446bf02ac72b761d7a, type: 3}
   randomAngleVariance: 0
