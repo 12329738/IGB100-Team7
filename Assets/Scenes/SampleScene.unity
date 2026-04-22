@@ -2438,11 +2438,11 @@ PrefabInstance:
       objectReference: {fileID: 1137018195}
     - target: {fileID: 2172062728557241853, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -10.5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2172062728557241853, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -265.4
+      value: -252
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2512,12 +2512,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: startingWeapons.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a4122697e8bc86043b348650c0e89b37, type: 2}
+      objectReference: {fileID: 11400000, guid: f66419d7267d9894ba26223be689168b, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
