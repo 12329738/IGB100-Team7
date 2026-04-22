@@ -86,7 +86,7 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
     public virtual void TakeDamage(EffectContext context)
     {
 
-        currentHealth -= context.damage;
+        currentHealth -= context.value;
         DamagePopup.instance.ShowCombatText(context);
         if (flashScript != null)
         {

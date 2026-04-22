@@ -56,9 +56,9 @@ public class Enemy : Entity, IDamageable
                 {
                     source = gameObject,
                     target = other.gameObject,
-                    damage = stats.GetStat(StatType.Damage),
+                    value = stats.GetStat(StatType.Damage),
                     hitInterval = 1f,
-                    damageId = this
+                    valueId = this
                 };
 
                 combat.DealDamage(context);

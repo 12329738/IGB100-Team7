@@ -23,27 +23,35 @@ public class StatusEffectManager : MonoBehaviour
             source = GameManager.instance.player.gameObject;
         }
 
-        var instance = new StatusEffectInstance(data, source, gameObject);
-        instance.OnApply();
-
         if (!activeEffects.TryGetValue(data, out var list))
         {
             list = new List<StatusEffectInstance>();
             activeEffects[data] = list;
         }
 
-        list.Add(instance);
 
-        foreach (var e in instance.subscribedEvents)
+        StatusEffectInstance instance = list.Find(e => e.context.source == source);
+
+        if (instance == null)
         {
-            if (!eventMap.TryGetValue(e, out var handlers))
-            {
-                handlers = new List<StatusEffectInstance>();
-                eventMap[e] = handlers;
-            }
+            instance = new StatusEffectInstance(data, source, gameObject);
+            instance.OnApplied += HandleInstanceApplied;
+            instance.OnExpired += HandleInstanceExpired;
 
-            handlers.Add(instance);
+            list.Add(instance);
+
+            foreach (var e in instance.subscribedEvents)
+            {
+                if (!eventMap.TryGetValue(e, out var handlers))
+                {
+                    handlers = new List<StatusEffectInstance>();
+                    eventMap[e] = handlers;
+                }
+
+                handlers.Add(instance);
+            }
         }
+        instance.OnApply();
 
         Debug.Log($"{gameObject.GetComponent<Entity>()} gained status {data.name}");
     }
@@ -124,9 +132,19 @@ public class StatusEffectManager : MonoBehaviour
         if (!eventMap.TryGetValue(type, out var list))
             return;
 
-        for (int i = 0; i < list.Count; i++)
+        foreach (var instance in list.ToArray())
         {
-            list[i].HandleEvent(type, ctx);
+            instance.HandleEvent(type, ctx);
         }
+    }
+
+    private void HandleInstanceApplied(StatusEffectInstance instance)
+    {
+        StatusEffectRegistry.instance?.AddStacks(instance.data, instance.stacks);
+    }
+
+    private void HandleInstanceExpired(StatusEffectInstance instance)
+    {
+        StatusEffectRegistry.instance?.RemoveStacks(instance.data, instance.stacks);
     }
 }

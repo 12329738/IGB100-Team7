@@ -9,12 +9,10 @@ public class Combat : MonoBehaviour
 
     public void DealDamage(EffectContext context)
     {
-        var key = (context.damageId, context.target);
-        Debug.Log(
-    $"DamageID: {context.damageId.GetHashCode()} | Target: {context.target.GetInstanceID()}"
+        var key = (context.valueId, context.target);
 
-);
-        int source = context.damageId.GetHashCode();
+
+        int source = context.valueId.GetHashCode();
         int target = context.target.GetInstanceID();
         if (lastHitTimes.TryGetValue(key, out float lastHit))
         {

@@ -114,9 +114,9 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
         {
             source = gameObject,
             target = target,
-            damage = TryGetStat(StatType.Damage),
+            value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
-            damageId = this,
+            valueId = this,
             isHit = data.isHit
 
         };

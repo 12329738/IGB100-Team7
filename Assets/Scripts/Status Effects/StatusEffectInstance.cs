@@ -7,8 +7,12 @@ public class StatusEffectInstance
     public StatusEffectData data;
     public EffectContext context;
     private float duration;
+    public int stacks;
     private float startTime;
     public HashSet<CombatEvent> subscribedEvents = new();
+    public Action<StatusEffectInstance> OnApplied;
+    public Action<StatusEffectInstance> OnExpired;
+    public Action<StatusEffectInstance, int> OnStacksChanged;
 
     public StatusEffectInstance(StatusEffectData data, GameObject _source, GameObject _target)
     {
@@ -17,7 +21,7 @@ public class StatusEffectInstance
         {
             source = _source,
             target = _target,
-            damageId = this
+            valueId = this
         };
 
         this.duration = data.duration;
@@ -33,6 +37,7 @@ public class StatusEffectInstance
 
     public void OnApply()
     {
+        stacks += 1;
         foreach (var entry in data.entries)
         {
             if (entry.trigger == CombatEvent.OnApply)
@@ -50,6 +55,7 @@ public class StatusEffectInstance
 
     public void Tick()
     {
+        context.stacks = stacks;
         foreach (var entry in data.entries)
         {
             if (entry.trigger != CombatEvent.OnTIck)
@@ -64,14 +70,39 @@ public class StatusEffectInstance
         
     }
 
+    public void AddStack(int amount)
+    {
+        stacks += amount;
+        if (stacks > data.maxStacks)
+            stacks = data.maxStacks;
+
+        Refresh();
+
+        OnStacksChanged?.Invoke(this, stacks);
+        
+
+    }
+
+    private void Refresh()
+    {
+        startTime = Time.time;
+    }
 
     public void HandleEvent(CombatEvent type, EffectContext ctx)
     {
-        Debug.Log($"Status effect {data.name} trigger event {type}");
-
         for (int i = 0; i < data.entries.Count; i++)
         {
-            data.entries[i].Execute(ctx);
+            var entry = data.entries[i];
+
+            if (entry.trigger != type)
+                continue;
+
+            ctx.stacks = stacks; 
+
+            foreach (var node in entry.effectData)
+            {
+                node.Execute(ctx);
+            }
         }
     }
 

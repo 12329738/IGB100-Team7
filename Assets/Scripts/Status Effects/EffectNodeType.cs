@@ -4,8 +4,6 @@ public enum EffectNodeType
     Knockback,
     ApplyStatusEffect,
     DealDamage,
-    Stun,
-    Slow,
     Heal,
     SpawnProjectile,
     ModifyStat

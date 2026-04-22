@@ -40,17 +40,12 @@ public class Stats
 
     public void AddModifierProvider(IModifierProvider provider)
     {
-        Debug.Log($"Adding provider: {provider}");
 
         if (modifierProviders.Add(provider))
         {
             provider.OnDirty -= MarkDirty;
             provider.OnDirty += MarkDirty;
             MarkDirty();
-        }
-        else
-        {
-            Debug.LogWarning($"Provider already added: {provider}");
         }
     }
 
@@ -91,7 +86,7 @@ public class Stats
 
         isRecalculating = true;
 
-        // Reset base values
+
         foreach (var stat in baseStats.statPresets)
         {
             cachedStats[stat.statType] = stat.value;

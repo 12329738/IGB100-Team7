@@ -54,7 +54,7 @@ public class DamagePopup : MonoBehaviour
         damageText.transform.position = newPosition;
 
         TextMeshProUGUI text = damageText.GetComponent<TextMeshProUGUI>();
-        text.text = context.damage.ToString();
+        text.text = context.value.ToString();
 
         text.color = (context.target == GameManager.instance.player.gameObject)
             ? Color.red

@@ -7,7 +7,7 @@ public class StatusEffectData : ScriptableObject
     public string name;
     public string description;
     public float duration;
-    public float maxStacks;
+    public int maxStacks;
     public List<EffectEntryNode> entries = new List<EffectEntryNode>();
 
     private void OnValidate()
