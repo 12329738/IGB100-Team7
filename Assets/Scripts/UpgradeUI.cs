@@ -43,7 +43,7 @@ public class UpgradeUI : MonoBehaviour
             {
                 string symbol = modifier.type == ModifierType.Percentage ? "%" : "";
                 string direction = modifier.amount > 0 ? "Increases" : "Decreases";
-                sb.AppendLine($"{direction} {modifier.stat.ToString()} by {modifier.amount}{symbol}");
+                sb.AppendLine($"{direction} {modifier.stat.ToString()} by {Mathf.Abs(modifier.amount)}{symbol}");
             }
         }
 
