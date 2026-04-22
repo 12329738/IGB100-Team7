@@ -8,10 +8,10 @@ public abstract class Item : ScriptableObject, IModifierProvider
     [HideInInspector]
     public int currentLevel = 1;
 
-    public List<Upgrade> _upgrades;
-    public virtual List<Upgrade> upgrades { get => _upgrades; set => _upgrades = value; }
+    public List<ItemUpgrade> _upgrades;
+    public virtual List<ItemUpgrade> upgrades { get => _upgrades; set => _upgrades = value; }
     [HideInInspector]
-    public virtual List<List<Upgrade>> upgradeTree { get; set; }
+    public virtual List<List<ItemUpgrade>> upgradeTree { get; set; }
     public ItemList _itemType;
     
     public virtual ItemList itemType { get => _itemType; set => _itemType = value; }

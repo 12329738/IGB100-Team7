@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class StatusEffectInstance
 {
@@ -13,6 +14,9 @@ public class StatusEffectInstance
     public Action<StatusEffectInstance> OnApplied;
     public Action<StatusEffectInstance> OnExpired;
     public Action<StatusEffectInstance, int> OnStacksChanged;
+    Guid Id = Guid.NewGuid();
+
+    public float LastTickTime { get; internal set; }
 
     public StatusEffectInstance(StatusEffectData data, GameObject _source, GameObject _target)
     {
@@ -21,9 +25,9 @@ public class StatusEffectInstance
         {
             source = _source,
             target = _target,
-            valueId = this
         };
-
+        context.effectInstanceId = Id;
+        context.sourceInstanceId = context.source.GetInstanceID();
         this.duration = data.duration;
         startTime = Time.time;
 
@@ -37,7 +41,7 @@ public class StatusEffectInstance
 
     public void OnApply()
     {
-        stacks += 1;
+        stacks++;
         foreach (var entry in data.entries)
         {
             if (entry.trigger == CombatEvent.OnApply)
@@ -55,19 +59,7 @@ public class StatusEffectInstance
 
     public void Tick()
     {
-        context.stacks = stacks;
-        foreach (var entry in data.entries)
-        {
-            if (entry.trigger != CombatEvent.OnTIck)
-                continue;
-
-            foreach (var node in entry.effectData)
-                {
-                    node.Execute(context);
-                }
-                    
-        }
-        
+        ExecuteEntries(CombatEvent.OnTick, context);
     }
 
     public void AddStack(int amount)
@@ -90,23 +82,27 @@ public class StatusEffectInstance
 
     public void HandleEvent(CombatEvent type, EffectContext ctx)
     {
-        for (int i = 0; i < data.entries.Count; i++)
-        {
-            var entry = data.entries[i];
+        ExecuteEntries(type, ctx);
+    }
 
+    private void ExecuteEntries(CombatEvent type, EffectContext ctx)
+    {
+        var localCtx = ctx.Clone();
+        localCtx.stacks = stacks;
+
+        foreach (var entry in data.entries)
+        {
             if (entry.trigger != type)
                 continue;
 
-            ctx.stacks = stacks; 
-
             foreach (var node in entry.effectData)
             {
-                node.Execute(ctx);
+                node.Execute(localCtx);
             }
+
+            GameManager.instance.effectSystem.Execute(localCtx);
         }
     }
-
-
     public bool IsExpired() => startTime + duration <= Time.time;
 
     public void Remove() { }

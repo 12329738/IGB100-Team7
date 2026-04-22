@@ -6,21 +6,22 @@ using UnityEngine;
 public class SpawnProjectileConfig : EffectNodeConfig
 {
     public Weapon projectile;
+    public string effect = "Spawn Projectile";
 
-    public override EffectNodeType Type => EffectNodeType.SpawnProjectile;
+    public override EffectType Type => EffectType.SpawnProjectile;
     public override void Execute(EffectContext ctx)
     {
-        projectile.Initialize();
-        IModifierProvider provider;
-        provider = projectile.owner.GetComponent<IModifierProvider>();
-        if (provider != null)
-        {
-            projectile.stats.AddModifierProvider(provider);
+        ctx.intent = EffectIntent.SpawnProjectile;
+        projectile.Initialize();  
+        ctx.payload.weapon = projectile;
+        //IModifierProvider provider;
+        //provider = projectile.owner.GetComponent<IModifierProvider>();
+        //if (provider != null)
+        //{
+        //    projectile.stats.AddModifierProvider(provider);
 
-            projectile.SpawnProjectiles(ctx);
-        }
-
-
+        //    projectile.SpawnProjectiles(ctx);
+        //}
         
     }   
 }

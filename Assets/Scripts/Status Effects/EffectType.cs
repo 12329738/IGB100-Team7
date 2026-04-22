@@ -1,4 +1,4 @@
-public enum EffectNodeType
+public enum EffectType
 {
     DamageOverTime,
     Knockback,
@@ -6,5 +6,7 @@ public enum EffectNodeType
     DealDamage,
     Heal,
     SpawnProjectile,
-    ModifyStat
+    ModifyStat,
+    SourceModifier,
+    StackCount
 }

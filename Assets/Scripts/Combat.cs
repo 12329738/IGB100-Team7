@@ -2,39 +2,43 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.Video.VideoPlayer;
 
 public class Combat : MonoBehaviour
 {
     private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
-
-    public void DealDamage(EffectContext context)
+    private EventHandler eventHandler;
+    public void Initialize(EventHandler handler)
     {
-        var key = (context.valueId, context.target);
+        eventHandler = handler;
+    }
 
+    public void DealDamage(EffectContext ctx)
+    {
+        var key = (ctx.effectInstanceId, ctx.target);
 
-        int source = context.valueId.GetHashCode();
-        int target = context.target.GetInstanceID();
         if (lastHitTimes.TryGetValue(key, out float lastHit))
         {
-            if (Time.time - lastHit < context.hitInterval)
+            if (Time.time - lastHit < ctx.hitInterval)
                 return;
         }
 
         lastHitTimes[key] = Time.time;
 
-        var damageable = context.target.GetComponent<IDamageable>();
+        var damageable = ctx.target.GetComponent<IDamageable>();
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        context.target.RaiseEvent(CombatEvent.OnDamageTaken, context);
-        damageable.TakeDamage(context);
-        
+        damageable.TakeDamage(ctx);
 
-        if (context.isHit)
+        ctx.target.RaiseEvent(CombatEvent.OnDamageTaken, ctx);
+
+        if (ctx.isHit)
         {
-            context.source.RaiseEvent(CombatEvent.OnHit, context);
+            EffectContext hitCtx = ctx.Clone();
+            hitCtx.trigger = CombatEvent.OnHit;
+            eventHandler.RaiseEvent(hitCtx);
         }
-        
     }
 
     public void Heal(EffectContext context, float amount)

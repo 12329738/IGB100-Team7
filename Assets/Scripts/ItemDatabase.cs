@@ -42,10 +42,10 @@ public class ItemDatabase : MonoBehaviour
     }
 
 
-    public List<Upgrade> GetAvaliableUpgrades()
+    public List<ItemUpgrade> GetAvaliableUpgrades()
     {
         Player player = GameManager.instance.player;
-        List<Upgrade> avaliableUpgrades = new List<Upgrade>();
+        List<ItemUpgrade> avaliableUpgrades = new List<ItemUpgrade>();
 
         int upgradeChoices = GameManager.instance.upgradesPerLevel;
 
@@ -87,14 +87,14 @@ public class ItemDatabase : MonoBehaviour
         }
 
 
-        List<Upgrade> chosenUpgrades = new List<Upgrade>();
-        List<Upgrade> pool = new List<Upgrade>(avaliableUpgrades);
+        List<ItemUpgrade> chosenUpgrades = new List<ItemUpgrade>();
+        List<ItemUpgrade> pool = new List<ItemUpgrade>(avaliableUpgrades);
 
         for (int i = 0; i < upgradeChoices && pool.Count > 0; i++)
         {
             int index = Random.Range(0, pool.Count);
 
-            Upgrade chosenUpgrade = Instantiate(pool[index]);
+            ItemUpgrade chosenUpgrade = Instantiate(pool[index]);
 
             List<Rarity> rarities = GameManager.instance.rarities;
             Rarity rarity = GenerateRarity(rarities);
@@ -144,11 +144,11 @@ public class ItemDatabase : MonoBehaviour
     {
         foreach (Item item in itemDatabase)
         {
-            List<List<Upgrade>> upgradeList = new List<List<Upgrade>>();
+            List<List<ItemUpgrade>> upgradeList = new List<List<ItemUpgrade>>();
 
             for (int i = 0; i < GameManager.instance.weaponUpgradeLimit; i++)
             {
-                upgradeList.Add(new List<Upgrade>());
+                upgradeList.Add(new List<ItemUpgrade>());
             }
 
             if (item is Weapon weapon)
@@ -157,7 +157,7 @@ public class ItemDatabase : MonoBehaviour
             }
       
 
-            foreach (Upgrade itemUpgrade in item.upgrades)
+            foreach (ItemUpgrade itemUpgrade in item.upgrades)
             {
                 if (itemUpgrade != null)
                 {

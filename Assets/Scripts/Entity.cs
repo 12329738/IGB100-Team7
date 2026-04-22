@@ -20,7 +20,7 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     [HideInInspector]
     public Combat combat {  get; private set; }
-    private StatusEffectManager status;
+    internal StatusEffectManager status;
     [HideInInspector]
     public List<EffectEntryNode> effects;
     [SerializeField]
@@ -52,24 +52,10 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     public void Awake()
     {
-        stats = new Stats();
-        stats.Initialize(statPreset);
-
-        stats.AddModifierProvider(this.provider); 
-
-        currentHealth = stats.GetStat(StatType.MaxHealth);
-        combat = GetComponent<Combat>();
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
-
-
         status = GetComponent<StatusEffectManager>();
+        eventHandler = new EventHandler();
         status.Initialize(eventHandler);
-        foreach (EffectEntryNode node in effects)
-        {
-            effectHandler.AddToMap(node);
-        }
+        OnSpawned();
     }
 
     public event Action OnDirty
@@ -87,6 +73,23 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
             return true;
     }
 
+    public void OnSpawned()
+    {
+
+        stats = new Stats();
+        stats.Initialize(statPreset);
+        stats.AddModifierProvider(this.provider);
+        currentHealth = stats.GetStat(StatType.MaxHealth);
+        canBeDamaged = true;
+        knockbackRemaining = 0;
+        combat = GetComponent<Combat>();
+        combat.Initialize(eventHandler);
+
+        foreach (EffectEntryNode node in effects)
+        {
+            effectHandler.AddToMap(node);
+        }
+    }
     public virtual void TakeDamage(EffectContext context)
     {
 
@@ -107,13 +110,6 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
     internal abstract void Die();
 
 
-    //public void AddStatModifier(float amount, StatType statType)
-    //{
-    //    StatModifier modifier = new StatModifier();
-    //    modifier.statType = statType;
-    //    modifier.value = amount;
-    //    stats.modifiers.Add(modifier);
-    //}
 
     public float GetCurrentHealthPercent()
     {

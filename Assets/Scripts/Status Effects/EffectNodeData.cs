@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class EffectNodeData
 {
-    public EffectNodeType type;
+    public EffectType type;
 
     [SerializeReference]
     public EffectNodeConfig effectConfig;
@@ -28,7 +28,7 @@ public class EffectNodeData
         effectConfig?.Execute(ctx);
     }
 
-    private EffectNodeConfig GetExpectedType(EffectNodeType type)
+    private EffectNodeConfig GetExpectedType(EffectType type)
     {
         return EffectNodeDatabase.Create(type);
     }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class ProjectileData 
@@ -14,15 +16,14 @@ public class ProjectileData
     public WeaponBehaviour behaviour;
     public ProjectilePattern pattern;
     public Team team;
-    public GameObject owner;
     public float hitInterval;
     public List<EffectEntryNode> effects;
     public bool isHit;
     public bool trackEnemy;
     public bool aimAtEnemy;
     public bool randomDirection;
+    public Guid weaponId;
     public GameObject source;
-
 
     public ProjectileData(Weapon original)
     {
@@ -38,13 +39,14 @@ public class ProjectileData
         pattern = original.pattern;
         behaviour = original.behaviour;
         isPiercing = original.isPiercing;
-        owner = original.owner;
+        source = original.owner;
         hitInterval = original.hitInterval;
         effects = original.effects;
         isHit = original.isHit;
         trackEnemy = original.trackEnemy;
         aimAtEnemy = original.aimAtEnemy;
         randomDirection = original.randomDirection;
+        weaponId = original.Id;
         source = original.owner;
     }
 

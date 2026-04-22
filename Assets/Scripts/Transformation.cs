@@ -7,7 +7,7 @@ public class Transformation : ScriptableObject
 {
     public string name;
     public string description;
-    public List<Upgrade> upgrades;
+    public List<TransformationUpgrade> upgrades;
     public StatusEffectData effect;
     public Sprite transformationSprite;
     

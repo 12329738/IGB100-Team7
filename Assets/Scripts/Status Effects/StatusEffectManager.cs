@@ -6,16 +6,71 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class StatusEffectManager : MonoBehaviour
 {
 
-    private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new();
-    Dictionary<CombatEvent, List<StatusEffectInstance>> eventMap = new();
+    private Dictionary<StatusEffectData, List<StatusEffectInstance>> activeEffects = new(); 
+    private Dictionary<CombatEvent, List<StatusEffectInstance>> eventIndex = new();
+    private List<(StatusEffectData, StatusEffectInstance)> toRemove = new();
+    private List<(StatusEffectData, GameObject)> pendingAdds = new();
+
     EventHandler handler;
     public void Initialize(EventHandler eventHandler)
     {
         handler = eventHandler;
-        handler.OnEvent += HandleEvent;
+        handler.OnEvent += ctx =>
+        {
+            Dispatch(ctx);
+        };
     }
 
-    public void ApplyEffect(StatusEffectData data, GameObject source)
+    private void Update()
+    {
+        float now = Time.time;
+        toRemove.Clear();
+
+        var effectsSnapshot = new List<KeyValuePair<StatusEffectData, List<StatusEffectInstance>>>(activeEffects);
+
+        foreach (var kvp in effectsSnapshot)
+        {
+            var instanceSnapshot = kvp.Value.ToArray();
+
+            foreach (var instance in instanceSnapshot)
+            {
+                if (instance.IsExpired())
+                {
+                    toRemove.Add((kvp.Key, instance));
+                    continue;
+                }
+
+                if (instance.data.hasTick)
+                {
+                    if (now - instance.LastTickTime >= instance.data.tickInterval)
+                    {
+                        instance.LastTickTime = now;
+                        instance.Tick();
+                    }
+                }
+            }
+        }
+
+        CleanupExpired();
+        ProcessPendingAdds();
+    }
+
+    private void ProcessPendingAdds()
+    {
+        foreach (var (data, source) in pendingAdds)
+        {
+            ApplyEffectImmediate(data, source);
+        }
+
+        pendingAdds.Clear();
+    }
+
+    public void QueueApplyAffect(StatusEffectData data, GameObject source)
+    {
+        pendingAdds.Add((data, source));
+    }
+
+    public void ApplyEffectImmediate(StatusEffectData data, GameObject source)
     {
 
         if (source.GetComponent<IEventHandler>() is Weapon)
@@ -30,28 +85,35 @@ public class StatusEffectManager : MonoBehaviour
         }
 
 
-        StatusEffectInstance instance = list.Find(e => e.context.source == source);
+        StatusEffectInstance instance =
+    list.Find(e => e.data == data && e.context.source == source);
 
         if (instance == null)
         {
-            instance = new StatusEffectInstance(data, source, gameObject);
+            instance = new StatusEffectInstance(data, source, this.gameObject);
+
             instance.OnApplied += HandleInstanceApplied;
             instance.OnExpired += HandleInstanceExpired;
 
             list.Add(instance);
+            instance.OnApply();
 
             foreach (var e in instance.subscribedEvents)
             {
-                if (!eventMap.TryGetValue(e, out var handlers))
+                if (!eventIndex.TryGetValue(e, out var effectList))
                 {
-                    handlers = new List<StatusEffectInstance>();
-                    eventMap[e] = handlers;
+                    effectList = new List<StatusEffectInstance>();
+                    eventIndex[e] = effectList;
                 }
 
-                handlers.Add(instance);
+                effectList.Add(instance);
             }
         }
-        instance.OnApply();
+
+        else
+        {
+            instance.AddStack(1); 
+        }
 
         Debug.Log($"{gameObject.GetComponent<Entity>()} gained status {data.name}");
     }
@@ -69,72 +131,34 @@ public class StatusEffectManager : MonoBehaviour
         return total;
     }
 
-    private void Update()
+    
+
+    private void CleanupExpired()
     {
-        CheckStatusEffectDurations();     
-    }
-
-    private void CheckStatusEffectDurations()
-    {
-        var keysToRemove = new List<StatusEffectData>();
-
-        foreach (var kvp in activeEffects)
+        foreach (var (data, instance) in toRemove)
         {
-            var effect = kvp.Value;
+            if (!activeEffects.TryGetValue(data, out var list))
+                continue;
 
-            for (int i = effect.Count - 1; i >= 0; i--)
-            {
-                var instance = effect[i];
+            instance.OnExpire();
 
-                instance.Tick();
+            list.Remove(instance);
 
-                if (instance.IsExpired())
-                {
-                    instance.OnExpire();
-                    Debug.Log($"Status effect {instance} expired on {gameObject.name}");
-                    effect.RemoveAt(i);
-
-                    UnsubscribeFromEvents(instance);
-                }
-            }
-
-            if (effect.Count == 0)
-            {
-                keysToRemove.Add(kvp.Key);
-            }
-        }
-
-        foreach (var key in keysToRemove)
-        {
-            activeEffects.Remove(key);
+            if (list.Count == 0)
+                activeEffects.Remove(data);
         }
     }
 
-    private void UnsubscribeFromEvents(StatusEffectInstance instance)
+    public void Dispatch(EffectContext ctx)
     {
-        foreach (var e in instance.subscribedEvents)
-        {
-            if (eventMap.TryGetValue(e, out var handlers))
-            {
-                handlers.Remove(instance);
-
-                if (handlers.Count == 0)
-                {
-                    eventMap.Remove(e);
-                }
-            }
-        }
-    }
-
-
-    private void HandleEvent(CombatEvent type, EffectContext ctx)
-    {
-        if (!eventMap.TryGetValue(type, out var list))
+        if (!eventIndex.TryGetValue(ctx.trigger, out var list))
             return;
 
-        foreach (var instance in list.ToArray())
+        var snapshot = list.ToArray(); 
+
+        for (int i = 0; i < snapshot.Length; i++)
         {
-            instance.HandleEvent(type, ctx);
+            snapshot[i].HandleEvent(ctx.trigger, ctx);
         }
     }
 
@@ -146,5 +170,11 @@ public class StatusEffectManager : MonoBehaviour
     private void HandleInstanceExpired(StatusEffectInstance instance)
     {
         StatusEffectRegistry.instance?.RemoveStacks(instance.data, instance.stacks);
+    }
+
+    public void ResetStatusEffects()
+    {
+        activeEffects.Clear();
+        eventIndex.Clear();
     }
 }

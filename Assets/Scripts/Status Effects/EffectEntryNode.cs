@@ -17,17 +17,23 @@ public class EffectEntryNode
         for (int i = 0; i < effectData.Count; i++)
         {
             if (effectData[i] == null)
-                effectData[i] = new EffectNodeData { type = EffectNodeType.ApplyStatusEffect };
+                effectData[i] = new EffectNodeData { type = EffectType.ApplyStatusEffect };
 
             effectData[i].Validate();
         }
     }
 
-    internal void Execute(EffectContext ctx)
+    public bool CanExecute(EffectContext ctx)
     {
-        foreach (EffectNodeData nodeData in effectData)
-        {
-            nodeData.effectConfig.Execute(ctx);
-        }
+        return ctx.trigger == trigger;
+    }
+
+    public void Execute(EffectContext ctx)
+    {
+        if (!CanExecute(ctx))
+            return;
+
+        foreach (var node in effectData)
+            node.Execute(ctx);
     }
 }

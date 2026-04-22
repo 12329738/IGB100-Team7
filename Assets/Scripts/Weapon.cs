@@ -22,13 +22,12 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     public bool aimAtEnemy;
     
     [HideInInspector]
-    public Upgrade baseUpgrade;
+    public ItemUpgrade baseUpgrade;
     [HideInInspector]
     public GameObject owner; 
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
-    private EffectHandler effectHandler;
     float cooldownTimer;
     public bool isHit;
     float projectileRemainder;
@@ -38,6 +37,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     public ProjectilePattern pattern;
     [SerializeField]
     private StatsPreset _statPreset;
+    public Guid Id = Guid.NewGuid();
 
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
@@ -58,17 +58,11 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
         stats.AddModifierProvider(this.provider);
 
         eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
-        foreach (EffectEntryNode node in effects)
-        {
-            effectHandler.AddToMap(node);
-        }
     }
 
     public void CreateBaseUpgrade()
     {
-        baseUpgrade = CreateInstance<Upgrade>();
+        baseUpgrade = CreateInstance<ItemUpgrade>();
         baseUpgrade.itemType = itemType;
         baseUpgrade.name = name;
         baseUpgrade.description = description;

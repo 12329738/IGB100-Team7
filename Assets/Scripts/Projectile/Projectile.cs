@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 
 public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
@@ -58,13 +59,13 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
         transform.localScale *= TryGetStat(StatType.Area);
 
         eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
+        effectHandler = new EffectHandler();
 
         foreach (EffectEntryNode node in data.effects)
         {
             effectHandler.AddToMap(node);
         }
-        ownerCombat = this.data.owner.GetComponent<Combat>();
+        ownerCombat = this.data.source.GetComponent<Entity>().combat;
 
         StopAllCoroutines();
 
@@ -96,7 +97,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
                 node.Execute(context);
             }
         }
-        ObjectPool.instance.ReturnObject(data.prefab, gameObject);
+        ObjectPool.instance.ReturnObject(gameObject);
 
     }
 
@@ -108,7 +109,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     private void TryHit(GameObject target)
     {
-        if (target == data.owner)
+        if (target == data.source)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -116,14 +117,15 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
         var context = new EffectContext
         {
-            source = gameObject,
+            source = data.source,
             target = target,
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
-            valueId = this,
-            isHit = data.isHit
-
+            effectInstanceId = data.weaponId,
+            isHit = data.isHit,
         };
+
+        context.sourceInstanceId = context.source.GetInstanceID();
 
         ownerCombat.DealDamage(context);
 

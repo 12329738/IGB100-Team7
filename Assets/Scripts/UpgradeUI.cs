@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
-    Upgrade upgrade;
+    ItemUpgrade upgrade;
     public TextMeshProUGUI uiText;
     public Image background;
 
@@ -23,7 +23,7 @@ public class UpgradeUI : MonoBehaviour
         
     }
 
-    public void Initialize(Upgrade upgrade)
+    public void Initialize(ItemUpgrade upgrade)
     {
         this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();

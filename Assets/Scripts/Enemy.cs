@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : Entity, IDamageable
 {
     public float expAmount;
     Player player;
+
 
     void Start()
     {
@@ -56,10 +58,10 @@ public class Enemy : Entity, IDamageable
                     source = gameObject,
                     target = other.gameObject,
                     value = stats.GetStat(StatType.Damage),
+                    effectInstanceId = this,
                     hitInterval = 1f,
-                    valueId = this
                 };
-
+                context.sourceInstanceId = context.source.GetInstanceID();
                 combat.DealDamage(context);
             }
         }
@@ -69,7 +71,13 @@ public class Enemy : Entity, IDamageable
     internal override void Die()
     {
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
+        OnDespawn();
         this.gameObject.SetActive(false);
+    }
+
+    private void OnDespawn()
+    {
+        status.ResetStatusEffects();
     }
 
     void OnEnable()
@@ -80,6 +88,6 @@ public class Enemy : Entity, IDamageable
     void OnDisable()
     {
         SpawnerManager.instance.UnregisterEnemy();
-        ObjectPool.instance.ReturnObject(this.gameObject, gameObject);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
 }

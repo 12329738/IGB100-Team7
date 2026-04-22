@@ -6,7 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class HealConfig : EffectNodeConfig
 {
     public float amount;
-    public override EffectNodeType Type => EffectNodeType.Heal;
+    public override EffectType Type => EffectType.Heal;
     public override void Execute(EffectContext ctx)
     {
 

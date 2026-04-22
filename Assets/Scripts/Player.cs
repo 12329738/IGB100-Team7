@@ -25,7 +25,7 @@ public class Player : Entity, IDamageable
     public float currentTransformationAmount;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
-    StatusEffectManager statusManager;
+
     public Sprite regularSprite;
     public SpriteRenderer sr;
 
@@ -38,7 +38,7 @@ public class Player : Entity, IDamageable
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
-        statusManager = GetComponent<StatusEffectManager>();
+
         foreach (Weapon weapon in startingWeapons) 
         {
             AddWeapon(weapon);
@@ -180,7 +180,7 @@ public class Player : Entity, IDamageable
 
         Time.timeScale = 0f;
 
-        List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
+        List<ItemUpgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
 
         if (chosenUpgrades.Count > 0)
         {
@@ -190,12 +190,19 @@ public class Player : Entity, IDamageable
             upgradeChosen = false;
         }
         
+        //if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        //{
+        //    List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
+        //    transformationUpgrades.AddRange(transformation.upgrades);
+        //    GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
+
+        //}
 
         Time.timeScale = 1f;
 
     }
 
-    public void AddUpgrade(Upgrade upgrade)
+    public void AddUpgrade(ItemUpgrade upgrade)
     {    
         Item item = TryGetItem(upgrade.itemType);
 
@@ -275,7 +282,7 @@ public class Player : Entity, IDamageable
 
     internal void Transform()
     {
-        statusManager.ApplyEffect(transformation.effect, gameObject);
+        status.QueueApplyAffect(transformation.effect, gameObject);
         sr.sprite = transformation.transformationSprite;
         isTransformed = true;
         

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+    public EffectSystem effectSystem;
     public Player player;
     public Camera camera;
     public GameUI gameUI;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public float maxExp = 1000000;
     public float maxLevel = 100;
     public float knockBackSpeed;
+    public int transformationUpgradeInterval = 5;
 
 
     public List<Rarity> rarities;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
         database = new ItemDatabase();
         database.Initialize();    
         projectileSpawner = new ProjectileSpawner();
+        effectSystem = new EffectSystem();
 
         CreateRarityDictionary();
     }

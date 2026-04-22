@@ -8,8 +8,10 @@ public class StatusEffectData : ScriptableObject
     public string description;
     public float duration;
     public int maxStacks;
+    
+    public bool hasTick = true;
+    public float tickInterval = 0.5f;
     public List<EffectEntryNode> entries = new List<EffectEntryNode>();
-
     private void OnValidate()
     {
         if (entries == null) return;

@@ -1,37 +1,17 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class EffectHandler 
+public class EffectHandler
 {
-    Dictionary<CombatEvent, List<EffectEntryNode>> eventMap = new();
-    private EventHandler eventHandler;
+    private List<EffectEntryNode> entries = new();
 
-    public EffectHandler(EventHandler eventHandler)
+    public void AddToMap(EffectEntryNode node)
     {
-        this.eventHandler = eventHandler;
-        eventHandler.OnEvent += HandleEvent;
+        entries.Add(node);
     }
 
-    public void HandleEvent(CombatEvent type, EffectContext ctx)
+    public void Execute(EffectContext ctx)
     {
-        if(!eventMap.TryGetValue(type, out var list))
-            return;
-
-        foreach (EffectEntryNode entry in list)
-        {
+        foreach (var entry in entries)
             entry.Execute(ctx);
-        }
     }
-
-    public void AddToMap(EffectEntryNode effect)
-    {
-        if (!eventMap.TryGetValue(effect.trigger, out var list))
-        {
-            list = new List<EffectEntryNode>();
-            eventMap[effect.trigger] = list;
-        }
-
-        list.Add(effect);
-    }
-
 }

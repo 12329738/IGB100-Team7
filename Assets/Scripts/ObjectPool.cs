@@ -22,25 +22,50 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetObject(GameObject prefab)
     {
-        if (!pool.ContainsKey(prefab))
-            pool[prefab] = new Queue<GameObject>();
-
-        if (pool[prefab].Count > 0)
+        if (!pool.TryGetValue(prefab, out var queue))
         {
-            GameObject obj = pool[prefab].Dequeue();
-            obj.SetActive(true);
-            return obj;
+            queue = new Queue<GameObject>();
+            pool[prefab] = queue;
         }
 
-        return Instantiate(prefab);
+        GameObject obj;
+
+        if (queue.Count > 0)
+        {
+            obj = queue.Dequeue();
+        }
+        else
+        {
+            obj = Instantiate(prefab);
+            obj.AddComponent<Poolable>();
+        }
+
+        obj.GetComponent<Poolable>().prefab = prefab;
+        obj.SetActive(true);
+        if (obj.GetComponent<Entity>())
+        {
+            obj.GetComponent<Entity>().OnSpawned();
+        }
+        return obj;
     }
 
-    public void ReturnObject(GameObject prefab, GameObject obj)
+    public void ReturnObject(GameObject obj)
     {
-        if (!pool.ContainsKey(prefab))
-            pool[prefab] = new Queue<GameObject>();
+        var poolable = obj.GetComponent<Poolable>();
+        if (poolable == null || poolable.prefab == null)
+        {
+            Destroy(obj);
+            return;
+        }
 
         obj.SetActive(false);
-        pool[prefab].Enqueue(obj);
+
+        if (!pool.TryGetValue(poolable.prefab, out var queue))
+        {
+            queue = new Queue<GameObject>();
+            pool[poolable.prefab] = queue;
+        }
+
+        queue.Enqueue(obj);
     }
 }

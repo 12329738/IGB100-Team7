@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 466738893801292406}
   - component: {fileID: 5719228438391645800}
   - component: {fileID: 6092473958964533532}
-  - component: {fileID: 1620644656706330053}
-  - component: {fileID: -5139355339428780303}
+  - component: {fileID: -6495538883026340603}
+  - component: {fileID: -5676004252566367511}
   m_Layer: 3
   m_Name: Enemy1
   m_TagString: Untagged
@@ -48,13 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b216f4aa02ab948953e01210fc4a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
   canBeDamaged: 1
   flashScript: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
   _team: 1
-  contactDamage: 20
   expAmount: 100
   references:
     version: 2
@@ -80,19 +78,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1620644656706330053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3512271440442089338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e431cd33e80d845a57073285fcefa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-5139355339428780303
+--- !u!114 &-6495538883026340603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,6 +88,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5676004252566367511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512271440442089338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e431cd33e80d845a57073285fcefa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8520254631157217528

@@ -5,7 +5,7 @@ public enum CombatEvent
     OnCrit,
     OnDamageTaken,
     OnHeal,
-    OnTIck,
+    OnTick,
     OnApply,
     OnContact,
     OnExpire

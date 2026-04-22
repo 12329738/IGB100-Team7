@@ -6,21 +6,21 @@ using static UnityEngine.Rendering.DebugUI;
 public class DamageOverTimeConfig : EffectNodeConfig
 {
     public float damage;
-    public float damageInterval;
     public bool isHit;
-    public override EffectNodeType Type => EffectNodeType.DamageOverTime;
+    public override EffectType Type => EffectType.DamageOverTime;
     public override void Execute(EffectContext ctx)
     {
+        ctx.intent = EffectIntent.DealDamage;
         ctx.isHit = isHit;
         ctx.value = damage;
-        IModifierReceiver receiver = ctx.source.GetComponent<IModifierReceiver>();
-        if (receiver != null)
-        {
-            ctx.value = (float)(receiver.stats.GetMultiplierFor(StatType.Damage) * damage * ctx.stacks);
-        }
+        if (ctx.stacks > 1)
+            ctx.value *= (float)ctx.stacks;
 
-        ctx.hitInterval = damageInterval;
-        ctx.target.GetComponent<Entity>().combat.DealDamage(ctx);
-        Debug.Log($"{ctx.target} took {damage} dmg from {ctx.stacks} stacks of {ctx.source}");
+        var receiver = ctx.source.GetComponent<IModifierReceiver>();
+        if (receiver != null)
+            ctx.value *= receiver.stats.GetStat(StatType.Damage);
+
+
+        Debug.Log($"{ctx.target} took {ctx.value} dmg from {ctx.stacks} stacks of {ctx.origin}");
     }
 }

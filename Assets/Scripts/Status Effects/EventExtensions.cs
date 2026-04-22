@@ -4,10 +4,10 @@ public static class EventExtensions
 {
     public static void RaiseEvent(this GameObject obj, CombatEvent type, EffectContext ctx)
     {
-        obj.GetComponent<IEventHandler>()?.eventHandler.RaiseEvent(type, ctx);
+        obj.GetComponent<IEventHandler>()?.eventHandler.RaiseEvent(ctx);
         if (obj.GetComponent<IEventHandler>() is Projectile projectile && type == CombatEvent.OnHit)
         {
-            projectile.data.owner.GetComponent<IEventHandler>().eventHandler.RaiseEvent(type, ctx);
+            projectile.data.source.GetComponent<IEventHandler>().eventHandler.RaiseEvent(ctx);
         }
     }
 }

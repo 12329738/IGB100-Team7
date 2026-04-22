@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class EventHandler 
 {
-    public event Action<CombatEvent, EffectContext> OnEvent;
+    public event Action<EffectContext> OnEvent;
 
-    public void RaiseEvent(CombatEvent type, EffectContext context)
+    public void RaiseEvent(EffectContext context)
     {
-        OnEvent?.Invoke(type, context);
+        OnEvent?.Invoke(context);
     }
 }

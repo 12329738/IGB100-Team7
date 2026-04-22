@@ -6,14 +6,14 @@ using UnityEngine;
 
 public static class EffectNodeDatabase
 {
-    private static Dictionary<EffectNodeType, System.Type> map = new();
+    private static Dictionary<EffectType, System.Type> map = new();
 
-    public static void Register(EffectNodeType type, System.Type t)
+    public static void Register(EffectType type, System.Type t)
     {
         map[type] = t;
     }
 
-    public static EffectNodeConfig Create(EffectNodeType type)
+    public static EffectNodeConfig Create(EffectType type)
     {
         if (!map.TryGetValue(type, out var t))
             return null;
@@ -21,7 +21,7 @@ public static class EffectNodeDatabase
         return (EffectNodeConfig)System.Activator.CreateInstance(t);
     }
 
-    public static Type Get(EffectNodeType type)
+    public static Type Get(EffectType type)
     {
         if (!map.TryGetValue(type, out var t))
             return null;

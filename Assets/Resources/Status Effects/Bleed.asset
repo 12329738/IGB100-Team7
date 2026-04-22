@@ -16,6 +16,8 @@ MonoBehaviour:
   description: 
   duration: 3
   maxStacks: 3
+  hasTick: 1
+  tickInterval: 0.5
   entries:
   - trigger: 5
     effectData:
@@ -33,5 +35,4 @@ MonoBehaviour:
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
         damage: 5
-        damageInterval: 0.5
         isHit: 0
