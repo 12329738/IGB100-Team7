@@ -27,7 +27,7 @@ MonoBehaviour:
   direction: 0
   hitInterval: 1
   isPiercing: 0
-  trackEnemy: 0
+  trackEnemy: 1
   aimAtEnemy: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
