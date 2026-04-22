@@ -22,7 +22,7 @@ MonoBehaviour:
   _itemType: 4
   _name: Holy Water
   _description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9c46ebde711ca374f816e59a555ba0ab, type: 3}
   baseStats: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   prefab: {fileID: 0}
   randomAngleVariance: 0
@@ -55,4 +55,6 @@ MonoBehaviour:
     - rid: 6460871561430433863
       type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
+        onlyAffectEnemies: 0
+        onlyAffectAllies: 0
         projectile: {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}
