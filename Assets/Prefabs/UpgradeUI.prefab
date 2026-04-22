@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiText: {fileID: 2202776033618883547}
+  background: {fileID: 5115210831458446176}
 --- !u!114 &2638346693216801685
 MonoBehaviour:
   m_ObjectHideFlags: 0

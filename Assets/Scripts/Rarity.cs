@@ -5,4 +5,5 @@ public class Rarity : ScriptableObject
    public RarityEnum rarity;
    public float chance;
    public float valueModifier;
+   public Color color;
 }

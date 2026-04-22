@@ -15,3 +15,4 @@ MonoBehaviour:
   rarity: 1
   chance: 30
   valueModifier: 1.25
+  color: {r: 0, g: 0.17847392, b: 0.9528302, a: 1}

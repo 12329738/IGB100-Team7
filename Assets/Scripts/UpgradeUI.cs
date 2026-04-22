@@ -9,6 +9,7 @@ public class UpgradeUI : MonoBehaviour
 {
     Upgrade upgrade;
     public TextMeshProUGUI uiText;
+    public Image background;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +27,7 @@ public class UpgradeUI : MonoBehaviour
     {
         this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();
+        background.color = GameManager.instance.rarityColors[upgrade.rarity];
         
 
         sb.AppendLine($"{this.upgrade.itemType.ToString()}");

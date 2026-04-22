@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
 
     public List<Rarity> rarities;
+    public Dictionary<RarityEnum, Color> rarityColors;
 
 
     public AnimationCurve experienceCurve;
@@ -50,6 +51,17 @@ public class GameManager : MonoBehaviour
         database = new ItemDatabase();
         database.Initialize();    
         projectileSpawner = new ProjectileSpawner();
+
+        CreateRarityDictionary();
+    }
+
+    private void CreateRarityDictionary()
+    {
+        rarityColors = new Dictionary<RarityEnum, Color>();
+        foreach (Rarity rarity in rarities)
+        {
+            rarityColors[rarity.rarity] = rarity.color;
+        }
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
