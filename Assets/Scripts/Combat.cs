@@ -8,10 +8,6 @@ public class Combat : MonoBehaviour
 {
     private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
     private EventHandler eventHandler;
-    public void Initialize(EventHandler handler)
-    {
-        eventHandler = handler;
-    }
 
     public void DealDamage(EffectContext ctx)
     {
@@ -37,7 +33,12 @@ public class Combat : MonoBehaviour
         {
             EffectContext hitCtx = ctx.Clone();
             hitCtx.trigger = CombatEvent.OnHit;
-            eventHandler.RaiseEvent(hitCtx);
+            ctx.eventHandler?.RaiseEvent(hitCtx); 
+
+            ctx.source
+                ?.GetComponent<Entity>()
+                ?.eventHandler
+                ?.RaiseEvent(hitCtx); 
         }
     }
 

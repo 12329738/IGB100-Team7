@@ -131,16 +131,23 @@ public class StatusEffectManager : MonoBehaviour
         return total;
     }
 
-    
+
 
     private void CleanupExpired()
     {
-        foreach (var (data, instance) in toRemove)
+        var expired = toRemove.ToArray();
+
+        // Phase 1: notify
+        foreach (var (data, instance) in expired)
+        {
+            instance.OnExpire();
+        }
+
+        // Phase 2: remove
+        foreach (var (data, instance) in expired)
         {
             if (!activeEffects.TryGetValue(data, out var list))
                 continue;
-
-            instance.OnExpire();
 
             list.Remove(instance);
 

@@ -31,6 +31,7 @@ public class EffectContext
     public DamageSourceDefinition origin;
     public DamageFlags flags;
 
+    public EventHandler eventHandler;
     public EffectContext Clone()
     {
         return (EffectContext)this.MemberwiseClone();

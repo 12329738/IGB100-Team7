@@ -11,6 +11,6 @@ public class KnockBackConfig : EffectNodeConfig
     {
         ctx.baseValue = magnitude;
         ctx.value = magnitude;
-        ctx.effectType = Type;
+        ctx.intent = EffectIntent.Knockback;
     }
 }

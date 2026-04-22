@@ -83,7 +83,7 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
         canBeDamaged = true;
         knockbackRemaining = 0;
         combat = GetComponent<Combat>();
-        combat.Initialize(eventHandler);
+
 
         foreach (EffectEntryNode node in effects)
         {

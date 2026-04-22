@@ -28,6 +28,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
+    private EffectHandler effectHandler;
     float cooldownTimer;
     public bool isHit;
     float projectileRemainder;
@@ -58,6 +59,12 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
         stats.AddModifierProvider(this.provider);
 
         eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
+
+        foreach (var effect in effects)
+        {
+            effectHandler.AddToMap(effect);
+        }
     }
 
     public void CreateBaseUpgrade()

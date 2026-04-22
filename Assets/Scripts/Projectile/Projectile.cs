@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
         transform.localScale *= TryGetStat(StatType.Area);
 
         eventHandler = new EventHandler();
-        effectHandler = new EffectHandler();
+        effectHandler = new EffectHandler(eventHandler);
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -123,6 +123,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
             hitInterval = data.hitInterval,
             effectInstanceId = data.weaponId,
             isHit = data.isHit,
+            eventHandler = this.eventHandler
         };
 
         context.sourceInstanceId = context.source.GetInstanceID();

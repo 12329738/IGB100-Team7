@@ -7,7 +7,9 @@ public class EffectSystem : MonoBehaviour
     public void Execute(EffectContext ctx)
     {
         Resolve(ctx);
-        Combat combat = ctx.target.GetComponent<Combat>();
+        var combat = ctx.target.GetComponent<Combat>();
+        if (combat == null)
+            return;
         switch (ctx.intent)
         {
             case EffectIntent.DealDamage:
