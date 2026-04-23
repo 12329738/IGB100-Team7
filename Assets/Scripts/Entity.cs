@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -50,7 +49,7 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     [SerializeField]
 
-    public void Awake()
+    public void OnEnable()
     {
         status = GetComponent<StatusEffectManager>();
         eventHandler = new EventHandler();
@@ -75,21 +74,30 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     public void OnSpawned()
     {
-
         stats = new Stats();
         stats.Initialize(statPreset);
         stats.AddModifierProvider(this.provider);
+
         currentHealth = stats.GetStat(StatType.MaxHealth);
         canBeDamaged = true;
         knockbackRemaining = 0;
+
         combat = GetComponent<Combat>();
 
+        // Recreate systems
+        eventHandler = new EventHandler();
+        effectHandler = new EffectHandler(eventHandler);
+
+        // Re-link status system
+        if (status != null)
+            status.Initialize(eventHandler);
 
         foreach (EffectEntryNode node in effects)
         {
             effectHandler.AddToMap(node);
         }
     }
+
     public virtual void TakeDamage(EffectContext context)
     {
 
