@@ -37,7 +37,7 @@ MonoBehaviour:
     - rid: 6460871584670285977
       type: {class: HealConfig, ns: , asm: Assembly-CSharp}
       data:
-        amount: 1
+        amount: 0
     - rid: 6460871584670285985
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
