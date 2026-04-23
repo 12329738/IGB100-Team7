@@ -2859,6 +2859,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966113104}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: vampire
       value: 
       objectReference: {fileID: 11400000, guid: d77e4f50fc5fe6d46b4cc3c5f506b533, type: 2}
@@ -2889,7 +2893,7 @@ PrefabInstance:
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: f66419d7267d9894ba26223be689168b, type: 2}
+      objectReference: {fileID: 11400000, guid: a9a27cad9c181e340984eed10ca162df, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
