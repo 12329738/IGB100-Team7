@@ -16,6 +16,6 @@ MonoBehaviour:
   _upgrades:
   - {fileID: 11400000, guid: 8ac5cca7e44cf334491c53af515a4b99, type: 2}
   _itemType: 6
-  _name: Vitality Potion
+  _name: 
   _description: 
   icon: {fileID: 21300000, guid: fae551a372a450b449a3a0e8dfdbdf84, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 0
+  _itemType: 4
   _name: 
   _description: 
   icon: {fileID: 0}
@@ -26,19 +26,19 @@ MonoBehaviour:
   isPiercing: 0
   trackEnemy: 0
   aimAtEnemy: 0
-  behaviour: {fileID: 0}
-  pattern: {fileID: 0}
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  behaviour: {fileID: 0}
+  pattern: {fileID: 0}
+  _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   effects:
   - trigger: 0
     effectData:
     - rid: 6460871561430433864
     - rid: 6460871561430433866
-  isHit: 0
-  stickToPlayer: 0
-  randomDirection: 0
-  _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   references:
     version: 2
     RefIds:
@@ -51,18 +51,14 @@ MonoBehaviour:
     - rid: 6460871561430433865
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
-        onlyAffectEnemies: 1
-        onlyAffectAllies: 0
         effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}
     - rid: 6460871561430433866
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 6
+        type: 4
         effectConfig:
-          rid: 6460871561430433868
-    - rid: 6460871561430433868
+          rid: 6974428177321951300
+    - rid: 6974428177321951300
       type: {class: HealConfig, ns: , asm: Assembly-CSharp}
       data:
-        onlyAffectEnemies: 0
-        onlyAffectAllies: 1
-        amount: 0
+        amount: 10
