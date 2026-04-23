@@ -193,13 +193,13 @@ public class Player : Entity, IDamageable
             upgradeChosen = false;
         }
         
-        if (level % GameManager.instance.transformationUpgradeInterval == 0)
-        {
-            List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
-            transformationUpgrades.AddRange(transformation.upgrades);
-            GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
+        //if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        //{
+        //    List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
+        //    transformationUpgrades.AddRange(transformation.upgrades);
+        //    GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
 
-        }
+        //}
 
         Time.timeScale = 1f;
 
@@ -229,10 +229,10 @@ public class Player : Entity, IDamageable
             }
         }
 
-        else if (upgrade is TransformationUpgrade transformationUpgrade)
-        {
-            transformationUpgrades.Add(transformationUpgrade);
-        }
+        //else if (upgrade is TransformationUpgrade transformationUpgrade)
+        //{
+        //    transformationUpgrades.Add(transformationUpgrade);
+        //}
         
     }
 

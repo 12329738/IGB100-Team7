@@ -45,57 +45,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e1075794bc168438f62830ca905826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectSystem: {fileID: 0}
-
+  effectExecutor: {fileID: 0}
   effectHandler: {fileID: 0}
-
   player: {fileID: 0}
   camera: {fileID: 0}
   gameUI: {fileID: 0}
   database: {fileID: 0}
-  weaponLimit: 3
-  passiveLimit: 3
-  upgradesPerLevel: 3
-  weaponUpgradeLimit: 5
+  statusEffectRegistry: {fileID: 0}
+  weaponLimit: 0
+  passiveLimit: 0
+  upgradesPerLevel: 0
+  weaponUpgradeLimit: 0
   passiveUpgradeLimit: 0
   minExp: 0
-  maxExp: 100000
+  maxExp: 1000000
   maxLevel: 100
-  knockBackSpeed: 20
-
-  transformationUpgradeInterval: 10
-
-  rarities:
-  - {fileID: 11400000, guid: 25085ca443515f64d916ed0f3987392d, type: 2}
-  - {fileID: 11400000, guid: 2afd744753b755d40a2f5c7c7887387b, type: 2}
-  - {fileID: 11400000, guid: d6c30d1f4f339404dbaa67af06c8fcbe, type: 2}
-  - {fileID: 11400000, guid: 311f1533db1ee6f408dd7275a4f36f4a, type: 2}
+  knockBackSpeed: 0
+  transformationUpgradeInterval: 5
+  rarities: []
   experienceCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.0009
-      inSlope: -0.13683175
-      outSlope: 0.010277928
-      tangentMode: 5
-      weightedMode: 2
-      inWeight: 0
-      outWeight: 0.30142674
-    - serializedVersion: 3
-      time: 1.15
-      value: 0.22575349
-      inSlope: 0.56180763
-      outSlope: 0.56180763
-      tangentMode: 0
+      value: 0
+      inSlope: 0.01
+      outSlope: 0.01
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.07370565
-      outWeight: 0.21652134
+      inWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2
+      time: 100
       value: 1
-      inSlope: 0.91087824
-      outSlope: 0.91087824
+      inSlope: 0.01
+      outSlope: 0.01
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -115,3 +99,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fbfddd8af313e4eb6af5c1c349581b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  executor: {fileID: 0}

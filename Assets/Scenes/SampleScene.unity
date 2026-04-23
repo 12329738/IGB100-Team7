@@ -2486,7 +2486,7 @@ MonoBehaviour:
   - waveName: Wave 1
     enemies:
     - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
-      amount: 20
+      amount: 40
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       spawnDuration: 60
     isBossWave: 0
@@ -2792,6 +2792,10 @@ PrefabInstance:
       propertyPath: weaponStats
       value: 
       objectReference: {fileID: 1207158718}
+    - target: {fileID: 1562418516489618883, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: levelUpScreen
+      value: 
+      objectReference: {fileID: 881984285233351309, guid: 32438ac1205678a47a843d0f4a4a56e4, type: 3}
     - target: {fileID: 1562418516489618883, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: transformationBar
       value: 
