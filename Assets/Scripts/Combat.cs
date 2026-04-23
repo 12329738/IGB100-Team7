@@ -40,6 +40,8 @@ public class Combat : MonoBehaviour
                 ?.eventHandler
                 ?.RaiseEvent(hitCtx); 
         }
+
+        if (ctx.target.GetComponent<Entity>() == null) return;
     }
 
     public void Heal(EffectContext context, float amount)

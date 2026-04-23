@@ -77,7 +77,8 @@ public class Enemy : Entity, IDamageable
 
     private void OnDespawn()
     {
-        status.ResetStatusEffects();
+        if (status != null)
+            status.ResetStatusEffects();
     }
 
     void OnEnable()
