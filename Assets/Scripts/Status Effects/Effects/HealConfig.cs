@@ -1,15 +1,22 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [Serializable]
-public class HealConfig : EffectNodeConfig
+public class HealConfig : EffectOperation
 {
     public float amount;
-    public override EffectType Type => EffectType.Heal;
-    public override void Execute(EffectContext ctx)
+    public override EffectIntent Type => EffectIntent.Heal;
+    public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-
-        ctx.target.GetComponent<Entity>().combat.Heal(ctx,amount);
+        intents.Add(new CombatIntent
+        {
+            type = Type,
+            source = ctx.source,
+            target = ctx.target,
+            value = amount,
+            context = ctx
+        });
     }
 }

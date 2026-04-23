@@ -38,7 +38,9 @@ MonoBehaviour:
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   effects:
-  - trigger: 0
+  - triggers: 00000000
+    hasTick: 0
+    tickInterval: 0
     effectData:
     - rid: 6460871561430433869
   references:
@@ -48,11 +50,10 @@ MonoBehaviour:
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 1
-        effectConfig:
-          rid: 6460871561430433871
-    - rid: 6460871561430433871
+        emitsIntent: 0
+        effectOperation:
+          rid: 6460871584670285966
+    - rid: 6460871584670285966
       type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
       data:
-        onlyAffectEnemies: 0
-        onlyAffectAllies: 0
         magnitude: 2

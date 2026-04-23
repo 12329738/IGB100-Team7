@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
-public class Weapon : Item, IEventHandler, IModifierReceiver
+public class Weapon : Item, IModifierReceiver
 {
     [HideInInspector]
 
@@ -28,7 +29,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
-    private EffectHandler effectHandler;
+
     float cooldownTimer;
     public bool isHit;
     float projectileRemainder;
@@ -58,13 +59,6 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
         stats.AddModifierProvider(GameManager.instance.player.provider);
         stats.AddModifierProvider(this.provider);
 
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
-        foreach (var effect in effects)
-        {
-            effectHandler.AddToMap(effect);
-        }
     }
 
     public void CreateBaseUpgrade()
@@ -114,7 +108,7 @@ public class Weapon : Item, IEventHandler, IModifierReceiver
     public void SpawnProjectiles(EffectContext context)
     {
         ProjectileData data = BuildProjectileData();
-        data.source = context.source;
+        data.owner = context.source;
 
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);

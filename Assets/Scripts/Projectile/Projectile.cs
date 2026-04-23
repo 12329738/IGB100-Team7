@@ -6,7 +6,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 
 
-public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
+public class Projectile : MonoBehaviour, IModifierProvider
 {
     [HideInInspector]
     public IProjectileState state;
@@ -16,9 +16,8 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
     public ProjectileData data;
     private Combat ownerCombat;
     [HideInInspector]
-    public EventHandler eventHandler {  get; set; } 
-    private EffectHandler effectHandler;
-    [HideInInspector]
+
+
     public Transform visual;
 
     [SerializeField]
@@ -58,14 +57,13 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
         transform.localScale *= TryGetStat(StatType.Area);
 
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
         foreach (EffectEntryNode node in data.effects)
         {
-            effectHandler.AddToMap(node);
+            EffectInstance instance = new EffectInstance(node, data.owner, gameObject);
+            GameManager.instance.effectHandler.Register(instance);
         }
-        ownerCombat = this.data.source.GetComponent<Entity>().combat;
+
+        ownerCombat = this.data.owner.GetComponent<Entity>().combat;
 
         StopAllCoroutines();
 
@@ -88,13 +86,9 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            if (node.trigger == CombatEvent.OnExpire)
+            if (node.triggers.Contains(CombatEvent.OnExpire))
             {
-                EffectContext context = new EffectContext
-                {
-                    source = this.gameObject
-                };
-                node.Execute(context);
+
             }
         }
         ObjectPool.instance.ReturnObject(gameObject);
@@ -109,7 +103,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     private void TryHit(GameObject target)
     {
-        if (target == data.source)
+        if (target == data.owner)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -117,18 +111,25 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
         var context = new EffectContext
         {
-            source = data.source,
+            source = data.owner,
             target = target,
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
-            effectInstanceId = data.weaponId,
             isHit = data.isHit,
-            eventHandler = this.eventHandler
+
+        };
+
+        var intent = new CombatIntent
+        {
+            value = stats[StatType.Damage],
+            source = gameObject,
+            target = context.target,
+            context = context
         };
 
         context.sourceInstanceId = context.source.GetInstanceID();
 
-        ownerCombat.DealDamage(context);
+        ownerCombat.DealDamage(intent);
 
         if (!data.isPiercing)
         {

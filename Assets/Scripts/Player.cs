@@ -1,7 +1,9 @@
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -33,6 +35,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public bool upgradeChosen;
     private bool levelUpRoutineRunning;
+    private List<TransformationUpgrade> transformationUpgrades;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -190,38 +193,47 @@ public class Player : Entity, IDamageable
             upgradeChosen = false;
         }
         
-        //if (level % GameManager.instance.transformationUpgradeInterval == 0)
-        //{
-        //    List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
-        //    transformationUpgrades.AddRange(transformation.upgrades);
-        //    GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
+        if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        {
+            List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
+            transformationUpgrades.AddRange(transformation.upgrades);
+            GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
 
-        //}
+        }
 
         Time.timeScale = 1f;
 
     }
 
-    public void AddUpgrade(ItemUpgrade upgrade)
+    public void AddUpgrade(Upgrade upgrade)
     {    
-        Item item = TryGetItem(upgrade.itemType);
+        if (upgrade is ItemUpgrade itemUpgrade)
+            {
+            Item item = TryGetItem(itemUpgrade.itemType);
 
-        if (item == null)
-        {
-            AddItem(upgrade.itemType);
-            item = TryGetItem(upgrade.itemType);
+            if (item == null)
+            {
+                AddItem(itemUpgrade.itemType);
+                item = TryGetItem(itemUpgrade.itemType);
+            }
+
+
+            if (upgrade.modifiers != null)
+            {
+                foreach (StatModifier modifier in upgrade.modifiers)
+                {
+                    item.AddModifier(modifier);
+                }
+
+                item.currentLevel++;
+            }
         }
 
-
-        if (upgrade.modifiers != null) 
+        else if (upgrade is TransformationUpgrade transformationUpgrade)
         {
-            foreach (StatModifier modifier in upgrade.modifiers)
-            {
-                item.AddModifier(modifier);
-            }         
-      
-            item.currentLevel++;
-        }     
+            transformationUpgrades.Add(transformationUpgrade);
+        }
+        
     }
 
 
@@ -282,7 +294,17 @@ public class Player : Entity, IDamageable
 
     internal void Transform()
     {
-        status.QueueApplyAffect(transformation.effect, gameObject);
+        status.Apply(transformation.effect, gameObject);
+        foreach (TransformationUpgrade upgrade in transformation.upgrades)
+        {
+            foreach (EffectEntryNode node in upgrade.effects)
+            {
+                effects.Add(node);
+                EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+                GameManager.instance.effectHandler.Register(instance);
+            }
+
+        }
         sr.sprite = transformation.transformationSprite;
         isTransformed = true;
         

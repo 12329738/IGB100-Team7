@@ -5,19 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class EffectEntryNode
 {
-    public CombatEvent trigger;
+    public List<CombatEvent> triggers;
+    public bool hasTick;
+    public float tickInterval;
     [SerializeReference]
     public List<EffectNodeData> effectData;
 
 
     public void Validate()
     {
-        if (effectData == null) return;
+        if (effectData == null)
+            effectData = new List<EffectNodeData>();
 
         for (int i = 0; i < effectData.Count; i++)
         {
             if (effectData[i] == null)
-                effectData[i] = new EffectNodeData { type = EffectType.ApplyStatusEffect };
+                effectData[i] = new EffectNodeData
+                {
+                    type = EffectIntent.ApplyStatusEffect
+                };
 
             effectData[i].Validate();
         }
@@ -25,15 +31,26 @@ public class EffectEntryNode
 
     public bool CanExecute(EffectContext ctx)
     {
-        return ctx.trigger == trigger;
+        return triggers.Contains(ctx.trigger);
     }
 
-    public void Execute(EffectContext ctx)
+    public void Execute(EffectContext ctx, List<CombatIntent> intents)
     {
         if (!CanExecute(ctx))
             return;
 
         foreach (var node in effectData)
-            node.Execute(ctx);
+        {
+            if (node.effectOperation is not IIntentModifier)
+            {
+                node.Execute(ctx, intents);
+            }
+
+            if (node.effectOperation is IIntentModifier)
+            {
+                node.Modify(ctx, intents);
+            }
+        }
+            
     }
 }

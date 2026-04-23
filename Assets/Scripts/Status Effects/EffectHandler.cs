@@ -1,44 +1,54 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class EffectHandler
+public class EffectHandler : MonoBehaviour
 {
-    private Dictionary<CombatEvent, List<EffectEntryNode>> eventMap = new();
-
-    private EventHandler eventHandler;
-    private EffectSystem effectSystem;
-
-    public EffectHandler(EventHandler eventHandler)
+    private readonly List<EffectInstance> effects = new();
+    public EffectExecutor executor;
+    //private EffectPipeline pipeline;
+    void Awake()
     {
-        this.eventHandler = eventHandler;
-        this.effectSystem = GameManager.instance.effectSystem;
-
-        eventHandler.OnEvent += HandleEvent;
+        executor = GameManager.instance.effectExecutor;
     }
-
-    public void AddToMap(EffectEntryNode effect)
+    private void Update()
     {
-        if (!eventMap.TryGetValue(effect.trigger, out var list))
+        float now = Time.time;
+
+        for (int i = 0; i < effects.Count; i++)
         {
-            list = new List<EffectEntryNode>();
-            eventMap[effect.trigger] = list;
-        }
-
-        list.Add(effect);
-    }
-
-    private void HandleEvent(EffectContext ctx)
-    {
-        if (!eventMap.TryGetValue(ctx.trigger, out var list))
-            return;
-
-        var snapshot = list.ToArray();
-
-        foreach (var entry in snapshot)
-        {
-            var localCtx = ctx.Clone();
-
-            entry.Execute(localCtx);         
-            effectSystem.Execute(localCtx);  
+            effects[i].Tick(now, executor);
         }
     }
+
+    public void Dispatch(EffectContext ctx)
+    {
+        List<CombatIntent> intents = new();
+
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+
+            effects[i].definition.Execute(ctx, intents);
+            
+        }
+
+        GameManager.instance.effectExecutor.Execute(intents);
+    }
+
+
+    public void Register(EffectInstance instance)
+    {
+        effects.Add(instance);
+    }
+
+    private void Register(StatusEffectInstance instance)
+    {
+        foreach (var runtime in instance.runtimes)
+        {
+            Register(runtime);
+        }
+    }
+
+
 }

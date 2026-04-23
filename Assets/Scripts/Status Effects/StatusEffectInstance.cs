@@ -2,82 +2,109 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.GraphicsBuffer;
 
 public class StatusEffectInstance
 {
     public StatusEffectData data;
+    public List<EffectInstance> runtimes = new();
     public EffectContext context;
-    private float duration;
-    public int stacks;
-    private float startTime;
-    public HashSet<CombatEvent> subscribedEvents = new();
-    public Action<StatusEffectInstance> OnApplied;
-    public Action<StatusEffectInstance> OnExpired;
-    public Action<StatusEffectInstance, int> OnStacksChanged;
-    Guid Id = Guid.NewGuid();
+    //public int stacks;
+    //public float startTime;
+    //public float lastTickTime;
+    //public GameObject source;
+    //public GameObject target;
+    public EffectState state;
+    public StatusEffectManager effectManager;
 
-    public float LastTickTime { get; internal set; }
-
-    public StatusEffectInstance(StatusEffectData data, GameObject _source, GameObject _target)
+    public StatusEffectInstance(StatusEffectData data, GameObject source, GameObject target, StatusEffectManager manager)
     {
+        effectManager = manager;
         this.data = data;
-        context = new EffectContext
-        {
-            source = _source,
-            target = _target,
-        };
-        context.effectInstanceId = Id;
-        context.sourceInstanceId = context.source.GetInstanceID();
-        this.duration = data.duration;
-        startTime = Time.time;
 
+        context = new EffectContext
+        {            
+            source = source,
+            target = target,
+            stacks = 1,
+        };
+        state = new EffectState
+        {
+            source = source,
+            target = target,
+            stacks = 1,
+            startTime = Time.time,
+            lastTickTime = Time.time,
+        };
 
         foreach (var entry in data.entries)
-        {          
-             subscribedEvents.Add(entry.trigger);          
+        {
+            var runtime = new EffectInstance(
+                entry,
+                source: source,
+                target: target
+            );
+
+            runtimes.Add(runtime);
         }
 
     }
 
-    public void OnApply()
+    public void OnApply(StatusEffectManager manager)
     {
-        stacks++;
-        foreach (var entry in data.entries)
-        {
-            if (entry.trigger == CombatEvent.OnApply)
-            {
-
-                foreach (var node in entry.effectData)
-                {
-                    node.Execute(context);
-                }
-                
-            }
-        }
+        context.trigger = CombatEvent.OnApply;
+        EmitEffects(context);
     }
 
 
     public void Tick()
     {
-        ExecuteEntries(CombatEvent.OnTick, context);
+        
+        if (Time.time - state.startTime > data.duration)
+        {
+            Expire();
+            return;
+        }
+        if (!data.hasTick)
+            return;
+        if (Time.time - state.lastTickTime < data.tickInterval)
+            return;
+
+        state.lastTickTime = Time.time;
+
+        context.trigger = CombatEvent.OnTick;
+        EmitEffects(context);
+                  
     }
+
+    public void EmitEffects(EffectContext context)
+    {
+        List<CombatIntent> intents = new List<CombatIntent>();
+        foreach (EffectInstance instance in runtimes)
+        {
+
+            context.effectInstance = instance;
+            instance.definition.Execute(context, intents);                      
+        }
+
+        GameManager.instance.effectExecutor.Execute(intents);        
+        
+    }
+
 
     public void AddStack(int amount)
     {
-        stacks += amount;
-        if (stacks > data.maxStacks)
-            stacks = data.maxStacks;
+        context.stacks += amount;
+        if (context.stacks > data.maxStacks)
+            context.stacks = data.maxStacks;
 
         Refresh();
-
-        OnStacksChanged?.Invoke(this, stacks);
         
-
     }
 
     private void Refresh()
     {
-        startTime = Time.time;
+        state.startTime = Time.time;
     }
 
     public void HandleEvent(CombatEvent type, EffectContext ctx)
@@ -88,26 +115,29 @@ public class StatusEffectInstance
     private void ExecuteEntries(CombatEvent type, EffectContext ctx)
     {
         var localCtx = ctx.Clone();
-        localCtx.stacks = stacks;
+        localCtx.stacks = state.stacks;
 
+        List<CombatIntent> intents = new List<CombatIntent>();
         foreach (var entry in data.entries)
         {
-            if (entry.trigger != type)
+            if (!entry.triggers.Contains(type))
                 continue;
 
             foreach (var node in entry.effectData)
             {
-                node.Execute(localCtx);
+                node.Execute(localCtx, intents);
             }
-
-            GameManager.instance.effectSystem.Execute(localCtx);
+            
         }
+        GameManager.instance.effectExecutor.Execute(intents);
     }
-    public bool IsExpired() => startTime + duration <= Time.time;
 
     public void Remove() { }
 
-    public void OnExpire() { }
+    public void Expire()
+    {      
+        effectManager.RemoveStatus(this);
+    }
 
 
 }

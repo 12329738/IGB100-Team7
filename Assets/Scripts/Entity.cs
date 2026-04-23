@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
-public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, IModifierReceiver
+public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiver
 {
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
@@ -13,14 +13,11 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
-    private EffectHandler effectHandler;
-    [HideInInspector]
-    public EventHandler eventHandler {  get; set; }
 
     [HideInInspector]
     public Combat combat {  get; private set; }
     internal StatusEffectManager status;
-    [HideInInspector]
+
     public List<EffectEntryNode> effects;
     [SerializeField]
     private StatsPreset _statPreset;
@@ -47,13 +44,13 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
     [HideInInspector]
     public List<StatModifier> Modifiers => provider.Modifiers;
 
+
+
     [SerializeField]
 
     public void OnEnable()
     {
         status = GetComponent<StatusEffectManager>();
-        eventHandler = new EventHandler();
-        status.Initialize(eventHandler);
         OnSpawned();
     }
 
@@ -84,25 +81,18 @@ public abstract class Entity : MonoBehaviour, IEventHandler, IModifierProvider, 
 
         combat = GetComponent<Combat>();
 
-        // Recreate systems
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
-        // Re-link status system
-        if (status != null)
-            status.Initialize(eventHandler);
-
         foreach (EffectEntryNode node in effects)
         {
-            effectHandler.AddToMap(node);
+            EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+            GameManager.instance.effectHandler.Register(instance);
         }
     }
 
-    public virtual void TakeDamage(EffectContext context)
+    public virtual void TakeDamage(CombatIntent intent)
     {
 
-        currentHealth -= context.value;
-        DamagePopup.instance.ShowCombatText(context);
+        currentHealth -= intent.value;
+        DamagePopup.instance.ShowCombatText(intent);
         if (flashScript != null)
         {
             flashScript.TriggerFlash();

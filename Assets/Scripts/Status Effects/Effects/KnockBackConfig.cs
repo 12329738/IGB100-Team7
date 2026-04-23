@@ -1,16 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [Serializable]
-public class KnockBackConfig : EffectNodeConfig
+public class KnockBackConfig : EffectOperation
 {
     public float magnitude;
-    public override EffectType Type => EffectType.Knockback;
-    public override void Execute(EffectContext ctx)
+    public override EffectIntent Type => EffectIntent.Knockback;
+    public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        ctx.baseValue = magnitude;
-        ctx.value = magnitude;
-        ctx.intent = EffectIntent.Knockback;
+        intents.Add(new CombatIntent
+        {
+            source = ctx.source,
+            target = ctx.target,
+            value = magnitude,
+            type = Type
+        });
     }
 }

@@ -1,25 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class SourceModifier : EffectNodeConfig
+public class SourceModifier : IIntentModifier
 {
     public DamageSourceDefinition targetTag;
     public float multiplier;
-    public override EffectType Type => EffectType.SourceModifier;
 
-    public override void Execute(EffectContext ctx)
+    public EffectIntent effectToModifiy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public void Modify(ref CombatIntent intent)
     {
-        if (ctx.origin != targetTag)
+        if (intent.context.origin != targetTag)
             return;
 
-        var modifier = new ContextModifier
-        {
-            value = multiplier,
-            source = this,
-            tag = "source_modifier"
-        };
-        ctx.modifiers.Add(modifier);
 
+        intent.value *= multiplier;
     }
 }

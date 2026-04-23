@@ -1,20 +1,26 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 
-public class ApplyStatusConfig : EffectNodeConfig
+public class ApplyStatusConfig : EffectOperation
 {
     public StatusEffectData effectData;
 
-    public override EffectType Type => EffectType.ApplyStatusEffect;
+    public override EffectIntent Type => EffectIntent.ApplyStatusEffect;
 
-    public override void Execute(EffectContext ctx)
+    public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        ctx.intent = EffectIntent.ApplyStatus;
+        intents.Add(new CombatIntent
+        {
+            context = ctx,
+            type = Type,
+            source = ctx.source,
+            target = ctx.target,
+        });
+
 
         ctx.payload.status = effectData;
-
-        Debug.Log($"{ctx.source} applies {effectData.name} to {ctx.target}");
     }
 }

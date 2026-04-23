@@ -10,7 +10,7 @@ public class StickToPlayer : WeaponBehaviour
 {
     if (usePlayerAsBase)
     {
-        Transform player = proj.data.source.transform;
+        Transform player = proj.data.owner.transform;
 
         proj.transform.position =player.transform.position + new Vector3(0.1f, 0, 0);
 

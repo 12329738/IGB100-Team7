@@ -27,9 +27,12 @@ public class DamagePopup : MonoBehaviour
 
     }
 
-    public void ShowCombatText(EffectContext context)
+    public void ShowCombatText(CombatIntent intent)
     {
-        GameObject target = context.target;
+
+        if (intent.value < 1)
+            return;
+        GameObject target = intent.target;
 
         SpriteRenderer renderer = target.GetComponentInChildren<SpriteRenderer>();
 
@@ -54,11 +57,17 @@ public class DamagePopup : MonoBehaviour
         damageText.transform.position = newPosition;
 
         TextMeshProUGUI text = damageText.GetComponent<TextMeshProUGUI>();
-        text.text = context.value.ToString();
+        int amount = (int)intent.value;
+        text.text = amount.ToString();
 
-        text.color = (context.target == GameManager.instance.player.gameObject)
+        text.color = (intent.target == GameManager.instance.player.gameObject)
             ? Color.red
             : Color.white;
+
+        if (intent.type == EffectIntent.Heal)
+        {
+            text.color = Color.green;
+        }
 
         StartCoroutine(FadeOut(damageText, target));
     }
