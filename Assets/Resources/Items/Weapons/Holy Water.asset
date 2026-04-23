@@ -47,11 +47,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 6460871561430433861
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 7
         effectConfig:
-          rid: -2
+          rid: 6974428177321951295
+    - rid: 6974428177321951295
+      type: {class: SourceModifier, ns: , asm: Assembly-CSharp}
+      data:
+        targetTag: {fileID: 0}
+        multiplier: 0
