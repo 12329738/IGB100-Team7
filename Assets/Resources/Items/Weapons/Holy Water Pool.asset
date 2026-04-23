@@ -55,11 +55,10 @@ MonoBehaviour:
     - rid: 6460871561430433866
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 6
+        type: 4
         effectConfig:
-          rid: 6974428177321951296
-    - rid: 6974428177321951296
-      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
+          rid: 6974428177321951300
+    - rid: 6974428177321951300
+      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
       data:
-        duration: 0
-        modifiers: []
+        amount: 10
