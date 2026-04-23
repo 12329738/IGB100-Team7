@@ -83,7 +83,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
         foreach (EffectEntryNode node in effects)
         {
-            EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+            EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
             GameManager.instance.effectHandler.Register(instance);
         }
     }

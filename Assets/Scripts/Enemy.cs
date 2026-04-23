@@ -97,6 +97,7 @@ public class Enemy : Entity, IDamageable
     void OnDisable()
     {
         SpawnerManager.instance.UnregisterEnemy();
+        GameManager.instance.effectHandler.UnRegister(gameObject);
         ObjectPool.instance.ReturnObject(gameObject);
     }
 }

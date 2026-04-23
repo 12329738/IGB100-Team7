@@ -8,5 +8,6 @@ public enum CombatEvent
     OnTick,
     OnApply,
     OnContact,
-    OnExpire
+    OnExpire,
+    OnDamage
 }

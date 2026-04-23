@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 
   duration: 3
   maxStacks: 3
+  definition: {fileID: 11400000, guid: 5ff474c2cea6a904097840e21543bf2e, type: 2}
   hasTick: 1
   tickInterval: 0.5
   entries:

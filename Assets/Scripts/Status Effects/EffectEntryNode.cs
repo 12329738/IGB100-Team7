@@ -45,12 +45,23 @@ public class EffectEntryNode
             {
                 node.Execute(ctx, intents);
             }
+        }
+            
+    }
+
+    public void Execute(EffectContext ctx, ref List<CombatIntent> intents)
+    {
+        if (!CanExecute(ctx))
+            return;
+
+        foreach (var node in effectData)
+        {
 
             if (node.effectOperation is IIntentModifier)
             {
-                node.Modify(ctx, intents);
+                node.Modify(ctx, ref intents);
             }
         }
-            
+
     }
 }

@@ -35,7 +35,7 @@ public class EffectNodeData
         return EffectNodeDatabase.Create(type);
     }
 
-    internal void Modify(EffectContext ctx, List<CombatIntent> intents)
+    internal void Modify(EffectContext ctx, ref List<CombatIntent> intents)
     {
         IIntentModifier modifier = effectOperation as IIntentModifier;
         for (int i = 0; i < intents.Count; i++)

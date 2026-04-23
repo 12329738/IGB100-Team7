@@ -7,8 +7,9 @@ public class EffectInstance
     public EffectState state;
     public EffectExecutor executor;
     public HashSet<CombatEvent> subscribedEvents = new();
+    public GameObject owner;
 
-    public EffectInstance(EffectEntryNode def, GameObject source, GameObject target)
+    public EffectInstance(EffectEntryNode def, GameObject source, GameObject target, GameObject owner)
     {
         definition = def;
         executor = GameManager.instance.effectExecutor;
@@ -23,6 +24,7 @@ public class EffectInstance
 
         foreach (var t in def.triggers)
             subscribedEvents.Add(t);
+        this.owner = owner;
     }
 
     public void Tick(float now, EffectExecutor executor)

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ModifyStatConfig : IIntentModifier
 {
     //public override EffectIntent Type => EffectIntent.ModifyStat;
-
+    public ValueSource valueSource;
     public float duration;
     public List<StatModifier> modifiers;
 

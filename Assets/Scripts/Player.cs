@@ -36,6 +36,9 @@ public class Player : Entity, IDamageable
     public bool upgradeChosen;
     private bool levelUpRoutineRunning;
     private List<TransformationUpgrade> transformationUpgrades;
+    [HideInInspector]
+    public float timeTransformed;
+    float transformationStartTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,6 +82,11 @@ public class Player : Entity, IDamageable
         CheckMovement();
         UpdateWeapons();
         UpdateTransformationAmount();
+        if (isTransformed)
+        {
+            timeTransformed = Time.time - transformationStartTime;
+            Debug.Log($"Player has been transformed for {timeTransformed} seconds");
+        }
     }
 
     private void UpdateTransformationAmount()
@@ -171,7 +179,12 @@ public class Player : Entity, IDamageable
 
         if (Input.GetKeyDown("t"))
         {
+            if (!isTransformed)
             Transform();
+            else
+            {
+                StopTransformation();
+            }
         }
 
         transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
@@ -294,19 +307,22 @@ public class Player : Entity, IDamageable
 
     internal void Transform()
     {
+        isTransformed = true;
+        timeTransformed = 0;
+        transformationStartTime = Time.time;
         status.Apply(transformation.effect, gameObject);
         foreach (TransformationUpgrade upgrade in transformation.upgrades)
         {
             foreach (EffectEntryNode node in upgrade.effects)
             {
                 effects.Add(node);
-                EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+                EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
                 GameManager.instance.effectHandler.Register(instance);
             }
 
         }
         sr.sprite = transformation.transformationSprite;
-        isTransformed = true;
+        
         
     }
 
@@ -314,6 +330,7 @@ public class Player : Entity, IDamageable
     {
         sr.sprite = regularSprite;
         isTransformed = false;
+        timeTransformed = 0;
     }
 
 }

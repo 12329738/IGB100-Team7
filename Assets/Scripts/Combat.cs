@@ -32,15 +32,19 @@ public class Combat : MonoBehaviour
         if (damageable == null || !damageable.IsDamageable())
             return;
 
+        EffectContext hitCtx = intent.context.Clone();
+        hitCtx.trigger = CombatEvent.OnDamage;
+        GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
+
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);
 
         if (intent.context.isHit)
         {
-            EffectContext hitCtx = intent.context.Clone();
-            hitCtx.trigger = CombatEvent.OnHit;
-            GameManager.instance.effectHandler.Dispatch(intent.context);
-            intent.context.source.GetComponent<StatusEffectManager>().Dispatch(hitCtx);
+            EffectContext ctx = intent.context.Clone();
+            ctx.trigger = CombatEvent.OnHit;
+            GameManager.instance.effectHandler.Dispatch(ctx);
+            ctx.source.GetComponent<StatusEffectManager>().Dispatch(ctx);
         }
 
     }

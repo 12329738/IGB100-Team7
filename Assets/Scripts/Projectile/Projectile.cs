@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectInstance instance = new EffectInstance(node, data.owner, gameObject);
+            EffectInstance instance = new EffectInstance(node, data.owner, gameObject, gameObject);
             GameManager.instance.effectHandler.Register(instance);
         }
 
@@ -91,6 +91,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
             }
         }
+        GameManager.instance.effectHandler.UnRegister(gameObject);
         ObjectPool.instance.ReturnObject(gameObject);
 
     }

@@ -8,5 +8,6 @@ public enum EffectIntent
     SpawnProjectile,
     ModifyStat,
     SourceModifier,
-    StackCount
+    StackCount,
+
 }

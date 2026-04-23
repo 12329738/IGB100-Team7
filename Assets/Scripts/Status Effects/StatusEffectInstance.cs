@@ -23,10 +23,11 @@ public class StatusEffectInstance
         this.data = data;
 
         context = new EffectContext
-        {            
+        {
             source = source,
             target = target,
             stacks = 1,
+            origin = data.definition
         };
         state = new EffectState
         {
@@ -42,7 +43,8 @@ public class StatusEffectInstance
             var runtime = new EffectInstance(
                 entry,
                 source: source,
-                target: target
+                target: target,
+                owner: source
             );
 
             runtimes.Add(runtime);

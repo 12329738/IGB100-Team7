@@ -25,7 +25,6 @@ public class EffectHandler : MonoBehaviour
     {
         List<CombatIntent> intents = new();
 
-
         for (int i = 0; i < effects.Count; i++)
         {
 
@@ -36,6 +35,20 @@ public class EffectHandler : MonoBehaviour
         GameManager.instance.effectExecutor.Execute(intents);
     }
 
+    public void Modify(EffectContext ctx, ref CombatIntent combatIntent)
+    {
+        List<CombatIntent> intents = new();
+        intents.Add((CombatIntent)combatIntent);
+
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+
+            effects[i].definition.Execute(ctx, ref intents);
+
+        }
+        combatIntent = intents[0];
+    }
 
     public void Register(EffectInstance instance)
     {
@@ -48,6 +61,11 @@ public class EffectHandler : MonoBehaviour
         {
             Register(runtime);
         }
+    }
+
+    public void UnRegister(GameObject owner)
+    {
+        effects.RemoveAll(x => x.owner == owner);
     }
 
 

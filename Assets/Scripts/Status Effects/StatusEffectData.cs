@@ -8,6 +8,7 @@ public class StatusEffectData : ScriptableObject
     public string description;
     public float duration;
     public int maxStacks;
+    public DamageSourceDefinition definition;
     
     public bool hasTick = true;
     public float tickInterval = 0.5f;
