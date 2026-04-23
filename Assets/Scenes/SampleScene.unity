@@ -2795,7 +2795,7 @@ PrefabInstance:
     - target: {fileID: 1562418516489618883, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: levelUpScreen
       value: 
-      objectReference: {fileID: 881984285233351309, guid: 32438ac1205678a47a843d0f4a4a56e4, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1562418516489618883, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: transformationBar
       value: 
@@ -2923,7 +2923,7 @@ PrefabInstance:
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 41df31b746c9c7a458fe6d53d2a0a375, type: 2}
+      objectReference: {fileID: 11400000, guid: b2210acf48c6ebc4c9d138dc126883d7, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
