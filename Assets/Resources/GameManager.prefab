@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e1075794bc168438f62830ca905826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectSystem: {fileID: 0}
   player: {fileID: 0}
   camera: {fileID: 0}
   gameUI: {fileID: 0}
@@ -54,9 +55,10 @@ MonoBehaviour:
   weaponUpgradeLimit: 5
   passiveUpgradeLimit: 0
   minExp: 0
-  maxExp: 1000000
+  maxExp: 100000
   maxLevel: 100
   knockBackSpeed: 20
+  transformationUpgradeInterval: 10
   rarities:
   - {fileID: 11400000, guid: 25085ca443515f64d916ed0f3987392d, type: 2}
   - {fileID: 11400000, guid: 2afd744753b755d40a2f5c7c7887387b, type: 2}
@@ -67,30 +69,30 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.0009
+      inSlope: -0.13683175
+      outSlope: 0.010277928
+      tangentMode: 5
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.30142674
+    - serializedVersion: 3
+      time: 1.15
+      value: 0.22575349
+      inSlope: 0.56180763
+      outSlope: 0.56180763
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.07370565
+      outWeight: 0.21652134
     - serializedVersion: 3
-      time: 0.69294596
-      value: 0.67907876
-      inSlope: 2.0572243
-      outSlope: 2.0572243
-      tangentMode: 0
+      time: 2
+      value: 1
+      inSlope: 0.91087824
+      outSlope: 0.91087824
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.14696462
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.023900643
-      outSlope: 0.023900643
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.25686207
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
