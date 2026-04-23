@@ -1,43 +1,46 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class StackCountModifier : EffectNodeConfig
+public class StackCountModifier : EffectOperation, IIntentModifier
 {
     public float valuePerStack;
-    public EffectType effect;
     public List<StatusEffectData> effects;
     public ModifierType modifierType;
-    public override EffectType Type => EffectType.StackCount;
+    public EffectIntent _effectToModify;
+    public EffectIntent effectToModifiy { get => _effectToModify; set => _effectToModify = value; }
 
+    public override EffectIntent Type => EffectIntent.StackCount;
 
-    public override void Execute(EffectContext ctx)
+    public override void Generate(EffectContext ctx, List<CombatIntent> intents)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Modify(ref CombatIntent intent)
     {
         float total = 0;
 
         foreach (var e in effects)
         {
-            total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e, ctx.source);
+            total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e, intent.source);
         }
 
-        var modifier = new ContextModifier
-        {
-            source = this,
-            tag = "stack_count"
-        };
 
         if (modifierType == ModifierType.Flat)
         {
-            modifier.value += (total * valuePerStack);
+            intent.value += (total * valuePerStack);
         }
 
         else if (modifierType == ModifierType.Percentage)
         {
-            modifier.value = 1f + (total * (valuePerStack/100));
+            intent.value = 1f + (total * (valuePerStack/100));
         }
 
-        ctx.modifiers.Add(modifier);
+        Debug.Log($"{_effectToModify.ToString()} modified by {total * valuePerStack} due to {total} stacks of {string.Join(",", effects.Select(i => i.name))} ");
+        
     }
 }
 

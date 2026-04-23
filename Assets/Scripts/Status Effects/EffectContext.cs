@@ -8,10 +8,10 @@ public class EffectContext
     public GameObject target;
 
 
-    public object effectInstanceId;
+    public EffectInstance effectInstance;
     public int sourceInstanceId;
     public float hitInterval;
-    public EffectType effectType;
+    //public EffectIntent effectType;
 
     public bool isHit = true;
     public float baseValue;
@@ -23,7 +23,7 @@ public class EffectContext
     public EffectIntent intent;
     public CombatEvent trigger;
 
-    public List<ContextModifier> modifiers = new();
+    public List<IIntentModifier> modifiers = new();
     public EffectPayload payload = new();
     public bool isCrit;
     public int? stacks;

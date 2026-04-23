@@ -8,46 +8,54 @@ public class Combat : MonoBehaviour
 {
     private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
 
-    public void DealDamage(EffectContext ctx)
+    public void DealDamage(CombatIntent intent)
     {
-        var key = (ctx.effectInstanceId, ctx.target);
-
-        if (lastHitTimes.TryGetValue(key, out float lastHit))
+        var effectKey = (intent.context.effectInstance, intent.context.target);
+        var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
+        float lastHit;
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
         {
-            if (Time.time - lastHit < ctx.hitInterval)
+            if (Time.time - lastHit < intent.context.hitInterval)
+                return;
+        }
+        
+
+        else if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
+        {
+            if (Time.time - lastHit < intent.context.hitInterval)
                 return;
         }
 
-        lastHitTimes[key] = Time.time;
+        lastHitTimes[effectKey] = Time.time;
 
-        var damageable = ctx.target.GetComponent<IDamageable>();
+        var damageable = intent.target.GetComponent<IDamageable>();
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        damageable.TakeDamage(ctx);
+        damageable.TakeDamage(intent);
+        DamagePopup.instance.ShowCombatText(intent);
 
-        GameManager.instance.effectHandler.Dispatch(ctx);
-
-        if (ctx.isHit)
+        if (intent.context.isHit)
         {
-            EffectContext hitCtx = ctx.Clone();
+            EffectContext hitCtx = intent.context.Clone();
             hitCtx.trigger = CombatEvent.OnHit;
-            GameManager.instance.effectHandler.Dispatch(ctx);
+            GameManager.instance.effectHandler.Dispatch(intent.context);
+            intent.context.source.GetComponent<StatusEffectManager>().Dispatch(hitCtx);
         }
 
-        if (ctx.target.GetComponent<Entity>() == null) return;
     }
 
-    public void Heal(EffectContext context, float amount)
+    public void Heal(CombatIntent intent)
     {
-        var damageable = context.target.GetComponent<IDamageable>();
-        damageable.Heal(amount);
-        GameManager.instance.effectHandler.Dispatch(context);
+        var damageable = intent.context.target.GetComponent<IDamageable>();
+        damageable.Heal(intent.value);
+        DamagePopup.instance.ShowCombatText(intent);
+
     }
 
-    public void KnockBack(EffectContext context, float magnitude)
+    public void KnockBack(CombatIntent intent)
     {
-        var damageable = context.target.GetComponent<IDamageable>();
-        damageable.KnockBack(magnitude, context.source.transform.position);
+        var damageable = intent.target.GetComponent<IDamageable>();
+        damageable.KnockBack(intent.value, intent.source.transform.position);
     }
 }

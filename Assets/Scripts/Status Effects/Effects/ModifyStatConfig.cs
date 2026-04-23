@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class ModifyStatConfig : EffectNodeConfig
+public class ModifyStatConfig : IIntentModifier
 {
-    public override EffectType Type => EffectType.ModifyStat;
+    //public override EffectIntent Type => EffectIntent.ModifyStat;
 
     public float duration;
     public List<StatModifier> modifiers;
 
-    public override void Execute(EffectContext ctx)
-    {
+    public EffectIntent effectToModifiy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    public void Modify(ref CombatIntent intent)
+    {
+        throw new NotImplementedException();
     }
 }

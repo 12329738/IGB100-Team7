@@ -6,22 +6,22 @@ using UnityEngine;
 
 public static class EffectNodeDatabase
 {
-    private static Dictionary<EffectType, System.Type> map = new();
+    private static Dictionary<EffectIntent, System.Type> map = new();
 
-    public static void Register(EffectType type, System.Type t)
+    public static void Register(EffectIntent type, System.Type t)
     {
         map[type] = t;
     }
 
-    public static EffectNodeConfig Create(EffectType type)
+    public static EffectOperation Create(EffectIntent type)
     {
         if (!map.TryGetValue(type, out var t))
             return null;
 
-        return (EffectNodeConfig)System.Activator.CreateInstance(t);
+        return (EffectOperation)System.Activator.CreateInstance(t);
     }
 
-    public static Type Get(EffectType type)
+    public static Type Get(EffectIntent type)
     {
         if (!map.TryGetValue(type, out var t))
             return null;
@@ -31,7 +31,7 @@ public static class EffectNodeDatabase
 
     public static void ScanAndRegister()
     {
-        var baseType = typeof(EffectNodeConfig);
+        var baseType = typeof(EffectOperation);
 
         foreach (var t in System.AppDomain.CurrentDomain.GetAssemblies()
                      .SelectMany(a => a.GetTypes()))
@@ -39,7 +39,7 @@ public static class EffectNodeDatabase
             if (t.IsAbstract || !baseType.IsAssignableFrom(t))
                 continue;
 
-            var instance = (EffectNodeConfig)System.Activator.CreateInstance(t);
+            var instance = (EffectOperation)System.Activator.CreateInstance(t);
             Register(instance.Type, t);
         }
     }

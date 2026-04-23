@@ -294,14 +294,14 @@ public class Player : Entity, IDamageable
 
     internal void Transform()
     {
-        status.QueueApplyAffect(transformation.effect, gameObject);
+        status.Apply(transformation.effect, gameObject);
         foreach (TransformationUpgrade upgrade in transformation.upgrades)
         {
             foreach (EffectEntryNode node in upgrade.effects)
             {
                 effects.Add(node);
-                EffectRuntime runtime = new EffectRuntime(node, gameObject, gameObject, gameObject);
-                GameManager.instance.effectHandler.Register(runtime);
+                EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+                GameManager.instance.effectHandler.Register(instance);
             }
 
         }

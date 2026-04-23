@@ -22,7 +22,7 @@ public class EffectEntryNode
             if (effectData[i] == null)
                 effectData[i] = new EffectNodeData
                 {
-                    type = EffectType.ApplyStatusEffect
+                    type = EffectIntent.ApplyStatusEffect
                 };
 
             effectData[i].Validate();
@@ -34,12 +34,23 @@ public class EffectEntryNode
         return triggers.Contains(ctx.trigger);
     }
 
-    public void Execute(EffectContext ctx)
+    public void Execute(EffectContext ctx, List<CombatIntent> intents)
     {
         if (!CanExecute(ctx))
             return;
 
         foreach (var node in effectData)
-            node.Execute(ctx);
+        {
+            if (node.effectOperation is not IIntentModifier)
+            {
+                node.Execute(ctx, intents);
+            }
+
+            if (node.effectOperation is IIntentModifier)
+            {
+                node.Modify(ctx, intents);
+            }
+        }
+            
     }
 }

@@ -1,9 +1,12 @@
 public enum EffectIntent
 {
-    None,
+    DamageOverTime,
+    Knockback,
+    ApplyStatusEffect,
     DealDamage,
     Heal,
-    ApplyStatus,
-    Knockback,
-    SpawnProjectile
+    SpawnProjectile,
+    ModifyStat,
+    SourceModifier,
+    StackCount
 }

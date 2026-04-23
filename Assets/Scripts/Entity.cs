@@ -83,16 +83,16 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
         foreach (EffectEntryNode node in effects)
         {
-            EffectRuntime runtime = new EffectRuntime(node, gameObject, gameObject, gameObject);
-            GameManager.instance.effectHandler.Register(runtime);
+            EffectInstance instance = new EffectInstance(node, gameObject, gameObject);
+            GameManager.instance.effectHandler.Register(instance);
         }
     }
 
-    public virtual void TakeDamage(EffectContext context)
+    public virtual void TakeDamage(CombatIntent intent)
     {
 
-        currentHealth -= context.value;
-        DamagePopup.instance.ShowCombatText(context);
+        currentHealth -= intent.value;
+        DamagePopup.instance.ShowCombatText(intent);
         if (flashScript != null)
         {
             flashScript.TriggerFlash();

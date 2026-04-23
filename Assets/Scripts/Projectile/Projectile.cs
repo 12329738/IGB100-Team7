@@ -16,9 +16,8 @@ public class Projectile : MonoBehaviour, IModifierProvider
     public ProjectileData data;
     private Combat ownerCombat;
     [HideInInspector]
-    public EventHandler eventHandler {  get; set; } 
 
-    [HideInInspector]
+
     public Transform visual;
 
     [SerializeField]
@@ -60,8 +59,8 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectRuntime runtime = new EffectRuntime(node, data.owner, data.owner, gameObject);
-            GameManager.instance.effectHandler.Register(runtime);
+            EffectInstance instance = new EffectInstance(node, data.owner, gameObject);
+            GameManager.instance.effectHandler.Register(instance);
         }
 
         ownerCombat = this.data.owner.GetComponent<Entity>().combat;
@@ -89,11 +88,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
         {
             if (node.triggers.Contains(CombatEvent.OnExpire))
             {
-                EffectContext context = new EffectContext
-                {
-                    source = this.gameObject
-                };
-                node.Execute(context);
+
             }
         }
         ObjectPool.instance.ReturnObject(gameObject);
@@ -120,14 +115,21 @@ public class Projectile : MonoBehaviour, IModifierProvider
             target = target,
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
-            effectInstanceId = data.weaponId,
             isHit = data.isHit,
-            eventHandler = this.eventHandler
+
+        };
+
+        var intent = new CombatIntent
+        {
+            value = stats[StatType.Damage],
+            source = gameObject,
+            target = context.target,
+            context = context
         };
 
         context.sourceInstanceId = context.source.GetInstanceID();
 
-        ownerCombat.DealDamage(context);
+        ownerCombat.DealDamage(intent);
 
         if (!data.isPiercing)
         {

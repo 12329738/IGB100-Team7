@@ -16,20 +16,25 @@ MonoBehaviour:
   description: 
   duration: 10000
   maxStacks: 1
+  hasTick: 0
+  tickInterval: 0
   entries:
-  - trigger: 0
+  - triggers: 00000000
+    hasTick: 0
+    tickInterval: 0
     effectData:
-    - rid: 6460871478165110901
+    - rid: 6460871584670285962
   references:
     version: 2
     RefIds:
-    - rid: 6460871478165110901
+    - rid: 6460871584670285962
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
-        effectConfig:
-          rid: 6460871478165110902
-    - rid: 6460871478165110902
+        emitsIntent: 0
+        effectOperation:
+          rid: 6460871584670285963
+    - rid: 6460871584670285963
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}

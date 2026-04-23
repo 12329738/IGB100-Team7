@@ -2,11 +2,10 @@ using UnityEngine;
 
 public interface IDamageable 
 {
-    void TakeDamage(EffectContext context);
+    void TakeDamage(CombatIntent intent);
     bool IsDamageable();
     Team team { get; }
-    //float lastHitTime { get; }
-    //float hitCooldown {  get; }
+
     Combat combat { get; }
     float currentHealth { get; }
     float GetCurrentHealthPercent();

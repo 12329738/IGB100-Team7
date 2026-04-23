@@ -1,48 +1,42 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class EffectExecutor : MonoBehaviour
 {
     public Combat combat;
-    public void Execute(EffectContext ctx)
+    public void Execute(CombatIntent intent)
     {
-        Resolve(ctx);
-        var combat = ctx.target.GetComponent<Combat>();
-        if (combat == null)
-            return;
-        switch (ctx.intent)
+    
+        switch (intent.type)
         {
             case EffectIntent.DealDamage:
-                combat.DealDamage(ctx);
+                intent.target.GetComponent<Combat>().DealDamage(intent);
                 break;
 
             case EffectIntent.Heal:
-                combat.Heal(ctx, ctx.value);
-                break;
-
-            case EffectIntent.ApplyStatus:
-                ctx.target.GetComponent<StatusEffectManager>()
-                    ?.QueueApplyAffect((StatusEffectData)ctx.payload.status, ctx.source);
-                break;
-
-            case EffectIntent.SpawnProjectile:
-                Debug.Log("Source modifiers currently not in effect for sprojectile spawn effect");
-                var weapon = ctx.payload.weapon; 
-                weapon?.SpawnProjectiles(ctx);
+                intent.target.GetComponent<Combat>().Heal(intent);
                 break;
 
             case EffectIntent.Knockback:
-                combat.KnockBack(ctx, ctx.value);
+                intent.target.GetComponent<Combat>().KnockBack(intent);
+                break;
+
+            case EffectIntent.ApplyStatusEffect:
+                intent.target.GetComponent<StatusEffectManager>()
+                    .Apply(intent.context.payload.status, intent.source);
                 break;
         }
     }
 
-    private void Resolve(EffectContext ctx)
+    public void Execute(List<CombatIntent> intents)
     {
-        foreach (ContextModifier m in ctx.modifiers)
+        foreach (CombatIntent intent in intents)
         {
-            if (m.value != 0)
-            ctx.value *= m.value;
+            Execute(intent);
         }
     }
 }

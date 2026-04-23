@@ -58,11 +58,19 @@ public class Enemy : Entity, IDamageable
                     source = gameObject,
                     target = other.gameObject,
                     value = stats.GetStat(StatType.Damage),
-                    effectInstanceId = this,
+                    sourceInstanceId = this.gameObject.GetInstanceID(),
                     hitInterval = 1f,
                 };
-                context.sourceInstanceId = context.source.GetInstanceID();
-                combat.DealDamage(context);
+
+                var intent = new CombatIntent
+                {
+                    value = stats.GetStat(StatType.Damage),
+                    source = gameObject,
+                    target = other.gameObject,
+                    context = context
+                };
+
+                combat.DealDamage(intent);
             }
         }
         
