@@ -134,7 +134,6 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         if (!data.isPiercing)
         {
-            Debug.Log($"Deactivating {this} because it collided with {target}");
             Deactivate();
         }
         

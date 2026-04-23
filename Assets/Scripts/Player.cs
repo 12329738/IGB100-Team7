@@ -85,7 +85,7 @@ public class Player : Entity, IDamageable
         if (isTransformed)
         {
             timeTransformed = Time.time - transformationStartTime;
-            Debug.Log($"Player has been transformed for {timeTransformed} seconds");
+
         }
     }
 
