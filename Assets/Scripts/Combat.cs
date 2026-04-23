@@ -7,7 +7,6 @@ using static UnityEngine.Video.VideoPlayer;
 public class Combat : MonoBehaviour
 {
     private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
-    private EventHandler eventHandler;
 
     public void DealDamage(EffectContext ctx)
     {
@@ -27,18 +26,13 @@ public class Combat : MonoBehaviour
 
         damageable.TakeDamage(ctx);
 
-        ctx.target.RaiseEvent(CombatEvent.OnDamageTaken, ctx);
+        GameManager.instance.effectHandler.Dispatch(ctx);
 
         if (ctx.isHit)
         {
             EffectContext hitCtx = ctx.Clone();
             hitCtx.trigger = CombatEvent.OnHit;
-            ctx.eventHandler?.RaiseEvent(hitCtx); 
-
-            ctx.source
-                ?.GetComponent<Entity>()
-                ?.eventHandler
-                ?.RaiseEvent(hitCtx); 
+            GameManager.instance.effectHandler.Dispatch(ctx);
         }
 
         if (ctx.target.GetComponent<Entity>() == null) return;
@@ -48,7 +42,7 @@ public class Combat : MonoBehaviour
     {
         var damageable = context.target.GetComponent<IDamageable>();
         damageable.Heal(amount);
-        context.target.RaiseEvent(CombatEvent.OnHeal, context);
+        GameManager.instance.effectHandler.Dispatch(context);
     }
 
     public void KnockBack(EffectContext context, float magnitude)

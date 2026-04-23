@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Vampire Upgrade 3
   m_EditorClassIdentifier: 
   name: 
-  description: 
+  description: Increases bleed damage by 25% each second you spend transformed. Resets
+    upon de-transforming.
   modifiers: []
   rarity: 0

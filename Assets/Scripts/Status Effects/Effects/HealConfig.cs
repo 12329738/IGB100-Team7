@@ -10,6 +10,7 @@ public class HealConfig : EffectNodeConfig
     public override void Execute(EffectContext ctx)
     {
 
-        ctx.target.GetComponent<Entity>().combat.Heal(ctx,amount);
+        ctx.value = amount;
+        ctx.intent = EffectIntent.Heal;
     }
 }

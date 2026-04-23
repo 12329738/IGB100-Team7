@@ -6,7 +6,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 
 
-public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
+public class Projectile : MonoBehaviour, IModifierProvider
 {
     [HideInInspector]
     public IProjectileState state;
@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
     private Combat ownerCombat;
     [HideInInspector]
     public EventHandler eventHandler {  get; set; } 
-    private EffectHandler effectHandler;
+
     [HideInInspector]
     public Transform visual;
 
@@ -58,14 +58,13 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
         transform.localScale *= TryGetStat(StatType.Area);
 
-        eventHandler = new EventHandler();
-        effectHandler = new EffectHandler(eventHandler);
-
         foreach (EffectEntryNode node in data.effects)
         {
-            effectHandler.AddToMap(node);
+            EffectRuntime runtime = new EffectRuntime(node, data.owner, data.owner, gameObject);
+            GameManager.instance.effectHandler.Register(runtime);
         }
-        ownerCombat = this.data.source.GetComponent<Entity>().combat;
+
+        ownerCombat = this.data.owner.GetComponent<Entity>().combat;
 
         StopAllCoroutines();
 
@@ -88,7 +87,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            if (node.trigger == CombatEvent.OnExpire)
+            if (node.triggers.Contains(CombatEvent.OnExpire))
             {
                 EffectContext context = new EffectContext
                 {
@@ -109,7 +108,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
     private void TryHit(GameObject target)
     {
-        if (target == data.source)
+        if (target == data.owner)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -117,7 +116,7 @@ public class Projectile : MonoBehaviour, IEventHandler, IModifierProvider
 
         var context = new EffectContext
         {
-            source = data.source,
+            source = data.owner,
             target = target,
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,

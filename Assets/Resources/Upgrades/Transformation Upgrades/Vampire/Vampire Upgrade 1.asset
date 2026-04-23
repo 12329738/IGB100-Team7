@@ -13,6 +13,41 @@ MonoBehaviour:
   m_Name: Vampire Upgrade 1
   m_EditorClassIdentifier: 
   name: 
-  description: 
+  description: You heal 1 health per second per bleeding enemy (max 40 health per
+    second)
+  effects:
+  - triggers: 05000000
+    hasTick: 1
+    tickInterval: 1
+    effectData:
+    - rid: 6460871584670285923
+    - rid: 6460871584670285926
   modifiers: []
   rarity: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6460871584670285923
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 4
+        effectConfig:
+          rid: 6460871584670285925
+    - rid: 6460871584670285925
+      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 0
+    - rid: 6460871584670285926
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 8
+        effectConfig:
+          rid: 6460871584670285928
+    - rid: 6460871584670285928
+      type: {class: StackCountModifier, ns: , asm: Assembly-CSharp}
+      data:
+        valuePerStack: 1
+        effect: 4
+        effects:
+        - {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
+        modifierType: 0

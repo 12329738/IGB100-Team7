@@ -23,7 +23,7 @@ public class ProjectileData
     public bool aimAtEnemy;
     public bool randomDirection;
     public Guid weaponId;
-    public GameObject source;
+    public GameObject owner;
 
     public ProjectileData(Weapon original)
     {
@@ -39,7 +39,6 @@ public class ProjectileData
         pattern = original.pattern;
         behaviour = original.behaviour;
         isPiercing = original.isPiercing;
-        source = original.owner;
         hitInterval = original.hitInterval;
         effects = original.effects;
         isHit = original.isHit;
@@ -47,7 +46,7 @@ public class ProjectileData
         aimAtEnemy = original.aimAtEnemy;
         randomDirection = original.randomDirection;
         weaponId = original.Id;
-        source = original.owner;
+        owner = original.owner;
     }
 
     public ProjectileData Clone()

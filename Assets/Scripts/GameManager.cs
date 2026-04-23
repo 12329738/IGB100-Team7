@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
-    public EffectSystem effectSystem;
+    public EffectExecutor effectExecutor;
+    public EffectHandler effectHandler;
     public Player player;
     public Camera camera;
     public GameUI gameUI;
     public ItemDatabase database;
     public ProjectileSpawner projectileSpawner;
+    public StatusEffectRegistry statusEffectRegistry;
     public int weaponLimit;
     public int passiveLimit;
     public int upgradesPerLevel;
@@ -53,7 +55,9 @@ public class GameManager : MonoBehaviour
         database = new ItemDatabase();
         database.Initialize();    
         projectileSpawner = new ProjectileSpawner();
-        effectSystem = new EffectSystem();
+        effectExecutor = new EffectExecutor();
+        effectHandler = GetComponent<EffectHandler>();
+        statusEffectRegistry = new StatusEffectRegistry();
 
         CreateRarityDictionary();
     }

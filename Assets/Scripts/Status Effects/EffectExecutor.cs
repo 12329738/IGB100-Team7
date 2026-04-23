@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EffectSystem : MonoBehaviour
+public class EffectExecutor : MonoBehaviour
 {
     public Combat combat;
     public void Execute(EffectContext ctx)
@@ -41,6 +41,7 @@ public class EffectSystem : MonoBehaviour
     {
         foreach (ContextModifier m in ctx.modifiers)
         {
+            if (m.value != 0)
             ctx.value *= m.value;
         }
     }

@@ -9,6 +9,7 @@ public class Transformation : ScriptableObject
     public string description;
     public List<TransformationUpgrade> upgrades;
     public StatusEffectData effect;
+    public List<EffectEntryNode> curentEffects;
     public Sprite transformationSprite;
     
     public void ApplyTransformation()

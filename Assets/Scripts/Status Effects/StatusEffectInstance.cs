@@ -34,7 +34,8 @@ public class StatusEffectInstance
 
         foreach (var entry in data.entries)
         {          
-             subscribedEvents.Add(entry.trigger);          
+            foreach (CombatEvent trigger in entry.triggers)
+             subscribedEvents.Add(trigger);          
         }
 
     }
@@ -44,7 +45,7 @@ public class StatusEffectInstance
         stacks++;
         foreach (var entry in data.entries)
         {
-            if (entry.trigger == CombatEvent.OnApply)
+            if (entry.triggers.Contains(CombatEvent.OnApply))
             {
 
                 foreach (var node in entry.effectData)
@@ -92,7 +93,7 @@ public class StatusEffectInstance
 
         foreach (var entry in data.entries)
         {
-            if (entry.trigger != type)
+            if (!entry.triggers.Contains(type))
                 continue;
 
             foreach (var node in entry.effectData)
@@ -100,7 +101,7 @@ public class StatusEffectInstance
                 node.Execute(localCtx);
             }
 
-            GameManager.instance.effectSystem.Execute(localCtx);
+            GameManager.instance.effectExecutor.Execute(localCtx);
         }
     }
     public bool IsExpired() => startTime + duration <= Time.time;

@@ -11,16 +11,6 @@ public class StatusEffectManager : MonoBehaviour
     private List<(StatusEffectData, StatusEffectInstance)> toRemove = new();
     private List<(StatusEffectData, GameObject)> pendingAdds = new();
 
-    EventHandler handler;
-    public void Initialize(EventHandler eventHandler)
-    {
-        handler = eventHandler;
-        handler.OnEvent += ctx =>
-        {
-            Dispatch(ctx);
-        };
-    }
-
     private void Update()
     {
         float now = Time.time;
@@ -73,10 +63,10 @@ public class StatusEffectManager : MonoBehaviour
     public void ApplyEffectImmediate(StatusEffectData data, GameObject source)
     {
 
-        if (source.GetComponent<IEventHandler>() is Weapon)
-        {
-            source = GameManager.instance.player.gameObject;
-        }
+        //if (source.GetComponent<IEventHandler>() is Weapon)
+        //{
+        //    source = GameManager.instance.player.gameObject;
+        //}
 
         if (!activeEffects.TryGetValue(data, out var list))
         {

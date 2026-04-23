@@ -20,7 +20,7 @@ public class ProjectileSpawner
             proj.transform.localScale = baseData.prefab.transform.localScale;
             proj.Initialize(data);
 
-            Vector3 origin = proj.data.source.transform.position;
+            Vector3 origin = proj.data.owner.transform.position;
 
             proj.transform.position = origin;
             proj.transform.rotation = Quaternion.identity;
