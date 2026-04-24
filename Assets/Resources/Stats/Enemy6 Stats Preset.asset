@@ -10,18 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
-  m_Name: Hunting Rifle Stats
+  m_Name: Enemy6 Stats Preset
   m_EditorClassIdentifier: 
   statPresets:
-  - statType: 2
-    value: 35
-  - statType: 4
-    value: 8
+  - statType: 0
+    value: 200
   - statType: 1
-    value: 15
-  - statType: 7
-    value: 3
-  - statType: 9
-    value: 4
-  - statType: 8
-    value: 4
+    value: 1
+  - statType: 2
+    value: 10
