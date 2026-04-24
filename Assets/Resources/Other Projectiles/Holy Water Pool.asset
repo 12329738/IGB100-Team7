@@ -46,17 +46,36 @@ MonoBehaviour:
       comparisonType: 0
       value: 0
     effectData:
-    - rid: 6460871561430433864
+    - rid: 6460871615362105411
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 7
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 6460871615362105413
   references:
     version: 2
     RefIds:
-    - rid: 6460871561430433864
+    - rid: 6460871615362105411
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
         effectOperation:
-          rid: 6460871606461530205
-    - rid: 6460871606461530205
+          rid: 6460871615362105412
+    - rid: 6460871615362105412
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}
+    - rid: 6460871615362105413
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 4
+        effectOperation:
+          rid: 6460871615362105415
+    - rid: 6460871615362105415
+      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 10

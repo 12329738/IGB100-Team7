@@ -14,7 +14,7 @@ public class HealConfig : EffectOperation
         {
             type = Type,
             source = ctx.damageSource,
-            target = ctx.target,
+            target = GameManager.instance.player,
             value = amount,
             context = ctx
         });

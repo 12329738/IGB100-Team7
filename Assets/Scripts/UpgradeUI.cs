@@ -28,13 +28,26 @@ public class UpgradeUI : MonoBehaviour
     {
         this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();
+
+        ItemUpgrade itemUpgrade = null;
+        if (upgrade is ItemUpgrade u)
+        {
+            itemUpgrade = u;
+            if (itemUpgrade.levelsAvaliable.Count == 0)
+                upgrade.rarity = RarityEnum.Common;
+        }
+
         background.color = GameManager.instance.rarityColors[upgrade.rarity];
+
+        
+
+
         if (upgrade is TransformationUpgrade)
         {
             background.color = GameManager.instance.rarityColors[RarityEnum.Transformation];
         }
         
-        if (upgrade is ItemUpgrade itemUpgrade)
+        if (upgrade is ItemUpgrade)
 
         {
             sb.AppendLine($"{GameManager.instance.database.GetDescription(itemUpgrade.itemType)}");
