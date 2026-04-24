@@ -28,16 +28,16 @@ MonoBehaviour:
   hitInterval: 1
   isPiercing: 0
   trackEnemy: 1
-  aimAtEnemy: 0
-  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
-  pattern: {fileID: 0}
+  aimAtEnemy: 1
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
-  effects: []
   isHit: 0
   stickToPlayer: 0
-  randomDirection: 0
+  randomDirection: 1
+  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
+  pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 25ebf3562b0e99147bb671dc0f77ff94, type: 2}
+  effects: []
   references:
     version: 2
     RefIds: []

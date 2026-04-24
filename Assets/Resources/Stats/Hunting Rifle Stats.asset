@@ -18,12 +18,12 @@ MonoBehaviour:
   - statType: 4
     value: 8
   - statType: 1
-    value: 15
+    value: 20
   - statType: 7
     value: 3
   - statType: 9
     value: 3
   - statType: 8
-    value: 2
+    value: 4
   - statType: 3
     value: 1

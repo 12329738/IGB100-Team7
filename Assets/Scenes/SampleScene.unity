@@ -2489,6 +2489,10 @@ MonoBehaviour:
       amount: 40
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       spawnDuration: 60
+    - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
+      amount: 10
+      statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
+      spawnDuration: 1
     isBossWave: 0
   - waveName: Wave 2
     enemies:
