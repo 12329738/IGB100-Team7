@@ -140,7 +140,7 @@ MonoBehaviour:
   effects: []
   _statPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
   _team: 1
-  expAmount: 150
+  expAmount: 75
   references:
     version: 2
     RefIds: []
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectHandler: {fileID: 0}
 --- !u!114 &8369639127053584013
 MonoBehaviour:
   m_ObjectHideFlags: 0
