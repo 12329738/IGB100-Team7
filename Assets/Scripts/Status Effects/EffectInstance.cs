@@ -3,36 +3,35 @@ using UnityEngine;
 
 public class EffectInstance
 {
-    public EffectEntryNode definition;
+    public EffectEntryNode entryNode;
     public EffectState state;
     public EffectExecutor executor;
-    public HashSet<CombatEvent> subscribedEvents = new();
+    //public HashSet<CombatEvent> subscribedEvents = new();
     public GameObject owner;
 
     public EffectInstance(EffectEntryNode def, GameObject source, GameObject target, GameObject owner)
     {
-        definition = def;
+        entryNode = def;
         executor = GameManager.instance.effectExecutor;
         state = new EffectState
         {
             source = source,
             target = target,
             startTime = Time.time,
-            lastTickTime = 0,
+            lastTickTime = Time.time,
             stacks = 1
         };
 
-        foreach (var t in def.triggers)
-            subscribedEvents.Add(t);
+      
         this.owner = owner;
     }
 
     public void Tick(float now, EffectExecutor executor)
     {
-        if (!definition.hasTick)
+        if (!entryNode.hasTick)
             return;
 
-        if (now - state.lastTickTime < definition.tickInterval)
+        if (now - state.lastTickTime < entryNode.tickInterval)
             return;
 
         state.lastTickTime = now;
@@ -45,10 +44,11 @@ public class EffectInstance
             stacks = state.stacks
         };
         List<CombatIntent> intents = new List<CombatIntent>();
-        definition.Execute(ctx, intents);
+        entryNode.Execute(ctx, intents);
+        entryNode.Execute(ctx, ref intents);
 
-       
-         executor.Execute(intents);
+
+        executor.Execute(intents);
         
         
     }

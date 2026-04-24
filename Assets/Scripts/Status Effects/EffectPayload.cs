@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EffectPayload
 {
-    public StatusEffectData status;
+    public StatusEffectDataInstance status;
     public Weapon weapon;
     public GameObject prefab;
 

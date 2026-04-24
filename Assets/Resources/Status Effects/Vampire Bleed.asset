@@ -16,10 +16,15 @@ MonoBehaviour:
   description: 
   duration: 10000
   maxStacks: 1
+  definition: {fileID: 0}
   hasTick: 0
   tickInterval: 0
   entries:
-  - triggers: 00000000
+  - conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     hasTick: 0
     tickInterval: 0
     effectData:

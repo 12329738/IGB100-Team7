@@ -16,6 +16,6 @@ MonoBehaviour:
   _upgrades:
   - {fileID: 11400000, guid: 3da486f8d6728c64e9ad4c70340e6988, type: 2}
   _itemType: 8
-  _name: 
+  _name: Beserker's RIng
   _description: 
   icon: {fileID: 21300000, guid: 26b69da2ffa7ecb4a8c184df40c1b311, type: 3}

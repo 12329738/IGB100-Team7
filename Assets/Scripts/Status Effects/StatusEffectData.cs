@@ -13,6 +13,8 @@ public class StatusEffectData : ScriptableObject
     public bool hasTick = true;
     public float tickInterval = 0.5f;
     public List<EffectEntryNode> entries = new List<EffectEntryNode>();
+
+
     private void OnValidate()
     {
         if (entries == null) return;
@@ -24,5 +26,6 @@ public class StatusEffectData : ScriptableObject
             entry.Validate();
         }
     }
+
 }
 

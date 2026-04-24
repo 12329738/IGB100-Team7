@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
-    ItemUpgrade upgrade;
+    Upgrade upgrade;
     public TextMeshProUGUI uiText;
     public Image background;
 
@@ -23,21 +24,29 @@ public class UpgradeUI : MonoBehaviour
         
     }
 
-    public void Initialize(ItemUpgrade upgrade)
+    public void Initialize(Upgrade upgrade)
     {
         this.upgrade = upgrade;
         StringBuilder sb = new StringBuilder();
         background.color = GameManager.instance.rarityColors[upgrade.rarity];
-        
-
-        sb.AppendLine($"{this.upgrade.itemType.ToString()}");
-
-        if (upgrade.description != "")
+        if (upgrade is TransformationUpgrade)
         {
-            sb.AppendLine($"{this.upgrade.description}");
+            background.color = GameManager.instance.rarityColors[RarityEnum.Transformation];
+        }
+        
+        if (upgrade is ItemUpgrade itemUpgrade)
+
+        {
+            sb.AppendLine($"{GameManager.instance.database.GetDescription(itemUpgrade.itemType)}");
+        }
+ 
+
+        if (!string.IsNullOrWhiteSpace(upgrade.description))
+        {
+            sb.AppendLine(upgrade.description);
         }
 
-        if (upgrade.modifiers  != null) 
+        if (upgrade.modifiers  != null && upgrade.modifiers.Count >0) 
         {
 
             sb.AppendLine($"{upgrade.rarity.ToString()}");

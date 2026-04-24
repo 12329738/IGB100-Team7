@@ -25,7 +25,7 @@ public class Weapon : Item, IModifierReceiver
     [HideInInspector]
     public ItemUpgrade baseUpgrade;
     [HideInInspector]
-    public GameObject owner; 
+    public Entity owner => GameManager.instance.player;
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
@@ -53,9 +53,6 @@ public class Weapon : Item, IModifierReceiver
         if (stats != null) return; 
         stats = new Stats();
         stats.Initialize(statPreset);
-
-        owner = GameManager.instance.player.gameObject;
-
         stats.AddModifierProvider(GameManager.instance.player.provider);
         stats.AddModifierProvider(this.provider);
 
@@ -100,7 +97,6 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }
@@ -108,12 +104,11 @@ public class Weapon : Item, IModifierReceiver
     public void SpawnProjectiles(EffectContext context)
     {
         ProjectileData data = BuildProjectileData();
-        data.owner = context.source;
+        data.owner = owner;
 
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }

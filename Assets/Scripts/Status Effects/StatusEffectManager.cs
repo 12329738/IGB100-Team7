@@ -1,27 +1,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StatusEffectManager : MonoBehaviour
 {
     private readonly List<StatusEffectInstance> effects = new();
     public EffectHandler effectHandler;
-    public void Apply(StatusEffectData def, GameObject source)
+    public void Apply(StatusEffectDataInstance data, GameObject source)
     {
 
-        var existing = effects.Find(e =>
-            e.data == def &&
-            e.state.source == source);
+        var existing = effects.FirstOrDefault(x => x.data.definition == data.definition); 
 
-        GameManager.instance.statusEffectRegistry.AddStacks(def, 1);
+        GameManager.instance.statusEffectRegistry.AddStacks(data.definition, 1);
         if (existing != null)
         {
             existing.AddStack(1);
             return;
         }
 
-        var instance = new StatusEffectInstance(def, source, gameObject, this);
+        var instance = new StatusEffectInstance(data, source, gameObject, this);
 
         effects.Add(instance);
 
@@ -43,8 +42,15 @@ public class StatusEffectManager : MonoBehaviour
 
     internal void RemoveStatus(StatusEffectInstance statusEffectInstance)
     {
-        GameManager.instance.statusEffectRegistry.RemoveStacks(statusEffectInstance.data, (int)statusEffectInstance.context.stacks);
+        GameManager.instance.statusEffectRegistry.RemoveStacks(statusEffectInstance.data.definition, (int)statusEffectInstance.context.stacks);
         effects.Remove(statusEffectInstance);
+    }
+
+    internal void RemoveStatus(StatusEffectData statusEffectData)
+    {
+        StatusEffectInstance instance = effects.FirstOrDefault(i => i.data.definition == statusEffectData.definition);
+        GameManager.instance.statusEffectRegistry.RemoveStacks(instance.data.definition, (int)instance.context.stacks);
+        effects.Remove(instance);
     }
 
     internal void ResetStatusEffects()

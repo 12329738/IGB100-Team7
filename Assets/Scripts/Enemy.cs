@@ -6,33 +6,36 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : Entity, IDamageable
 {
     public float expAmount;
-    Player player;
+    Player player => GameManager.instance.player;
 
 
     void Start()
     {
-        player = GameManager.instance.player;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (knockbackRemaining > 0)
+        HandleKnockbackOrMovement();
+    }
+
+    private void HandleKnockbackOrMovement()
+    {
+        if (knockbackRemaining > 0.1f)
         {
             float step = GameManager.instance.knockBackSpeed * Time.deltaTime;
 
-            if (step > knockbackRemaining)
-                step = knockbackRemaining;
+            step = Mathf.Min(step, knockbackRemaining);
 
             transform.position += knockbackDirection * step;
+
             knockbackRemaining -= step;
+
+            return; 
         }
 
-        else
-        {
-            Move();
-        }
-            
+        Move();
     }
 
     void Move()
@@ -91,6 +94,7 @@ public class Enemy : Entity, IDamageable
 
     void OnEnable()
     {
+
         SpawnerManager.instance.RegisterEnemy();
     }
 

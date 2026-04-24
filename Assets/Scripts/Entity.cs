@@ -16,7 +16,8 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     [HideInInspector]
     public Combat combat {  get; private set; }
-    internal StatusEffectManager status;
+    [HideInInspector]
+    public StatusEffectManager status;
 
     public List<EffectEntryNode> effects;
     [SerializeField]

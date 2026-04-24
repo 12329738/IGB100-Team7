@@ -38,7 +38,11 @@ MonoBehaviour:
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   effects:
-  - triggers: 00000000
+  - conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     hasTick: 0
     tickInterval: 0
     effectData:

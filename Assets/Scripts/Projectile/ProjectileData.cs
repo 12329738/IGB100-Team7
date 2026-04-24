@@ -23,7 +23,7 @@ public class ProjectileData
     public bool aimAtEnemy;
     public bool randomDirection;
     public Guid weaponId;
-    public GameObject owner;
+    public Entity owner;
 
     public ProjectileData(Weapon original)
     {
