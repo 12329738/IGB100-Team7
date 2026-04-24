@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35d8ba7a4e7c6943b685db9e4aac7a3, type: 3}
   m_Name: Burn
   m_EditorClassIdentifier: 
-  id: 
+  id: Burn
