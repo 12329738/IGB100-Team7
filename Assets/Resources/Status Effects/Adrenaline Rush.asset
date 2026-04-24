@@ -9,27 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Adrenaline
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Adrenaline Rush
   m_EditorClassIdentifier: 
   name: 
   description: 
-  effects:
-  - triggers: 03000000
+  duration: 2
+  maxStacks: 1
+  definition: {fileID: 0}
+  hasTick: 0
+  tickInterval: 0
+  entries:
+  - triggers: 06000000
     hasTick: 0
     tickInterval: 0
     effectData:
-    - rid: 6974428200029913095
-  modifiers: []
-  rarity: 0
-  itemType: 7
-  levelsAvaliable: 
+    - rid: 6974428200029913164
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6974428200029913095
+    - rid: 6974428200029913164
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 6
