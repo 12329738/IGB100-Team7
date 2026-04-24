@@ -25,6 +25,6 @@ public class SourceModifier : EffectOperation, IIntentModifier
         float multiplier = valueSource.Evaluate();
 
         intent.value *= multiplier;
-        Debug.Log($"Source {targetTag} {intent} multipled by {multiplier}");
+        Debug.Log($"Source {targetTag.id} effect {intent.type.ToString()} multipled by {multiplier}");
     }
 }
