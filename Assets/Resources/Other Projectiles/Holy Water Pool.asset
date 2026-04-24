@@ -55,8 +55,8 @@ MonoBehaviour:
       data:
         type: 2
         effectOperation:
-          rid: 6460871606461530205
-    - rid: 6460871606461530205
+          rid: 6460871612458336331
+    - rid: 6460871612458336331
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}

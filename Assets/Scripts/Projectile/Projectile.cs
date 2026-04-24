@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
@@ -108,7 +109,32 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     private void OnTriggerStay(Collider other)
     {
         TryHit(other.gameObject);
+        RaiseContactEvent(other.gameObject);
+    }
 
+    private void RaiseContactEvent(GameObject target)
+    {
+        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
+            return;
+
+        var context = new EffectContext
+        {
+            damageSource = this,
+            damageSourceOwner = data.owner,
+            target = target.GetComponent<IDamageSource>(),
+            hitInterval = data.hitInterval,
+            sourceInstanceId = this.GetInstanceID(),
+            trigger = CombatEvent.OnContact,
+        };
+
+        var intent = new CombatIntent
+        {
+            source = this,
+            target = context.target,
+            context = context
+        };
+
+        ownerCombat.TriggerContact(intent);
     }
 
     private void TryHit(GameObject target)
@@ -138,7 +164,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             context = context
         };
 
-        //context.sourceInstanceId = context.source.GetInstanceID();
+        context.sourceInstanceId = this.GetInstanceID();
 
         ownerCombat.DealDamage(intent);
 

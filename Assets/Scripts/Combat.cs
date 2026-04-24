@@ -71,7 +71,26 @@ public class Combat : MonoBehaviour
     public void KnockBack(CombatIntent intent)
     {
         if (intent.context.target is IDamageable damageable)
-            if (intent.source is Component comp)
+            if (intent.source.owner is Component comp)
             damageable.KnockBack(intent.value, comp.gameObject.transform.position);
+    }
+
+    internal void TriggerContact(CombatIntent intent)
+    {
+        var effectKey = (intent.context.effectInstance, intent.context.target);
+        var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
+        float lastHit;
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
+        {
+            if (Time.time - lastHit < intent.context.hitInterval)
+                return;
+        }
+
+
+        else if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
+        {
+            if (Time.time - lastHit < intent.context.hitInterval)
+                return;
+        }
     }
 }
