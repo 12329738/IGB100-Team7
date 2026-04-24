@@ -33,7 +33,8 @@ MonoBehaviour:
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 4cb66081ada9a444cb7f06eab3ccca8f, type: 2}
-  subWeaponData: []
+  subWeaponData:
+  - {fileID: 0}
   subWeaponInstances: []
   definition: {fileID: 11400000, guid: f6beaa833d0b91e45b8e9cca40570265, type: 2}
   effects:

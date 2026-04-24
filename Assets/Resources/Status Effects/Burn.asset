@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Damages enemies over time
   duration: 5
   maxStacks: 1
-  definition: {fileID: 0}
+  definition: {fileID: 11400000, guid: 31f6cebff34d0c24380eb884de1be75f, type: 2}
   hasTick: 1
   tickInterval: 0.5
   entries:
