@@ -27,6 +27,7 @@ public class ProjectileSpawner
 
             Enemy target = null;
             Vector3 finalDirection = proj.data.finalDirection;
+            finalDirection = Vector3.forward;
             if (proj.data.trackEnemy || proj.data.aimAtEnemy)
             {
                  target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));

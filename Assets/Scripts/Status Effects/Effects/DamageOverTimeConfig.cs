@@ -17,9 +17,6 @@ public class DamageOverTimeConfig : EffectOperation
         if (ctx.stacks > 1)
             value *= (float)ctx.stacks;
 
-        var receiver = ctx.source.GetComponent<IModifierReceiver>();
-        if (receiver != null)
-            value*= receiver.stats.GetStat(StatType.Damage);
         intents.Add(new CombatIntent
         {
             source = ctx.source,

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.Rendering.DebugUI;
 using static UnityEngine.Video.VideoPlayer;
 
 public class Combat : MonoBehaviour
@@ -35,6 +36,10 @@ public class Combat : MonoBehaviour
         EffectContext hitCtx = intent.context.Clone();
         hitCtx.trigger = CombatEvent.OnDamage;
         GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
+
+        IModifierReceiver modifierReceiver = intent.context.source.GetComponent<IModifierReceiver>();
+        if (modifierReceiver != null)
+            intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
 
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);

@@ -8,7 +8,7 @@ using UnityEngine;
 public class EffectNodeData
 {
     public EffectIntent type;
-    public bool emitsIntent;
+    //public bool emitsIntent;
     [SerializeReference]
     public EffectOperation effectOperation;
     [System.NonSerialized]

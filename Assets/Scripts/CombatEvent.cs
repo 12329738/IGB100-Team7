@@ -9,5 +9,29 @@ public enum CombatEvent
     OnApply,
     OnContact,
     OnExpire,
-    OnDamage
+    OnDamage,
+    OnDeath,
+    OnSpawn,
+    OnStackCount,
+    IsTransformed
+}
+
+public enum ComparisonType
+{
+    GreaterThan,
+    LessThan,
+    EqualTo,
+    GreaterOrEqual,
+    LessOrEqual
+}
+
+[System.Serializable]
+public class CombatCondition
+{
+    public CombatEvent triggerEvent;
+
+    public bool useComparison;
+
+    public ComparisonType comparisonType;
+    public float value;
 }

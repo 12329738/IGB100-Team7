@@ -28,8 +28,8 @@ public class EffectHandler : MonoBehaviour
         for (int i = 0; i < effects.Count; i++)
         {
 
-            effects[i].definition.Execute(ctx, intents);
-            
+            effects[i].entryNode.Execute(ctx, intents);
+
         }
 
         GameManager.instance.effectExecutor.Execute(intents);
@@ -44,7 +44,7 @@ public class EffectHandler : MonoBehaviour
         for (int i = 0; i < effects.Count; i++)
         {
 
-            effects[i].definition.Execute(ctx, ref intents);
+            effects[i].entryNode.Execute(ctx, ref intents);
 
         }
         combatIntent = intents[0];
@@ -53,6 +53,12 @@ public class EffectHandler : MonoBehaviour
     public void Register(EffectInstance instance)
     {
         effects.Add(instance);
+
+        List<CombatIntent> intents = new List<CombatIntent>();
+        EffectContext context = new EffectContext { trigger = CombatEvent.OnApply };
+        instance.entryNode.Execute(context, intents);
+        instance.entryNode.Execute(context, ref intents);
+
     }
 
     private void Register(StatusEffectInstance instance)
@@ -67,6 +73,12 @@ public class EffectHandler : MonoBehaviour
     {
         effects.RemoveAll(x => x.owner == owner);
     }
+
+    public void UnRegister(EffectInstance instance)
+    {
+        effects.Remove(instance);
+    }
+
 
 
 }

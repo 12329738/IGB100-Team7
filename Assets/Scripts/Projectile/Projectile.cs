@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
@@ -86,7 +87,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            if (node.triggers.Contains(CombatEvent.OnExpire))
+            if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
 
             }
@@ -134,7 +135,6 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         if (!data.isPiercing)
         {
-            Debug.Log($"Deactivating {this} because it collided with {target}");
             Deactivate();
         }
         

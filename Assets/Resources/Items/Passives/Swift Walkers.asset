@@ -16,6 +16,6 @@ MonoBehaviour:
   _upgrades:
   - {fileID: 11400000, guid: 106209807d0455c4cb495ea1c0637f30, type: 2}
   _itemType: 11
-  _name: 
+  _name: Swift Walkers
   _description: 
   icon: {fileID: 21300000, guid: 817c5cbc269d2b344848a36aab84b6cf, type: 3}

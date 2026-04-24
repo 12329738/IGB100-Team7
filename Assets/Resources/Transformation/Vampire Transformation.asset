@@ -15,10 +15,8 @@ MonoBehaviour:
   name: 
   description: 
   upgrades:
+  - {fileID: 11400000, guid: 5f0a02e90d0bc54438e3ee127f55c10e, type: 2}
+  - {fileID: 11400000, guid: fcbe9210de961894b8fbaa61cba14592, type: 2}
   - {fileID: 11400000, guid: 00d173ea352853545bfe9d0cba02f085, type: 2}
   effect: {fileID: 11400000, guid: d77e4f50fc5fe6d46b4cc3c5f506b533, type: 2}
-  curentEffects: []
   transformationSprite: {fileID: 1322119876, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
-  references:
-    version: 2
-    RefIds: []

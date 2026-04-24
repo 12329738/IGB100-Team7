@@ -100,7 +100,6 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }
@@ -113,7 +112,6 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }

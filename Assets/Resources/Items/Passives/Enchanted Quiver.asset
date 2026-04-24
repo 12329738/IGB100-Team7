@@ -16,6 +16,6 @@ MonoBehaviour:
   _upgrades:
   - {fileID: 11400000, guid: 6a8846e0ea095694f9d61da4be5091b0, type: 2}
   _itemType: 10
-  _name: 
+  _name: Enchanted Quiver
   _description: 
   icon: {fileID: 21300000, guid: 9b123c465d52f474882d09bd71649f3b, type: 3}
