@@ -8,6 +8,7 @@ public class Enemy : Entity, IDamageable
     public float expAmount;
     Player player => GameManager.instance.player;
 
+   
 
     void Start()
     {
@@ -58,8 +59,9 @@ public class Enemy : Entity, IDamageable
             {
                 var context = new EffectContext
                 {
-                    source = gameObject,
-                    target = other.gameObject,
+                    damageSource = this,
+                    target = other.GetComponent<IDamageSource>(),
+                    damageSourceOwner = this,
                     value = stats.GetStat(StatType.Damage),
                     sourceInstanceId = this.gameObject.GetInstanceID(),
                     hitInterval = 1f,
@@ -68,8 +70,8 @@ public class Enemy : Entity, IDamageable
                 var intent = new CombatIntent
                 {
                     value = stats.GetStat(StatType.Damage),
-                    source = gameObject,
-                    target = other.gameObject,
+                    source = this,
+                    target = other.GetComponent<IDamageSource>(),
                     context = context
                 };
 
@@ -101,7 +103,7 @@ public class Enemy : Entity, IDamageable
     void OnDisable()
     {
         SpawnerManager.instance.UnregisterEnemy();
-        GameManager.instance.effectHandler.UnRegister(gameObject);
+        GameManager.instance.effectHandler.UnRegister(this);
         ObjectPool.instance.ReturnObject(gameObject);
     }
 }

@@ -10,18 +10,20 @@ public class RemoveStatusEffect : EffectOperation
 
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        Entity target = ctx.target.GetComponent<Entity>();
-        if (target != null)
+
+        if (ctx.target is Component comp)
         {
-            StatusEffectManager manager = target.GetComponent<StatusEffectManager>();
+            StatusEffectManager manager = comp.gameObject.GetComponent<StatusEffectManager>();
             if (effect == null)
             {
                 manager.ResetStatusEffects();
             }
 
             else
-            manager.RemoveStatus(effect);
+                manager.RemoveStatus(effect);
+
         }
+
     }
 
 }

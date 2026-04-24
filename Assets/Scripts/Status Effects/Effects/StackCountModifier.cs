@@ -25,7 +25,7 @@ public class StackCountModifier : EffectOperation, IIntentModifier
 
         foreach (var e in effects)
         {
-            total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e.definition, intent.source);
+            total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e.definition);
         }
 
 

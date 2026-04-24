@@ -32,16 +32,16 @@ public class DamagePopup : MonoBehaviour
 
         if (intent.value < 1)
             return;
-        GameObject target = intent.target;
+        Component comp = intent.target as Component;
 
-        SpriteRenderer renderer = target.GetComponentInChildren<SpriteRenderer>();
+        SpriteRenderer renderer = comp.gameObject.GetComponentInChildren<SpriteRenderer>();
 
         Vector3 topCenter = new Vector3(
             renderer.bounds.center.x,
             renderer.bounds.center.y,
             renderer.bounds.max.z
         );
-        Vector3 worldPosition = topCenter + target.transform.up * textHeightOffset;
+        Vector3 worldPosition = topCenter + comp.gameObject.transform.up * textHeightOffset;
 
         GameObject damageText = Instantiate(damageTextPrefab, damageCanvas.transform);
 
@@ -60,7 +60,7 @@ public class DamagePopup : MonoBehaviour
         int amount = (int)intent.value;
         text.text = amount.ToString();
 
-        text.color = (intent.target == GameManager.instance.player.gameObject)
+        text.color = (comp.gameObject == GameManager.instance.player.gameObject)
             ? Color.red
             : Color.white;
 
@@ -69,7 +69,7 @@ public class DamagePopup : MonoBehaviour
             text.color = Color.green;
         }
 
-        StartCoroutine(FadeOut(damageText, target));
+        StartCoroutine(FadeOut(damageText, comp.gameObject));
     }
             
 

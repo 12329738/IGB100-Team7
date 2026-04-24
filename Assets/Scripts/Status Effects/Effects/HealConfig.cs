@@ -13,7 +13,7 @@ public class HealConfig : EffectOperation
         intents.Add(new CombatIntent
         {
             type = Type,
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
             value = amount,
             context = ctx

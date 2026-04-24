@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a9f1cd2f40c6b849bcb62614eb065f1, type: 3}
-  m_Name: New Arc Behaviour
+  m_Script: {fileID: 11500000, guid: d35d8ba7a4e7c6943b685db9e4aac7a3, type: 3}
+  m_Name: Bolt Shot
   m_EditorClassIdentifier: 
-  height: 3
-  duration: 2
+  id: Bolt Shot

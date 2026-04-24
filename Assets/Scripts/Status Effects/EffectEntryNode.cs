@@ -104,7 +104,7 @@ public class EffectEntryNode
             
     }
 
-    public void Execute(EffectContext ctx, ref List<CombatIntent> intents)
+    public void Modify(EffectContext ctx, ref List<CombatIntent> intents)
     {
         if (!CanExecute(ctx))
             return;

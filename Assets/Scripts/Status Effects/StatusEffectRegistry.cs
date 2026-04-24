@@ -36,7 +36,7 @@ public class StatusEffectRegistry : MonoBehaviour
         return totalStacks.TryGetValue(type, out var value) ? value : 0;
     }
 
-    internal int GetStacksFromSource(DamageSourceDefinition effectData, GameObject source)
+    internal int GetStacksFromSource(DamageSourceDefinition effectData)
     {
         return totalStacks.TryGetValue(effectData, out var value) ? value : 0;
     }

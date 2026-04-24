@@ -19,12 +19,14 @@ public class DamageOverTimeConfig : EffectOperation
 
         intents.Add(new CombatIntent
         {
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
             type = EffectIntent.DealDamage,
             value = value,
-            context = ctx
+            context = ctx,
+
         });
+        
 
 
         Debug.Log($"{ctx.target} took {value} dmg from {ctx.stacks} stacks of {ctx.origin}");

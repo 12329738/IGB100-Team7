@@ -261,7 +261,7 @@ public class Player : Entity, IDamageable
             {
                 foreach (EffectEntryNode node in transformationUpgrade.effects)
                 {
-                    EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
+                    EffectInstance instance = new EffectInstance(node, this, this,this);
                     currentEffects.Add(instance);
                     GameManager.instance.effectHandler.Register(instance);
                 }
@@ -335,7 +335,7 @@ public class Player : Entity, IDamageable
 
         foreach (EffectEntryNode node in currentTransformationEffects)
         {
-            EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
+            EffectInstance instance = new EffectInstance(node, this, this,this);
             currentEffects.Add(instance);
             GameManager.instance.effectHandler.Register(instance);
         }

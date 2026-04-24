@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EffectState
 {
-    public GameObject source;
-    public GameObject target;
+    public IDamageSource source;
+    public IDamageSource target;
 
     public float startTime;
     public float lastTickTime;

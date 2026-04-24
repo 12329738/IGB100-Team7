@@ -20,13 +20,13 @@ MonoBehaviour:
   hasTick: 1
   tickInterval: 0.5
   entries:
-  - conditions:
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
     - triggerEvent: 5
       useComparison: 0
       comparisonType: 0
       value: 0
-    hasTick: 0
-    tickInterval: 0
     effectData:
     - rid: 6460871561430433858
   references:
@@ -36,11 +36,10 @@ MonoBehaviour:
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 0
-        emitsIntent: 0
         effectOperation:
           rid: 6460871606461530203
     - rid: 6460871606461530203
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        damage: 0
+        damage: 15
         isHit: 0

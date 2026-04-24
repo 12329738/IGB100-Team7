@@ -5,30 +5,30 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
-public class StatusEffectInstance
+public class StatusEffectInstance : IDamageSource
 {
     public StatusEffectDataInstance data;
     public List<EffectInstance> runtimes = new();
     public EffectContext context;
-    //public int stacks;
-    //public float startTime;
-    //public float lastTickTime;
-    //public GameObject source;
-    //public GameObject target;
     public EffectState state;
     public StatusEffectManager effectManager;
+    public Entity _owner;
+    public Entity owner { get => _owner; set => _owner = value; }
+    public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
 
-    public StatusEffectInstance(StatusEffectDataInstance data, GameObject source, GameObject target, StatusEffectManager manager)
+    public StatusEffectInstance(StatusEffectDataInstance data, IDamageSource source, IDamageSource target, StatusEffectManager manager)
     {
         effectManager = manager;
         this.data = data;
+        owner = GameManager.instance.player;
 
         context = new EffectContext
         {
-            source = source,
+            damageSource = source,
             target = target,
             origin = data.definition,
-            stacks = 0
+            stacks = 0,
+            damageSourceOwner = owner
         };
 
         state = new EffectState
@@ -48,7 +48,7 @@ public class StatusEffectInstance
                 entry,
                 source: source,
                 target: target,
-                owner: source
+                effectCreator: _owner.GetComponent<IDamageSource>()
             );
 
             runtimes.Add(runtime);

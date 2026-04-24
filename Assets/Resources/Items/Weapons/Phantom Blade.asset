@@ -30,15 +30,16 @@ MonoBehaviour:
   isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
-  behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
-  pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
-  effects: []
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0
+  behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
+  pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   _statPreset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
+  subWeapon: []
+  definition: {fileID: 11400000, guid: 61d115f1a4b287444bafa013409d7864, type: 2}
+  effects: []
   references:
     version: 2
     RefIds: []
