@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class EffectEntryNode
 {
-    public List<CombatEvent> triggers;
     public bool hasTick;
     public float tickInterval;
+    public List<CombatCondition> conditions;
+    
     [SerializeReference]
     public List<EffectNodeData> effectData;
+    
 
 
     public void Validate()
@@ -29,9 +32,53 @@ public class EffectEntryNode
         }
     }
 
+    public bool Evaluate(CombatCondition condition, EffectContext context)
+    {
+        if (!condition.useComparison)
+            return true;
+
+        float incomingValue = GetValue(condition.triggerEvent, context);
+
+        
+
+        switch (condition.comparisonType)
+        {
+            case ComparisonType.GreaterThan:
+                return incomingValue > condition.value;
+            case ComparisonType.LessThan:
+                return incomingValue < condition.value;
+            case ComparisonType.EqualTo:
+                return Mathf.Approximately(incomingValue, condition.value);
+            case ComparisonType.GreaterOrEqual:
+                return incomingValue >= condition.value;
+            case ComparisonType.LessOrEqual:
+                return incomingValue <= condition.value;
+        }
+
+        return false;
+    }
+
+    private float GetValue(CombatEvent triggerEvent, EffectContext context)
+    {
+        switch (triggerEvent)
+        {
+            case CombatEvent.OnDamage:
+                return context.value;
+
+            case CombatEvent.OnStackCount:
+                return (float)context.stacks;
+
+            case CombatEvent.OnHeal:
+                return context.value;
+
+            default:
+                return 0f;
+        }
+    }
+
     public bool CanExecute(EffectContext ctx)
     {
-        return triggers.Contains(ctx.trigger);
+        return conditions.Any(x => x.triggerEvent == ctx.trigger);
     }
 
     public void Execute(EffectContext ctx, List<CombatIntent> intents)
@@ -43,13 +90,21 @@ public class EffectEntryNode
         {
             if (node.effectOperation is not IIntentModifier)
             {
-                node.Execute(ctx, intents);
+                foreach (CombatCondition condition in conditions)
+                {
+                    if (Evaluate(condition, ctx))
+                    {
+                        node.Execute(ctx, intents);
+                    }
+                    break;
+
+                }
             }
         }
             
     }
 
-    public void Execute(EffectContext ctx, ref List<CombatIntent> intents)
+    public void Modify(EffectContext ctx, ref List<CombatIntent> intents)
     {
         if (!CanExecute(ctx))
             return;
@@ -59,7 +114,16 @@ public class EffectEntryNode
 
             if (node.effectOperation is IIntentModifier)
             {
-                node.Modify(ctx, ref intents);
+                foreach (CombatCondition condition in conditions)
+                {
+                    if (Evaluate(condition, ctx))
+                    {
+                        node.Modify(ctx, ref intents);
+                    }
+                    break;
+                        
+                }
+                
             }
         }
 

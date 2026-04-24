@@ -25,7 +25,7 @@ public class Weapon : Item, IModifierReceiver
     [HideInInspector]
     public ItemUpgrade baseUpgrade;
     [HideInInspector]
-    public GameObject owner; 
+    public Entity owner => GameManager.instance.player;
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
@@ -40,6 +40,11 @@ public class Weapon : Item, IModifierReceiver
     [SerializeField]
     private StatsPreset _statPreset;
     public Guid Id = Guid.NewGuid();
+    bool isWeapon = true;
+    public List<Weapon> subWeaponData;
+    [HideInInspector]
+    public List<Weapon> subWeaponInstances = new List<Weapon>();
+    public DamageSourceDefinition definition;
 
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
@@ -53,12 +58,26 @@ public class Weapon : Item, IModifierReceiver
         if (stats != null) return; 
         stats = new Stats();
         stats.Initialize(statPreset);
-
-        owner = GameManager.instance.player.gameObject;
-
         stats.AddModifierProvider(GameManager.instance.player.provider);
         stats.AddModifierProvider(this.provider);
 
+        foreach(Weapon weapon in subWeaponData)
+        {
+            Weapon subWeapon = Instantiate(weapon);
+            subWeapon.Initialize(this);
+            subWeaponInstances.Add(subWeapon);
+        }
+
+    }
+
+    public void Initialize(Weapon weapon)
+    {
+        if (stats != null) return;
+        stats = new Stats();
+        stats.Initialize(statPreset);
+        stats.AddModifierProvider(GameManager.instance.player.provider);
+        stats.AddModifierProvider(weapon);
+        stats.AddModifierProvider(this.provider);
     }
 
     public void CreateBaseUpgrade()
@@ -100,7 +119,6 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }
@@ -108,13 +126,16 @@ public class Weapon : Item, IModifierReceiver
     public void SpawnProjectiles(EffectContext context)
     {
         ProjectileData data = BuildProjectileData();
-        data.owner = context.source;
+        data.owner = owner;
 
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        Debug.Log($"{this} has a projectile count of {stats.GetStat(StatType.ProjectileCount)}, spawning {count} projectiles");
-        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+        if (context.damageSource is Component comp)
+        {
+            GameManager.instance.projectileSpawner.CreateProjectile(data, count, comp.gameObject.transform.position);
+        }
+        
 
     }
 

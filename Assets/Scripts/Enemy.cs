@@ -6,33 +6,37 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : Entity, IDamageable
 {
     public float expAmount;
-    Player player;
+    Player player => GameManager.instance.player;
 
+   
 
     void Start()
     {
-        player = GameManager.instance.player;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (knockbackRemaining > 0)
+        HandleKnockbackOrMovement();
+    }
+
+    private void HandleKnockbackOrMovement()
+    {
+        if (knockbackRemaining > 0.1f)
         {
             float step = GameManager.instance.knockBackSpeed * Time.deltaTime;
 
-            if (step > knockbackRemaining)
-                step = knockbackRemaining;
+            step = Mathf.Min(step, knockbackRemaining);
 
             transform.position += knockbackDirection * step;
+
             knockbackRemaining -= step;
+
+            return; 
         }
 
-        else
-        {
-            Move();
-        }
-            
+        Move();
     }
 
     void Move()
@@ -55,8 +59,9 @@ public class Enemy : Entity, IDamageable
             {
                 var context = new EffectContext
                 {
-                    source = gameObject,
-                    target = other.gameObject,
+                    damageSource = this,
+                    target = other.GetComponent<IDamageSource>(),
+                    damageSourceOwner = this,
                     value = stats.GetStat(StatType.Damage),
                     sourceInstanceId = this.gameObject.GetInstanceID(),
                     hitInterval = 1f,
@@ -65,8 +70,8 @@ public class Enemy : Entity, IDamageable
                 var intent = new CombatIntent
                 {
                     value = stats.GetStat(StatType.Damage),
-                    source = gameObject,
-                    target = other.gameObject,
+                    source = this,
+                    target = other.GetComponent<IDamageSource>(),
                     context = context
                 };
 
@@ -91,13 +96,14 @@ public class Enemy : Entity, IDamageable
 
     void OnEnable()
     {
+
         SpawnerManager.instance.RegisterEnemy();
     }
 
     void OnDisable()
     {
         SpawnerManager.instance.UnregisterEnemy();
-        GameManager.instance.effectHandler.UnRegister(gameObject);
+        GameManager.instance.effectHandler.UnRegister(this);
         ObjectPool.instance.ReturnObject(gameObject);
     }
 }

@@ -17,17 +17,16 @@ public class DamageOverTimeConfig : EffectOperation
         if (ctx.stacks > 1)
             value *= (float)ctx.stacks;
 
-        var receiver = ctx.source.GetComponent<IModifierReceiver>();
-        if (receiver != null)
-            value*= receiver.stats.GetStat(StatType.Damage);
         intents.Add(new CombatIntent
         {
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
             type = EffectIntent.DealDamage,
             value = value,
-            context = ctx
+            context = ctx,
+
         });
+        
 
 
         Debug.Log($"{ctx.target} took {value} dmg from {ctx.stacks} stacks of {ctx.origin}");

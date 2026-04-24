@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Player : Entity, IDamageable
 {
@@ -21,7 +22,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public List<Passive> passives;
     [HideInInspector]
-    public Dictionary<ItemList, Item> itemDictionary = new Dictionary<ItemList, Item>();
+    public Dictionary<ItemList, Item> itemDictionary = new();
     public Transformation transformation;
     [HideInInspector]
     public float currentTransformationAmount;
@@ -31,28 +32,46 @@ public class Player : Entity, IDamageable
     public Sprite regularSprite;
     public SpriteRenderer sr;
 
-    Queue<int> levelUps;
+    Queue<int> levelUps = new();
     [HideInInspector]
     public bool upgradeChosen;
     private bool levelUpRoutineRunning;
-    private List<TransformationUpgrade> transformationUpgrades;
+
     [HideInInspector]
     public float timeTransformed;
     float transformationStartTime;
+    List<Upgrade> avaliableTransformationUpgrades = new();
+    List<EffectEntryNode> currentTransformationEffects = new();
+
+    public List<TransformationUpgrade> currentTransformationUpgrades = new();
+    List<EffectInstance> currentEffects = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
 
+        foreach (EffectEntryNode node in transformation.effect.entries)
+        {
+            currentTransformationEffects.Add(node);
+        }
+        foreach (TransformationUpgrade upgrade in currentTransformationUpgrades)
+        {
+            foreach (EffectEntryNode node in upgrade.effects)
+            {
+                currentTransformationEffects.Add(node);
+            }
+        }
+
         foreach (Weapon weapon in startingWeapons) 
         {
             AddWeapon(weapon);
         }
 
+        avaliableTransformationUpgrades.AddRange(transformation.upgrades);
+
         pickupCollider = GetComponent<SphereCollider>();
         pickupCollider.radius = stats.GetStat(StatType.Collection);
-        levelUps = new Queue<int>();
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
 
@@ -82,11 +101,6 @@ public class Player : Entity, IDamageable
         CheckMovement();
         UpdateWeapons();
         UpdateTransformationAmount();
-        if (isTransformed)
-        {
-            timeTransformed = Time.time - transformationStartTime;
-
-        }
     }
 
     private void UpdateTransformationAmount()
@@ -106,6 +120,7 @@ public class Player : Entity, IDamageable
             if (!isTransformed)
             {
                 regenAccumulator += stats.GetStat(StatType.TransformationGainRate) * Time.deltaTime;
+                timeTransformed = Time.time - transformationStartTime;
             }
 
 
@@ -114,13 +129,9 @@ public class Player : Entity, IDamageable
                 regenAccumulator -= stats.GetStat(StatType.TransformationDecayRate) * Time.deltaTime;
             }
 
-            //int regenAmount = Mathf.FloorToInt(regenAccumulator);
-
-            //if (regenAmount > 1)
-            //{
-                AddTransformationPoints(regenAccumulator);
-                regenAccumulator -= regenAccumulator;
-            //}
+            AddTransformationPoints(regenAccumulator);
+            regenAccumulator -= regenAccumulator;
+            
             yield return null;
         }
         
@@ -196,7 +207,7 @@ public class Player : Entity, IDamageable
 
         Time.timeScale = 0f;
 
-        List<ItemUpgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
+        List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
 
         if (chosenUpgrades.Count > 0)
         {
@@ -205,14 +216,14 @@ public class Player : Entity, IDamageable
             yield return new WaitUntil(() => upgradeChosen == true);
             upgradeChosen = false;
         }
-        
-        //if (level % GameManager.instance.transformationUpgradeInterval == 0)
-        //{
-        //    List<TransformationUpgrade> transformationUpgrades = new List<TransformationUpgrade>();
-        //    transformationUpgrades.AddRange(transformation.upgrades);
-        //    GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
 
-        //}
+        if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        {
+            GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
+            yield return new WaitUntil(() => upgradeChosen == true);
+            upgradeChosen = false;
+
+        }
 
         Time.timeScale = 1f;
 
@@ -242,10 +253,20 @@ public class Player : Entity, IDamageable
             }
         }
 
-        //else if (upgrade is TransformationUpgrade transformationUpgrade)
-        //{
-        //    transformationUpgrades.Add(transformationUpgrade);
-        //}
+        else if (upgrade is TransformationUpgrade transformationUpgrade)
+        {
+            currentTransformationEffects.AddRange(transformationUpgrade.effects);
+            avaliableTransformationUpgrades.Remove(transformationUpgrade);
+            if (isTransformed)
+            {
+                foreach (EffectEntryNode node in transformationUpgrade.effects)
+                {
+                    EffectInstance instance = new EffectInstance(node, this, this,this);
+                    currentEffects.Add(instance);
+                    GameManager.instance.effectHandler.Register(instance);
+                }
+            }
+        }
         
     }
 
@@ -310,16 +331,13 @@ public class Player : Entity, IDamageable
         isTransformed = true;
         timeTransformed = 0;
         transformationStartTime = Time.time;
-        status.Apply(transformation.effect, gameObject);
-        foreach (TransformationUpgrade upgrade in transformation.upgrades)
-        {
-            foreach (EffectEntryNode node in upgrade.effects)
-            {
-                effects.Add(node);
-                EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
-                GameManager.instance.effectHandler.Register(instance);
-            }
 
+
+        foreach (EffectEntryNode node in currentTransformationEffects)
+        {
+            EffectInstance instance = new EffectInstance(node, this, this,this);
+            currentEffects.Add(instance);
+            GameManager.instance.effectHandler.Register(instance);
         }
         sr.sprite = transformation.transformationSprite;
         
@@ -328,9 +346,16 @@ public class Player : Entity, IDamageable
 
     private void StopTransformation()
     {
+
+        foreach (EffectInstance instance in currentEffects)
+        {
+            GameManager.instance.effectHandler.UnRegister(instance);
+        }
         sr.sprite = regularSprite;
         isTransformed = false;
         timeTransformed = 0;
     }
 
+
+    
 }

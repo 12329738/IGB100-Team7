@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9f1cd2f40c6b849bcb62614eb065f1, type: 3}
   m_Name: New Arc Behaviour
   m_EditorClassIdentifier: 
-  height: 5
+  height: 3
   duration: 2

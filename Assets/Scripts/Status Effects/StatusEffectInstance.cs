@@ -1,34 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
-public class StatusEffectInstance
+public class StatusEffectInstance : IDamageSource
 {
-    public StatusEffectData data;
+    public StatusEffectDataInstance data;
     public List<EffectInstance> runtimes = new();
     public EffectContext context;
-    //public int stacks;
-    //public float startTime;
-    //public float lastTickTime;
-    //public GameObject source;
-    //public GameObject target;
     public EffectState state;
     public StatusEffectManager effectManager;
+    public Entity _owner;
+    public Entity owner { get => _owner; set => _owner = value; }
+    public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
 
-    public StatusEffectInstance(StatusEffectData data, GameObject source, GameObject target, StatusEffectManager manager)
+    public StatusEffectInstance(StatusEffectDataInstance data, IDamageSource source, IDamageSource target, StatusEffectManager manager)
     {
         effectManager = manager;
         this.data = data;
+        owner = GameManager.instance.player;
 
         context = new EffectContext
         {
-            source = source,
+            damageSource = source,
             target = target,
-            stacks = 1,
-            origin = data.definition
+            origin = data.definition,
+            stacks = 0,
+            damageSourceOwner = owner
         };
+
         state = new EffectState
         {
             source = source,
@@ -37,6 +39,8 @@ public class StatusEffectInstance
             startTime = Time.time,
             lastTickTime = Time.time,
         };
+        AddStack(1);
+       
 
         foreach (var entry in data.entries)
         {
@@ -44,7 +48,7 @@ public class StatusEffectInstance
                 entry,
                 source: source,
                 target: target,
-                owner: source
+                effectCreator: _owner.GetComponent<IDamageSource>()
             );
 
             runtimes.Add(runtime);
@@ -86,7 +90,7 @@ public class StatusEffectInstance
         {
 
             context.effectInstance = instance;
-            instance.definition.Execute(context, intents);                      
+            instance.entryNode.Execute(context, intents);                      
         }
 
         GameManager.instance.effectExecutor.Execute(intents);        
@@ -99,9 +103,10 @@ public class StatusEffectInstance
         context.stacks += amount;
         if (context.stacks > data.maxStacks)
             context.stacks = data.maxStacks;
-
         Refresh();
-        
+        context.trigger = CombatEvent.OnStackCount;
+        EmitEffects(context);
+        GameManager.instance.effectHandler.Dispatch(context);    
     }
 
     private void Refresh()
@@ -122,7 +127,7 @@ public class StatusEffectInstance
         List<CombatIntent> intents = new List<CombatIntent>();
         foreach (var entry in data.entries)
         {
-            if (!entry.triggers.Contains(type))
+            if (entry.conditions.Any(x=>x.triggerEvent == type))
                 continue;
 
             foreach (var node in entry.effectData)

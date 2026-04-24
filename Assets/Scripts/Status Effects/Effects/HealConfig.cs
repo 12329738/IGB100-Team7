@@ -13,8 +13,8 @@ public class HealConfig : EffectOperation
         intents.Add(new CombatIntent
         {
             type = Type,
-            source = ctx.source,
-            target = ctx.target,
+            source = ctx.damageSource,
+            target = GameManager.instance.player,
             value = amount,
             context = ctx
         });

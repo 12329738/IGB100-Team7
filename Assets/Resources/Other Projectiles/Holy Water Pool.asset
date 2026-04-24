@@ -23,46 +23,59 @@ MonoBehaviour:
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
-  isPiercing: 0
+  isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
-  isHit: 0
+  isHit: 1
   stickToPlayer: 0
   randomDirection: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
-  _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
+  _statPreset: {fileID: 11400000, guid: 4cb66081ada9a444cb7f06eab3ccca8f, type: 2}
+  subWeaponData:
+  - {fileID: 0}
+  subWeaponInstances: []
+  definition: {fileID: 11400000, guid: f6beaa833d0b91e45b8e9cca40570265, type: 2}
   effects:
-  - triggers: 
-    hasTick: 0
+  - hasTick: 0
     tickInterval: 0
+    conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     effectData:
-    - rid: 6460871561430433864
-    - rid: 6460871561430433866
+    - rid: 6460871615362105411
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 7
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 6460871615362105413
   references:
     version: 2
     RefIds:
-    - rid: 6460871561430433864
+    - rid: 6460871615362105411
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
-        emitsIntent: 0
         effectOperation:
-          rid: 6974428200029913093
-    - rid: 6460871561430433866
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        emitsIntent: 0
-        effectOperation:
-          rid: 6974428200029913094
-    - rid: 6974428200029913093
+          rid: 6460871615362105412
+    - rid: 6460871615362105412
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}
-    - rid: 6974428200029913094
+    - rid: 6460871615362105413
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 4
+        effectOperation:
+          rid: 6460871615362105415
+    - rid: 6460871615362105415
       type: {class: HealConfig, ns: , asm: Assembly-CSharp}
       data:
         amount: 10

@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 
-public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiver
+public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiver, IDamageSource 
 {
     [HideInInspector] public bool canBeDamaged = true;
     [SerializeField] public FlashWhite flashScript;
@@ -16,7 +16,8 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     [HideInInspector]
     public Combat combat {  get; private set; }
-    internal StatusEffectManager status;
+    [HideInInspector]
+    public StatusEffectManager status;
 
     public List<EffectEntryNode> effects;
     [SerializeField]
@@ -35,6 +36,12 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     public float currentHealth { get; set; } = 1;
     [HideInInspector]
     public readonly ModifierProvider provider = new ModifierProvider();
+
+    public Entity _owner;
+    public Entity owner { get => this; set => _owner = value; }
+    public DamageSourceDefinition _definition;
+    public DamageSourceDefinition definition { get => _definition; set => _definition = value; }
+    public GameObject GameObject => gameObject;
 
     public void AddModifier(StatModifier mod)
         => provider.AddModifier(mod);
@@ -83,7 +90,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
         foreach (EffectEntryNode node in effects)
         {
-            EffectInstance instance = new EffectInstance(node, gameObject, gameObject, gameObject);
+            EffectInstance instance = new EffectInstance(node, this, this,this);
             GameManager.instance.effectHandler.Register(instance);
         }
     }

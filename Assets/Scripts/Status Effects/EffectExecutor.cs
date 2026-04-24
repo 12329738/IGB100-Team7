@@ -10,26 +10,34 @@ public class EffectExecutor : MonoBehaviour
     public Combat combat;
     public void Execute(CombatIntent intent)
     {
-    
-        switch (intent.type)
+        if (intent.target is Component comp)
         {
+
+        
+            switch (intent.type)
+        {
+            
+        
             case EffectIntent.DealDamage:
-                intent.target.GetComponent<Combat>().DealDamage(intent);
+                comp.gameObject.GetComponent<Combat>().DealDamage(intent);
                 break;
 
             case EffectIntent.Heal:
-                intent.target.GetComponent<Combat>().Heal(intent);
+                comp.gameObject.GetComponent<Combat>().Heal(intent);
                 break;
 
             case EffectIntent.Knockback:
-                intent.target.GetComponent<Combat>().KnockBack(intent);
+                comp.gameObject.GetComponent<Combat>().KnockBack(intent);
                 break;
 
             case EffectIntent.ApplyStatusEffect:
-                intent.target.GetComponent<StatusEffectManager>()
+                comp.gameObject.GetComponent<StatusEffectManager>()
                     .Apply(intent.context.payload.status, intent.source);
                 break;
+            }
         }
+            
+        
     }
 
     public void Execute(List<CombatIntent> intents)

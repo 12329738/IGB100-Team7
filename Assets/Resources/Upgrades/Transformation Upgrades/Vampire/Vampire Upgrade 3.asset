@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701c6debb7274f8478afcd174d772bf0, type: 3}
   m_Name: Vampire Upgrade 3
   m_EditorClassIdentifier: 
-  name: 
+  name: Vampire Upgrade 3
   description: Increases bleed damage by 25% each second you spend transformed. Resets
     upon de-transforming.
   effects:
-  - triggers: 09000000
+  - triggers: 0c000000
+    conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     hasTick: 0
     tickInterval: 0
     effectData:

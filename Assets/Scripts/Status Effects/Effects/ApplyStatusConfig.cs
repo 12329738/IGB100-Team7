@@ -16,11 +16,13 @@ public class ApplyStatusConfig : EffectOperation
         {
             context = ctx,
             type = Type,
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
         });
 
 
-        ctx.payload.status = effectData;
+        ctx.payload.status = new StatusEffectDataInstance(effectData);
     }
+
+
 }

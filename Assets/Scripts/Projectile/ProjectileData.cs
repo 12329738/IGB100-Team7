@@ -22,8 +22,9 @@ public class ProjectileData
     public bool trackEnemy;
     public bool aimAtEnemy;
     public bool randomDirection;
-    public Guid weaponId;
-    public GameObject owner;
+    public Entity owner;
+    public DamageSourceDefinition definition;
+    public Vector3 location;
 
     public ProjectileData(Weapon original)
     {
@@ -45,8 +46,8 @@ public class ProjectileData
         trackEnemy = original.trackEnemy;
         aimAtEnemy = original.aimAtEnemy;
         randomDirection = original.randomDirection;
-        weaponId = original.Id;
         owner = original.owner;
+        definition = original.definition;
     }
 
     public ProjectileData Clone()

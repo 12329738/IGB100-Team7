@@ -10,12 +10,14 @@ public class KnockBackConfig : EffectOperation
     public override EffectIntent Type => EffectIntent.Knockback;
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
+
         intents.Add(new CombatIntent
         {
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
             value = magnitude,
-            type = Type
+            type = Type,
+            context = ctx
         });
     }
 }

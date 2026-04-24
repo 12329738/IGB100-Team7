@@ -8,7 +8,7 @@ using static UnityEngine.UI.Image;
 public class ProjectileSpawner
 {
 
-    public void CreateProjectile(ProjectileData baseData, int count)
+    public void CreateProjectile(ProjectileData baseData, int count, Vector3? startPosition = null)
     {
 
         for (int i = 0; i < count; i++)
@@ -20,13 +20,17 @@ public class ProjectileSpawner
             proj.transform.localScale = baseData.prefab.transform.localScale;
             proj.Initialize(data);
 
+
             Vector3 origin = proj.data.owner.transform.position;
+            if (startPosition != null)
+                origin = (Vector3)startPosition;
 
             proj.transform.position = origin;
             proj.transform.rotation = Quaternion.identity;
 
             Enemy target = null;
             Vector3 finalDirection = proj.data.finalDirection;
+            finalDirection = Vector3.forward;
             if (proj.data.trackEnemy || proj.data.aimAtEnemy)
             {
                  target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));

@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     public float knockBackSpeed;
     public int transformationUpgradeInterval = 5;
 
-
-    public List<Rarity> rarities;
+    [HideInInspector]
+    public Rarity[] rarities;
     public Dictionary<RarityEnum, Color> rarityColors;
 
 
@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         database = new ItemDatabase();
-        database.Initialize();    
+        database.Initialize();
+        rarities= Resources.LoadAll<Rarity>("Rarities");
         projectileSpawner = new ProjectileSpawner();
         effectExecutor = new EffectExecutor();
         effectHandler = GetComponent<EffectHandler>();

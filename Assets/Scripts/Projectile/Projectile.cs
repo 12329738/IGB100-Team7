@@ -2,11 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
+using static UnityEngine.GraphicsBuffer;
 
 
-public class Projectile : MonoBehaviour, IModifierProvider
+public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 {
     [HideInInspector]
     public IProjectileState state;
@@ -34,6 +36,10 @@ public class Projectile : MonoBehaviour, IModifierProvider
         => provider.RemoveModifier(mod);
 
     public List<StatModifier> Modifiers => provider.Modifiers;
+
+    public Entity owner { get => data.owner; set => data.owner = value; }
+    public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
+
     private readonly ModifierProvider provider = new ModifierProvider();
 
     public void Update()
@@ -59,7 +65,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectInstance instance = new EffectInstance(node, data.owner, gameObject, gameObject);
+            EffectInstance instance = new EffectInstance(node, this, this,this);
             GameManager.instance.effectHandler.Register(instance);
         }
 
@@ -86,12 +92,16 @@ public class Projectile : MonoBehaviour, IModifierProvider
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            if (node.triggers.Contains(CombatEvent.OnExpire))
+            EffectContext context = new EffectContext { damageSource = this, damageSourceOwner = data.owner, trigger = CombatEvent.OnExpire };
+            List<CombatIntent> intents = new List<CombatIntent>();
+            if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
-
+                node.Execute(context, intents);
+                node.Modify(context, ref intents);
             }
+            GameManager.instance.effectExecutor.Execute(intents);
         }
-        GameManager.instance.effectHandler.UnRegister(gameObject);
+        GameManager.instance.effectHandler.UnRegister(this);
         ObjectPool.instance.ReturnObject(gameObject);
 
     }
@@ -99,12 +109,37 @@ public class Projectile : MonoBehaviour, IModifierProvider
     private void OnTriggerStay(Collider other)
     {
         TryHit(other.gameObject);
+        RaiseContactEvent(other.gameObject);
+    }
 
+    private void RaiseContactEvent(GameObject target)
+    {
+        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
+            return;
+
+        var context = new EffectContext
+        {
+            damageSource = this,
+            damageSourceOwner = data.owner,
+            target = target.GetComponent<IDamageSource>(),
+            hitInterval = data.hitInterval,
+            sourceInstanceId = this.GetInstanceID(),
+            trigger = CombatEvent.OnContact,
+        };
+
+        var intent = new CombatIntent
+        {
+            source = this,
+            target = context.target,
+            context = context
+        };
+
+        ownerCombat.TriggerContact(intent);
     }
 
     private void TryHit(GameObject target)
     {
-        if (target == data.owner)
+        if (target == data.owner.gameObject)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -112,23 +147,24 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         var context = new EffectContext
         {
-            source = data.owner,
-            target = target,
+            damageSource = this,
+            damageSourceOwner = data.owner,
+            target = target.GetComponent<IDamageSource>(),
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,
             isHit = data.isHit,
-
+            sourceInstanceId = this.GetInstanceID()
         };
 
         var intent = new CombatIntent
         {
             value = stats[StatType.Damage],
-            source = gameObject,
+            source = this,
             target = context.target,
             context = context
         };
 
-        context.sourceInstanceId = context.source.GetInstanceID();
+        context.sourceInstanceId = this.GetInstanceID();
 
         ownerCombat.DealDamage(intent);
 
