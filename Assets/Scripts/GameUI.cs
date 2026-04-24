@@ -39,7 +39,7 @@ public class GameUI : MonoBehaviour
             SetVisible(false, image);
         }
     }
-    public void ShowUpgradeOptions(List<ItemUpgrade> upgrades)
+    public void ShowUpgradeOptions(List<Upgrade> upgrades)
     {
         levelUpScreen = Instantiate(levelUpScreenPrefab);
 

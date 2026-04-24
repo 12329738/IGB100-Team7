@@ -1,9 +1,12 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor.Overlays;
 using UnityEngine;
+using System.ComponentModel;
 using static UnityEditor.Progress;
 
 public class ItemDatabase : MonoBehaviour
@@ -42,7 +45,7 @@ public class ItemDatabase : MonoBehaviour
     }
 
 
-    public List<ItemUpgrade> GetAvaliableUpgrades()
+    public List<Upgrade> GetAvaliableUpgrades()
     {
         Player player = GameManager.instance.player;
         List<ItemUpgrade> avaliableUpgrades = new List<ItemUpgrade>();
@@ -87,25 +90,26 @@ public class ItemDatabase : MonoBehaviour
         }
 
 
-        List<ItemUpgrade> chosenUpgrades = new List<ItemUpgrade>();
+        List<Upgrade> chosenUpgrades = new List<Upgrade>();
         List<ItemUpgrade> pool = new List<ItemUpgrade>(avaliableUpgrades);
 
         for (int i = 0; i < upgradeChoices && pool.Count > 0; i++)
         {
-            int index = Random.Range(0, pool.Count);
+            int index = UnityEngine.Random.Range(0, pool.Count);
 
             ItemUpgrade chosenUpgrade = Instantiate(pool[index]);
 
-            List<Rarity> rarities = GameManager.instance.rarities;
+            Rarity[] rarities = GameManager.instance.rarities;
             Rarity rarity = GenerateRarity(rarities);
 
 
 
-            chosenUpgrade.rarity = rarity.rarity;
+            
 
 
             if (chosenUpgrade.modifiers != null)
             {
+                chosenUpgrade.rarity = rarity.rarity;
                 foreach (StatModifier modifier in chosenUpgrade.modifiers)
                 {
                     modifier.amount *= rarity.valueModifier;
@@ -120,24 +124,24 @@ public class ItemDatabase : MonoBehaviour
         return chosenUpgrades;
     }
 
-    public Rarity GenerateRarity(List<Rarity> rarities)
+    public Rarity GenerateRarity(Rarity[] rarities)
     {
         float total = 0f;
         foreach (Rarity rarity in rarities)
             total += rarity.chance;
 
-        float random = Random.Range(0, total);
+        float random = UnityEngine.Random.Range(0, total);
 
         float cumulative = 0f;
 
-        for (int i = 0; i < rarities.Count; i++)
+        for (int i = 0; i < rarities.Length; i++)
         {
             cumulative += rarities[i].chance;
             if (random < cumulative)
                 return rarities[i];
         }
 
-        return rarities[rarities.Count-1];
+        return rarities[rarities.Length-1];
     }
 
     private void CreateItemUpgrades()
@@ -176,5 +180,14 @@ public class ItemDatabase : MonoBehaviour
         }
     }
 
-    
+    public string GetDescription(Enum value)
+    {
+        var field = value.GetType().GetField(value.ToString());
+        var attr = field.GetCustomAttribute<System.ComponentModel.DescriptionAttribute>();
+
+        return attr != null ? attr.Description : value.ToString();
+    }
+
+
+
 }

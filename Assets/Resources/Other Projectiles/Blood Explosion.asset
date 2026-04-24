@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
+  m_Name: Blood Explosion
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  _upgrades: []
+  _itemType: 0
+  _name: 
+  _description: 
+  icon: {fileID: 0}
+  baseStats: {fileID: 0}
+  prefab: {fileID: 0}
+  randomAngleVariance: 0
+  direction: 0
+  hitInterval: 1
+  isPiercing: 0
+  trackEnemy: 0
+  aimAtEnemy: 0
+  baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
+  isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  behaviour: {fileID: 0}
+  pattern: {fileID: 0}
+  _statPreset: {fileID: 0}
+  effects:
+  - triggers: 0b000000
+    conditions: []
+    hasTick: 0
+    tickInterval: 0
+    effectData:
+    - rid: 6460871606461530193
+  references:
+    version: 2
+    RefIds:
+    - rid: 6460871606461530193
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 6
+        emitsIntent: 0
+        effectOperation:
+          rid: 6460871606461530196
+    - rid: 6460871606461530196
+      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
+      data:
+        valueSource:
+          mode: 0
+          constant: 0
+          multiplier: 0
+        duration: 0
+        modifiers: []

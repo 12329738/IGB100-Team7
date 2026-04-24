@@ -30,7 +30,6 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 1
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0
@@ -38,22 +37,25 @@ MonoBehaviour:
   pattern: {fileID: 11400000, guid: 1af918db992704748928efa5fa0c2747, type: 2}
   _statPreset: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   effects:
-  - triggers: 
-    hasTick: 0
+  - hasTick: 0
     tickInterval: 0
+    conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     effectData:
     - rid: 6974428157262168127
   references:
     version: 2
     RefIds:
+    - rid: 6460871606461530283
+      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
+      data:
+        magnitude: 10
     - rid: 6974428157262168127
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 1
-        emitsIntent: 0
         effectOperation:
-          rid: 6974428200029913199
-    - rid: 6974428200029913199
-      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
-      data:
-        magnitude: 0
+          rid: 6460871606461530283

@@ -20,7 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e75f8c266632b474ca7e3cb80dba0d72, type: 2}
   _itemType: 5
   _name: Eternal Sword
-  _description: Shoots piercing slashes at enemies
+  _description: Slash towards the nearest enemy, relasing a shockwave that pierces
+    enemies
   icon: {fileID: 21300000, guid: a9d7594b374375d418b61d63c8030c0e, type: 3}
   baseStats: {fileID: 11400000, guid: 6fc24c2416afb274ab1ce6859621f52f, type: 2}
   prefab: {fileID: 999691352028456364, guid: e188fdd92d348254c839a6dc8246b985, type: 3}

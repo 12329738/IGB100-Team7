@@ -60,13 +60,9 @@ MonoBehaviour:
   minExp: 0
   maxExp: 1000000
   maxLevel: 100
-  knockBackSpeed: 0
-  transformationUpgradeInterval: 10
-  rarities:
-  - {fileID: 11400000, guid: 25085ca443515f64d916ed0f3987392d, type: 2}
-  - {fileID: 11400000, guid: 2afd744753b755d40a2f5c7c7887387b, type: 2}
-  - {fileID: 11400000, guid: d6c30d1f4f339404dbaa67af06c8fcbe, type: 2}
-  - {fileID: 11400000, guid: 311f1533db1ee6f408dd7275a4f36f4a, type: 2}
+  knockBackSpeed: 10
+  transformationUpgradeInterval: 1
+  rarities: []
   experienceCurve:
     serializedVersion: 2
     m_Curve:

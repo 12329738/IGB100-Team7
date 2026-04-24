@@ -12,13 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701c6debb7274f8478afcd174d772bf0, type: 3}
   m_Name: Vampire Upgrade 2
   m_EditorClassIdentifier: 
-  name: 
-  description: Maximum bleed stacks are increased to 5,  When an enemy reaches max
-    bleed stacks, the bleeding bursts and deals damage in an area equal to 5% of
-    their health.
-  effects: []
+  name: Vampire Upgrade 2
+  description: Maximum bleed stacks are increased to 5,  While transformed, when
+    an enemy reaches max bleed stacks, the bleeding bursts and deals damage in an
+    area equal to 5% of their health, removing all their stacks.
+  effects:
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 6
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 6460871606461530199
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 12
+      useComparison: 1
+      comparisonType: 3
+      value: 5
+    effectData:
+    - rid: 6460871606461530279
   modifiers: []
   rarity: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6460871606461530199
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 9
+        effectOperation:
+          rid: 6460871606461530278
+    - rid: 6460871606461530278
+      type: {class: ModifyMaxStacks, ns: , asm: Assembly-CSharp}
+      data:
+        effect: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
+        newMaxStacks: 5
+    - rid: 6460871606461530279
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 10
+        effectOperation:
+          rid: 6460871606461530287
+    - rid: 6460871606461530287
+      type: {class: RemoveStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        effect: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}

@@ -21,6 +21,8 @@ public class ApplyStatusConfig : EffectOperation
         });
 
 
-        ctx.payload.status = effectData;
+        ctx.payload.status = new StatusEffectDataInstance(effectData);
     }
+
+
 }
