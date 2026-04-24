@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea81cdae415a23a4c950979a48bb08f0, type: 3}
   m_Name: New Effect Group
   m_EditorClassIdentifier: 
-  applyTrigger: 0
-  removeTrigger: 0
   effects: []
   references:
     version: 2

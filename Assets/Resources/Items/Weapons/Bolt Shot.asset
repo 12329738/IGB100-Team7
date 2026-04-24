@@ -52,7 +52,7 @@ MonoBehaviour:
     - rid: 6460871606461530283
       type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
       data:
-        magnitude: 10
+        magnitude: 1
     - rid: 6974428157262168127
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
