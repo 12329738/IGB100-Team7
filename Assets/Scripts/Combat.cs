@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.Rendering.DebugUI;
 using static UnityEngine.Video.VideoPlayer;
@@ -92,5 +93,10 @@ public class Combat : MonoBehaviour
             if (Time.time - lastHit < intent.context.hitInterval)
                 return;
         }
+
+        lastHitTimes[effectKey] = Time.time;
+
+        if (intent.target is Component comp)
+            GameManager.instance.effectHandler.Dispatch(intent.context);
     }
 }
