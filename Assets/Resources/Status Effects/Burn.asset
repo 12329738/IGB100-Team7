@@ -16,8 +16,13 @@ MonoBehaviour:
   description: Damages enemies over time
   duration: 5
   maxStacks: 1
+  definition: {fileID: 0}
+  hasTick: 1
+  tickInterval: 1
   entries:
-  - trigger: 5
+  - triggers: 05000000
+    hasTick: 0
+    tickInterval: 0
     effectData:
     - rid: 6460871561430433858
   references:
@@ -27,11 +32,11 @@ MonoBehaviour:
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 0
-        effectConfig:
-          rid: 6460871561430433860
-    - rid: 6460871561430433860
+        emitsIntent: 0
+        effectOperation:
+          rid: 6974428200029913098
+    - rid: 6974428200029913098
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        damage: 5
-        damageInterval: 0.5
+        damage: 10
         isHit: 0
