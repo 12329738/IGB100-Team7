@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Vampire Upgrade 1
   description: You heal 1 health per second per bleeding enemy (max 40 health per
-    second)
+    second) while transformed.
   effects:
   - hasTick: 1
     tickInterval: 1
-    trigger: 0
     conditions:
     - triggerEvent: 5
       useComparison: 0

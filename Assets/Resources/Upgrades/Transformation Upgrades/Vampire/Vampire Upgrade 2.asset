@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Vampire Upgrade 2
   m_EditorClassIdentifier: 
   name: Vampire Upgrade 2
-  description: Maximum bleed stacks are increased to 5,  When an enemy reaches max
-    bleed stacks, the bleeding bursts and deals damage in an area equal to 5% of
-    their health.
+  description: Maximum bleed stacks are increased to 5,  While transformed, when
+    an enemy reaches max bleed stacks, the bleeding bursts and deals damage in an
+    area equal to 5% of their health, removing all their stacks.
   effects:
   - hasTick: 0
     tickInterval: 0
