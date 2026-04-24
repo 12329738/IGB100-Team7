@@ -106,10 +106,7 @@ public class StatusEffectInstance
         Refresh();
         context.trigger = CombatEvent.OnStackCount;
         EmitEffects(context);
-        GameManager.instance.effectHandler.Dispatch(context);
-
-        
-        
+        GameManager.instance.effectHandler.Dispatch(context);    
     }
 
     private void Refresh()

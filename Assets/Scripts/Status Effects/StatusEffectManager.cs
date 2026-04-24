@@ -46,6 +46,13 @@ public class StatusEffectManager : MonoBehaviour
         effects.Remove(statusEffectInstance);
     }
 
+    internal void RemoveStatus(StatusEffectData statusEffectData)
+    {
+        StatusEffectInstance instance = effects.FirstOrDefault(i => i.data.definition == statusEffectData.definition);
+        GameManager.instance.statusEffectRegistry.RemoveStacks(instance.data.definition, (int)instance.context.stacks);
+        effects.Remove(instance);
+    }
+
     internal void ResetStatusEffects()
     {
         effects.Clear();

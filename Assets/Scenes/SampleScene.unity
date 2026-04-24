@@ -2938,16 +2938,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b2210acf48c6ebc4c9d138dc126883d7, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: currentTransformationUpgrades.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'currentTransformationUpgrades.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 5f0a02e90d0bc54438e3ee127f55c10e, type: 2}
+      objectReference: {fileID: 11400000, guid: fcbe9210de961894b8fbaa61cba14592, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'currentTransformationUpgrades.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: fcbe9210de961894b8fbaa61cba14592, type: 2}
+      objectReference: {fileID: 11400000, guid: 5f0a02e90d0bc54438e3ee127f55c10e, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'currentTransformationUpgrades.Array.data[2]'
       value: 

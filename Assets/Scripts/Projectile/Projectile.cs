@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectInstance instance = new EffectInstance(node, data.owner, gameObject, gameObject);
+            EffectInstance instance = new EffectInstance(node, data.owner.gameObject, gameObject, gameObject);
             GameManager.instance.effectHandler.Register(instance);
         }
 
@@ -105,7 +105,7 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
     private void TryHit(GameObject target)
     {
-        if (target == data.owner)
+        if (target == data.owner.gameObject)
             return;
 
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
@@ -113,7 +113,8 @@ public class Projectile : MonoBehaviour, IModifierProvider
 
         var context = new EffectContext
         {
-            source = data.owner,
+            source = gameObject,
+            owner = data.owner,
             target = target,
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,

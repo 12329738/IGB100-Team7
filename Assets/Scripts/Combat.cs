@@ -37,7 +37,7 @@ public class Combat : MonoBehaviour
         hitCtx.trigger = CombatEvent.OnDamage;
         GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
 
-        IModifierReceiver modifierReceiver = intent.context.source.GetComponent<IModifierReceiver>();
+        IModifierReceiver modifierReceiver = intent.context.owner.GetComponent<IModifierReceiver>();
         if (modifierReceiver != null)
             intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
 
@@ -49,7 +49,7 @@ public class Combat : MonoBehaviour
             EffectContext ctx = intent.context.Clone();
             ctx.trigger = CombatEvent.OnHit;
             GameManager.instance.effectHandler.Dispatch(ctx);
-            ctx.source.GetComponent<StatusEffectManager>().Dispatch(ctx);
+            ctx.owner.GetComponent<StatusEffectManager>().Dispatch(ctx);
         }
 
     }

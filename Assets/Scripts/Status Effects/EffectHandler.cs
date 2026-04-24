@@ -27,7 +27,8 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-
+            if (ctx.source != effects[i].owner && ctx.owner != effects[i].owner)
+                continue;
             effects[i].entryNode.Execute(ctx, intents);
 
         }
@@ -43,8 +44,8 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-
-            effects[i].entryNode.Execute(ctx, ref intents);
+            if (ctx.source == effects[i].owner)
+                effects[i].entryNode.Execute(ctx, ref intents);
 
         }
         combatIntent = intents[0];

@@ -10,4 +10,5 @@ public enum EffectIntent
     SourceModifier,
     StackCount,
     ModifyMaxStacks,
+    RemoveStatusEffect,
 }
