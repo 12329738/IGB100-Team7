@@ -56,4 +56,4 @@ MonoBehaviour:
     - rid: 6460871584670285966
       type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
       data:
-        magnitude: 2
+        magnitude: 0
