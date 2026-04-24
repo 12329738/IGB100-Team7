@@ -10,6 +10,22 @@ public class ProjectileSpawner
 
     public void CreateProjectile(ProjectileData baseData, int count, Vector3? startPosition = null)
     {
+        float range = baseData.stats.TryGetValue(StatType.Range, out var r) ? r : 0f;
+
+        Collider[] hits = Physics.OverlapSphere(
+            baseData.owner.transform.position,
+            range,
+            LayerMask.GetMask("Enemy")
+        );
+
+        List<Enemy> enemies = new();
+
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent<Enemy>(out var enemy))
+                enemies.Add(enemy);
+        }
+
 
         for (int i = 0; i < count; i++)
         {
@@ -28,39 +44,52 @@ public class ProjectileSpawner
             proj.transform.position = origin;
             proj.transform.rotation = Quaternion.identity;
 
-            Enemy target = null;
+
             Vector3 finalDirection = proj.data.finalDirection;
             finalDirection = Vector3.forward;
-            if (proj.data.trackEnemy || proj.data.aimAtEnemy)
+
+            Enemy target = null;
+
+            if (enemies.Count > 0)
             {
-                 target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
+                target = enemies[i % enemies.Count];
             }
+
             
+            Vector3 dir = Vector3.forward;
+            float angle = proj.data.baseDirection;
 
             if (target != null)
             {
-                if (proj.data.trackEnemy)
-                {
-                    target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
+                Vector3 toTarget = target.transform.position - origin;
+                dir = toTarget.normalized;
 
-                    {
-                        Vector3 direction = target.transform.position - origin;
-                        finalDirection = direction;
-                    }
-                }
+                angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
-                else if (proj.data.aimAtEnemy)
-                {
-                    target = GetClosestEnemy(origin, proj.TryGetStat(StatType.Range));
+                finalDirection = Vector3.forward;
 
-
-                    Vector3 direction = target.transform.position - origin;
-                    float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-
+                if (proj.data.aimAtEnemy)
                     proj.data.baseDirection = angle;
-
-                }
             }
+
+            if (proj.data.trackEnemy && target != null)
+            {
+                finalDirection = dir;
+            }
+
+            else
+            {
+
+                finalDirection = Quaternion.Euler(0f, proj.data.baseDirection, 0f)
+                                 * Vector3.forward;
+            }
+
+            if (proj.data.pattern != null)
+            {
+                finalDirection = proj.data.pattern.ConfigureBase(i, count, proj.data);
+            }
+            
+
 
             if (proj.data.randomDirection)
             {
@@ -69,12 +98,6 @@ public class ProjectileSpawner
                 finalDirection = origin + new Vector3(random.x, 0f, random.y);
             }
 
-            if (proj.data.pattern != null)
-            {               
-                finalDirection = proj.data.pattern.ConfigureBase(i, count, proj.data);     
-            }
-
-            
 
             proj.data.finalDirection = finalDirection;
             proj.transform.rotation = Quaternion.LookRotation(finalDirection);
