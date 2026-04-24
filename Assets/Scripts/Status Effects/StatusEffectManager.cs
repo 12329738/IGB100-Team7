@@ -8,7 +8,7 @@ public class StatusEffectManager : MonoBehaviour
 {
     private readonly List<StatusEffectInstance> effects = new();
     public EffectHandler effectHandler;
-    public void Apply(StatusEffectDataInstance data, GameObject source)
+    public void Apply(StatusEffectDataInstance data, IDamageSource source)
     {
 
         var existing = effects.FirstOrDefault(x => x.data.definition == data.definition); 
@@ -20,7 +20,7 @@ public class StatusEffectManager : MonoBehaviour
             return;
         }
 
-        var instance = new StatusEffectInstance(data, source, gameObject, this);
+        var instance = new StatusEffectInstance(data, source, gameObject.GetComponent<IDamageSource>(), this);
 
         effects.Add(instance);
 

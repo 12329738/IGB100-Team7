@@ -27,7 +27,7 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (ctx.source != effects[i].owner && ctx.owner != effects[i].owner)
+            if (ctx.damageSource != effects[i].effectHolder && ctx.damageSourceOwner != effects[i].effectHolder)
                 continue;
             effects[i].entryNode.Execute(ctx, intents);
 
@@ -44,8 +44,8 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (ctx.source == effects[i].owner)
-                effects[i].entryNode.Execute(ctx, ref intents);
+            if (ctx.damageSource.owner == effects[i].effectHolder)
+                effects[i].entryNode.Modify(ctx, ref intents);
 
         }
         combatIntent = intents[0];
@@ -58,7 +58,7 @@ public class EffectHandler : MonoBehaviour
         List<CombatIntent> intents = new List<CombatIntent>();
         EffectContext context = new EffectContext { trigger = CombatEvent.OnApply };
         instance.entryNode.Execute(context, intents);
-        instance.entryNode.Execute(context, ref intents);
+        instance.entryNode.Modify(context, ref intents);
 
     }
 
@@ -70,9 +70,9 @@ public class EffectHandler : MonoBehaviour
         }
     }
 
-    public void UnRegister(GameObject owner)
+    public void UnRegister(IDamageSource owner)
     {
-        effects.RemoveAll(x => x.owner == owner);
+        effects.RemoveAll(x => x.effectHolder == owner);
     }
 
     public void UnRegister(EffectInstance instance)

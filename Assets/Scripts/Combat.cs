@@ -7,7 +7,7 @@ using static UnityEngine.Video.VideoPlayer;
 
 public class Combat : MonoBehaviour
 {
-    private Dictionary<(object damageId, GameObject target), float> lastHitTimes = new();
+    private Dictionary<(object damageId, IDamageSource target), float> lastHitTimes = new();
 
     public void DealDamage(CombatIntent intent)
     {
@@ -29,7 +29,8 @@ public class Combat : MonoBehaviour
 
         lastHitTimes[effectKey] = Time.time;
 
-        var damageable = intent.target.GetComponent<IDamageable>();
+        IDamageable damageable = intent.context.target as IDamageable;
+
         if (damageable == null || !damageable.IsDamageable())
             return;
 
@@ -37,8 +38,7 @@ public class Combat : MonoBehaviour
         hitCtx.trigger = CombatEvent.OnDamage;
         GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
 
-        IModifierReceiver modifierReceiver = intent.context.owner.GetComponent<IModifierReceiver>();
-        if (modifierReceiver != null)
+        if (intent.context.damageSourceOwner is IModifierReceiver modifierReceiver)
             intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
 
         damageable.TakeDamage(intent);
@@ -49,22 +49,29 @@ public class Combat : MonoBehaviour
             EffectContext ctx = intent.context.Clone();
             ctx.trigger = CombatEvent.OnHit;
             GameManager.instance.effectHandler.Dispatch(ctx);
-            ctx.owner.GetComponent<StatusEffectManager>().Dispatch(ctx);
+
+            if (ctx.damageSourceOwner is Component comp)
+            comp.gameObject.GetComponent<StatusEffectManager>().Dispatch(ctx);
         }
 
     }
 
     public void Heal(CombatIntent intent)
     {
-        var damageable = intent.context.target.GetComponent<IDamageable>();
-        damageable.Heal(intent.value);
-        DamagePopup.instance.ShowCombatText(intent);
+        if (intent.context.target is IDamageable damageable)
+        {
+            damageable.Heal(intent.value);
+            DamagePopup.instance.ShowCombatText(intent);
+        }
+
+
 
     }
 
     public void KnockBack(CombatIntent intent)
     {
-        var damageable = intent.target.GetComponent<IDamageable>();
-        damageable.KnockBack(intent.value, intent.source.transform.position);
+        if (intent.context.target is IDamageable damageable)
+            if (intent.source is Component comp)
+            damageable.KnockBack(intent.value, comp.gameObject.transform.position);
     }
 }

@@ -32,17 +32,24 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
   randomDirection: 1
   behaviour: {fileID: 11400000, guid: 535d81d4ae3dac440ace6f4f5a3c47ff, type: 2}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
+  subWeaponData:
+  - {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}
+  subWeaponInstances: []
+  definition: {fileID: 11400000, guid: ac4f11976431f2344aff501b5d65c62d, type: 2}
   effects:
-  - triggers: 
-    hasTick: 0
+  - hasTick: 0
     tickInterval: 0
+    conditions:
+    - triggerEvent: 8
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     effectData:
     - rid: 6460871561430433861
   references:
@@ -51,17 +58,10 @@ MonoBehaviour:
     - rid: 6460871561430433861
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 7
-        emitsIntent: 0
+        type: 5
         effectOperation:
-          rid: 6974428200029913192
-    - rid: 6974428200029913192
-      type: {class: SourceModifier, ns: , asm: Assembly-CSharp}
+          rid: 6460871606461530318
+    - rid: 6460871606461530318
+      type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
-        targetTag: {fileID: 0}
-        multiplier: 0
-        valueSource:
-          mode: 0
-          constant: 0
-          multiplier: 0
-        _effectToModify: 0
+        weaponData: {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}

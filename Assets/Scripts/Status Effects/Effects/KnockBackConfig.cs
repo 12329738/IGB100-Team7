@@ -12,7 +12,7 @@ public class KnockBackConfig : EffectOperation
     {
         intents.Add(new CombatIntent
         {
-            source = ctx.source,
+            source = ctx.damageSource,
             target = ctx.target,
             value = magnitude,
             type = Type

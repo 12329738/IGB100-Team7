@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EffectContext
 {
-    public GameObject source;
-    public Entity owner;
-    public GameObject target;
+    public IDamageSource damageSource;
+    public IDamageSource damageSourceOwner;
+    public IDamageSource target;
+
 
 
     public EffectInstance effectInstance;

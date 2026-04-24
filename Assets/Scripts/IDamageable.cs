@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IDamageable 
+public interface IDamageable : IDamageSource
 {
     void TakeDamage(CombatIntent intent);
     bool IsDamageable();

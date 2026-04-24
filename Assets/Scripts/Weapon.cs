@@ -40,6 +40,11 @@ public class Weapon : Item, IModifierReceiver
     [SerializeField]
     private StatsPreset _statPreset;
     public Guid Id = Guid.NewGuid();
+    bool isWeapon = true;
+    public List<Weapon> subWeaponData;
+    [HideInInspector]
+    public List<Weapon> subWeaponInstances = new List<Weapon>();
+    public DamageSourceDefinition definition;
 
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
@@ -56,6 +61,23 @@ public class Weapon : Item, IModifierReceiver
         stats.AddModifierProvider(GameManager.instance.player.provider);
         stats.AddModifierProvider(this.provider);
 
+        foreach(Weapon weapon in subWeaponData)
+        {
+            Weapon subWeapon = Instantiate(weapon);
+            subWeapon.Initialize(this);
+            subWeaponInstances.Add(subWeapon);
+        }
+
+    }
+
+    public void Initialize(Weapon weapon)
+    {
+        if (stats != null) return;
+        stats = new Stats();
+        stats.Initialize(statPreset);
+        stats.AddModifierProvider(GameManager.instance.player.provider);
+        stats.AddModifierProvider(weapon);
+        stats.AddModifierProvider(this.provider);
     }
 
     public void CreateBaseUpgrade()
@@ -109,7 +131,11 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+        if (context.damageSource is Component comp)
+        {
+            GameManager.instance.projectileSpawner.CreateProjectile(data, count, comp.gameObject.transform.position);
+        }
+        
 
     }
 

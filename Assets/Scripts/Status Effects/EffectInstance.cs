@@ -7,12 +7,13 @@ public class EffectInstance
     public EffectState state;
     public EffectExecutor executor;
     //public HashSet<CombatEvent> subscribedEvents = new();
-    public GameObject owner;
+    public IDamageSource effectHolder;
 
-    public EffectInstance(EffectEntryNode def, GameObject source, GameObject target, GameObject owner)
+    public EffectInstance(EffectEntryNode def, IDamageSource source, IDamageSource target, IDamageSource effectCreator)
     {
         entryNode = def;
         executor = GameManager.instance.effectExecutor;
+        effectHolder = target;
         state = new EffectState
         {
             source = source,
@@ -22,8 +23,7 @@ public class EffectInstance
             stacks = 1
         };
 
-      
-        this.owner = owner;
+
     }
 
     public void Tick(float now, EffectExecutor executor)
@@ -38,14 +38,14 @@ public class EffectInstance
 
         var ctx = new EffectContext
         {
-            source = state.source,
+            damageSource = state.source,
             target = state.target,
             trigger = CombatEvent.OnTick,
             stacks = state.stacks
         };
         List<CombatIntent> intents = new List<CombatIntent>();
         entryNode.Execute(ctx, intents);
-        entryNode.Execute(ctx, ref intents);
+        entryNode.Modify(ctx, ref intents);
 
 
         executor.Execute(intents);

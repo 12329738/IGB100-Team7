@@ -30,13 +30,14 @@ MonoBehaviour:
   trackEnemy: 1
   aimAtEnemy: 0
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
-  randomDirection: 1
+  randomDirection: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 25ebf3562b0e99147bb671dc0f77ff94, type: 2}
+  subWeapon: []
+  definition: {fileID: 11400000, guid: 6640048ea65a4c44c897befecf37ab3d, type: 2}
   effects: []
   references:
     version: 2
