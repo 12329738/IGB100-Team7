@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: Holy Water Flask Stats
   m_EditorClassIdentifier: 
   statPresets:
-  main:Assets/Resources/Stats/Holy Water Flask Stats.asset
   - statType: 3
-    value: 1.5
+    value: 1
   - statType: 4
     value: 8
-  - statType: 9
-    value: 7
+  - statType: 1
+    value: 3
+  - statType: 7
+    value: 4
   - statType: 8
     value: 1
-  - statType: 1
-    value: 10
-  - statType: 7
-    value: 3
+  - statType: 9
+    value: 6
