@@ -19,7 +19,7 @@ public class DamageOverTimeConfig : EffectOperation
 
         intents.Add(new CombatIntent
         {
-            source = ctx.damageSource,
+            damageInstanceSource = ctx.damageInstanceSource,
             target = ctx.target,
             type = EffectIntent.DealDamage,
             value = value,

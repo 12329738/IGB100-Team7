@@ -16,7 +16,7 @@ public class ApplyStatusConfig : EffectOperation
         {
             context = ctx,
             type = Type,
-            source = ctx.damageSource,
+            damageInstanceSource = ctx.damageInstanceSource,      
             target = ctx.target,
         });
 

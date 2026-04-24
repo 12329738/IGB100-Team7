@@ -178,7 +178,27 @@ public class Stats
 
         return mult;
     }
+    public IEnumerable<StatModifier> GetAllModifiers()
+    {
+        HashSet<IModifierProvider> visited = new();
 
+        foreach (var provider in modifierProviders)
+        {
+            foreach (var mod in GetModifiersSafe(provider, visited))
+            {
+                yield return mod;
+            }
+        }
+    }
+
+    public IEnumerable<StatModifier> GetModifiers(StatType type)
+    {
+        foreach (var mod in GetAllModifiers())
+        {
+            if (mod.stat == type)
+                yield return mod;
+        }
+    }
 
 
 }

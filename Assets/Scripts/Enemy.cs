@@ -59,7 +59,7 @@ public class Enemy : Entity, IDamageable
             {
                 var context = new EffectContext
                 {
-                    damageSource = this,
+                    damageInstanceSource = this,
                     target = other.GetComponent<IDamageSource>(),
                     damageSourceOwner = this,
                     value = stats.GetStat(StatType.Damage),
@@ -70,7 +70,7 @@ public class Enemy : Entity, IDamageable
                 var intent = new CombatIntent
                 {
                     value = stats.GetStat(StatType.Damage),
-                    source = this,
+                    damageInstanceSource = this,
                     target = other.GetComponent<IDamageSource>(),
                     context = context
                 };

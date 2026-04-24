@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EffectContext
 {
+    public IDamageSource damageInstanceSource;
     public IDamageSource damageSource;
     public IDamageSource damageSourceOwner;
     public IDamageSource target;
+    public IModifierProvider modifierProvider;
 
-
+    public List<IModifierProvider> extraProviders;
 
     public EffectInstance effectInstance;
     public int sourceInstanceId;

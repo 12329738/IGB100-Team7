@@ -119,6 +119,8 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
+        if (count == 0)
+            count = 1;
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
 
     }
@@ -131,7 +133,9 @@ public class Weapon : Item, IModifierReceiver
         float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
-        if (context.damageSource is Component comp)
+        if (count == 0)
+            count = 1;
+        if (context.damageInstanceSource is Component comp)
         {
             GameManager.instance.projectileSpawner.CreateProjectile(data, count, comp.gameObject.transform.position);
         }

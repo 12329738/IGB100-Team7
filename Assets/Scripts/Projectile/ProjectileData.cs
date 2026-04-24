@@ -25,7 +25,8 @@ public class ProjectileData
     public Entity owner;
     public DamageSourceDefinition definition;
     public Vector3 location;
-
+    public IDamageSource weapon;
+    public List<IModifierProvider> modifierProviders = new();
     public ProjectileData(Weapon original)
     {
         stats = new Dictionary<StatType, float>();
@@ -48,6 +49,10 @@ public class ProjectileData
         randomDirection = original.randomDirection;
         owner = original.owner;
         definition = original.definition;
+        if (original is IDamageSource damageSource)
+            weapon = damageSource;
+        modifierProviders.Add(original);
+        modifierProviders.Add(original.owner);
     }
 
     public ProjectileData Clone()

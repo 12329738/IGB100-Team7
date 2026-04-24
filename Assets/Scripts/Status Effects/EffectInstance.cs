@@ -38,7 +38,7 @@ public class EffectInstance
 
         var ctx = new EffectContext
         {
-            damageSource = state.source,
+            damageInstanceSource = state.source,
             target = state.target,
             trigger = CombatEvent.OnTick,
             stacks = state.stacks

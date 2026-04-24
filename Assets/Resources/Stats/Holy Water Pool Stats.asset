@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statPresets:
   - statType: 2
+<<<<<<< Updated upstream
     value: 0
+=======
+    value: 1
+>>>>>>> Stashed changes
   - statType: 7
     value: 5
   - statType: 3
@@ -24,6 +28,9 @@ MonoBehaviour:
   - statType: 9
     value: 0
   - statType: 8
+<<<<<<< Updated upstream
     value: 1
   - statType: 1
+=======
+>>>>>>> Stashed changes
     value: 0

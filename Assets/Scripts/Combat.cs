@@ -38,7 +38,7 @@ public class Combat : MonoBehaviour
         hitCtx.trigger = CombatEvent.OnDamage;
         GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
 
-        if (intent.context.damageSourceOwner is IModifierReceiver modifierReceiver)
+        if (intent.context.damageSource is IModifierReceiver modifierReceiver)
             intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
 
         damageable.TakeDamage(intent);
@@ -71,7 +71,62 @@ public class Combat : MonoBehaviour
     public void KnockBack(CombatIntent intent)
     {
         if (intent.context.target is IDamageable damageable)
+<<<<<<< Updated upstream
             if (intent.source is Component comp)
             damageable.KnockBack(intent.value, comp.gameObject.transform.position);
     }
+=======
+            if (intent.damageInstanceSource.owner is Component comp)
+            damageable.KnockBack(intent.value, comp.gameObject.transform.position);
+    }
+
+    internal void TriggerContact(CombatIntent intent)
+    {
+        var effectKey = (intent.context.effectInstance, intent.context.target);
+        var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
+        float lastHit;
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
+        {
+            if (Time.time - lastHit < intent.context.hitInterval)
+                return;
+        }
+
+
+        else if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
+        {
+            if (Time.time - lastHit < intent.context.hitInterval)
+                return;
+        }
+
+        lastHitTimes[effectKey] = Time.time;
+
+        if (intent.target is Component comp)
+            GameManager.instance.effectHandler.Dispatch(intent.context);
+    }
+
+
+    float ResolveDamage(EffectContext ctx)
+    {
+        float value = ctx.value;
+
+        float flat = 0f;
+        float mult = 1f;
+
+        var mods = ModifierResolver.Resolve(ctx);
+
+        foreach (var mod in mods)
+        {
+            if (mod.stat != StatType.Damage)
+                continue;
+
+            if (mod.type == ModifierType.Flat)
+                flat += mod.amount;
+
+            if (mod.type == ModifierType.Percentage)
+                mult += mod.amount / 100f;
+        }
+
+        return (value + flat) * mult;
+    }
+>>>>>>> Stashed changes
 }

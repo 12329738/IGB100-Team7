@@ -28,18 +28,25 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
 
 
-    public void AddModifier(StatModifier mod)
-        => provider.AddModifier(mod);
 
-    public void RemoveModifier(StatModifier mod)
-        => provider.RemoveModifier(mod);
 
-    public List<StatModifier> Modifiers => provider.Modifiers;
+   
 
     public Entity owner { get => data.owner; set => data.owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
 
     private readonly ModifierProvider provider = new ModifierProvider();
+    public List<StatModifier> Modifiers => provider.Modifiers;
+    public void AddModifier(StatModifier mod)
+    => provider.AddModifier(mod);
+
+    public void RemoveModifier(StatModifier mod)
+        => provider.RemoveModifier(mod);
+    public event Action OnDirty
+    {
+        add => provider.OnDirty += value;
+        remove => provider.OnDirty -= value;
+    }
 
     public void Update()
     {      
@@ -48,11 +55,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             data.behaviour.Move(this, state);
         }
     }
-    public event Action OnDirty
-    {
-        add => provider.OnDirty += value;
-        remove => provider.OnDirty -= value;
-    }
+    
 
     public void Initialize(ProjectileData d)
     {
@@ -91,7 +94,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectContext context = new EffectContext { damageSource = this, damageSourceOwner = data.owner, trigger = CombatEvent.OnExpire };
+            EffectContext context = new EffectContext { damageInstanceSource = this, damageSourceOwner = data.owner, trigger = CombatEvent.OnExpire };
             List<CombatIntent> intents = new List<CombatIntent>();
             if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
@@ -109,6 +112,33 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         TryHit(other.gameObject);
 
+<<<<<<< Updated upstream
+=======
+    private void RaiseContactEvent(GameObject target)
+    {
+        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
+            return;
+
+        var context = new EffectContext
+        {
+            damageInstanceSource = this,
+            damageSource = data.weapon,
+            damageSourceOwner = data.owner,
+            target = target.GetComponent<IDamageSource>(),
+            hitInterval = data.hitInterval,
+            sourceInstanceId = this.GetInstanceID(),
+            trigger = CombatEvent.OnContact,
+        };
+
+        var intent = new CombatIntent
+        {
+            damageInstanceSource = this,
+            target = context.target,
+            context = context
+        };
+
+        ownerCombat.TriggerContact(intent);
+>>>>>>> Stashed changes
     }
 
     private void TryHit(GameObject target)
@@ -121,7 +151,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
         var context = new EffectContext
         {
-            damageSource = this,
+            damageInstanceSource = this,
             damageSourceOwner = data.owner,
             target = target.GetComponent<IDamageSource>(),
             value = TryGetStat(StatType.Damage),
@@ -133,7 +163,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         var intent = new CombatIntent
         {
             value = stats[StatType.Damage],
-            source = this,
+            damageInstanceSource = this,
             target = context.target,
             context = context
         };

@@ -32,7 +32,7 @@ public class EffectExecutor : MonoBehaviour
 
             case EffectIntent.ApplyStatusEffect:
                 comp.gameObject.GetComponent<StatusEffectManager>()
-                    .Apply(intent.context.payload.status, intent.source);
+                    .Apply(intent.context.payload.status, intent.damageInstanceSource);
                 break;
             }
         }

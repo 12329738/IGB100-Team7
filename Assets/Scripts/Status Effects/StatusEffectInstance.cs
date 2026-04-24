@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
-public class StatusEffectInstance : IDamageSource
+public class StatusEffectInstance : IDamageSource, IModifierProvider
 {
     public StatusEffectDataInstance data;
     public List<EffectInstance> runtimes = new();
@@ -16,15 +16,30 @@ public class StatusEffectInstance : IDamageSource
     public Entity owner { get => _owner; set => _owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
 
+    private readonly ModifierProvider provider = new ModifierProvider();
+    public List<StatModifier> Modifiers => provider.Modifiers;
+    public IModifierProvider modifierProviderSource;
+    public void AddModifier(StatModifier mod)
+    => provider.AddModifier(mod);
+
+    public void RemoveModifier(StatModifier mod)
+        => provider.RemoveModifier(mod);
+    public event Action OnDirty
+    {
+        add => provider.OnDirty += value;
+        remove => provider.OnDirty -= value;
+    }
+
     public StatusEffectInstance(StatusEffectDataInstance data, IDamageSource source, IDamageSource target, StatusEffectManager manager)
     {
+        modifierProviderSource = (IModifierProvider)source;
         effectManager = manager;
         this.data = data;
         owner = GameManager.instance.player;
 
         context = new EffectContext
         {
-            damageSource = source,
+            damageInstanceSource = source,
             target = target,
             origin = data.definition,
             stacks = 0,

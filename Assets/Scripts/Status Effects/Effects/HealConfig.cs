@@ -13,8 +13,13 @@ public class HealConfig : EffectOperation
         intents.Add(new CombatIntent
         {
             type = Type,
+<<<<<<< Updated upstream
             source = ctx.damageSource,
             target = ctx.target,
+=======
+            damageInstanceSource = ctx.damageInstanceSource,
+            target = GameManager.instance.player,
+>>>>>>> Stashed changes
             value = amount,
             context = ctx
         });

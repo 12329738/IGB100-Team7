@@ -9,6 +9,7 @@ public class StatModifier
     public ModifierType type;
     public Guid id;
     public IModifierProvider source;
+    public DamageSourceDefinition? requiredDefinition;
 
     public StatModifier()
     {
