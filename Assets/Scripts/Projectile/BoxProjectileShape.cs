@@ -14,10 +14,9 @@ public class BoxProjectileShape : MonoBehaviour, IProjectileShape
         if (!initialized)
             Initialize();
 
-        float scale = Mathf.Pow(size, 1f / 3f);
-        col.size *= scale;
-        float factor = Mathf.Sqrt(size);
-        visual.localScale *= factor;
+        float scale = Mathf.Sqrt(size);
+        col.size = baseSize * scale;
+        visual.localScale = baseScale * scale;
     }
 
     public void Initialize()

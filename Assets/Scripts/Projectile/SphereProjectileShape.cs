@@ -16,8 +16,8 @@ public class SphereProjectileShape : MonoBehaviour, IProjectileShape
             Initialize();
 
         float sphereScale = Mathf.Sqrt(size);
-        col.radius *= sphereScale;
-        visual.localScale *= sphereScale;
+        col.radius = baseSize * sphereScale;
+        visual.localScale = baseScale * sphereScale;
     }
     public void ResetSize()
     {
