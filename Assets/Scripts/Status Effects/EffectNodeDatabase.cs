@@ -44,10 +44,10 @@ public static class EffectNodeDatabase
         }
     }
 
-    [InitializeOnLoadMethod]
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] 
-    static void Init()
-    {
-        EffectNodeDatabase.ScanAndRegister();
-    }
+    //[InitializeOnLoadMethod]
+    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] 
+    //static void Init()
+    //{
+    //    EffectNodeDatabase.ScanAndRegister();
+    //}
 }

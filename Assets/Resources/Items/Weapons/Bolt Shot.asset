@@ -36,7 +36,8 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 11400000, guid: 1af918db992704748928efa5fa0c2747, type: 2}
   _statPreset: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
-  subWeapon: []
+  subWeaponData: []
+  subWeaponInstances: []
   definition: {fileID: 11400000, guid: cb3dcea3bd7b541449b7e9831741a51d, type: 2}
   effects:
   - hasTick: 0
@@ -51,13 +52,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 6460871606461530283
-      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
-      data:
-        magnitude: 1
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 6974428157262168127
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 1
         effectOperation:
-          rid: 6460871606461530283
+          rid: -2
