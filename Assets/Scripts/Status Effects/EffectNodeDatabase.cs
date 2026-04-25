@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 public static class EffectNodeDatabase
@@ -43,9 +46,16 @@ public static class EffectNodeDatabase
         }
     }
 
-    //[InitializeOnLoadMethod]
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] 
-    static void Init()
+#if UNITY_EDITOR
+    [InitializeOnLoadMethod]
+    static void EditorInit()
+    {
+        EffectNodeDatabase.ScanAndRegister();
+    }
+#endif
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void RunTimeInit()
     {
         EffectNodeDatabase.ScanAndRegister();
     }
