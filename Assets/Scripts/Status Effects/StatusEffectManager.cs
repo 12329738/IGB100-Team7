@@ -55,6 +55,10 @@ public class StatusEffectManager : MonoBehaviour
 
     internal void ResetStatusEffects()
     {
+        foreach (StatusEffectInstance instance in effects)
+        {
+            RemoveStatus(instance);
+        }
         effects.Clear();
     }
 

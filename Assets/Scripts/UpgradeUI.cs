@@ -48,9 +48,27 @@ public class UpgradeUI : MonoBehaviour
         }
         
         if (upgrade is ItemUpgrade)
-
         {
-            sb.AppendLine($"{GameManager.instance.database.GetDescription(itemUpgrade.itemType)}");
+            
+            Item playerItem = GameManager.instance.player.TryGetItem(itemUpgrade.itemType);
+            string level = "";
+            if (itemUpgrade.levelsAvaliable.Count == 0)
+            {
+                
+            }
+
+            else if (playerItem == null)
+            {
+                level = "Level 1";
+            }
+
+            else
+            {
+                level = $"Level {playerItem.currentLevel}";
+            }
+
+
+            sb.AppendLine($"{GameManager.instance.database.GetDescription(itemUpgrade.itemType)} {level}");
         }
  
 

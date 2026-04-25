@@ -244,7 +244,7 @@ public class Player : Entity, IDamageable
             }
 
 
-            if (upgrade.modifiers != null)
+            if (upgrade.modifiers.Count > 0)
             {
                 foreach (StatModifier modifier in upgrade.modifiers)
                 {
