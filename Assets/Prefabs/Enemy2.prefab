@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: -0.0000000043961, z: -0.028911}
-  m_LocalScale: {x: 0.09978397, y: 0.09978397, z: 0.09978397}
+  m_LocalScale: {x: 0.21641111, y: 0.21641111, z: 0.21641111}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7174853079067364914}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 545742387, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
+  m_Sprite: {fileID: -2062958965, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 4061204989553054452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 6.818, y: 6.818, z: 6.818}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -137,9 +137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDamaged: 1
   flashScript: {fileID: 0}
+  status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: a79dcb1db1545b04c8cd37cbc1ab4fcf, type: 2}
   _team: 1
+  _owner: {fileID: 0}
+  _definition: {fileID: 0}
   expAmount: 50
   references:
     version: 2

@@ -116,8 +116,8 @@ Transform:
   m_GameObject: {fileID: 4061204989553054452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: 0}
-  m_LocalScale: {x: 13.53682, y: 13.53682, z: 13.53682}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 25.405903, y: 25.405903, z: 25.405903}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4947560392509385920}
@@ -137,9 +137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDamaged: 1
   flashScript: {fileID: 0}
+  status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
   _team: 1
+  _owner: {fileID: 0}
+  _definition: {fileID: 0}
   expAmount: 100
   references:
     version: 2
@@ -163,7 +166,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.08906376, y: 0.2, z: 0.07331665}
+  m_Size: {x: 0.07, y: 0.2, z: 0.07331665}
   m_Center: {x: 0.005905296, y: 0, z: -0.011130084}
 --- !u!114 &3464707079348668055
 MonoBehaviour:
