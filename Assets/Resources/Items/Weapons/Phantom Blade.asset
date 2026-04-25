@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19a323d4d38807245869edd13667363a, type: 2}
   _itemType: 0
   _name: Phantom Blade
-  _description: Summons blades that orbit the player
+  _description: Summons blades that orbit the player, damaging enemies on contact.
   icon: {fileID: 21300000, guid: 52f97e6c174d95d47b3af968f59d0942, type: 3}
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
@@ -37,7 +37,8 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
   pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   _statPreset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
-  subWeapon: []
+  subWeaponData: []
+  subWeaponInstances: []
   definition: {fileID: 11400000, guid: 61d115f1a4b287444bafa013409d7864, type: 2}
   effects: []
   references:
