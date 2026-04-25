@@ -1,4 +1,3 @@
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class SphereProjectileShape : MonoBehaviour, IProjectileShape
