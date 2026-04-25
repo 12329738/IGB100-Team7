@@ -12,23 +12,8 @@ public class Combat : MonoBehaviour
 
     public void DealDamage(CombatIntent intent)
     {
-        var effectKey = (intent.context.effectInstance, intent.context.target);
-        var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
-        float lastHit;
-        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
-        {
-            if (Time.time - lastHit < intent.context.hitInterval)
-                return;
-        }
-        
-
-        else if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
-        {
-            if (Time.time - lastHit < intent.context.hitInterval)
-                return;
-        }
-
-        lastHitTimes[effectKey] = Time.time;
+        if (!CanHit(intent))
+            return;
 
         IDamageable damageable = intent.context.target as IDamageable;
 
@@ -78,25 +63,42 @@ public class Combat : MonoBehaviour
 
     internal void TriggerContact(CombatIntent intent)
     {
-        var effectKey = (intent.context.effectInstance, intent.context.target);
-        var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
-        float lastHit;
-        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
-        {
-            if (Time.time - lastHit < intent.context.hitInterval)
-                return;
-        }
-
-
-        else if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
-        {
-            if (Time.time - lastHit < intent.context.hitInterval)
-                return;
-        }
-
-        lastHitTimes[effectKey] = Time.time;
+        if (!CanHit(intent))
+            return;
 
         if (intent.target is Component comp)
             GameManager.instance.effectHandler.Dispatch(intent.context);
+    }
+
+    public bool CanHit(CombatIntent intent)
+    {
+        float lastHit;
+        if (intent.context.effectInstance != null)
+        {
+            var effectKey = (intent.context.effectInstance, intent.context.target);
+            if (lastHitTimes.TryGetValue(effectKey, out lastHit))
+            {
+                if (Time.time - lastHit < intent.context.hitInterval)
+                    return false;
+            }
+            lastHitTimes[effectKey] = Time.time;
+            return true;
+        }
+
+        else if (intent.context.sourceInstanceId != null)
+        {
+
+            var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
+
+            if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
+            {
+                if (Time.time - lastHit < intent.context.hitInterval)
+                    return false;
+            }
+            lastHitTimes[sourceKey] = Time.time;
+            return true;
+        }
+
+        return false;
     }
 }

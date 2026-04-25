@@ -52,32 +52,31 @@ public class Enemy : Entity, IDamageable
 
     private void OnTriggerStay(Collider other)
     {
-        if (other is BoxCollider)
+        
+        Player player = other.GetComponentInParent<Player>();
+        if (player != null)
         {
-            Player player = other.GetComponentInParent<Player>();
-            if (player != null)
+            var context = new EffectContext
             {
-                var context = new EffectContext
-                {
-                    damageSource = this,
-                    target = other.GetComponent<IDamageSource>(),
-                    damageSourceOwner = this,
-                    value = stats.GetStat(StatType.Damage),
-                    sourceInstanceId = this.gameObject.GetInstanceID(),
-                    hitInterval = 1f,
-                };
+                damageSource = this,
+                target = other.GetComponent<IDamageSource>(),
+                damageSourceOwner = this,
+                value = stats.GetStat(StatType.Damage),
+                sourceInstanceId = this.gameObject.GetInstanceID(),
+                hitInterval = 1f,
+            };
 
-                var intent = new CombatIntent
-                {
-                    value = stats.GetStat(StatType.Damage),
-                    source = this,
-                    target = other.GetComponent<IDamageSource>(),
-                    context = context
-                };
+            var intent = new CombatIntent
+            {
+                value = stats.GetStat(StatType.Damage),
+                source = this,
+                target = other.GetComponent<IDamageSource>(),
+                context = context
+            };
 
-                combat.DealDamage(intent);
-            }
+            combat.DealDamage(intent);
         }
+        
         
     }
 

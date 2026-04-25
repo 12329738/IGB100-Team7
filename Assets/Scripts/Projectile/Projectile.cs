@@ -61,7 +61,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         data = d;
         stats =data.stats;
 
-        transform.localScale *= TryGetStat(StatType.Area);
+
+        ApplyAreaStat(TryGetStat(StatType.Area));
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -88,6 +89,16 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         Deactivate();
     }
 
+    public void ApplyAreaStat(float area)
+    {
+        var shape = GetComponent<IProjectileShape>();
+        if (shape!= null)
+        {
+            shape.Initialize();
+            shape.ResetSize();
+            shape.SetSize(area);
+        }
+    }
     public void Deactivate()
     {
         foreach (EffectEntryNode node in data.effects)
@@ -117,24 +128,32 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
             return;
 
-        var context = new EffectContext
+        foreach (EffectEntryNode node in data.effects)
         {
-            damageSource = this,
-            damageSourceOwner = data.owner,
-            target = target.GetComponent<IDamageSource>(),
-            hitInterval = data.hitInterval,
-            sourceInstanceId = this.GetInstanceID(),
-            trigger = CombatEvent.OnContact,
-        };
+            if (node.conditions.Any(x => x.triggerEvent == CombatEvent.OnContact))
+            {
+                var context = new EffectContext
+                {
+                    damageSource = this,
+                    damageSourceOwner = data.owner,
+                    target = target.GetComponent<IDamageSource>(),
+                    hitInterval = data.hitInterval,
+                    sourceInstanceId = this.GetInstanceID(),
+                    trigger = CombatEvent.OnContact,
+                };
 
-        var intent = new CombatIntent
-        {
-            source = this,
-            target = context.target,
-            context = context
-        };
+                var intent = new CombatIntent
+                {
+                    source = this,
+                    target = context.target,
+                    context = context
+                };
 
-        ownerCombat.TriggerContact(intent);
+                ownerCombat.TriggerContact(intent);
+            }
+
+        }
+        
     }
 
     private void TryHit(GameObject target)

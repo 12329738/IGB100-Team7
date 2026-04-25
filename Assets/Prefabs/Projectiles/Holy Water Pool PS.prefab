@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8609116030268763451}
   - component: {fileID: -3645177392850111193}
   - component: {fileID: 4279005101457127313}
-  m_Layer: 0
+  - component: {fileID: 4108146080906189502}
+  m_Layer: 7
   m_Name: Holy Water Pool PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +69,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4279005101457127313
 Rigidbody:
@@ -97,6 +98,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4108146080906189502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6535610066460921345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ad548983ddbae409a284eb41c43ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: -3645177392850111193}
 --- !u!1 &8716798436190535206
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,8 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2154469452295403746}
   - component: {fileID: 8498995404806053852}
-  - component: {fileID: 3448142594160629274}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,27 +198,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!135 &3448142594160629274
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8716798436190535206}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.54
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9023139999490754753
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +209,7 @@ GameObject:
   - component: {fileID: 2413658065950092618}
   - component: {fileID: 3937991069670661590}
   - component: {fileID: 3282742194400497700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5048,7 +5040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4780672895381447589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5064,7 +5056,7 @@ Transform:
   m_GameObject: {fileID: 9150631530822584058}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -3,10 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+
 
 public class Player : Entity, IDamageable
 {
@@ -16,7 +16,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public float currentExperience = 0;
     public List<Weapon> startingWeapons;
-    SphereCollider pickupCollider;
+    public SphereCollider pickupCollider;
     [HideInInspector]
     public List<Weapon> weapons;
     [HideInInspector]
@@ -30,7 +30,9 @@ public class Player : Entity, IDamageable
     Coroutine transformationCoroutine;
 
     public Sprite regularSprite;
+
     public SpriteRenderer sr;
+
 
     Queue<int> levelUps = new();
     [HideInInspector]
@@ -49,7 +51,7 @@ public class Player : Entity, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
+
 
         foreach (EffectEntryNode node in transformation.effect.entries)
         {
@@ -70,7 +72,7 @@ public class Player : Entity, IDamageable
 
         avaliableTransformationUpgrades.AddRange(transformation.upgrades);
 
-        pickupCollider = GetComponent<SphereCollider>();
+
         pickupCollider.radius = stats.GetStat(StatType.Collection);
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
@@ -217,7 +219,7 @@ public class Player : Entity, IDamageable
             upgradeChosen = false;
         }
 
-        if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
             GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
             yield return new WaitUntil(() => upgradeChosen == true);

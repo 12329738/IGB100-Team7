@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7126441801414183815}
   - component: {fileID: 4967002423649952269}
-  - component: {fileID: 555609383459478792}
+  - component: {fileID: 7878975428955049970}
   - component: {fileID: -5530915616236386464}
-  m_Layer: 0
+  - component: {fileID: 544109826734594681}
+  - component: {fileID: 9017549256829329164}
+  - component: {fileID: 7430363139122959058}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1.1993935, y: 1.1993935, z: 1.1993935}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6015161388496561043}
@@ -49,43 +52,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDamaged: 1
   flashScript: {fileID: 0}
+  status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: 55aa42f8c2b05af4ba96190dafe1beb1, type: 2}
   _team: 0
+  _owner: {fileID: 0}
+  _definition: {fileID: 0}
   level: 1
   currentExperience: 0
-  startingWeapons: []
+  startingWeapons:
+  - {fileID: 11400000, guid: b2210acf48c6ebc4c9d138dc126883d7, type: 2}
+  - {fileID: 11400000, guid: a9a27cad9c181e340984eed10ca162df, type: 2}
+  - {fileID: 11400000, guid: 41df31b746c9c7a458fe6d53d2a0a375, type: 2}
+  pickupCollider: {fileID: 9017549256829329164}
   weapons: []
   passives: []
-  transformation: {fileID: 0}
+  transformation: {fileID: 11400000, guid: 5cf3d55c62a980c47b559011081361f9, type: 2}
   currentTransformationAmount: 0
-  regularSprite: {fileID: 0}
-  sr: {fileID: 0}
+  regularSprite: {fileID: -589670836, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
+  sr: {fileID: 4067718094682474035}
   upgradeChosen: 0
+  timeTransformed: 0
+  currentTransformationUpgrades: []
   references:
     version: 2
     RefIds: []
---- !u!65 &555609383459478792
-BoxCollider:
+--- !u!114 &7878975428955049970
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4124480751125308057}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.15, z: 0.15}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e431cd33e80d845a57073285fcefa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-5530915616236386464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +101,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectHandler: {fileID: 0}
+--- !u!54 &544109826734594681
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &9017549256829329164
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 447
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &7430363139122959058
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124480751125308057}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 136
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 375
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7535302806152510063
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,9 +180,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6015161388496561043}
-  - component: {fileID: 3021073055226903450}
-  m_Layer: 0
-  m_Name: Cube
+  - component: {fileID: 4067718094682474035}
+  m_Layer: 8
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,13 +197,13 @@ Transform:
   m_GameObject: {fileID: 7535302806152510063}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.111, y: -0, z: -0.27}
+  m_LocalScale: {x: 0.63938, y: 0.63938, z: 0.63938}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7126441801414183815}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!212 &3021073055226903450
+--- !u!212 &4067718094682474035
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,12 +247,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -589670836, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
