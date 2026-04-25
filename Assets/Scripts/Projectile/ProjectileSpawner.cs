@@ -33,7 +33,6 @@ public class ProjectileSpawner
             Projectile proj = obj.GetComponent<Projectile>();
 
             ProjectileData data = baseData.Clone();
-            proj.transform.localScale = baseData.prefab.transform.localScale;
             proj.Initialize(data);
 
 

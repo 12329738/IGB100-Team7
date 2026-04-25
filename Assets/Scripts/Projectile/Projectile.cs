@@ -61,7 +61,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         data = d;
         stats =data.stats;
 
-        transform.localScale *= TryGetStat(StatType.Area);
+
+        ApplyAreaStat(TryGetStat(StatType.Area));
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -88,6 +89,16 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         Deactivate();
     }
 
+    public void ApplyAreaStat(float area)
+    {
+        var shape = GetComponent<IProjectileShape>();
+        if (shape!= null)
+        {
+            shape.Initialize();
+            shape.ResetSize();
+            shape.SetSize(area);
+        }
+    }
     public void Deactivate()
     {
         foreach (EffectEntryNode node in data.effects)

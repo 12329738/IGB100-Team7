@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8609116030268763451}
   - component: {fileID: -3645177392850111193}
   - component: {fileID: 4279005101457127313}
+  - component: {fileID: 4108146080906189502}
   m_Layer: 7
   m_Name: Holy Water Pool PS
   m_TagString: Untagged
@@ -97,6 +98,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4108146080906189502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6535610066460921345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ad548983ddbae409a284eb41c43ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: -3645177392850111193}
 --- !u!1 &8716798436190535206
 GameObject:
   m_ObjectHideFlags: 0
