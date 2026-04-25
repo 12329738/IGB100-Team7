@@ -30,7 +30,9 @@ public class Player : Entity, IDamageable
     Coroutine transformationCoroutine;
 
     public Sprite regularSprite;
+
     public SpriteRenderer sr;
+
 
     Queue<int> levelUps = new();
     [HideInInspector]
@@ -49,7 +51,7 @@ public class Player : Entity, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
+
 
         foreach (EffectEntryNode node in transformation.effect.entries)
         {
