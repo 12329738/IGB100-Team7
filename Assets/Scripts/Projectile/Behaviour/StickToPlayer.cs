@@ -11,8 +11,10 @@ public class StickToPlayer : WeaponBehaviour
     if (usePlayerAsBase)
     {
         Transform player = proj.data.owner.transform;
-
-        proj.transform.position =player.transform.position + new Vector3(0.1f, 0, 0);
+        float playerHeight = player.GetComponentInChildren<SpriteRenderer>().bounds.extents.z;
+        float projectileHeight = proj.GetComponentInChildren<SpriteRenderer>().bounds.extents.z;
+        float offset = playerHeight + projectileHeight;
+        proj.transform.position = player.position + new Vector3(0, 0, offset);
 
 
     }

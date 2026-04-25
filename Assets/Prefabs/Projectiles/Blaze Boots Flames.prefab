@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 323028562032452672}
   - component: {fileID: 8468003853796296888}
   - component: {fileID: 3666057331242603457}
+  - component: {fileID: 5927669896922876014}
   m_Layer: 7
   m_Name: Blaze Boots Flames
   m_TagString: Untagged
@@ -184,3 +185,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5927669896922876014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999691352028456364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7f286e015443647ad6ce860d309600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 8468003853796296888}
