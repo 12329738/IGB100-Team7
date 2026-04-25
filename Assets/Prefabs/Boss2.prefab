@@ -56,7 +56,7 @@ MonoBehaviour:
   _team: 1
   _owner: {fileID: 0}
   _definition: {fileID: 0}
-  expAmount: 500
+  expAmount: 1000
   references:
     version: 2
     RefIds: []
