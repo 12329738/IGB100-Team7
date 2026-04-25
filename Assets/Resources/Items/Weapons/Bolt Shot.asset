@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 625c4ee4466033945ac12d0717f82449, type: 2}
   - {fileID: 11400000, guid: 9f5e526cdb79ea54897f30a31ee11d2f, type: 2}
   _itemType: 1
-  _name: Boltshot
-  _description: Shoots 3 projectiles in a cone
+  _name: Shoots 3 arrows in a cone towards the nearest enemy
+  _description: Shoots projectiles that knockback enemies
   icon: {fileID: 21300000, guid: ed109a88c2ee6354880996aa8af5f526, type: 3}
   baseStats: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
   prefab: {fileID: 999691352028456364, guid: 7a3fcaf5940cd2446bf02ac72b761d7a, type: 3}
@@ -52,11 +52,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 6460871606461530283
+      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
+      data:
+        magnitude: 2
     - rid: 6974428157262168127
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 1
         effectOperation:
-          rid: -2
+          rid: 6460871606461530283

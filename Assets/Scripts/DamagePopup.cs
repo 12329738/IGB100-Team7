@@ -11,11 +11,10 @@ public class DamagePopup : MonoBehaviour
 {
     public GameObject damageTextPrefab; 
     public float textHeightOffset = 2f;  
-    public float floatSpeed = 1f;        
-    public float fadeTime = 5f;         
+    public float floatSpeed = 10f;        
+    public float fadeTime = 10f;         
     public static DamagePopup instance;
     public Canvas damageCanvas;
-    public enum CombatTextType { EnemyDamage,PlayerDamage,Healing}
 
     void Awake()
     {

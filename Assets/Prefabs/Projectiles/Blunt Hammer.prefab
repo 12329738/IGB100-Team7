@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8071236033994822163}
   - component: {fileID: 5028007883852948830}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 323028562032452672}
   - component: {fileID: 8468003853796296888}
   - component: {fileID: 3666057331242603457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blunt Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

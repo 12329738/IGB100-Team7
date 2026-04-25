@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2888505477660258265}
   - component: {fileID: 3359591255438457301}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3964742804921509418}
   - component: {fileID: 8513398061808517436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite Mask (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7105248882995375687}
   - component: {fileID: 4092657021536584195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292978495713797028}
   - component: {fileID: 3578725034512616820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Holy Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2901033163474035673}
   - component: {fileID: 2107487789206808979}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109620924359792721}
   - component: {fileID: 5456358466651899810}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239147278337112768}
   - component: {fileID: 8264016693095432004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 915632907117357860}
   - component: {fileID: 7235281899377145472}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
