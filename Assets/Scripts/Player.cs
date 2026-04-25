@@ -16,7 +16,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public float currentExperience = 0;
     public List<Weapon> startingWeapons;
-    SphereCollider pickupCollider;
+    public SphereCollider pickupCollider;
     [HideInInspector]
     public List<Weapon> weapons;
     [HideInInspector]
@@ -72,7 +72,7 @@ public class Player : Entity, IDamageable
 
         avaliableTransformationUpgrades.AddRange(transformation.upgrades);
 
-        pickupCollider = GetComponent<SphereCollider>();
+
         pickupCollider.radius = stats.GetStat(StatType.Collection);
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }

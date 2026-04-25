@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8609116030268763451}
   - component: {fileID: -3645177392850111193}
   - component: {fileID: 4279005101457127313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Holy Water Pool PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2154469452295403746}
   - component: {fileID: 8498995404806053852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 2413658065950092618}
   - component: {fileID: 3937991069670661590}
   - component: {fileID: 3282742194400497700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5026,7 +5026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4780672895381447589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
