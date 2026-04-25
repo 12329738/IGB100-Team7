@@ -78,4 +78,4 @@ MonoBehaviour:
     - rid: 6460871615362105415
       type: {class: HealConfig, ns: , asm: Assembly-CSharp}
       data:
-        amount: 10
+        amount: 5
