@@ -217,7 +217,7 @@ public class Player : Entity, IDamageable
             upgradeChosen = false;
         }
 
-        if (level % GameManager.instance.transformationUpgradeInterval == 0)
+        if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
             GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
             yield return new WaitUntil(() => upgradeChosen == true);
