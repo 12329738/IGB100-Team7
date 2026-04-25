@@ -127,12 +127,16 @@ public class Stats
 
         foreach (var stat in cachedStats.Keys.ToList())
         {
-            float baseValue = cachedStats[stat];
+            if (cachedStats[stat] > 0)
+            {
+                float baseValue = cachedStats[stat];
 
-            float value = baseValue + flat[stat];
-            value *=  multiplicative[stat];                  
+                float value = baseValue + flat[stat];
+                value *= multiplicative[stat];
 
-            cachedStats[stat] = value;
+                cachedStats[stat] = value;
+            }
+            
         }
         isDirty = false;
         isRecalculating = false;

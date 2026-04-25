@@ -46,6 +46,18 @@ public class ObjectPool : MonoBehaviour
         {
             obj.GetComponent<Entity>().OnSpawned();
         }
+
+        ParticleSystem[] systems = obj.GetComponentsInChildren<ParticleSystem>();
+        if (systems != null)
+        {
+            foreach (ParticleSystem ps in systems)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                ps.Clear();
+                ps.Play();
+            }
+
+        }
         return obj;
     }
 
