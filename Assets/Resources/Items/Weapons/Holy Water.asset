@@ -23,7 +23,7 @@ MonoBehaviour:
   _name: Holy Water
   _description: Throw a vial that leaves a pool of water which heals you and applies
     burn to enemies
-  icon: {fileID: 21300000, guid: 9c46ebde711ca374f816e59a555ba0ab, type: 3}
+  icon: {fileID: 21300000, guid: ac4affa47cd39794299edfd54399b3c1, type: 3}
   baseStats: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   prefab: {fileID: 6370724445159366449, guid: 5dfc3d8fe6a1fe6429a3f73cdd059112, type: 3}
   randomAngleVariance: 0

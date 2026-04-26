@@ -21,7 +21,7 @@ MonoBehaviour:
   _itemType: 0
   _name: Phantom Blade
   _description: Summons blades that orbit the player, damaging enemies on contact.
-  icon: {fileID: 21300000, guid: 52f97e6c174d95d47b3af968f59d0942, type: 3}
+  icon: {fileID: 21300000, guid: 68a5fe3672bb1cc459ab425a4e7a105d, type: 3}
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
   randomAngleVariance: 0

@@ -22,7 +22,7 @@ MonoBehaviour:
   _itemType: 2
   _name: Blaze Boots
   _description: Spawn burning ground below you that damages enemies
-  icon: {fileID: 21300000, guid: 5182be4db3c5be946af47fb1ede1abbc, type: 3}
+  icon: {fileID: 21300000, guid: 7160738fc6c848546a2739257e8c477e, type: 3}
   baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
   prefab: {fileID: 999691352028456364, guid: f810c45529bf31c4e947e6900349504b, type: 3}
   randomAngleVariance: 0
@@ -38,7 +38,8 @@ MonoBehaviour:
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
-  subWeapon: []
+  subWeaponData: []
+  subWeaponInstances: []
   definition: {fileID: 11400000, guid: ec1776457eab575439e23ae399a45d00, type: 2}
   effects: []
   references:
