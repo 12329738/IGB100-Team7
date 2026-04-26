@@ -40,7 +40,7 @@ MonoBehaviour:
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   subWeaponData:
-  - {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}
+  - {fileID: 11400000, guid: 5828018a8900ecd448741b01f5e49162, type: 2}
   subWeaponInstances: []
   definition: {fileID: 11400000, guid: ac4f11976431f2344aff501b5d65c62d, type: 2}
   effects:
@@ -65,6 +65,6 @@ MonoBehaviour:
     - rid: 6460871606461530318
       type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
-        weaponData: {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}
+        weaponData: {fileID: 11400000, guid: 5828018a8900ecd448741b01f5e49162, type: 2}
         spawnAtTarget: 0
         spawnAtSource: 1
