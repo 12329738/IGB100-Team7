@@ -84,15 +84,16 @@ public class Enemy : Entity, IDamageable
     internal override void Die()
     {
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
-        OnDespawn();
-        this.gameObject.SetActive(false);
-    }
+        SpawnerManager.instance.UnregisterEnemy();
+        
 
-    private void OnDespawn()
-    {
         if (status != null)
             status.ResetStatusEffects();
+        GameManager.instance.effectHandler.UnRegister(this);
+        ObjectPool.instance.ReturnObject(gameObject);
     }
+
+
 
     void OnEnable()
     {
@@ -102,8 +103,6 @@ public class Enemy : Entity, IDamageable
 
     void OnDisable()
     {
-        SpawnerManager.instance.UnregisterEnemy();
-        GameManager.instance.effectHandler.UnRegister(this);
-        ObjectPool.instance.ReturnObject(gameObject);
+        
     }
 }

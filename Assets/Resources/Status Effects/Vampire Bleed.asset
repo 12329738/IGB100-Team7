@@ -32,11 +32,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 6460871584670285962
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
         effectOperation:
-          rid: -2
+          rid: 6460871655503691853
+    - rid: 6460871655503691853
+      type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
+      data:
+        effectData: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}

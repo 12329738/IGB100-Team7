@@ -31,17 +31,27 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 6460871584670285975
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 4
         effectOperation:
-          rid: -2
+          rid: 6460871655503691851
     - rid: 6460871584670285985
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 8
         effectOperation:
-          rid: -2
+          rid: 6460871655503691852
+    - rid: 6460871655503691851
+      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 0
+    - rid: 6460871655503691852
+      type: {class: StackCountModifier, ns: , asm: Assembly-CSharp}
+      data:
+        valuePerStack: 1
+        effects:
+        - {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
+        modifierType: 0
+        _effectToModify: 4

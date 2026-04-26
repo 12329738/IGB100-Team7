@@ -57,7 +57,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     public void OnEnable()
     {
-        status = GetComponent<StatusEffectManager>();
+
         OnSpawned();
     }
 
@@ -78,6 +78,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     public void OnSpawned()
     {
+        status = GetComponent<StatusEffectManager>();
         stats = new Stats();
         stats.Initialize(statPreset);
         stats.AddModifierProvider(this.provider);

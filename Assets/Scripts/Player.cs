@@ -211,7 +211,7 @@ public class Player : Entity, IDamageable
     private IEnumerator LevelUp()
     {
 
-
+        level++;
         Time.timeScale = 0f;
 
         List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
@@ -325,7 +325,7 @@ public class Player : Entity, IDamageable
     {
         levelUps.Enqueue(1);
         currentExperience -= GameManager.instance.GetExperienceAtLevel(level);
-        level++;
+        
     }
 
     internal override void Die()

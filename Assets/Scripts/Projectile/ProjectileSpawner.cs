@@ -26,6 +26,7 @@ public class ProjectileSpawner
                 enemies.Add(enemy);
         }
 
+        Enemy target = GetClosestEnemy(baseData.owner.transform.position, range);
 
         for (int i = 0; i < count; i++)
         {
@@ -47,14 +48,13 @@ public class ProjectileSpawner
             Vector3 finalDirection = proj.data.finalDirection;
             finalDirection = Vector3.forward;
 
-            Enemy target = null;
 
-            if (enemies.Count > 0)
+            if (enemies.Count > 0 && !proj.data.aimAtEnemy)
             {
                 target = enemies[i % enemies.Count];
             }
 
-            
+
             Vector3 dir = Vector3.forward;
             float angle = proj.data.baseDirection;
 
@@ -87,7 +87,7 @@ public class ProjectileSpawner
             {
                 finalDirection = proj.data.pattern.ConfigureBase(i, count, proj.data);
             }
-            
+
 
 
             if (proj.data.randomDirection)

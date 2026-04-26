@@ -55,7 +55,8 @@ public class StatusEffectManager : MonoBehaviour
 
     internal void ResetStatusEffects()
     {
-        foreach (StatusEffectInstance instance in effects)
+        StatusEffectInstance[] snapshot = effects.ToArray();
+        foreach (StatusEffectInstance instance in snapshot)
         {
             RemoveStatus(instance);
         }
