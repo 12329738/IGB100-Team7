@@ -3353,6 +3353,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.1414
       objectReference: {fileID: 0}
+    - target: {fileID: 846841536451498269, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -39
+      objectReference: {fileID: 0}
     - target: {fileID: 915575711633173874, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
