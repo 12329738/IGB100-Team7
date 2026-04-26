@@ -144,7 +144,7 @@ MonoBehaviour:
   _owner: {fileID: 0}
   _definition: {fileID: 0}
   expAmount: 250
-  damageSourceDefinition: {fileID: 0}
+  damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   references:
     version: 2
     RefIds: []
