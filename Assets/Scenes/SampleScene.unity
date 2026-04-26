@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7a3529e32ac048ace48bab4f978d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 300
+  startingTime: 360
   timerText: {fileID: 54157458}
   waveText: {fileID: 540305542}
   waves:
