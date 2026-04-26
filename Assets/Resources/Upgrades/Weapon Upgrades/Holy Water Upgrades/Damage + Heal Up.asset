@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
+  effects: []
   modifiers:
   - stat: 2
     amount: 15
@@ -22,3 +23,6 @@ MonoBehaviour:
   rarity: 0
   itemType: 4
   levelsAvaliable: 0100000002000000030000000400000005000000
+  references:
+    version: 2
+    RefIds: []
