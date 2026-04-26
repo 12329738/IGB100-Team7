@@ -66,3 +66,5 @@ MonoBehaviour:
       type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
         weaponData: {fileID: 11400000, guid: fc4da98ab2a4ba14abc033e596915530, type: 2}
+        spawnAtTarget: 0
+        spawnAtSource: 1

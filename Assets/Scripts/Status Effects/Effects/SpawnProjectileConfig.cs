@@ -8,6 +8,8 @@ using UnityEngine;
 public class SpawnProjectileConfig : EffectOperation
 {
     public Weapon weaponData;
+    public bool spawnAtTarget;
+    public bool spawnAtSource;
 
     public override EffectIntent Type => EffectIntent.SpawnProjectile;
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
@@ -27,7 +29,15 @@ public class SpawnProjectileConfig : EffectOperation
             playerWeapon.Initialize();
         }
         ctx.payload.weapon = playerWeapon;
-        playerWeapon.SpawnProjectiles(ctx);
+        IDamageSource targetLocation = null;
+        if (spawnAtTarget)
+            targetLocation = ctx.target;
+        if (spawnAtSource)
+            targetLocation = ctx.damageSource;
+        Vector3 position = Vector3.forward;
+        if (targetLocation is Component comp)
+            position = comp.gameObject.transform.position;
+        playerWeapon.SpawnProjectiles(ctx, position);
         
         
     }

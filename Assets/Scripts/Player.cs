@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -325,7 +326,7 @@ public class Player : Entity, IDamageable
 
     internal override void Die()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     internal void Transform()

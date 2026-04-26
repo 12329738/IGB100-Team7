@@ -50,10 +50,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDamaged: 1
   flashScript: {fileID: 0}
+  status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
   _team: 1
+  _owner: {fileID: 0}
+  _definition: {fileID: 0}
   expAmount: 100
+  damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   references:
     version: 2
     RefIds: []
@@ -90,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff890a48ce768449b1f6e6ef6e3e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectHandler: {fileID: 0}
 --- !u!114 &-5676004252566367511
 MonoBehaviour:
   m_ObjectHideFlags: 0

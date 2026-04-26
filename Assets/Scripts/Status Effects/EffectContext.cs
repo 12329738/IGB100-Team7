@@ -30,7 +30,7 @@ public class EffectContext
     public bool isCrit;
     public int? stacks;
 
-    public DamageSourceDefinition origin;
+    public DamageSourceDefinition definition;
     public DamageFlags flags;
 
     public EventHandler eventHandler;

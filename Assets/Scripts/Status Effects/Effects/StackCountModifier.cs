@@ -21,6 +21,8 @@ public class StackCountModifier : EffectOperation, IIntentModifier
 
     public void Modify(ref CombatIntent intent)
     {
+        if (intent.type != effectToModifiy)
+            return;
         float total = 0;
 
         foreach (var e in effects)

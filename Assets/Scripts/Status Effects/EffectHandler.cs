@@ -33,8 +33,6 @@ public class EffectHandler : MonoBehaviour
 
         }
 
-
-
         GameManager.instance.effectExecutor.Execute(intents);
     }
 
