@@ -14,10 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
+  effects: []
   modifiers:
   - stat: 8
-    amount: 1
-    isPercentage: 0
+    amount: 15
+    isPercentage: 1
+    type: 1
   rarity: 0
   itemType: 10
   levelsAvaliable: 0100000002000000030000000400000005000000
+  references:
+    version: 2
+    RefIds: []

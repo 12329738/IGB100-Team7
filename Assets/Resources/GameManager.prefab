@@ -59,7 +59,7 @@ MonoBehaviour:
   passiveUpgradeLimit: 5
   minExp: 0
   maxExp: 500000
-  maxLevel: 36
+  maxLevel: 35
   knockBackSpeed: 10
   transformationUpgradeInterval: 12
   rarities: []
