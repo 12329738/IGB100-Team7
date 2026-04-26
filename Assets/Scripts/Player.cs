@@ -202,6 +202,8 @@ public class Player : Entity, IDamageable
         }
         if (Input.GetKeyDown("r"))
             Die();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
 
             transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
     }
