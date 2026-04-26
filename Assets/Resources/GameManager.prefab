@@ -61,7 +61,7 @@ MonoBehaviour:
   maxExp: 1000000
   maxLevel: 100
   knockBackSpeed: 10
-  transformationUpgradeInterval: 1
+  transformationUpgradeInterval: 10
   rarities: []
   experienceCurve:
     serializedVersion: 2
