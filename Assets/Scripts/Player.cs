@@ -200,7 +200,7 @@ public class Player : Entity, IDamageable
                 StopTransformation();
             }
         }
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("o"))
             Die();
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
