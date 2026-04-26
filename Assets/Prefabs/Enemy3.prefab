@@ -143,7 +143,7 @@ MonoBehaviour:
   _team: 1
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
-  expAmount: 150
+  expAmount: 100
   damageSourceDefinition: {fileID: 0}
   references:
     version: 2
