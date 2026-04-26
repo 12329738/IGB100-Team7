@@ -4,9 +4,8 @@ using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
 
@@ -51,10 +50,25 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+        ResetRuntimeState();
 
+        
+    }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void ResetRuntimeState()
+    {
         database = new ItemDatabase();
         database.Initialize();
-        rarities= Resources.LoadAll<Rarity>("Rarities");
+        rarities = Resources.LoadAll<Rarity>("Rarities");
         projectileSpawner = new ProjectileSpawner();
         effectExecutor = new EffectExecutor();
         effectHandler = GetComponent<EffectHandler>();
@@ -62,7 +76,17 @@ public class GameManager : MonoBehaviour
 
         CreateRarityDictionary();
     }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneReference sceneRef = FindFirstObjectByType<SceneReference>();
 
+        if (sceneRef != null)
+        {
+            SetSceneReferences(sceneRef);
+        }
+
+        ResetRuntimeState();
+    }
     private void CreateRarityDictionary()
     {
         rarityColors = new Dictionary<RarityEnum, Color>();
@@ -75,11 +99,10 @@ public class GameManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Initialize()
     {
-        if (instance == null)
-        {
-            GameObject prefab = Resources.Load<GameObject>("GameManager");
-            Instantiate(prefab);
-        }
+        if (instance != null) return;
+
+        GameObject prefab = Resources.Load<GameObject>("GameManager");
+        Instantiate(prefab);
     }
 
 
