@@ -326,7 +326,7 @@ public class Player : Entity, IDamageable
 
     internal override void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     internal void Transform()

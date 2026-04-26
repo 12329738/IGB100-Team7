@@ -22,10 +22,23 @@ public class Combat : MonoBehaviour
 
         EffectContext hitCtx = intent.context.Clone();
         hitCtx.trigger = CombatEvent.OnDamage;
-        GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
 
-        if (intent.context.damageSourceOwner is IModifierReceiver modifierReceiver)
-            intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
+        if (intent.context.definition.usesValueSource)
+        {
+            intent.value = intent.context.definition.source.Evaluate(intent);
+        }
+
+        if (!intent.context.definition.ignoreModifiers)
+        {
+            GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
+
+            if (intent.context.damageSourceOwner is IModifierReceiver modifierReceiver && intent.context.damageSource != intent.context.damageSourceOwner)
+            {
+
+            }
+                //intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
+
+        }
 
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);

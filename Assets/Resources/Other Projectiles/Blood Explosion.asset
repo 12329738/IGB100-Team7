@@ -19,7 +19,7 @@ MonoBehaviour:
   _description: 
   icon: {fileID: 0}
   baseStats: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 3336189089032681717, guid: baa76528aed299c459867f66198a39b0, type: 3}
   randomAngleVariance: 0
   direction: 0
   hitInterval: 1
@@ -27,18 +27,23 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   baseUpgrade: {fileID: 0}
-  owner: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
   randomDirection: 0
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
-  _statPreset: {fileID: 0}
+  _statPreset: {fileID: 11400000, guid: 3c127eda619fbf44c8be9c172077da77, type: 2}
+  subWeaponData: []
+  subWeaponInstances: []
+  definition: {fileID: 11400000, guid: 1589b44a901b9ad438503cda5d6beb97, type: 2}
   effects:
-  - triggers: 0b000000
-    conditions: []
-    hasTick: 0
+  - hasTick: 0
     tickInterval: 0
+    conditions:
+    - triggerEvent: 9
+      useComparison: 0
+      comparisonType: 0
+      value: 0
     effectData:
     - rid: 6460871606461530193
   references:
@@ -48,15 +53,16 @@ MonoBehaviour:
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 6
-        emitsIntent: 0
         effectOperation:
-          rid: 6460871606461530196
-    - rid: 6460871606461530196
+          rid: 6460871651864870983
+    - rid: 6460871651864870983
       type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
       data:
+        type: 2
         valueSource:
-          mode: 0
+          mode: 5
           constant: 0
           multiplier: 0
-        duration: 0
+          useTarget: 1
+          useSource: 0
         modifiers: []

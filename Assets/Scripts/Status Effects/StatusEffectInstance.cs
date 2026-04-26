@@ -26,7 +26,7 @@ public class StatusEffectInstance : IDamageSource
         {
             damageSource = source,
             target = target,
-            origin = data.definition,
+            definition = data.definition,
             stacks = 0,
             damageSourceOwner = owner
         };
@@ -100,6 +100,8 @@ public class StatusEffectInstance : IDamageSource
 
     public void AddStack(int amount)
     {
+        if (context.stacks < data.maxStacks)
+            GameManager.instance.statusEffectRegistry.AddStacks(data.definition, 1);
         context.stacks += amount;
         if (context.stacks > data.maxStacks)
             context.stacks = data.maxStacks;

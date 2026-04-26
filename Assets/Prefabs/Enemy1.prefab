@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3512271440442089338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
-  m_LocalScale: {x: 5.1306133, y: 5.1306133, z: 5.1306133}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
+  m_LocalScale: {x: 6.818, y: 6.818, z: 6.818}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7798037084314893067}
@@ -56,7 +56,8 @@ MonoBehaviour:
   _team: 1
   _owner: {fileID: 0}
   _definition: {fileID: 0}
-  expAmount: 25
+  expAmount: 100
+  damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   references:
     version: 2
     RefIds: []

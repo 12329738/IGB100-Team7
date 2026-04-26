@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 4061204989553054452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
   m_LocalScale: {x: 6.818, y: 6.818, z: 6.818}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -142,8 +142,9 @@ MonoBehaviour:
   _statPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
   _team: 1
   _owner: {fileID: 0}
-  _definition: {fileID: 0}
-  expAmount: 75
+  _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
+  expAmount: 150
+  damageSourceDefinition: {fileID: 0}
   references:
     version: 2
     RefIds: []

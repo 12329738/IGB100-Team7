@@ -7,7 +7,7 @@ public class Enemy : Entity, IDamageable
 {
     public float expAmount;
     Player player => GameManager.instance.player;
-
+    public DamageSourceDefinition damageSourceDefinition;
    
 
     void Start()
@@ -61,6 +61,7 @@ public class Enemy : Entity, IDamageable
                 damageSource = this,
                 target = other.GetComponent<IDamageSource>(),
                 damageSourceOwner = this,
+                definition = damageSourceDefinition,
                 value = stats.GetStat(StatType.Damage),
                 sourceInstanceId = this.gameObject.GetInstanceID(),
                 hitInterval = 1f,

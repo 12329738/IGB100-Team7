@@ -13,7 +13,7 @@ public class StatusEffectManager : MonoBehaviour
 
         var existing = effects.FirstOrDefault(x => x.data.definition == data.definition); 
 
-        GameManager.instance.statusEffectRegistry.AddStacks(data.definition, 1);
+        
         if (existing != null)
         {
             existing.AddStack(1);

@@ -7,8 +7,8 @@ using UnityEngine;
 public class ModifyStatConfig : EffectOperation, IIntentModifier
 {
     public override EffectIntent Type => EffectIntent.ModifyStat;
+    public ModifierType type;
     public ValueSource valueSource;
-    public float duration;
     public List<StatModifier> modifiers;
 
     public EffectIntent effectToModifiy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

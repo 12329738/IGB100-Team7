@@ -55,7 +55,7 @@ public class Weapon : Item, IModifierReceiver
     public List<EffectEntryNode> effects;
     public void Initialize()
     {
-        if (stats != null) return; 
+
         stats = new Stats();
         stats.Initialize(statPreset);
         stats.AddModifierProvider(GameManager.instance.player.provider);
@@ -125,7 +125,7 @@ public class Weapon : Item, IModifierReceiver
 
     }
 
-    public void SpawnProjectiles(EffectContext context)
+    public void SpawnProjectiles(EffectContext context, Vector3 position)
     {
         ProjectileData data = BuildProjectileData();
         data.owner = owner;
@@ -137,7 +137,7 @@ public class Weapon : Item, IModifierReceiver
             count = 1;
         if (context.damageSource is Component comp)
         {
-            GameManager.instance.projectileSpawner.CreateProjectile(data, count, comp.gameObject.transform.position);
+            GameManager.instance.projectileSpawner.CreateProjectile(data, count, position);
         }
         
 

@@ -55,12 +55,15 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     public void Initialize(ProjectileData d)
     {
-        visual = GetComponentInChildren<SpriteRenderer>().transform;
+
         data = d;
-        stats =data.stats;
-
-
-        ApplyAreaStat(TryGetStat(StatType.Area));
+        stats = data.stats;
+        if (GetComponentInChildren<SpriteRenderer>() != null)
+        {
+            visual = GetComponentInChildren<SpriteRenderer>().transform;
+            ApplyAreaStat(TryGetStat(StatType.Area));
+        }
+            
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -166,6 +169,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         {
             damageSource = this,
             damageSourceOwner = data.owner,
+            definition = data.definition,
             target = target.GetComponent<IDamageSource>(),
             value = TryGetStat(StatType.Damage),
             hitInterval = data.hitInterval,

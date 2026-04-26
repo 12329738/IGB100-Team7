@@ -58,10 +58,10 @@ MonoBehaviour:
   weaponUpgradeLimit: 5
   passiveUpgradeLimit: 5
   minExp: 0
-  maxExp: 500000
-  maxLevel: 35
+  maxExp: 1000000
+  maxLevel: 100
   knockBackSpeed: 10
-  transformationUpgradeInterval: 12
+  transformationUpgradeInterval: 10
   rarities: []
   experienceCurve:
     serializedVersion: 2
