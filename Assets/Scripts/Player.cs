@@ -200,8 +200,12 @@ public class Player : Entity, IDamageable
                 StopTransformation();
             }
         }
+        if (Input.GetKeyDown("r"))
+            Die();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
 
-        transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+            transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
     }
 
     private IEnumerator LevelUp()
