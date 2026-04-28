@@ -53,6 +53,7 @@ public class Weapon : Item, IModifierReceiver
     public Stats stats { get => _stats; set => _stats = value; }
 
     public List<EffectEntryNode> effects;
+    public float attackInterval;
     public void Initialize()
     {
 
@@ -67,7 +68,8 @@ public class Weapon : Item, IModifierReceiver
             subWeapon.Initialize(this);
             subWeaponInstances.Add(subWeapon);
         }
-
+        attackInterval = 1f / stats.GetStat(StatType.AttackSpeed);
+        cooldownTimer = attackInterval;
     }
 
     public void Initialize(Weapon weapon)
@@ -93,17 +95,18 @@ public class Weapon : Item, IModifierReceiver
     public void Tick(float deltaTime)
     {
 
-        if (stats.GetStat(StatType.Duration) <= 0)
+        //if (stats.GetStat(StatType.Duration) <= 0)
 
+        //{
+        //    return;
+        //}
+
+        attackInterval = 1f/stats.GetStat(StatType.AttackSpeed);
+        cooldownTimer += deltaTime;
+
+        if (cooldownTimer >= attackInterval)
         {
-            return;
-        }
-
-        cooldownTimer -= deltaTime;
-
-        if (cooldownTimer <= 0f)
-        {
-            cooldownTimer = stats.GetStat(StatType.Cooldown);
+            cooldownTimer -= attackInterval;
             SpawnProjectiles();
 
             

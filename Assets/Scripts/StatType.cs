@@ -11,7 +11,7 @@ public enum StatType
     CritDamage,
     Duration,
     ProjectileCount,
-    Cooldown,
+    AttackSpeed,
     Collection,
     MaxTransformation,
     TransformationGainRate,
