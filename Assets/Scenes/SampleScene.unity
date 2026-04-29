@@ -4020,6 +4020,10 @@ PrefabInstance:
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 41df31b746c9c7a458fe6d53d2a0a375, type: 2}
+    - target: {fileID: 6015161388496561043, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 7126441801414183815, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

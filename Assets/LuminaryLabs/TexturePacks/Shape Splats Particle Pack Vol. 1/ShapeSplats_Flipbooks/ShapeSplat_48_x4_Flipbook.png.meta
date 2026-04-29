@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 3430e9fdbe0634ce3be2a932aad9b9ee
+AssetOrigin:
+  serializedVersion: 1
+  productId: 365374
+  packageName: Shape Splats Particle Pack Vol. 1
+  packageVersion: 1.0.0
+  assetPath: Assets/LuminaryLabs/TexturePacks/Shape Splats Particle Pack Vol. 1/ShapeSplats_Flipbooks/ShapeSplat_48_x4_Flipbook.png
+  uploadId: 875538
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,10 +135,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 365374
-  packageName: Shape Splats Particle Pack Vol. 1
-  packageVersion: 1.0.0
-  assetPath: Assets/LuminaryLabs/TexturePacks/Shape Splats Particle Pack Vol. 1/ShapeSplats_Flipbooks/ShapeSplat_48_x4_Flipbook.png
-  uploadId: 875538
