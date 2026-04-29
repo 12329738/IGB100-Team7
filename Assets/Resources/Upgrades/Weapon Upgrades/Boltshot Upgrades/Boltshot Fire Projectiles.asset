@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Vitality Potion Passive
+  m_Name: Boltshot Fire Projectiles
   m_EditorClassIdentifier: 
   name: 
   description: 
@@ -18,30 +18,26 @@ MonoBehaviour:
   - hasTick: 0
     tickInterval: 0
     conditions:
-    - triggerEvent: 6
+    - triggerEvent: 0
       useComparison: 0
       comparisonType: 0
       value: 0
     effectData:
-    - rid: 6974428314434011402
-  modifiers:
-  - stat: 0
-    amount: 20
-    isPercentage: 1
-    type: 1
-  rarity: 1
-  itemType: 6
+    - rid: 6974428314434011395
+  modifiers: []
+  rarity: 0
+  itemType: 12
   levelsAvaliable: 0100000002000000030000000400000005000000
   references:
     version: 2
     RefIds:
-    - rid: 6974428314434011402
+    - rid: 6974428314434011395
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 4
+        type: 2
         effectOperation:
-          rid: 6974428314434011404
-    - rid: 6974428314434011404
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
+          rid: 6974428314434011398
+    - rid: 6974428314434011398
+      type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
-        amount: 20
+        effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}

@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 87435486d3e7af64bbfce5aa855cb156, type: 2}
   - {fileID: 11400000, guid: 9edde51530885874482ee37b97c43f07, type: 2}
   - {fileID: 11400000, guid: 28333695d28bbdc40b0925606a7d57de, type: 2}
+  - {fileID: 11400000, guid: f7461f782d710884d8d95564b4916620, type: 2}
   _itemType: 3
   _name: Blunt Hammer
   _description: Hit enemies around you in a circle and knock them back.
@@ -49,6 +50,7 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871561430433869
+  attackInterval: 0
   references:
     version: 2
     RefIds:
