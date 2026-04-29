@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2aa0668e126e7824e82b9806be09883b, type: 2}
   - {fileID: 11400000, guid: c0668fa778b3b474daa21bf573970111, type: 2}
   - {fileID: 11400000, guid: e75f8c266632b474ca7e3cb80dba0d72, type: 2}
+  - {fileID: 11400000, guid: 1091215bd72dd814a96ce893e5d2adcd, type: 2}
   _itemType: 5
   _name: Eternal Sword
   _description: Slash towards the nearest enemy, relasing a shockwave that pierces
@@ -26,11 +27,11 @@ MonoBehaviour:
   baseStats: {fileID: 11400000, guid: 6fc24c2416afb274ab1ce6859621f52f, type: 2}
   prefab: {fileID: 999691352028456364, guid: e188fdd92d348254c839a6dc8246b985, type: 3}
   randomAngleVariance: 0
-  direction: 0
+  direction: 90
   hitInterval: 1
   isPiercing: 1
-  trackEnemy: 1
-  aimAtEnemy: 0
+  trackEnemy: 0
+  aimAtEnemy: 1
   baseUpgrade: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
@@ -42,6 +43,7 @@ MonoBehaviour:
   subWeaponInstances: []
   definition: {fileID: 11400000, guid: c5ad3287891725148bcf3a22e921eb3b, type: 2}
   effects: []
+  attackInterval: 0
   references:
     version: 2
     RefIds: []

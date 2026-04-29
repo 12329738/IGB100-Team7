@@ -52,7 +52,7 @@ MonoBehaviour:
   flashScript: {fileID: 0}
   status: {fileID: 0}
   effects: []
-  _statPreset: {fileID: 11400000, guid: 32184baa0436da346b71fd6e4d965bb2, type: 2}
+  _statPreset: {fileID: 11400000, guid: ab4010e5455eefd44b3ab73a0bc27607, type: 2}
   _team: 1
   _owner: {fileID: 0}
   _definition: {fileID: 0}

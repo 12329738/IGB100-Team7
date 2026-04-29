@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ed41691073d66e42ab0fde55c48cfbe, type: 2}
   - {fileID: 11400000, guid: 625c4ee4466033945ac12d0717f82449, type: 2}
   - {fileID: 11400000, guid: 9f5e526cdb79ea54897f30a31ee11d2f, type: 2}
+  - {fileID: 11400000, guid: 06e3e8fb591540e4cb7ca8871030944f, type: 2}
   _itemType: 1
   _name: Bolt Shot
   _description: Shoots 3 arrows in a cone towards the nearest enemy that knocback
@@ -50,6 +51,7 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6974428157262168127
+  attackInterval: 0
   references:
     version: 2
     RefIds:

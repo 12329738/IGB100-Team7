@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ffb33a9975366d49a3937b01b1523d7, type: 2}
   - {fileID: 11400000, guid: 3019414870ea27c4f827627da306f3c9, type: 2}
   - {fileID: 11400000, guid: 2685ffab1baee0a4e9ae3bf4d4b7f505, type: 2}
+  - {fileID: 11400000, guid: c166174df09fbf143b20485ad4bb6659, type: 2}
   _itemType: 4
   _name: Holy Water
   _description: Throw a vial that leaves a pool of water which heals you and applies
@@ -53,6 +54,7 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871561430433861
+  attackInterval: 0
   references:
     version: 2
     RefIds:

@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc0cdfc540cf9034b96bab79bba82571, type: 2}
   - {fileID: 11400000, guid: 71d2aedc9ce54cd469018100e98a9314, type: 2}
   - {fileID: 11400000, guid: f562f058c2c612249b35ede429ae992d, type: 2}
+  - {fileID: 11400000, guid: b11e79abdd0530843a73635b23120719, type: 2}
   _itemType: 12
   _name: Hunting Rifle
   _description: Shoots 5 bullets each at a different target nearby.
@@ -40,6 +41,7 @@ MonoBehaviour:
   subWeaponInstances: []
   definition: {fileID: 11400000, guid: 6640048ea65a4c44c897befecf37ab3d, type: 2}
   effects: []
+  attackInterval: 0
   references:
     version: 2
     RefIds: []
