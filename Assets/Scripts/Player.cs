@@ -86,7 +86,7 @@ public class Player : Entity, IDamageable
             return;
 
         Weapon weapon = Instantiate(weaponData); 
-        weapon.Initialize();
+        weapon.Initialize(this);
 
         weapons.Add(weapon);
         itemDictionary.Add(weapon.itemType, weapon);

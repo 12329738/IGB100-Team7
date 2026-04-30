@@ -162,9 +162,11 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         if (target == data.owner.gameObject)
             return;
 
+
         if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
             return;
-
+        if (targetDamageable.team == owner.GetComponent<IDamageable>().team)
+            return;
         var context = new EffectContext
         {
             damageSource = this,

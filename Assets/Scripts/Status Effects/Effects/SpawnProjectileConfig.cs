@@ -26,7 +26,7 @@ public class SpawnProjectileConfig : EffectOperation
         if (playerWeapon == null)
         {
             playerWeapon = weaponData;
-            playerWeapon.Initialize();
+            playerWeapon.Initialize(ctx.damageSourceOwner as Entity);
         }
         ctx.payload.weapon = playerWeapon;
         IDamageSource targetLocation = null;

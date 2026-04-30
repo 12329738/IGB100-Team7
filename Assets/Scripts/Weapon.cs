@@ -14,8 +14,6 @@ public class Weapon : Item, IModifierReceiver
     public StatsPreset baseStats;
     public GameObject prefab;
     [UnityEngine.Range(0f, 360f)]
-    public float randomAngleVariance;
-    [UnityEngine.Range(0f, 360f)]
     public float direction;
     public float hitInterval = 1f;
     public bool isPiercing;
@@ -25,7 +23,7 @@ public class Weapon : Item, IModifierReceiver
     [HideInInspector]
     public ItemUpgrade baseUpgrade;
     [HideInInspector]
-    public Entity owner => GameManager.instance.player;
+    public Entity owner;
     
     [HideInInspector]
     public EventHandler eventHandler {  get; set; }
@@ -53,13 +51,13 @@ public class Weapon : Item, IModifierReceiver
     public Stats stats { get => _stats; set => _stats = value; }
 
     public List<EffectEntryNode> effects;
-    public float attackInterval;
-    public void Initialize()
+    float attackInterval;
+    public void Initialize(Entity e)
     {
-
+        owner = e;
         stats = new Stats();
         stats.Initialize(statPreset);
-        stats.AddModifierProvider(GameManager.instance.player.provider);
+        stats.AddModifierProvider(e);
         stats.AddModifierProvider(this.provider);
 
         foreach(Weapon weapon in subWeaponData)

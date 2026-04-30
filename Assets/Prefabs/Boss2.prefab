@@ -58,6 +58,8 @@ MonoBehaviour:
   _definition: {fileID: 0}
   expAmount: 1000
   damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
+  weapon: {fileID: 0}
+  behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   references:
     version: 2
     RefIds: []

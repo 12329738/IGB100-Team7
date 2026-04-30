@@ -12,21 +12,31 @@ public class ProjectileSpawner
     {
         float range = baseData.stats.TryGetValue(StatType.Range, out var r) ? r : 0f;
 
-        Collider[] hits = Physics.OverlapSphere(
+        Entity target = null;
+        List<Enemy> enemies = new();
+        if (baseData.owner is Player player)
+        {
+            Collider[] hits = Physics.OverlapSphere(
             baseData.owner.transform.position,
             range,
             LayerMask.GetMask("Enemy")
         );
 
-        List<Enemy> enemies = new();
+            
+            foreach (var hit in hits)
+            {
+                if (hit.TryGetComponent<Enemy>(out var enemy))
+                    enemies.Add(enemy);
+            }
 
-        foreach (var hit in hits)
-        {
-            if (hit.TryGetComponent<Enemy>(out var enemy))
-                enemies.Add(enemy);
+            target = GetClosestEnemy(baseData.owner.transform.position, range);
         }
 
-        Enemy target = GetClosestEnemy(baseData.owner.transform.position, range);
+        else if (baseData.owner is Enemy)
+        {
+            target = GameManager.instance.player;
+        }
+
 
         for (int i = 0; i < count; i++)
         {

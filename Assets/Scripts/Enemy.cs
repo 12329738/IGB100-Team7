@@ -8,11 +8,15 @@ public class Enemy : Entity, IDamageable
     public float expAmount;
     Player player => GameManager.instance.player;
     public DamageSourceDefinition damageSourceDefinition;
+    public Weapon weaponData;
+    [HideInInspector]
+    public Weapon weapon;
+    public EnemyBehaviour behaviour;
    
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -41,13 +45,10 @@ public class Enemy : Entity, IDamageable
 
     void Move()
     {
-        if (player != null)
+        if (behaviour != null)
         {
-
-            Vector3 dir = player.transform.position - transform.position;
-            transform.position += dir.normalized * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+            behaviour.Move(player, this);
         }
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -85,7 +86,7 @@ public class Enemy : Entity, IDamageable
     {
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         SpawnerManager.instance.UnregisterEnemy();
-        
+        weapon = null;
 
         if (status != null)
             status.ResetStatusEffects();
@@ -97,6 +98,11 @@ public class Enemy : Entity, IDamageable
 
     void OnEnable()
     {
+        if (weaponData != null)
+        {
+            weapon = Instantiate(weaponData);
+            weapon.Initialize(this);
+        }
 
         SpawnerManager.instance.RegisterEnemy();
     }
