@@ -144,10 +144,10 @@ MonoBehaviour:
   _owner: {fileID: 0}
   _definition: {fileID: 0}
   expAmount: 50
-  damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
-  weaponData: {fileID: 0}
+  damageSourceDefinition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
+  weaponData: {fileID: 11400000, guid: 6917b75eb1073b34ba495c31a6b70f59, type: 2}
   weapon: {fileID: 0}
-  behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
+  behaviour: {fileID: 11400000, guid: ede0d59f96d4ec24da4bd0d93d336595, type: 2}
   references:
     version: 2
     RefIds: []
