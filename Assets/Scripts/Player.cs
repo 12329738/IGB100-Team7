@@ -33,6 +33,8 @@ public class Player : Entity, IDamageable
     public Sprite regularSprite;
 
     public SpriteRenderer sr;
+    bool isFlipped;
+    Animator animator;
 
 
     Queue<int> levelUps = new();
@@ -52,7 +54,7 @@ public class Player : Entity, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        animator = GetComponentInChildren<Animator>();
 
         foreach (EffectEntryNode node in transformation.effect.entries)
         {
@@ -185,11 +187,17 @@ public class Player : Entity, IDamageable
 
     private void CheckMovement()
     {
-        Vector3 movement = new Vector3(
-            Input.GetKey("d") ? 1 : Input.GetKey("a") ? -1 : 0,
-            0,
-            Input.GetKey("w") ? 1 : Input.GetKey("s") ? -1 : 0
+        if (Input.GetKey("d") || Input.GetKey("s") || Input.GetKey("w") || Input.GetKey("a"))
+        {
+            animator.SetBool("IsMoving", true);
+        }
+
+        else
+            animator.SetBool("IsMoving", false);
+
+        Vector3 movement = new Vector3(Input.GetKey("d") ? 1 : Input.GetKey("a") ? -1 : 0,  0,Input.GetKey("w") ? 1 : Input.GetKey("s") ? -1 : 0
         ).normalized;
+
 
         if (Input.GetKeyDown("t"))
         {
@@ -200,8 +208,18 @@ public class Player : Entity, IDamageable
                 StopTransformation();
             }
         }
-        if (Input.GetKeyDown("o"))
-            Die();
+        if (Input.GetKeyDown("d") && !isFlipped)
+        {
+            sr.flipX = true;
+            isFlipped = true;
+        }
+            
+        if (Input.GetKeyDown("a") && isFlipped)
+        {
+            sr.flipX = false;
+            isFlipped = false;
+        }
+            
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
