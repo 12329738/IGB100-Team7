@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
-  m_Name: Enemy2 Stats Preset
+  m_Name: RangedEnemy1 Stats Preset
   m_EditorClassIdentifier: 
   statPresets:
   - statType: 0
-    value: 120
+    value: 75
   - statType: 1
     value: 1
   - statType: 2
