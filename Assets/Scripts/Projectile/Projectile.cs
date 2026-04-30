@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     [HideInInspector]
     public ProjectileData data;
     private Combat ownerCombat;
+    [HideInInspector]
 
 
     public Transform visual;
@@ -119,12 +120,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     private void OnTriggerStay(Collider other)
     {
-        if (definition.dealsDamage)
-        {
-            TryHit(other.gameObject);
-        }
-
-
+        TryHit(other.gameObject);
         RaiseContactEvent(other.gameObject);
     }
 
