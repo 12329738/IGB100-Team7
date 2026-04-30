@@ -2857,7 +2857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7a3529e32ac048ace48bab4f978d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 360
+  startingTime: 600
   timerText: {fileID: 54157458}
   waveText: {fileID: 540305542}
   waves:
@@ -2966,6 +2966,74 @@ MonoBehaviour:
       amount: 120
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       spawnDuration: 40
+    isBossWave: 1
+  - waveName: Wave 7
+    enemies:
+    - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
+      amount: 90
+      statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
+      spawnDuration: 2
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+      amount: 120
+      statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
+      amount: 180
+      statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
+      amount: 120
+      statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
+      spawnDuration: 40
+    isBossWave: 0
+  - waveName: Wave 8
+    enemies:
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
+      amount: 80
+      statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
+      spawnDuration: 2
+    - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
+      amount: 120
+      statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
+      amount: 120
+      statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
+      spawnDuration: 60
+    isBossWave: 0
+  - waveName: Wave 9
+    enemies:
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+      amount: 20
+      statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
+      spawnDuration: 2
+    - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
+      amount: 200
+      statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
+      amount: 180
+      statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
+      spawnDuration: 60
+    isBossWave: 0
+  - waveName: Wave 10
+    enemies:
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+      amount: 50
+      statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
+      spawnDuration: 1
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+      amount: 120
+      statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
+      amount: 180
+      statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
+      spawnDuration: 60
+    - enemyPrefab: {fileID: 146454749206447347, guid: f07bc2b5b52be7b40947c50b3dfe9ca4, type: 3}
+      amount: 1
+      statsPreset: {fileID: 11400000, guid: 584efd0ebbea9094f92403f55e26f44e, type: 2}
+      spawnDuration: 1
     isBossWave: 1
   player: {fileID: 393413090}
   minSpawnDistance: 10
