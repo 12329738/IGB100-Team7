@@ -19,6 +19,7 @@ public class StatusEffectRegistry : MonoBehaviour
             totalStacks[type] = 0;
 
         totalStacks[type] += amount;
+        Debug.Log($"There are a total of {totalStacks[type]} stacks of {type}");
     }
 
     public void RemoveStacks(DamageSourceDefinition type, int amount)
@@ -29,6 +30,7 @@ public class StatusEffectRegistry : MonoBehaviour
         totalStacks[type] -= amount;
         if (totalStacks[type] < 0)
             totalStacks[type] = 0;
+        Debug.Log($"There are a total of {totalStacks[type]} stacks of {type}");
     }
 
     public int GetTotalStacks(DamageSourceDefinition type)
@@ -38,6 +40,7 @@ public class StatusEffectRegistry : MonoBehaviour
 
     internal int GetStacksFromSource(DamageSourceDefinition effectData)
     {
+        Debug.Log($"There are a total of {totalStacks[effectData]} stacks of {effectData}");
         return totalStacks.TryGetValue(effectData, out var value) ? value : 0;
     }
 }

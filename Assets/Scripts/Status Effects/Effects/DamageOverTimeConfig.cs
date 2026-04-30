@@ -17,6 +17,9 @@ public class DamageOverTimeConfig : EffectOperation
         if (ctx.stacks > 1)
             value *= (float)ctx.stacks;
 
+
+
+        
         intents.Add(new CombatIntent
         {
             source = ctx.damageSource,

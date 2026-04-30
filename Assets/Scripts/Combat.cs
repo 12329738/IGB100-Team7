@@ -19,6 +19,8 @@ public class Combat : MonoBehaviour
 
         if (damageable == null || !damageable.IsDamageable())
             return;
+        if (intent.target == intent.context.damageSourceOwner)
+            return;
 
         IModifierReceiver owner = null;
         Projectile proj = null;
