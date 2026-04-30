@@ -63,21 +63,24 @@ public class Weapon : Item, IModifierReceiver
         foreach(Weapon weapon in subWeaponData)
         {
             Weapon subWeapon = Instantiate(weapon);
-            subWeapon.Initialize(this);
+            subWeapon.Initialize(this, e);
             subWeaponInstances.Add(subWeapon);
         }
         attackInterval = 1f / stats.GetStat(StatType.AttackSpeed);
         cooldownTimer = attackInterval;
     }
 
-    public void Initialize(Weapon weapon)
+    public void Initialize(Weapon weapon, Entity e)
     {
+        owner = e;
         if (stats != null) return;
         stats = new Stats();
         stats.Initialize(statPreset);
         stats.AddModifierProvider(GameManager.instance.player.provider);
         stats.AddModifierProvider(weapon);
         stats.AddModifierProvider(this.provider);
+        attackInterval = 1f / stats.GetStat(StatType.AttackSpeed);
+        cooldownTimer = attackInterval;
     }
 
     public void CreateBaseUpgrade()
