@@ -20,8 +20,17 @@ public class Combat : MonoBehaviour
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        EffectContext hitCtx = intent.context.Clone();
-        hitCtx.trigger = CombatEvent.OnDamage;
+        IModifierReceiver owner = null;
+        Projectile proj = null;
+
+
+
+        if (intent.context.damageSourceOwner is IModifierReceiver r)
+            owner = r;
+
+        if (intent.context.damageSource is Projectile p)
+            proj = p;
+        intent.context.trigger = CombatEvent.OnDamage;
 
         if (intent.context.definition.usesValueSource)
         {
@@ -30,15 +39,17 @@ public class Combat : MonoBehaviour
 
         if (!intent.context.definition.ignoreModifiers)
         {
-            GameManager.instance.effectHandler.Modify(hitCtx, ref intent);
-
-            if (intent.context.damageSourceOwner is IModifierReceiver modifierReceiver && intent.context.damageSource != intent.context.damageSourceOwner)
-            {
-
-            }
-                //intent.value *= modifierReceiver.stats.GetStat(StatType.Damage);
-
+            GameManager.instance.effectHandler.Modify(intent.context, ref intent);
         }
+
+        if (proj != null)
+        {
+            bool isCrit = UnityEngine.Random.Range(0f, 100f) < proj.stats[StatType.CritChance];
+            intent.context.isCrit = isCrit;
+            if (isCrit)
+                intent.value *= 1+(proj.stats[StatType.CritDamage]/100);
+        }
+        
 
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);
