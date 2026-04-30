@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
+  m_Name: Boss Projectile
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  _upgrades: []
+  _itemType: 1
+  _name: Bolt Shot
+  _description: Shoots 3 arrows in a cone towards the nearest enemy that knocback
+    on hit.
+  icon: {fileID: 21300000, guid: 256d24c51643e294b9572150f246c09a, type: 3}
+  baseStats: {fileID: 11400000, guid: fedbb9e09b5d4cb44a5f3d0ade6ad8f7, type: 2}
+  prefab: {fileID: 999691352028456364, guid: 7a3fcaf5940cd2446bf02ac72b761d7a, type: 3}
+  direction: 0
+  hitInterval: 1
+  isPiercing: 0
+  trackEnemy: 0
+  aimAtEnemy: 1
+  baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
+  isHit: 0
+  stickToPlayer: 0
+  randomDirection: 0
+  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
+  pattern: {fileID: 0}
+  _statPreset: {fileID: 11400000, guid: bf1b21841fa20a542bb1abeea7c17fae, type: 2}
+  subWeaponData: []
+  subWeaponInstances: []
+  definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
+  effects: []
+  references:
+    version: 2
+    RefIds: []

@@ -10,12 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28227b3159a9a0a428481177364484e8, type: 3}
-  m_Name: Boss2 Stats Preset
+  m_Name: Boss Projectile Stats
   m_EditorClassIdentifier: 
   statPresets:
-  - statType: 0
-    value: 4000
-  - statType: 1
-    value: 1
   - statType: 2
-    value: 15
+    value: 10
+  - statType: 1
+    value: 10
+  - statType: 9
+    value: 0.5
+  - statType: 4
+    value: 5
+  - statType: 7
+    value: 1
+  - statType: 8
+    value: 1
+  - statType: 3
+    value: 1
+  - statType: 5
+    value: 10
+  - statType: 6
+    value: 50
