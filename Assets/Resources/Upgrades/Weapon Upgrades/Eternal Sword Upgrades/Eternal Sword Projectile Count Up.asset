@@ -22,7 +22,7 @@ MonoBehaviour:
     type: 1
   rarity: 0
   itemType: 5
-  levelsAvaliable: 0200000005000000
+  levelsAvaliable: 020000000300000005000000
   references:
     version: 2
     RefIds: []
