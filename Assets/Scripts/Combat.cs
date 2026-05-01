@@ -44,10 +44,14 @@ public class Combat : MonoBehaviour
 
         if (proj != null)
         {
-            bool isCrit = UnityEngine.Random.Range(0f, 100f) < proj.stats[StatType.CritChance];
-            intent.context.isCrit = isCrit;
-            if (isCrit)
-                intent.value *= 1+(proj.stats[StatType.CritDamage]/100);
+            if (proj.stats.TryGetValue(StatType.CritChance, out float critChance))
+            {
+                bool isCrit = UnityEngine.Random.Range(0f, 100f) < critChance;
+                intent.context.isCrit = isCrit;
+                if (isCrit)
+                    intent.value *= 1 + (proj.stats[StatType.CritDamage] / 100);
+            }
+            
         }
         
 
