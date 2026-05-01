@@ -36,4 +36,9 @@ public class SphereProjectileShape : MonoBehaviour, IProjectileShape
 
         initialized = true;
     }
+
+    public void SetCollider(bool enabled)
+    {
+        col.enabled = enabled;
+    }
 }

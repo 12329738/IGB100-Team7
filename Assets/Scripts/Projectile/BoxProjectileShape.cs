@@ -37,5 +37,8 @@ public class BoxProjectileShape : MonoBehaviour, IProjectileShape
         visual.localScale = baseScale;
     }
 
-
+    public void SetCollider(bool enabled)
+    {
+        col.enabled = enabled;
+    }
 }

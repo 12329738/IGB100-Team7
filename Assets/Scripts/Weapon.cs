@@ -19,7 +19,8 @@ public class Weapon : Item, IModifierReceiver
     public bool isPiercing;
     public bool trackEnemy;
     public bool aimAtEnemy;
-    
+    public bool spawnOnTarget;
+    public HitMode hitMode;
     [HideInInspector]
     public ItemUpgrade baseUpgrade;
     [HideInInspector]

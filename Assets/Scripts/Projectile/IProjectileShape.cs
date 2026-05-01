@@ -7,6 +7,5 @@ public interface IProjectileShape
     public Vector3 baseScale { get; set; }
     void Initialize();
     void ResetSize();
-
-   
+    void SetCollider(bool enabled);
 }

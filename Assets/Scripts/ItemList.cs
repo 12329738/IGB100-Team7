@@ -29,6 +29,8 @@ public enum ItemList
     SwiftWalkers,
     [Description("Hunting Rifle")]
     HuntingRifle,
+    [Description("Fangs")]
+    Fangs
 }
 
 

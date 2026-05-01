@@ -22,9 +22,11 @@ public class ProjectileData
     public bool trackEnemy;
     public bool aimAtEnemy;
     public bool randomDirection;
+    public bool spawnAtTarget;
     public Entity owner;
     public DamageSourceDefinition definition;
     public Vector3 location;
+    public HitMode hitMode;
 
     public ProjectileData(Weapon original)
     {
@@ -48,6 +50,8 @@ public class ProjectileData
         randomDirection = original.randomDirection;
         owner = original.owner;
         definition = original.definition;
+        spawnAtTarget = original.spawnOnTarget;
+        hitMode = original.hitMode;
     }
 
     public ProjectileData Clone()

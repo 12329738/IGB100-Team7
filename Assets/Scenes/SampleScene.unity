@@ -4122,7 +4122,7 @@ PrefabInstance:
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a9a27cad9c181e340984eed10ca162df, type: 2}
+      objectReference: {fileID: 11400000, guid: 8e2885f454e1f1a4a95ac1e046da15ae, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 

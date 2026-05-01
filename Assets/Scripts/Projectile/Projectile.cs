@@ -16,9 +16,9 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     public ProjectileData data;
     private Combat ownerCombat;
     [HideInInspector]
-
-
     public Transform visual;
+
+
 
     [SerializeField]
     private StatsPreset _statPreset;
@@ -53,6 +53,12 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         remove => provider.OnDirty -= value;
     }
 
+    IEnumerator InstantHit()
+    {
+        yield return new WaitForFixedUpdate();
+        var shape = GetComponent<IProjectileShape>();
+        shape.SetCollider(false);
+    }
     public void Initialize(ProjectileData d)
     {
 
@@ -73,13 +79,16 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
         ownerCombat = this.data.owner.GetComponent<Entity>().combat;
 
-        StopAllCoroutines();
 
         if (stats[StatType.Duration] > 0)
         {
             StartCoroutine(LifetimeRoutine());
         }
 
+        if (data.hitMode == HitMode.Instant)
+        {
+            StartCoroutine(InstantHit());
+        }
     }
 
 
@@ -98,6 +107,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             shape.Initialize();
             shape.ResetSize();
             shape.SetSize(area);
+            shape.SetCollider(true);
         }
     }
     public void Deactivate()
@@ -114,6 +124,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             GameManager.instance.effectExecutor.Execute(intents);
         }
         GameManager.instance.effectHandler.UnRegister(this);
+        StopAllCoroutines();
         ObjectPool.instance.ReturnObject(gameObject);
 
     }

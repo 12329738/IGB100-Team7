@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
+  m_Name: Fangs
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  _upgrades: []
+  _itemType: 13
+  _name: Fangs
+  _description: Bite the closest enemies, dealing damage in an area.
+  icon: {fileID: 21300000, guid: 7160738fc6c848546a2739257e8c477e, type: 3}
+  baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
+  prefab: {fileID: 999691352028456364, guid: f810c45529bf31c4e947e6900349504b, type: 3}
+  direction: 0
+  hitInterval: 1
+  isPiercing: 1
+  trackEnemy: 1
+  aimAtEnemy: 0
+  spawnOnTarget: 1
+  hitMode: 2
+  baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
+  isHit: 1
+  stickToPlayer: 0
+  randomDirection: 0
+  behaviour: {fileID: 0}
+  pattern: {fileID: 0}
+  _statPreset: {fileID: 11400000, guid: 0f543cf79aa9b18468ab98d2ed00badc, type: 2}
+  subWeaponData: []
+  subWeaponInstances: []
+  definition: {fileID: 11400000, guid: 500e92a03a049074e8daa295656244be, type: 2}
+  effects:
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 0
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 1647346626353692738
+  references:
+    version: 2
+    RefIds:
+    - rid: 1647346626353692738
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 2
+        effectOperation:
+          rid: 1647346626353692739
+    - rid: 1647346626353692739
+      type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
+      data:
+        effectData: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}

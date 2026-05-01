@@ -30,6 +30,8 @@ public class ProjectileSpawner
             }
 
             target = GetClosestEnemy(baseData.owner.transform.position, range);
+            if (baseData.spawnAtTarget && target == null)
+                return;
         }
 
         else if (baseData.owner is Enemy)
@@ -109,6 +111,9 @@ public class ProjectileSpawner
 
 
             proj.data.finalDirection = finalDirection;
+            if (data.spawnAtTarget)
+                proj.transform.position = target.transform.position;
+
             proj.transform.rotation = Quaternion.LookRotation(finalDirection);
 
 
