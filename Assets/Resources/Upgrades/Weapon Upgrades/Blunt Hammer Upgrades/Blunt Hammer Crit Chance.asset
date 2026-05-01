@@ -17,7 +17,7 @@ MonoBehaviour:
   effects: []
   modifiers:
   - stat: 5
-    amount: 5
+    amount: 10
     isPercentage: 1
     type: 1
   rarity: 0

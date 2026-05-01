@@ -28,6 +28,6 @@ MonoBehaviour:
   - statType: 3
     value: 1
   - statType: 5
-    value: 10
+    value: 15
   - statType: 6
-    value: 50
+    value: 75

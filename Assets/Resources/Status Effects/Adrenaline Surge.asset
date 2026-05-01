@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Adrenaline Surge
+  m_EditorClassIdentifier: 
+  name: 
+  description: 
+  duration: 3
+  maxStacks: 1
+  definition: {fileID: 11400000, guid: f2945d179ad43af4fb332e12e18d6a9f, type: 2}
+  hasTick: 0
+  tickInterval: 0
+  entries:
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 3
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 2962360328088715332
+  references:
+    version: 2
+    RefIds:
+    - rid: 2962360328088715332
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 6
+        effectOperation:
+          rid: 2962360328088715334
+    - rid: 2962360328088715334
+      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1
+        valueSource:
+          mode: 0
+          constant: 0
+          multiplier: 0
+          useTarget: 0
+          useSource: 1
+        modifiers:
+        - stat: 1
+          amount: 25
+          isPercentage: 1
+          type: 1
+        - stat: 9
+          amount: 25
+          isPercentage: 1
+          type: 1
