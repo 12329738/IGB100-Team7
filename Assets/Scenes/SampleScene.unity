@@ -912,7 +912,7 @@ MonoBehaviour:
   minimumEnemyNumber: 16
   currentEnemies: 0
   enemies:
-  - {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
+  - {fileID: 3512271440442089338, guid: ef7e9e9eae574f545bb14799d87b7456, type: 3}
   experienceGem: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
   padding: 5
 --- !u!4 &570029839
