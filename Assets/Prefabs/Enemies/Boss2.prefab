@@ -56,8 +56,9 @@ MonoBehaviour:
   _team: 1
   _owner: {fileID: 0}
   _definition: {fileID: 0}
-  expAmount: 1000
+  expAmount: 800
   damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
+  weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   references:
