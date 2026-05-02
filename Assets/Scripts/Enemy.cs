@@ -7,7 +7,6 @@ public class Enemy : Entity, IDamageable
 {
     public float expAmount;
     Player player => GameManager.instance.player;
-    public DamageSourceDefinition damageSourceDefinition;
     public Weapon weaponData;
     [HideInInspector]
     public Weapon weapon;
@@ -61,13 +60,11 @@ public class Enemy : Entity, IDamageable
             {
                 damageSource = this,
                 target = other.GetComponent<IDamageSource>(),
-                damageSourceOwner = this,
-                definition = damageSourceDefinition,
+
                 value = stats.GetStat(StatType.Damage),
-                sourceInstanceId = this.gameObject.GetInstanceID(),
-                hitInterval = 1f,
             };
 
+            context.damageSource.definition = definition;
             var intent = new CombatIntent
             {
                 value = stats.GetStat(StatType.Damage),
@@ -91,6 +88,7 @@ public class Enemy : Entity, IDamageable
         if (status != null)
             status.ResetStatusEffects();
         GameManager.instance.effectHandler.UnRegister(this);
+        flashScript.ResetMaterial();
         ObjectPool.instance.ReturnObject(gameObject);
     }
 

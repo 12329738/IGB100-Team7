@@ -21,7 +21,7 @@ public class StackCountModifier : EffectOperation, IIntentModifier
 
     public void Modify(ref CombatIntent intent)
     {
-        if (intent.type != effectToModifiy)
+        if (intent.intent != effectToModifiy)
             return;
         float total = 0;
 

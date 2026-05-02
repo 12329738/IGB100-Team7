@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 4890225282619313067}
   - component: {fileID: 3464707079348668055}
   - component: {fileID: 8369639127053584013}
+  - component: {fileID: -8742206365990321327}
   m_Layer: 3
   m_Name: RangedEnemy2
   m_TagString: Untagged
@@ -136,15 +137,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeDamaged: 1
-  flashScript: {fileID: 0}
+  flashScript: {fileID: -8742206365990321327}
   status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
   _team: 1
   _owner: {fileID: 0}
-  _definition: {fileID: 0}
+  _definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
+  _hitInterval: 1
   expAmount: 50
-  damageSourceDefinition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
   weaponData: {fileID: 11400000, guid: 60c4525be69e97747804d788a2b30906, type: 2}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: ede0d59f96d4ec24da4bd0d93d336595, type: 2}
@@ -197,3 +198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e431cd33e80d845a57073285fcefa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8742206365990321327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4061204989553054452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9fccfaff7691a4a956c40f7496eed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.05

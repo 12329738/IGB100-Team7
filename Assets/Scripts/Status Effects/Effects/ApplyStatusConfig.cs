@@ -15,7 +15,7 @@ public class ApplyStatusConfig : EffectOperation
         intents.Add(new CombatIntent
         {
             context = ctx,
-            type = Type,
+            intent = Type,
             source = ctx.damageSource,
             target = ctx.target,
         });

@@ -14,7 +14,7 @@ public class EffectExecutor : MonoBehaviour
         {
 
         
-            switch (intent.type)
+            switch (intent.intent)
         {
             
         

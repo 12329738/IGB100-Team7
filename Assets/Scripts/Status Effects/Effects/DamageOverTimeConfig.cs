@@ -21,7 +21,7 @@ public class DamageOverTimeConfig : EffectOperation
         {
             source = ctx.damageSource,
             target = ctx.target,
-            type = EffectIntent.DealDamage,
+            intent = EffectIntent.DealDamage,
             value = value,
             context = ctx,
 
@@ -29,6 +29,6 @@ public class DamageOverTimeConfig : EffectOperation
         
 
 
-        Debug.Log($"{ctx.target} took {value} dmg from {ctx.stacks} stacks of {ctx.definition}");
+        Debug.Log($"{ctx.target} took {value} dmg from {ctx.stacks} stacks of {ctx.damageSource.definition}");
     }
 }

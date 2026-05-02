@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -31,7 +31,7 @@ public class Player : Entity, IDamageable
     Coroutine transformationCoroutine;
 
     public Sprite regularSprite;
-
+    public AnimatorController animatorController;
     public SpriteRenderer sr;
     bool isFlipped;
     Animator animator;
@@ -365,8 +365,9 @@ public class Player : Entity, IDamageable
             GameManager.instance.effectHandler.Register(instance);
         }
         sr.sprite = transformation.transformationSprite;
-        
-        
+        animator.runtimeAnimatorController = transformation.animator;
+
+
     }
 
     private void StopTransformation()
@@ -379,6 +380,7 @@ public class Player : Entity, IDamageable
         sr.sprite = regularSprite;
         isTransformed = false;
         timeTransformed = 0;
+        animator.runtimeAnimatorController = animatorController;
     }
 
 

@@ -38,7 +38,7 @@ public class EffectNodeData
         IIntentModifier modifier = effectOperation as IIntentModifier;
         for (int i = 0; i < intents.Count; i++)
         {
-            if (intents[i].type == modifier.effectToModifiy)
+            if (intents[i].intent == modifier.effectToModifiy)
             {
                 var temp = intents[i];
                 modifier.Modify(ref temp);

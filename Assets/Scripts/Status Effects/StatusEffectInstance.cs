@@ -15,6 +15,9 @@ public class StatusEffectInstance : IDamageSource
     public Entity _owner;
     public Entity owner { get => _owner; set => _owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
+    public float hitInterval { get => data.tickInterval;
+        set => data.tickInterval = value;
+    }
 
     public StatusEffectInstance(StatusEffectDataInstance data, IDamageSource source, IDamageSource target, StatusEffectManager manager)
     {
@@ -26,10 +29,10 @@ public class StatusEffectInstance : IDamageSource
         {
             damageSource = source,
             target = target,
-            definition = data.definition,
             stacks = 0,
-            damageSourceOwner = owner
+
         };
+        context.damageSource.definition = definition;
 
         state = new EffectState
         {
@@ -88,13 +91,10 @@ public class StatusEffectInstance : IDamageSource
         List<CombatIntent> intents = new List<CombatIntent>();
         foreach (EffectInstance instance in runtimes)
         {
-
-            context.effectInstance = instance;
             instance.entryNode.Execute(context, intents);                      
         }
 
         GameManager.instance.effectExecutor.Execute(intents);        
-        
     }
 
 

@@ -30,7 +30,8 @@ public enum ItemList
     [Description("Hunting Rifle")]
     HuntingRifle,
     [Description("Fangs")]
-    Fangs
+    Fangs,
+    None
 }
 
 

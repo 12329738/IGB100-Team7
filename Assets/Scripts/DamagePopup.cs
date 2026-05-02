@@ -63,7 +63,7 @@ public class DamagePopup : MonoBehaviour
             ? Color.red
             : Color.white;
 
-        if (intent.type == EffectIntent.Heal)
+        if (intent.intent == EffectIntent.Heal)
         {
             text.color = Color.green;
         }

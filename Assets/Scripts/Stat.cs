@@ -55,7 +55,7 @@ public class Stat
 
     //    foreach (var mod in modifiers)
     //    {
-    //        switch (mod.type)
+    //        switch (mod.intent)
     //        {
     //            case ModifierType.Flat:
     //                finalValue += mod.value;

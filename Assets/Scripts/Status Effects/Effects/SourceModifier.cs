@@ -20,13 +20,13 @@ public class SourceModifier : EffectOperation, IIntentModifier
 
     public void Modify(ref CombatIntent intent)
     {
-        if (intent.context.definition != targetTag)
+        if (intent.context.damageSource.definition != targetTag)
             return;
-        if (intent.type !=  effectToModifiy)
+        if (intent.intent !=  effectToModifiy)
             return;
         float sourceValue = valueSource.Evaluate(intent);
 
         intent.value *= multiplier;
-        Debug.Log($"Source {targetTag.id} effect {intent.type.ToString()} multipled by {multiplier}");
+        Debug.Log($"Source {targetTag.id} effect {intent.intent.ToString()} multipled by {multiplier}");
     }
 }

@@ -16,7 +16,7 @@ public class KnockBackConfig : EffectOperation
             source = ctx.damageSource,
             target = ctx.target,
             value = magnitude,
-            type = Type,
+            intent = Type,
             context = ctx
         });
     }

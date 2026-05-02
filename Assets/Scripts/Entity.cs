@@ -37,6 +37,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     [HideInInspector]
     public readonly ModifierProvider provider = new ModifierProvider();
 
+    [HideInInspector]
     public Entity _owner;
     public Entity owner { get => this; set => _owner = value; }
     public DamageSourceDefinition _definition;
@@ -51,7 +52,8 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     [HideInInspector]
     public List<StatModifier> Modifiers => provider.Modifiers;
 
-
+    public float _hitInterval;
+    public float hitInterval { get => _hitInterval; set => _hitInterval = value; }
 
     [SerializeField]
 

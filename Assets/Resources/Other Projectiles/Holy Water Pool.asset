@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 4
+  _itemType: 14
   _name: 
   _description: 
   icon: {fileID: 0}
@@ -25,6 +25,8 @@ MonoBehaviour:
   isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   isHit: 1
@@ -55,7 +57,6 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871615362105413
-  attackInterval: 0
   references:
     version: 2
     RefIds:

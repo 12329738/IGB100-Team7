@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 466738893801292406}
   - component: {fileID: 5719228438391645800}
   - component: {fileID: 6092473958964533532}
+  - component: {fileID: -5182194787163290855}
   - component: {fileID: -6495538883026340603}
   - component: {fileID: -5676004252566367511}
   m_Layer: 3
@@ -49,15 +50,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeDamaged: 1
-  flashScript: {fileID: 0}
+  flashScript: {fileID: -5182194787163290855}
   status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
   _team: 1
   _owner: {fileID: 0}
-  _definition: {fileID: 0}
+  _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
+  _hitInterval: 1
   expAmount: 25
-  damageSourceDefinition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
@@ -85,6 +86,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5182194787163290855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512271440442089338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9fccfaff7691a4a956c40f7496eed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.05
 --- !u!114 &-6495538883026340603
 MonoBehaviour:
   m_ObjectHideFlags: 0
