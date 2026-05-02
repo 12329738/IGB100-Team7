@@ -257,7 +257,7 @@ public class Player : Entity, IDamageable
     public void AddUpgrade(Upgrade upgrade)
     {    
         if (upgrade is ItemUpgrade itemUpgrade)
-            {
+        {
             Item item = TryGetItem(itemUpgrade.itemType);
 
             if (item == null)

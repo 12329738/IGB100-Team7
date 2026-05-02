@@ -58,8 +58,8 @@ public class Weapon : Item, IModifierReceiver
         owner = e;
         stats = new Stats();
         stats.Initialize(statPreset);
-        stats.AddModifierProvider(e);
-        stats.AddModifierProvider(this.provider);
+        stats.AddModifierProvider(e.provider);
+        stats.AddModifierProvider(provider);
 
         foreach(Weapon weapon in subWeaponData)
         {
@@ -77,9 +77,9 @@ public class Weapon : Item, IModifierReceiver
         if (stats != null) return;
         stats = new Stats();
         stats.Initialize(statPreset);
-        stats.AddModifierProvider(GameManager.instance.player.provider);
+        stats.AddModifierProvider(e.provider);
         stats.AddModifierProvider(weapon);
-        stats.AddModifierProvider(this.provider);
+        stats.AddModifierProvider(provider);
         attackInterval = 1f / stats.GetStat(StatType.AttackSpeed);
         cooldownTimer = attackInterval;
     }
