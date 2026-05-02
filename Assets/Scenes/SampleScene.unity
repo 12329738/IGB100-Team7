@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: timer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+  m_sharedMaterial: {fileID: 1003606389510534732, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -802,7 +802,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: wave
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &540305543
@@ -2495,8 +2495,20 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3916113344748108558, guid: e5b62e34716a1354bb52953904617fbb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 3916113344748108558, guid: e5b62e34716a1354bb52953904617fbb, type: 3}
       propertyPath: m_fontSizeBase
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916113344748108558, guid: e5b62e34716a1354bb52953904617fbb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1003606389510534732, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 3916113344748108558, guid: e5b62e34716a1354bb52953904617fbb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3916113344748108558, guid: e5b62e34716a1354bb52953904617fbb, type: 3}
       propertyPath: m_fontColorGradient.topLeft.b
@@ -2864,7 +2876,7 @@ MonoBehaviour:
   - waveName: Wave 1
     enemies:
     - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
-      amount: 120
+      amount: 90
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       spawnDuration: 60
     - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
@@ -2882,10 +2894,6 @@ MonoBehaviour:
       amount: 120
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       spawnDuration: 60
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
-      amount: 15
-      statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
-      spawnDuration: 1
     isBossWave: 0
   - waveName: Wave 3
     enemies:
@@ -2897,10 +2905,10 @@ MonoBehaviour:
       amount: 25
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       spawnDuration: 1
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
       amount: 15
-      statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
-      spawnDuration: 60
+      statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
+      spawnDuration: 5
     - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
       amount: 60
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
@@ -2908,12 +2916,12 @@ MonoBehaviour:
     isBossWave: 1
   - waveName: Wave 4
     enemies:
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
-      amount: 75
-      statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
-      spawnDuration: 60
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
-      amount: 180
+      amount: 10
+      statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
+      spawnDuration: 2
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
+      amount: 120
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       spawnDuration: 60
     - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
@@ -2928,13 +2936,13 @@ MonoBehaviour:
   - waveName: Wave 5
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: dbbc83897d99616478273c96d0868bec, type: 3}
-      amount: 180
+      amount: 80
       statsPreset: {fileID: 11400000, guid: a79dcb1db1545b04c8cd37cbc1ab4fcf, type: 2}
       spawnDuration: 30
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
-      amount: 120
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
+      amount: 100
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
-      spawnDuration: 60
+      spawnDuration: 45
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
       amount: 80
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
@@ -2982,18 +2990,18 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       spawnDuration: 60
     - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
-      amount: 120
+      amount: 80
       statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
       spawnDuration: 40
     isBossWave: 0
   - waveName: Wave 8
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
-      amount: 80
+      amount: 20
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
       spawnDuration: 2
     - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
-      amount: 40
+      amount: 20
       statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
       spawnDuration: 60
     - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
@@ -3019,15 +3027,15 @@ MonoBehaviour:
   - waveName: Wave 10
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
-      amount: 50
+      amount: 30
       statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
       spawnDuration: 1
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+    - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
       amount: 60
       statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
       spawnDuration: 60
-    - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
-      amount: 120
+    - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
+      amount: 20
       statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
       spawnDuration: 60
     - enemyPrefab: {fileID: 146454749206447347, guid: f07bc2b5b52be7b40947c50b3dfe9ca4, type: 3}
@@ -3733,8 +3741,20 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2774044841136477708, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 2774044841136477708, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_fontSizeBase
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774044841136477708, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1003606389510534732, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 2774044841136477708, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2858331219879908218, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4006,6 +4026,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8761779726965717610, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
       propertyPath: m_colorMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761779726965717610, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 8761779726965717610, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1003606389510534732, guid: 719f80d5e5f25694ca887ff4b91e2905, type: 2}
+    - target: {fileID: 8761779726965717610, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8761779726965717610, guid: a534d2b4e01f1454daff0e8c034279f3, type: 3}
