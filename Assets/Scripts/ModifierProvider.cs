@@ -23,6 +23,12 @@ public class ModifierProvider : IModifierProvider
             MarkDirty();
     }
 
+    public void RemoveAllModifiers()
+    {
+        modifiers.Clear();
+        MarkDirty();
+    }
+
     public void AddChild(IModifierProvider child)
     {
         if (children.Contains(child)) return;

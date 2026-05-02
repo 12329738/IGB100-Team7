@@ -55,6 +55,15 @@ public class Combat : MonoBehaviour
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);
 
+        if ((object)intent.target == GameManager.instance.player)
+        {
+            EffectContext ctx = intent.context.Clone();
+            ctx.trigger = CombatEvent.OnDamageTaken;
+            GameManager.instance.effectHandler.Dispatch(ctx);
+        }
+
+        
+
         if (intent.context.isHit)
         {
             EffectContext ctx = intent.context.Clone();

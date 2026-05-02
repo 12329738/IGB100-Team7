@@ -17,43 +17,18 @@ MonoBehaviour:
   duration: 3
   maxStacks: 1
   definition: {fileID: 11400000, guid: f2945d179ad43af4fb332e12e18d6a9f, type: 2}
+  modifiers:
+  - stat: 9
+    amount: 25
+    type: 1
+    duration: 0
+  - stat: 1
+    amount: 25
+    type: 1
+    duration: 0
   hasTick: 0
   tickInterval: 0
-  entries:
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 3
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 2962360328088715332
+  entries: []
   references:
     version: 2
-    RefIds:
-    - rid: 2962360328088715332
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 6
-        effectOperation:
-          rid: 2962360328088715334
-    - rid: 2962360328088715334
-      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
-      data:
-        type: 1
-        valueSource:
-          mode: 0
-          constant: 0
-          multiplier: 0
-          useTarget: 0
-          useSource: 1
-        modifiers:
-        - stat: 1
-          amount: 25
-          isPercentage: 1
-          type: 1
-        - stat: 9
-          amount: 25
-          isPercentage: 1
-          type: 1
+    RefIds: []

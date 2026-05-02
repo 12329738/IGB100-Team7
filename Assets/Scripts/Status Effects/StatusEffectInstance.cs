@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
-public class StatusEffectInstance : IDamageSource
+public class StatusEffectInstance : IDamageSource, IModifierProvider 
 {
     public StatusEffectDataInstance data;
     public List<EffectInstance> runtimes = new();
@@ -18,6 +18,26 @@ public class StatusEffectInstance : IDamageSource
     public float hitInterval { get => data.tickInterval;
         set => data.tickInterval = value;
     }
+
+    public readonly ModifierProvider provider = new ModifierProvider();
+
+    public void AddModifier(StatModifier mod)
+    {
+        Debug.Log($"ADDING MOD: {mod.stat} {mod.amount} TO {this}");
+        provider.AddModifier(mod);
+    }
+
+
+    public void RemoveModifier(StatModifier mod)
+        => provider.RemoveModifier(mod);
+
+    public event Action OnDirty
+    {
+        add => provider.OnDirty += value;
+        remove => provider.OnDirty -= value;
+    }
+
+    public List<StatModifier> Modifiers => provider.Modifiers;
 
     public Guid guid { get; set; }
 
@@ -59,6 +79,9 @@ public class StatusEffectInstance : IDamageSource
 
             runtimes.Add(runtime);
         }
+
+        provider.Modifiers.AddRange(data.modifiers);
+
 
     }
 
@@ -147,7 +170,8 @@ public class StatusEffectInstance : IDamageSource
     public void Remove() { }
 
     public void Expire()
-    {      
+    {   
+        provider.RemoveAllModifiers();
         effectManager.RemoveStatus(this);
     }
 

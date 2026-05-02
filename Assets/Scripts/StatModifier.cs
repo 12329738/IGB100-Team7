@@ -5,13 +5,8 @@ public class StatModifier
 {
     public StatType stat;
     public float amount;
-    public bool isPercentage = true;
     public ModifierType type;
     public IModifierProvider source;
-
-    public StatModifier()
-    {
-
-    }
+    public float duration = 0;
 
 }

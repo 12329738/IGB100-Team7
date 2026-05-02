@@ -27,7 +27,9 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (ctx.damageSource != effects[i].effectHolder && ctx.damageSource.owner != effects[i].effectHolder)
+            if (ctx.trigger == CombatEvent.OnDamageTaken && (object)ctx.target == GameManager.instance.player)
+            {}
+            else if (ctx.damageSource != effects[i].effectHolder && ctx.damageSource.owner != effects[i].effectHolder)
                 continue;
             effects[i].entryNode.Execute(ctx, intents);
 
