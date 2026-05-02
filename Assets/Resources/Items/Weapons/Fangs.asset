@@ -17,9 +17,9 @@ MonoBehaviour:
   _itemType: 13
   _name: Fangs
   _description: Bite the closest enemies, dealing damage in an area.
-  icon: {fileID: 21300000, guid: 7160738fc6c848546a2739257e8c477e, type: 3}
+  icon: {fileID: 21300000, guid: cc0ec541799ca1444847637194e6c24d, type: 3}
   baseStats: {fileID: 11400000, guid: 112bad5bb8d5f4446bb3e82328757864, type: 2}
-  prefab: {fileID: 999691352028456364, guid: f810c45529bf31c4e947e6900349504b, type: 3}
+  prefab: {fileID: 2829436178380112118, guid: 7ed954edd861fb949b8d5579d5c0ccca, type: 3}
   direction: 0
   hitInterval: 1
   isPiercing: 1
