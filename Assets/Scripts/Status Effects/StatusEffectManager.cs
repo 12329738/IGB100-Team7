@@ -31,6 +31,7 @@ public class StatusEffectManager : MonoBehaviour
             e.provider.AddChild(instance.provider);
 
         instance.OnApply(this);
+        DamagePopup.instance.ShowStatusEffect(instance);
         Debug.Log($"{source} applied {instance.data.name} to {gameObject}");
 
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
   m_Name: Adrenaline Surge
   m_EditorClassIdentifier: 
-  name: 
+  name: Adrenaline Surge
   description: 
   duration: 3
   maxStacks: 1
