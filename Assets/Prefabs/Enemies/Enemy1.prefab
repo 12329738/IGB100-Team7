@@ -58,7 +58,7 @@ MonoBehaviour:
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   _hitInterval: 1
-  expAmount: 25
+  expAmount: 15
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9fccfaff7691a4a956c40f7496eed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashDuration: 0.05
 --- !u!114 &-6495538883026340603
 MonoBehaviour:
   m_ObjectHideFlags: 0
