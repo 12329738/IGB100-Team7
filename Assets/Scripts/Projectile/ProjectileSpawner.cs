@@ -111,11 +111,16 @@ public class ProjectileSpawner
 
 
             proj.data.finalDirection = finalDirection;
-            if (data.spawnAtTarget)
-                proj.transform.position = target.transform.position;
+            
+                
 
             proj.transform.rotation = Quaternion.LookRotation(finalDirection);
 
+            if (data.spawnAtTarget)
+            {
+                proj.transform.position = target.transform.position;
+                proj.transform.rotation = Quaternion.identity;
+            }
 
             if (proj.data.behaviour != null)
             {

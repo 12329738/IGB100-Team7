@@ -101,7 +101,7 @@ public class Enemy : Entity, IDamageable
             weapon = Instantiate(weaponData);
             weapon.Initialize(this);
         }
-
+        
         SpawnerManager.instance.RegisterEnemy();
     }
 
