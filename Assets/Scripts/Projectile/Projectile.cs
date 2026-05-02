@@ -36,6 +36,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     public Entity owner { get => data.owner; set => data.owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
     public float hitInterval { get => data.hitInterval; set => data.hitInterval = value; }
+    public Guid guid { get;set; }
 
     private readonly ModifierProvider provider = new ModifierProvider();
 
@@ -54,7 +55,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     public void Initialize(ProjectileData d)
     {
-
+        guid = Guid.NewGuid();
         data = d;
         stats = data.stats;
         if (GetComponentInChildren<SpriteRenderer>() != null)

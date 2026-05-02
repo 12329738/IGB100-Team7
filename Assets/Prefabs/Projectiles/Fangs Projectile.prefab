@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
-  _statPreset: {fileID: 0}
 --- !u!54 &3666057331242603457
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92,11 +91,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.93
+  m_Radius: 0.9
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5069826615066088164
 MonoBehaviour:

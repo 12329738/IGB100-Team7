@@ -19,8 +19,11 @@ public class StatusEffectInstance : IDamageSource
         set => data.tickInterval = value;
     }
 
+    public Guid guid { get; set; }
+
     public StatusEffectInstance(StatusEffectDataInstance data, IDamageSource source, IDamageSource target, StatusEffectManager manager)
     {
+        guid = Guid.NewGuid();
         effectManager = manager;
         this.data = data;
         owner = GameManager.instance.player;

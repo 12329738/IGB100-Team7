@@ -8,5 +8,5 @@ public interface IDamageSource
     public Entity owner { get; set; }
     public DamageSourceDefinition definition {  get; set; }
     public float hitInterval { get; set; }
-    public Guid guid => new();
+    public Guid guid { get; set; }
 }

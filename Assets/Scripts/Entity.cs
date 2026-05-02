@@ -54,12 +54,13 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     public float _hitInterval;
     public float hitInterval { get => _hitInterval; set => _hitInterval = value; }
+    public Guid guid { get; set; }
 
     [SerializeField]
 
     public void OnEnable()
     {
-
+        guid = Guid.NewGuid();
         OnSpawned();
     }
 
