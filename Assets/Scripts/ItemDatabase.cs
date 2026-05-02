@@ -26,7 +26,7 @@ public class ItemDatabase : MonoBehaviour
 
     private void CreateItemDatabase()
     {
-        Item[] items = Resources.LoadAll<Item>("Items");
+        Item[] items = Resources.LoadAll<Item>("Items/Player Items");
         itemDatabase = new List<Item>(items);
     }
 

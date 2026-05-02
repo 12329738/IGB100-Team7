@@ -4,9 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 
 public class Player : Entity, IDamageable
@@ -255,7 +257,7 @@ public class Player : Entity, IDamageable
     }
 
     public void AddUpgrade(Upgrade upgrade)
-    {    
+    {
         if (upgrade is ItemUpgrade itemUpgrade)
         {
             Item item = TryGetItem(itemUpgrade.itemType);
@@ -266,14 +268,28 @@ public class Player : Entity, IDamageable
                 item = TryGetItem(itemUpgrade.itemType);
             }
 
+            bool hasModifiers = upgrade.modifiers.Count > 0;
+            bool hasEffects = upgrade.effects.Count > 0;
 
-            if (upgrade.modifiers.Count > 0)
+            if (hasModifiers)
             {
                 foreach (StatModifier modifier in upgrade.modifiers)
                 {
                     item.AddModifier(modifier);
                 }
+            }
 
+            if (hasEffects)
+            {
+                foreach (var effect in upgrade.effects)
+                {
+                    EffectInstance instance = new EffectInstance(effect, this, this, this);
+                    GameManager.instance.effectHandler.Register(instance);
+                }
+            }
+
+            if (hasModifiers || hasEffects)
+            {
                 item.currentLevel++;
             }
         }
@@ -312,7 +328,8 @@ public class Player : Entity, IDamageable
 
         }
 
-        
+
+
     }
 
     private void AddPassive(Passive passive)
@@ -323,6 +340,7 @@ public class Player : Entity, IDamageable
         itemDictionary.Add(passiveInstance.itemType, passiveInstance);
 
         provider.AddChild(passiveInstance.provider);
+        
     }
 
     public void AddExperience(float amount)

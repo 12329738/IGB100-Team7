@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class StatusEffectManager : MonoBehaviour
 {
@@ -25,7 +27,11 @@ public class StatusEffectManager : MonoBehaviour
 
         effects.Add(instance);
 
+        if (gameObject.TryGetComponent<Entity>(out Entity e))
+            e.provider.AddChild(instance.provider);
+
         instance.OnApply(this);
+        DamagePopup.instance.ShowStatusEffect(instance);
         Debug.Log($"{source} applied {instance.data.name} to {gameObject}");
 
     }
@@ -41,10 +47,12 @@ public class StatusEffectManager : MonoBehaviour
         }
     }
 
-    internal void RemoveStatus(StatusEffectInstance statusEffectInstance)
+    internal void RemoveStatus(StatusEffectInstance instance)
     {
-        GameManager.instance.statusEffectRegistry.RemoveStacks(statusEffectInstance.data.definition, (int)statusEffectInstance.context.stacks);
-        effects.Remove(statusEffectInstance);
+        GameManager.instance.statusEffectRegistry.RemoveStacks(instance.data.definition, (int)instance.context.stacks);
+        effects.Remove(instance);
+        if (gameObject.TryGetComponent<Entity>(out Entity e))
+            e.provider.RemoveChild(instance.provider);
     }
 
     internal void RemoveStatus(StatusEffectData statusEffectData)
@@ -52,6 +60,8 @@ public class StatusEffectManager : MonoBehaviour
         StatusEffectInstance instance = effects.FirstOrDefault(i => i.data.definition == statusEffectData.definition);
         GameManager.instance.statusEffectRegistry.RemoveStacks(instance.data.definition, (int)instance.context.stacks);
         effects.Remove(instance);
+        if (gameObject.TryGetComponent<Entity>(out Entity e))
+            e.provider.RemoveChild(instance.provider);
     }
 
     internal void ResetStatusEffects()

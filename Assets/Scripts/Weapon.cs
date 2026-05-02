@@ -26,8 +26,7 @@ public class Weapon : Item, IModifierReceiver
     [HideInInspector]
     public Entity owner;
     
-    [HideInInspector]
-    public EventHandler eventHandler {  get; set; }
+
 
     float cooldownTimer;
     public bool isHit;
@@ -40,11 +39,11 @@ public class Weapon : Item, IModifierReceiver
     private StatsPreset _statPreset;
     public Guid Id = Guid.NewGuid();
     bool isWeapon = true;
+    
+    public DamageSourceDefinition definition;
     public List<Weapon> subWeaponData;
     [HideInInspector]
     public List<Weapon> subWeaponInstances = new List<Weapon>();
-    public DamageSourceDefinition definition;
-
     public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
 
     private Stats _stats;
@@ -96,12 +95,6 @@ public class Weapon : Item, IModifierReceiver
 
     public void Tick(float deltaTime)
     {
-
-        //if (stats.GetStat(StatType.Duration) <= 0)
-
-        //{
-        //    return;
-        //}
 
         attackInterval = 1f/stats.GetStat(StatType.AttackSpeed);
         cooldownTimer += deltaTime;
