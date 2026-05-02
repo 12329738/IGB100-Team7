@@ -257,7 +257,7 @@ public class Player : Entity, IDamageable
     }
 
     public void AddUpgrade(Upgrade upgrade)
-    {    
+    {
         if (upgrade is ItemUpgrade itemUpgrade)
         {
             Item item = TryGetItem(itemUpgrade.itemType);
@@ -268,26 +268,29 @@ public class Player : Entity, IDamageable
                 item = TryGetItem(itemUpgrade.itemType);
             }
 
+            bool hasModifiers = upgrade.modifiers.Count > 0;
+            bool hasEffects = upgrade.effects.Count > 0;
 
-            if (upgrade.modifiers.Count > 0)
+            if (hasModifiers)
             {
                 foreach (StatModifier modifier in upgrade.modifiers)
                 {
                     item.AddModifier(modifier);
                 }
-
-                item.currentLevel++;
             }
 
-            if (upgrade.effects.Count > 0)
+            if (hasEffects)
             {
-                
                 foreach (var effect in upgrade.effects)
                 {
                     EffectInstance instance = new EffectInstance(effect, this, this, this);
                     GameManager.instance.effectHandler.Register(instance);
                 }
+            }
 
+            if (hasModifiers || hasEffects)
+            {
+                item.currentLevel++;
             }
         }
 
