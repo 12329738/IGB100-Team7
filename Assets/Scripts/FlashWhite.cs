@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+
 public class FlashWhite : MonoBehaviour
 {
-    public float flashDuration = 0.05f; 
+
 
     private SpriteRenderer spriteRenderer;
     private Material originalMaterial;
@@ -18,12 +19,11 @@ public class FlashWhite : MonoBehaviour
 
         whiteMaterial = new Material(Shader.Find("GUI/Text Shader"));
         whiteMaterial.color = Color.white; 
-    }
+    }   
 
     public void TriggerFlash()
     {
-        if (flashRoutine != null)
-            StopCoroutine(flashRoutine);
+        flashRoutine = null;
 
         flashRoutine = StartCoroutine(FlashCoroutine());
     }
@@ -34,11 +34,18 @@ public class FlashWhite : MonoBehaviour
         spriteRenderer.material = whiteMaterial;
 
 
-        yield return new WaitForSeconds(flashDuration);
+        yield return new WaitForSeconds(GameManager.instance.flashDuration);
 
 
         spriteRenderer.material = originalMaterial;
 
         flashRoutine = null;
+    }
+
+    internal void ResetMaterial()
+    {
+        flashRoutine = null;
+        spriteRenderer.material = originalMaterial;
+        
     }
 }

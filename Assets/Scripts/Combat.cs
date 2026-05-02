@@ -12,32 +12,29 @@ public class Combat : MonoBehaviour
 
     public void DealDamage(CombatIntent intent)
     {
-        if (!CanHit(intent))
-            return;
-
+        
         IDamageable damageable = intent.context.target as IDamageable;
 
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        IModifierReceiver owner = null;
+        if (!CanHit(intent))
+            return;
+
+        intent.context.trigger = CombatEvent.OnDamage;
+
         Projectile proj = null;
-
-
-
-        if (intent.context.damageSourceOwner is IModifierReceiver r)
-            owner = r;
 
         if (intent.context.damageSource is Projectile p)
             proj = p;
-        intent.context.trigger = CombatEvent.OnDamage;
+        
 
-        if (intent.context.definition.usesValueSource)
+        if (intent.context.damageSource.definition.usesValueSource)
         {
-            intent.value = intent.context.definition.source.Evaluate(intent);
+            intent.value = intent.context.damageSource.definition.source.Evaluate(intent);
         }
 
-        if (!intent.context.definition.ignoreModifiers)
+        if (!intent.context.damageSource.definition.ignoreModifiers)
         {
             GameManager.instance.effectHandler.Modify(intent.context, ref intent);
         }
@@ -64,8 +61,8 @@ public class Combat : MonoBehaviour
             ctx.trigger = CombatEvent.OnHit;
             GameManager.instance.effectHandler.Dispatch(ctx);
 
-            if (ctx.damageSourceOwner is Component comp)
-            comp.gameObject.GetComponent<StatusEffectManager>().Dispatch(ctx);
+            if (ctx.damageSource.owner is Component comp)
+              comp.gameObject.GetComponent<StatusEffectManager>().Dispatch(ctx);
         }
 
     }
@@ -77,16 +74,13 @@ public class Combat : MonoBehaviour
             damageable.Heal(intent.value);
             DamagePopup.instance.ShowCombatText(intent);
         }
-
-
-
     }
 
     public void KnockBack(CombatIntent intent)
     {
         if (intent.context.target is IDamageable damageable)
             if (intent.source.owner is Component comp)
-            damageable.KnockBack(intent.value, comp.gameObject.transform.position);
+                damageable.KnockBack(intent.value, comp.gameObject.transform.position);
     }
 
     internal void TriggerContact(CombatIntent intent)
@@ -101,32 +95,15 @@ public class Combat : MonoBehaviour
     public bool CanHit(CombatIntent intent)
     {
         float lastHit;
-        if (intent.context.effectInstance != null)
+       
+        var effectKey = (intent.context.damageSource.guid, intent.context.target);
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
         {
-            var effectKey = (intent.context.effectInstance, intent.context.target);
-            if (lastHitTimes.TryGetValue(effectKey, out lastHit))
-            {
-                if (Time.time - lastHit < intent.context.hitInterval)
-                    return false;
-            }
-            lastHitTimes[effectKey] = Time.time;
-            return true;
+            if (Time.time - lastHit < intent.context.damageSource.hitInterval)
+                return false;
         }
+        lastHitTimes[effectKey] = Time.time;
+        return true;
 
-        else if (intent.context.sourceInstanceId != null)
-        {
-
-            var sourceKey = (intent.context.sourceInstanceId, intent.context.target);
-
-            if (lastHitTimes.TryGetValue(sourceKey, out lastHit))
-            {
-                if (Time.time - lastHit < intent.context.hitInterval)
-                    return false;
-            }
-            lastHitTimes[sourceKey] = Time.time;
-            return true;
-        }
-
-        return false;
     }
 }

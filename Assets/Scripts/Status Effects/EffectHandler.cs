@@ -27,7 +27,7 @@ public class EffectHandler : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (ctx.damageSource != effects[i].effectHolder && ctx.damageSourceOwner != effects[i].effectHolder)
+            if (ctx.damageSource != effects[i].effectHolder && ctx.damageSource.owner != effects[i].effectHolder)
                 continue;
             effects[i].entryNode.Execute(ctx, intents);
 

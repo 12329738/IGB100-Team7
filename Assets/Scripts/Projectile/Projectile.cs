@@ -20,10 +20,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
 
 
-    [SerializeField]
-    private StatsPreset _statPreset;
     [HideInInspector]
-    public virtual StatsPreset statPreset { get => _statPreset; set => _statPreset = value; }
+    public virtual StatsPreset statPreset { get; set; }
 
 
 
@@ -37,6 +35,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     public Entity owner { get => data.owner; set => data.owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
+    public float hitInterval { get => data.hitInterval; set => data.hitInterval = value; }
 
     private readonly ModifierProvider provider = new ModifierProvider();
 
@@ -53,12 +52,6 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         remove => provider.OnDirty -= value;
     }
 
-    IEnumerator InstantHit()
-    {
-        yield return new WaitForFixedUpdate();
-        var shape = GetComponent<IProjectileShape>();
-        shape.SetCollider(false);
-    }
     public void Initialize(ProjectileData d)
     {
 
@@ -91,7 +84,12 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         }
     }
 
-
+    IEnumerator InstantHit()
+    {
+        yield return new WaitForFixedUpdate();
+        var shape = GetComponent<IProjectileShape>();
+        shape.SetCollider(false);
+    }
 
     IEnumerator LifetimeRoutine()
     {
@@ -114,7 +112,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         foreach (EffectEntryNode node in data.effects)
         {
-            EffectContext context = new EffectContext { damageSource = this, damageSourceOwner = data.owner, trigger = CombatEvent.OnExpire };
+            EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnExpire };
             List<CombatIntent> intents = new List<CombatIntent>();
             if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
@@ -147,10 +145,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
                 var context = new EffectContext
                 {
                     damageSource = this,
-                    damageSourceOwner = data.owner,
                     target = target.GetComponent<IDamageSource>(),
-                    hitInterval = data.hitInterval,
-                    sourceInstanceId = this.GetInstanceID(),
                     trigger = CombatEvent.OnContact,
                 };
 
@@ -181,14 +176,13 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         var context = new EffectContext
         {
             damageSource = this,
-            damageSourceOwner = data.owner,
-            definition = data.definition,
+
             target = target.GetComponent<IDamageSource>(),
             value = TryGetStat(StatType.Damage),
-            hitInterval = data.hitInterval,
             isHit = data.isHit,
-            sourceInstanceId = this.GetInstanceID()
         };
+
+        context.damageSource.definition = definition;
 
         var intent = new CombatIntent
         {
@@ -198,7 +192,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             context = context
         };
 
-        context.sourceInstanceId = this.GetInstanceID();
+
 
         ownerCombat.DealDamage(intent);
 

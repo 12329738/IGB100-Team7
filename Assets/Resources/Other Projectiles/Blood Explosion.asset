@@ -14,19 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 0
+  _itemType: 14
   _name: 
   _description: 
   icon: {fileID: 0}
   baseStats: {fileID: 0}
   prefab: {fileID: 3336189089032681717, guid: baa76528aed299c459867f66198a39b0, type: 3}
-  randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 0
   trackEnemy: 0
   aimAtEnemy: 0
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
   randomDirection: 0
