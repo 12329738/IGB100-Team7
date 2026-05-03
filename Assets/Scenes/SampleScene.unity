@@ -4478,18 +4478,34 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 268219526, guid: a718ccf80a2857341a052e91818f4c1a, type: 3}
+    - target: {fileID: 4067718094682474035, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4124480751125308057, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 682986021}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: regularSprite
       value: 
       objectReference: {fileID: -1203882600, guid: 400b303f9abc6084d88b85ee5a0d5779, type: 3}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: transformOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 2a0533e2067dcb84cbeb171b188074ea, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: animatorController
       value: 
       objectReference: {fileID: 9100000, guid: 07f629a65980dc64ea2339d7ac700ceb, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: transformationSprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: startingWeapons.Array.size
       value: 1
@@ -4568,6 +4584,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7430363139122959058, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535302806152510063, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}

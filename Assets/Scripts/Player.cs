@@ -34,6 +34,7 @@ public class Player : Entity, IDamageable
 
     public Sprite regularSprite;
     public AnimatorController animatorController;
+    public AnimatorOverrideController transformOverride;
     public SpriteRenderer sr;
     bool isFlipped;
     Animator animator;
@@ -383,7 +384,7 @@ public class Player : Entity, IDamageable
             GameManager.instance.effectHandler.Register(instance);
         }
         sr.sprite = transformation.transformationSprite;
-        animator.runtimeAnimatorController = transformation.animator;
+        animator.runtimeAnimatorController = transformOverride;
 
 
     }
