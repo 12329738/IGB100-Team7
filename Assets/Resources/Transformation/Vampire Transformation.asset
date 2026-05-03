@@ -20,4 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00d173ea352853545bfe9d0cba02f085, type: 2}
   effect: {fileID: 11400000, guid: d77e4f50fc5fe6d46b4cc3c5f506b533, type: 2}
   transformationSprite: {fileID: 1322119876, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
-  animator: {fileID: 9100000, guid: 07f629a65980dc64ea2339d7ac700ceb, type: 2}
+  animator: {fileID: 22100000, guid: 2a0533e2067dcb84cbeb171b188074ea, type: 2}

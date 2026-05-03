@@ -11,6 +11,6 @@ public class Transformation : ScriptableObject
     public List<TransformationUpgrade> upgrades;
     public StatusEffectData effect;
     public Sprite transformationSprite;
-    public AnimatorController animator;
+    public AnimatorOverrideController animator;
 
 }

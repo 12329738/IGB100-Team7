@@ -4491,6 +4491,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1203882600, guid: 400b303f9abc6084d88b85ee5a0d5779, type: 3}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: transformOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 2a0533e2067dcb84cbeb171b188074ea, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: animatorController
       value: 
       objectReference: {fileID: 9100000, guid: 07f629a65980dc64ea2339d7ac700ceb, type: 2}
