@@ -17,5 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6c705cb2975d8f4c8aa4a1cbda236fa, type: 2}
   _itemType: 7
   _name: Adrenaline
-  _description: 
+  _description: On taking damage, increase movement speed and attack speed by 25%
+    for 3 seconds
   icon: {fileID: 21300000, guid: 3e5e720da19f9f1459495b7de9eedd37, type: 3}

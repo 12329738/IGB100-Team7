@@ -24,7 +24,6 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 2962360328088715328
-    - rid: 2962360328088715335
   modifiers: []
   rarity: 0
   itemType: 7
@@ -42,13 +41,3 @@ MonoBehaviour:
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: 0fd327ced7476db4eb4ef40c995391bb, type: 2}
-    - rid: 2962360328088715335
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        effectOperation:
-          rid: 2962360328088715337
-    - rid: 2962360328088715337
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 10
