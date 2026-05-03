@@ -37,6 +37,7 @@ public class Player : Entity, IDamageable
     public SpriteRenderer sr;
     bool isFlipped;
     Animator animator;
+    private StatusEffectDataInstance transformationStatusEffect;
 
 
     Queue<int> levelUps = new();
@@ -58,17 +59,19 @@ public class Player : Entity, IDamageable
     {
         animator = GetComponentInChildren<Animator>();
 
-        foreach (EffectEntryNode node in transformation.effect.entries)
-        {
-            currentTransformationEffects.Add(node);
-        }
-        foreach (TransformationUpgrade upgrade in currentTransformationUpgrades)
-        {
-            foreach (EffectEntryNode node in upgrade.effects)
-            {
-                currentTransformationEffects.Add(node);
-            }
-        }
+        //foreach (EffectEntryNode node in transformation.effect.entries)
+        //{
+        //    currentTransformationEffects.Add(node);
+        //}
+        //foreach (TransformationUpgrade upgrade in currentTransformationUpgrades)
+        //{
+        //    foreach (EffectEntryNode node in upgrade.effects)
+        //    {
+        //        currentTransformationEffects.Add(node);
+        //    }
+        //}
+
+        transformationStatusEffect = new StatusEffectDataInstance(transformation.effect);
 
         foreach (Weapon weapon in startingWeapons) 
         {
@@ -296,17 +299,9 @@ public class Player : Entity, IDamageable
 
         else if (upgrade is TransformationUpgrade transformationUpgrade)
         {
-            currentTransformationEffects.AddRange(transformationUpgrade.effects);
+            transformationStatusEffect.entries.AddRange(transformationUpgrade.effects);
             avaliableTransformationUpgrades.Remove(transformationUpgrade);
-            if (isTransformed)
-            {
-                foreach (EffectEntryNode node in transformationUpgrade.effects)
-                {
-                    EffectInstance instance = new EffectInstance(node, this, this,this);
-                    currentEffects.Add(instance);
-                    GameManager.instance.effectHandler.Register(instance);
-                }
-            }
+
         }
         
     }
@@ -375,13 +370,7 @@ public class Player : Entity, IDamageable
         timeTransformed = 0;
         transformationStartTime = Time.time;
 
-
-        foreach (EffectEntryNode node in currentTransformationEffects)
-        {
-            EffectInstance instance = new EffectInstance(node, this, this,this);
-            currentEffects.Add(instance);
-            GameManager.instance.effectHandler.Register(instance);
-        }
+        status.Apply(transformationStatusEffect, this.GetComponent<IDamageSource>());
         sr.sprite = transformation.transformationSprite;
         animator.runtimeAnimatorController = transformation.animator;
 
@@ -390,11 +379,7 @@ public class Player : Entity, IDamageable
 
     private void StopTransformation()
     {
-
-        foreach (EffectInstance instance in currentEffects)
-        {
-            GameManager.instance.effectHandler.UnRegister(instance);
-        }
+        status.RemoveStatus(transformation.effect);
         sr.sprite = regularSprite;
         isTransformed = false;
         timeTransformed = 0;

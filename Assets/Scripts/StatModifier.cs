@@ -9,4 +9,13 @@ public class StatModifier
     public IModifierProvider source;
     public float duration = 0;
 
+
+    public StatModifier(StatModifier mod)
+    {
+        stat = mod.stat;
+        amount = mod.amount;
+        type = mod.type;
+        source = mod.source;
+        duration = mod.duration;
+    }
 }

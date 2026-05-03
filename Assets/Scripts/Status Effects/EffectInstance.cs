@@ -6,7 +6,6 @@ public class EffectInstance
     public EffectEntryNode entryNode;
     public EffectState state;
     public EffectExecutor executor;
-    //public HashSet<CombatEvent> subscribedEvents = new();
     public IDamageSource effectHolder;
 
     public EffectInstance(EffectEntryNode def, IDamageSource source, IDamageSource target, IDamageSource effectCreator)

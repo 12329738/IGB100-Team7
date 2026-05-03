@@ -34,4 +34,12 @@ public class CombatCondition
 
     public ComparisonType comparisonType;
     public float value;
+
+    public CombatCondition(CombatCondition condition)
+    {
+        triggerEvent = condition.triggerEvent;
+        useComparison = condition.useComparison;
+        comparisonType = condition.comparisonType;
+        value = condition.value;
+    }
 }

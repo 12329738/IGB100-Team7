@@ -70,14 +70,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
 
         foreach (var entry in data.entries)
         {
-            var runtime = new EffectInstance(
-                entry,
-                source: source,
-                target: target,
-                effectCreator: _owner.GetComponent<IDamageSource>()
-            );
-
-            runtimes.Add(runtime);
+            AddRuntime(entry);
         }
 
         provider.Modifiers.AddRange(data.modifiers);
@@ -91,6 +84,23 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         EmitEffects(context);
     }
 
+    public void AddRuntime(EffectEntryNode entry)
+    {
+        var runtime = new EffectInstance(
+            entry,
+            source: context.damageSource,
+            target: context.target,
+            effectCreator: _owner.GetComponent<IDamageSource>()
+        );
+
+        runtimes.Add(runtime);
+    }
+
+    public void AddRuntime(List<EffectEntryNode> entries)
+    {
+        foreach (var entry in entries)
+            AddRuntime(entry);
+    }
 
     public void Tick()
     {
@@ -100,6 +110,10 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
             Expire();
             return;
         }
+
+        foreach (var runtime in runtimes)
+            runtime.Tick(Time.time, GameManager.instance.effectExecutor);
+
         if (!data.hasTick)
             return;
         if (Time.time - state.lastTickTime < data.tickInterval)
