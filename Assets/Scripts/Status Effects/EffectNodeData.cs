@@ -6,11 +6,21 @@ using UnityEngine;
 public class EffectNodeData
 {
     public EffectIntent type;
-    //public bool emitsIntent;
     [SerializeReference]
     public EffectOperation effectOperation;
     [System.NonSerialized]
     public EffectOperation runtimeNodeConfig;
+
+    public EffectNodeData(EffectNodeData effect)
+    {
+        type = effect.type;
+        effectOperation = effect.effectOperation;
+    }
+
+    public EffectNodeData(EffectIntent intent)
+    {
+        type = intent;
+    }
 
     public void Validate()
     {

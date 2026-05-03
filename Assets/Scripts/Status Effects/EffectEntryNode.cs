@@ -12,8 +12,20 @@ public class EffectEntryNode
     
     [SerializeReference]
     public List<EffectNodeData> effectData;
-    
 
+
+    public EffectEntryNode(EffectEntryNode entry)
+    {
+        hasTick = entry.hasTick;
+        tickInterval = entry.tickInterval;
+        conditions = new();
+        foreach (var condition in entry.conditions)
+            conditions.Add(new CombatCondition(condition));
+
+        effectData = new();
+        foreach (var effect in entry.effectData)
+            effectData.Add(new EffectNodeData(effect));
+    }
 
     public void Validate()
     {
@@ -23,10 +35,7 @@ public class EffectEntryNode
         for (int i = 0; i < effectData.Count; i++)
         {
             if (effectData[i] == null)
-                effectData[i] = new EffectNodeData
-                {
-                    type = EffectIntent.ApplyStatusEffect
-                };
+                effectData[i] = new EffectNodeData(EffectIntent.ApplyStatusEffect);
 
             effectData[i].Validate();
         }

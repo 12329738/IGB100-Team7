@@ -6,7 +6,7 @@ public class EffectHandler : MonoBehaviour
 {
     private readonly List<EffectInstance> effects = new();
     public EffectExecutor executor;
-    //private EffectPipeline pipeline;
+
     void Awake()
     {
         executor = GameManager.instance.effectExecutor;

@@ -56,7 +56,7 @@ public class Weapon : Item, IModifierReceiver
     {
         owner = e;
         stats = new Stats();
-        stats.Initialize(statPreset);
+        stats.Initialize(statPreset, definition);
         stats.AddModifierProvider(e.provider);
         stats.AddModifierProvider(provider);
 
@@ -75,7 +75,7 @@ public class Weapon : Item, IModifierReceiver
         owner = e;
         if (stats != null) return;
         stats = new Stats();
-        stats.Initialize(statPreset);
+        stats.Initialize(statPreset,definition);
         stats.AddModifierProvider(e.provider);
         stats.AddModifierProvider(weapon);
         stats.AddModifierProvider(provider);

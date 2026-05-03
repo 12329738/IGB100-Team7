@@ -83,7 +83,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     {
         status = GetComponent<StatusEffectManager>();
         stats = new Stats();
-        stats.Initialize(statPreset);
+        stats.Initialize(statPreset, definition);
         stats.AddModifierProvider(this.provider);
 
         currentHealth = stats.GetStat(StatType.MaxHealth);

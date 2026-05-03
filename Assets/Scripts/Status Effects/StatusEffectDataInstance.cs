@@ -9,7 +9,7 @@ public class StatusEffectDataInstance
     public float duration;
     public int maxStacks;
     public DamageSourceDefinition definition;
-    public List<StatModifier> modifiers;
+    public List<StatModifier> modifiers = new();
 
     public bool hasTick = true;
     public float tickInterval = 0.5f;
@@ -24,8 +24,17 @@ public class StatusEffectDataInstance
         definition = data.definition;
         hasTick  = data.hasTick;
         tickInterval = data.tickInterval;
-        entries = data.entries;
-        modifiers = data.modifiers;
+        entries = new List<EffectEntryNode>();
+        foreach (var entry in data.entries)
+        {
+            entries.Add(new EffectEntryNode(entry)); 
+        }
+
+        modifiers = new List<StatModifier>();
+        foreach (var mod in data.modifiers)
+        {
+            modifiers.Add(new StatModifier(mod)); 
+        }
 
     }
 

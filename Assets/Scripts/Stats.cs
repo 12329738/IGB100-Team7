@@ -18,11 +18,12 @@ public class Stats
     bool isDirty;
     private bool isRecalculating = false;
     private bool isInitializing = false;
+    private DamageSourceDefinition definition;
 
-    public void Initialize(StatsPreset preset)
+    public void Initialize(StatsPreset preset, DamageSourceDefinition definition)
     {
         isInitializing = true;
-
+        this.definition = definition;
         baseStats = preset ?? new StatsPreset();
 
         cachedStats.Clear();
@@ -109,6 +110,9 @@ public class Stats
             foreach (var mod in GetModifiersSafe(provider, visited))
             {
                 if (!cachedStats.ContainsKey(mod.stat))
+                    continue;
+
+                if (mod.appliedTo != null && mod.appliedTo != definition)
                     continue;
 
                 switch (mod.type)
