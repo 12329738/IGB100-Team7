@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Adrenaline
+  m_Name: Adrenaline 1
   m_EditorClassIdentifier: 
   name: 
-  description: 
+  description: On taking damage, increase movement speed and attack speed by 25%
+    for 1 seconds
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -27,7 +28,7 @@ MonoBehaviour:
   modifiers: []
   rarity: 0
   itemType: 7
-  levelsAvaliable: 0100000002000000030000000400000005000000
+  levelsAvaliable: 01000000
   references:
     version: 2
     RefIds:
