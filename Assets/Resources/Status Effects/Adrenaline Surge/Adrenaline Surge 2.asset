@@ -21,10 +21,12 @@ MonoBehaviour:
   - stat: 9
     amount: 25
     type: 1
+    appliedTo: {fileID: 0}
     duration: 0
   - stat: 1
-    amount: 25
+    amount: 10
     type: 1
+    appliedTo: {fileID: 0}
     duration: 0
   hasTick: 0
   tickInterval: 0

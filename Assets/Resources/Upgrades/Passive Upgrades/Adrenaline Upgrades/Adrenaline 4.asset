@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Adrenaline 4
   m_EditorClassIdentifier: 
   name: 
-  description: On taking damage, increase movement speed and attack speed by 25%
-    for 4 seconds
+  description: On taking damage, increase movement speed and attack speed for 4 seconds
   effects:
   - hasTick: 0
     tickInterval: 0
