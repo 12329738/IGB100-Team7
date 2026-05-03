@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Adrenaline
+  m_Name: Adrenaline 1
   m_EditorClassIdentifier: 
   name: 
-  description: 
+  description: On taking damage, increase movement speed and attack speed by 25%
+    for 1 seconds
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -24,11 +25,10 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 2962360328088715328
-    - rid: 2962360328088715335
   modifiers: []
   rarity: 0
   itemType: 7
-  levelsAvaliable: 0100000002000000030000000400000005000000
+  levelsAvaliable: 01000000
   references:
     version: 2
     RefIds:
@@ -42,13 +42,3 @@ MonoBehaviour:
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: 0fd327ced7476db4eb4ef40c995391bb, type: 2}
-    - rid: 2962360328088715335
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        effectOperation:
-          rid: 2962360328088715337
-    - rid: 2962360328088715337
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 10

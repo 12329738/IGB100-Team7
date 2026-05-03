@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
-  m_Name: Adrenaline Surge
+  m_Name: Adrenaline Surge 1
   m_EditorClassIdentifier: 
-  name: Adrenaline Surge
+  name: Adrenaline Surge 1
   description: 
-  duration: 3
+  duration: 1
   maxStacks: 1
   definition: {fileID: 11400000, guid: f2945d179ad43af4fb332e12e18d6a9f, type: 2}
   modifiers:
