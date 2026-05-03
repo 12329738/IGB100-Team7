@@ -17,7 +17,17 @@ MonoBehaviour:
   duration: 10000
   maxStacks: 1
   definition: {fileID: 11400000, guid: 5ff474c2cea6a904097840e21543bf2e, type: 2}
-  modifiers: []
+  modifiers:
+  - stat: 1
+    amount: 20
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
+  - stat: 9
+    amount: 50
+    type: 1
+    appliedTo: {fileID: 11400000, guid: 500e92a03a049074e8daa295656244be, type: 2}
+    duration: 0
   hasTick: 0
   tickInterval: 0
   entries:

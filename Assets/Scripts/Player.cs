@@ -49,10 +49,8 @@ public class Player : Entity, IDamageable
     public float timeTransformed;
     float transformationStartTime;
     List<Upgrade> avaliableTransformationUpgrades = new();
-    List<EffectEntryNode> currentTransformationEffects = new();
 
     public List<TransformationUpgrade> currentTransformationUpgrades = new();
-    List<EffectInstance> currentEffects = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

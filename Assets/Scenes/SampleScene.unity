@@ -4483,6 +4483,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: _definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 57d57d564818f9e408227d892a51cc75, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: regularSprite
       value: 
       objectReference: {fileID: -1203882600, guid: 400b303f9abc6084d88b85ee5a0d5779, type: 3}
