@@ -52,7 +52,7 @@ MonoBehaviour:
   gameUI: {fileID: 0}
   database: {fileID: 0}
   statusEffectRegistry: {fileID: 0}
-  weaponLimit: 3
+  weaponLimit: 4
   passiveLimit: 3
   upgradesPerLevel: 3
   weaponUpgradeLimit: 5
@@ -62,6 +62,7 @@ MonoBehaviour:
   maxLevel: 100
   knockBackSpeed: 10
   transformationUpgradeInterval: 10
+  flashDuration: 0.05
   rarities: []
   experienceCurve:
     serializedVersion: 2

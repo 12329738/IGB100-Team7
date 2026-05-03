@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Fangs
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades: []
+  _upgrades:
+  - {fileID: 11400000, guid: c6a7d09161dc12f46b92a25d389934f1, type: 2}
+  - {fileID: 11400000, guid: cfc0a3fb6d64bc14bae8e33fcb8d0fa7, type: 2}
+  - {fileID: 11400000, guid: eef4197105b975847907d4b55822c621, type: 2}
+  - {fileID: 11400000, guid: 1949e3f3651226043a858a39f7bb1b92, type: 2}
   _itemType: 13
   _name: Fangs
   _description: Bite the closest enemies, dealing damage in an area.
