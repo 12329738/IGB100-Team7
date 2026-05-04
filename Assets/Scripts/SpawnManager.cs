@@ -124,14 +124,40 @@ public class SpawnManager : MonoBehaviour
     // Waves
     void SpawnWave(WaveData wave)
     {
+        StopAllCoroutines(); // prevents stacking systems
+
         foreach (var enemy in wave.enemies)
         {
-            StartCoroutine(SpawnOverTime(enemy));
+            enemy.currentAlive = 0;
+            enemy.spawnTimer = 0f;
+
+            StartCoroutine(ManageEnemyType(enemy));
+        }
+    }
+
+    IEnumerator ManageEnemyType(EnemySpawnData enemy)
+    {
+        // Initial spawn over time
+        if (enemy.amount > 0)
+        {
+            float interval = enemy.spawnDuration / enemy.amount;
+
+            for (int i = 0; i < enemy.amount; i++)
+            {
+                SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+                yield return new WaitForSeconds(interval);
+            }
         }
 
-        if (wave.isBossWave)
+        // Maintain minimum count forever
+        while (true)
         {
-            Debug.Log("Boss Wave!");
+            if (enemy.currentAlive < enemy.minAlive)
+            {
+                SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+            }
+
+            yield return new WaitForSeconds(enemy.spawnDelay);
         }
     }
 
@@ -143,7 +169,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < enemy.amount; i++)
         {
-            SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset);
+            SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
             yield return new WaitForSeconds(interval);
         }
     }
@@ -190,11 +216,11 @@ public class SpawnManager : MonoBehaviour
         WaveData randomWave = waves[Random.Range(0, waves.Length)];
         var enemyData = randomWave.enemies[Random.Range(0, randomWave.enemies.Length)];
 
-        SpawnEnemy(enemyData.enemyPrefab, enemyData.statsPreset);
+        SpawnEnemy(enemyData.enemyPrefab, enemyData.statsPreset, enemyData);
     }
 
     // Spawning
-    void SpawnEnemy(GameObject prefab, StatsPreset preset)
+    void SpawnEnemy(GameObject prefab, StatsPreset preset, EnemySpawnData data)
     {
         GameObject obj = ObjectPool.instance.GetObject(prefab);
         if (obj == null) return;
@@ -209,7 +235,17 @@ public class SpawnManager : MonoBehaviour
         obj.transform.position = GetSpawnLocation();
         obj.transform.rotation = Quaternion.identity;
 
-        obj.SetActive(true); // triggers OnEnable → OnSpawned
+        obj.SetActive(true);
+
+        // Track this type
+        data.currentAlive++;
+
+        // Register callback on death
+        Enemy enemy = obj.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.OnDeathCallback = () => data.currentAlive--;
+        }
     }
 
     Vector3 GetSpawnLocation()
