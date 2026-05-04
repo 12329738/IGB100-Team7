@@ -17,7 +17,7 @@ MonoBehaviour:
   effects: []
   modifiers:
   - stat: 5
-    amount: 5
+    amount: 2.5
     type: 0
     appliedTo: {fileID: 0}
     duration: 0
