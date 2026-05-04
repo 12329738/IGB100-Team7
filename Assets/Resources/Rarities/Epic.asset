@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Epic
   m_EditorClassIdentifier: 
   rarity: 2
-  chance: 15
+  chance: 17.5
   valueModifier: 3
   color: {r: 0.8301887, g: 0.011747932, b: 0.70769376, a: 1}

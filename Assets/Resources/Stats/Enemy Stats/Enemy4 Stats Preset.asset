@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statPresets:
   - statType: 0
-    value: 45
+    value: 35
   - statType: 1
-    value: 4
+    value: 5
   - statType: 2
     value: 1

@@ -26,6 +26,8 @@ MonoBehaviour:
   isPiercing: 0
   trackEnemy: 0
   aimAtEnemy: 1
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   isHit: 0
@@ -33,10 +35,10 @@ MonoBehaviour:
   randomDirection: 0
   behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
-  _statPreset: {fileID: 11400000, guid: bf1b21841fa20a542bb1abeea7c17fae, type: 2}
+  _statPreset: {fileID: 11400000, guid: 9fda97056e2ce2840a191ae7cd7a399a, type: 2}
+  definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
   effects: []
   references:
     version: 2
