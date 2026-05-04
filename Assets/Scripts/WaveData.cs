@@ -4,13 +4,19 @@ using UnityEngine;
 public class EnemySpawnData
 {
     public GameObject enemyPrefab;
-    public int amount;
-
-    [Header("Stats")]
     public StatsPreset statsPreset;
 
-    [Header("Spawn Timing")]
-    public float spawnDuration = 60f; // spread over the minute
+    [Header("Wave Spawn")]
+    public int amount;
+    public float spawnDuration = 60f;
+
+    [Header("Runtime Control")]
+    public int minAlive = 3;          // Minimum number to maintain
+    public float spawnDelay = 2f;     // Time between spawns
+
+    // Runtime tracking (not shown in inspector)
+    [HideInInspector] public int currentAlive = 0;
+    [HideInInspector] public float spawnTimer = 0f;
 }
 
 [System.Serializable]

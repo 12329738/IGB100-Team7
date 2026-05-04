@@ -11,6 +11,7 @@ public class Enemy : Entity, IDamageable
     [HideInInspector]
     public Weapon weapon;
     public EnemyBehaviour behaviour;
+    public Action OnDeathCallback;
    
 
     void Start()
@@ -81,14 +82,19 @@ public class Enemy : Entity, IDamageable
 
     internal override void Die()
     {
+        OnDeathCallback?.Invoke();
+
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         SpawnerManager.instance.UnregisterEnemy();
+
         weapon = null;
 
         if (status != null)
             status.ResetStatusEffects();
+
         GameManager.instance.effectHandler.UnRegister(this);
         flashScript.ResetMaterial();
+
         ObjectPool.instance.ReturnObject(gameObject);
     }
 
