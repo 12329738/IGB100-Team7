@@ -37,6 +37,7 @@ public class SpawnManager : MonoBehaviour
     [Header("Spawning")]
     public float padding = 2f;
     public GameObject experienceGem;
+    public GameObject chest;
 
     [Header("Minimum Spawn Control")]
     public float minSpawnInterval = 1f;
@@ -295,5 +296,10 @@ public class SpawnManager : MonoBehaviour
         exp.experienceValue = amount;
 
         obj.SetActive(true);
+    }
+
+    public void SpawnChest(Vector3 position)
+    {
+        GameObject obj = ObjectPool.instance.GetObject(chest);
     }
 }

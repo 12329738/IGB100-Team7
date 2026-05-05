@@ -10,6 +10,7 @@ public class SpawnerManager : MonoBehaviour
     public int currentEnemies;
     public GameObject[] enemies;
     public GameObject experienceGem;
+    public GameObject chest;
     public float padding;
     float timer;
     Camera cam;
@@ -129,4 +130,9 @@ public class SpawnerManager : MonoBehaviour
         
     }
 
+    internal void SpawnChest(Vector3 position)
+    {
+        GameObject obj = ObjectPool.instance.GetObject(chest);
+        chest.transform.position = position;
+    }
 }

@@ -12,7 +12,7 @@ public class Enemy : Entity, IDamageable
     public Weapon weapon;
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
-   
+    public bool dropsChest;
 
     void Start()
     {
@@ -85,6 +85,8 @@ public class Enemy : Entity, IDamageable
         OnDeathCallback?.Invoke();
 
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
+        if (dropsChest)
+            SpawnerManager.instance.SpawnChest(transform.position);
         SpawnerManager.instance.UnregisterEnemy();
 
         weapon = null;
@@ -111,8 +113,4 @@ public class Enemy : Entity, IDamageable
         SpawnerManager.instance.RegisterEnemy();
     }
 
-    void OnDisable()
-    {
-        
-    }
 }

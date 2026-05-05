@@ -42,7 +42,7 @@ public class Player : Entity, IDamageable
 
     Queue<int> levelUps = new();
     [HideInInspector]
-    public bool upgradeChosen;
+    public bool upgradeChosen = false;
     private bool levelUpRoutineRunning;
 
     [HideInInspector]
@@ -231,29 +231,49 @@ public class Player : Entity, IDamageable
 
     private IEnumerator LevelUp()
     {
-
         level++;
-        Time.timeScale = 0f;
 
-        List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
-
-        if (chosenUpgrades.Count > 0)
-        {
-            GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
-
-            yield return new WaitUntil(() => upgradeChosen == true);
-            upgradeChosen = false;
-        }
+        StartCoroutine(ShowUpgrades(1));
 
         if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
-            GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
-            yield return new WaitUntil(() => upgradeChosen == true);
-            upgradeChosen = false;
-
+            StartCoroutine(ShowTransformationUpgrade());
         }
 
+        yield return null;
+
+    }
+
+    public IEnumerator ShowUpgrades(int number)
+    {
+        Time.timeScale = 0f;
+
+        for (int i = 0; i < number; i++)
+        {
+            List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
+
+            if (chosenUpgrades.Count > 0)
+            {
+                GameManager.instance.gameUI.ShowUpgradeOptions(chosenUpgrades);
+
+                yield return new WaitUntil(() => upgradeChosen == true);
+                upgradeChosen = false;
+            }
+        }
+        
+        
         Time.timeScale = 1f;
+    }
+
+    public IEnumerator ShowTransformationUpgrade()
+    {
+        GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
+        yield return new WaitUntil(() => upgradeChosen == true);
+        upgradeChosen = false;
+    }
+
+    public void ShowUpgradeScreen()
+    {
 
     }
 
