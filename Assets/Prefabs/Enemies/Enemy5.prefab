@@ -149,6 +149,7 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
+  dropsChest: 0
   references:
     version: 2
     RefIds: []
@@ -171,8 +172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.08, y: 0.2, z: 0.05}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.07271876, y: 0.2, z: 0.042718746}
+  m_Center: {x: 0.0012135484, y: 0, z: 0.00040453038}
 --- !u!114 &3464707079348668055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,4 +211,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9fccfaff7691a4a956c40f7496eed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashDuration: 0.05

@@ -202,7 +202,7 @@ public class Player : Entity, IDamageable
         ).normalized;
 
 
-        if (Input.GetKeyDown("t"))
+        if (Input.GetKeyDown("r"))
         {
             if (!isTransformed)
             Transform();
