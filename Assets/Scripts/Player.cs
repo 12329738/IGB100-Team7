@@ -233,7 +233,7 @@ public class Player : Entity, IDamageable
     {
         level++;
 
-        StartCoroutine(ShowUpgrades(1));
+        yield return StartCoroutine(ShowUpgrades(1));
 
         if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
@@ -267,9 +267,11 @@ public class Player : Entity, IDamageable
 
     public IEnumerator ShowTransformationUpgrade()
     {
+        Time.timeScale = 0f;
         GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
         yield return new WaitUntil(() => upgradeChosen == true);
         upgradeChosen = false;
+        Time.timeScale = 1f;
     }
 
     public void ShowUpgradeScreen()
