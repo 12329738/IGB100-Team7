@@ -31,6 +31,8 @@ public enum ItemList
     HuntingRifle,
     [Description("Fangs")]
     Fangs,
+    [Description("Boomerang")]
+    Boomerang,
     None
 }
 
