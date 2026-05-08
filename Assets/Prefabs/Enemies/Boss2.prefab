@@ -64,7 +64,7 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
-  dropsChest: 0
+  dropsChest: 1
   references:
     version: 2
     RefIds: []

@@ -58,13 +58,13 @@ MonoBehaviour:
   _statPreset: {fileID: 11400000, guid: 584efd0ebbea9094f92403f55e26f44e, type: 2}
   _team: 1
   _owner: {fileID: 0}
-  _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
+  _definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
   _hitInterval: 1
   expAmount: 2000
   weaponData: {fileID: 11400000, guid: bf43fa655d6521b4bad3759407e2e531, type: 2}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: ede0d59f96d4ec24da4bd0d93d336595, type: 2}
-  dropsChest: 0
+  dropsChest: 1
   references:
     version: 2
     RefIds: []
