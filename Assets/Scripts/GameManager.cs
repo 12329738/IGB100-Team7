@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public float knockBackSpeed;
     public int transformationUpgradeInterval = 5;
     public float flashDuration = 0.05f;
+    public float healthPickupDropRate = 5f;
 
     [HideInInspector]
     public Rarity[] rarities;
