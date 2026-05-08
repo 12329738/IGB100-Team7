@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rare
   m_EditorClassIdentifier: 
   rarity: 1
-  chance: 30
+  chance: 35
   valueModifier: 1.5
   color: {r: 0, g: 0.17847392, b: 0.9528302, a: 1}
