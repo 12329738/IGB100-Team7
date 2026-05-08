@@ -31,6 +31,12 @@ public enum ItemList
     HuntingRifle,
     [Description("Fangs")]
     Fangs,
+    [Description("Magnetism")]
+    Magnetism,
+    [Description("Monstrous Stamina")]
+    MonstrousStamina,
+    [Description("Recharger")]
+    Recharger,
     None
 }
 
