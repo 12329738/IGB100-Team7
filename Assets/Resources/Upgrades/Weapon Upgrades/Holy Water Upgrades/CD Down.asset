@@ -17,9 +17,10 @@ MonoBehaviour:
   effects: []
   modifiers:
   - stat: 9
-    amount: 5
-    isPercentage: 1
+    amount: 10
     type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   rarity: 0
   itemType: 4
   levelsAvaliable: 0100000002000000030000000400000005000000
