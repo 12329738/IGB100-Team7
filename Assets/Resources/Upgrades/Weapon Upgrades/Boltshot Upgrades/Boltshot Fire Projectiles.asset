@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
   m_Name: Boltshot Fire Projectiles
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Fire Bolts
+  description: Bolts apply burn to hit enemies
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
     - rid: 6974428314434011395
   modifiers: []
   rarity: 0
-  itemType: 12
+  itemType: 1
   levelsAvaliable: 
   references:
     version: 2
