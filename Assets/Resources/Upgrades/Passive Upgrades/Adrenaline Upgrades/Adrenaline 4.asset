@@ -24,7 +24,12 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 2962360328088715328
-  modifiers: []
+  modifiers:
+  - stat: 11
+    amount: 10
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   rarity: 0
   itemType: 7
   levelsAvaliable: 04000000

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Monstrous Stamina
   m_EditorClassIdentifier: 
   currentLevel: 1
-  _upgrades:
-  - {fileID: 11400000, guid: d72504466b05188498aa32b2b8d3197c, type: 2}
+  _upgrades: []
   _itemType: 15
   _name: Monstrous Stamina
   _description: 
