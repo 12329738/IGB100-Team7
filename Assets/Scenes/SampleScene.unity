@@ -1062,7 +1062,7 @@ MonoBehaviour:
   minimumEnemyNumber: 16
   currentEnemies: 0
   enemies:
-  - {fileID: 3512271440442089338, guid: ef7e9e9eae574f545bb14799d87b7456, type: 3}
+  - {fileID: 3512271440442089338, guid: 6462c3e1d0335f24aa5a590e157a046a, type: 3}
   experienceGem: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
   chest: {fileID: 6009706109667482827, guid: da1adacbfe3b73344a3372d18a8cb93c, type: 3}
   padding: 5
@@ -4592,6 +4592,14 @@ PrefabInstance:
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 41df31b746c9c7a458fe6d53d2a0a375, type: 2}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: currentTransformationUpgrades.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: 'currentTransformationUpgrades.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f0a02e90d0bc54438e3ee127f55c10e, type: 2}
     - target: {fileID: 6015161388496561043, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.27683184

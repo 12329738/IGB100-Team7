@@ -17,6 +17,7 @@ MonoBehaviour:
   duration: 3
   maxStacks: 3
   definition: {fileID: 11400000, guid: 5ff474c2cea6a904097840e21543bf2e, type: 2}
+  modifiers: []
   hasTick: 1
   tickInterval: 0.5
   entries:
@@ -41,5 +42,5 @@ MonoBehaviour:
     - rid: 6460871584670285969
       type: {class: DamageOverTimeConfig, ns: , asm: Assembly-CSharp}
       data:
-        damage: 5
+        damage: 10
         isHit: 0

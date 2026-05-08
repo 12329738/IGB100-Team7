@@ -32,9 +32,9 @@ MonoBehaviour:
   - statType: 10
     value: 1
   - statType: 11
-    value: 50
+    value: 75
   - statType: 12
-    value: 2.5
+    value: 3
   - statType: 13
     value: 5
   - statType: 5
