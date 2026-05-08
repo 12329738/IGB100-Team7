@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class StatusEffectManager : MonoBehaviour
 {

@@ -1,14 +1,7 @@
-using NUnit.Framework.Internal;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 
 public class Player : Entity, IDamageable
@@ -33,7 +26,7 @@ public class Player : Entity, IDamageable
     Coroutine transformationCoroutine;
 
     public Sprite regularSprite;
-    public AnimatorController animatorController;
+    public RuntimeAnimatorController animatorController;
     public SpriteRenderer sr;
     bool isFlipped;
     Animator animator;
