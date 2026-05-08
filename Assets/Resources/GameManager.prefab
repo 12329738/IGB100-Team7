@@ -55,8 +55,8 @@ MonoBehaviour:
   weaponLimit: 4
   passiveLimit: 3
   upgradesPerLevel: 3
-  weaponUpgradeLimit: 5
-  passiveUpgradeLimit: 5
+  weaponUpgradeLimit: 6
+  passiveUpgradeLimit: 6
   minExp: 0
   maxExp: 1000000
   maxLevel: 100

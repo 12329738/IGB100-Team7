@@ -13,7 +13,7 @@ public class Combat : MonoBehaviour
     public void DealDamage(CombatIntent intent)
     {
         
-        IDamageable damageable = intent.context.target as IDamageable;
+        IDamageable damageable = intent.target as IDamageable;
 
         if (damageable == null || !damageable.IsDamageable())
             return;
@@ -50,7 +50,9 @@ public class Combat : MonoBehaviour
             }
             
         }
-        
+
+        if (intent.target is Entity e)
+            intent.value *= e.stats.GetStat(StatType.DamageTaken);
 
         damageable.TakeDamage(intent);
         DamagePopup.instance.ShowCombatText(intent);
@@ -89,7 +91,7 @@ public class Combat : MonoBehaviour
     {
         if (intent.context.target is IDamageable damageable)
             if (intent.source.owner is Component comp)
-                damageable.KnockBack(intent.value, comp.gameObject.transform.position);
+                damageable.KnockBack(intent);
     }
 
     internal void TriggerContact(CombatIntent intent)

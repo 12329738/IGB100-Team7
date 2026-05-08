@@ -27,23 +27,25 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: ac4affa47cd39794299edfd54399b3c1, type: 3}
   baseStats: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
   prefab: {fileID: 6370724445159366449, guid: 5dfc3d8fe6a1fe6429a3f73cdd059112, type: 3}
-  randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 0
   trackEnemy: 0
   aimAtEnemy: 0
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
   randomDirection: 1
   behaviour: {fileID: 11400000, guid: 535d81d4ae3dac440ace6f4f5a3c47ff, type: 2}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: f4dd791c7a0929949b6b8830a4f3b701, type: 2}
+  definition: {fileID: 11400000, guid: ac4f11976431f2344aff501b5d65c62d, type: 2}
   subWeaponData:
   - {fileID: 11400000, guid: 5828018a8900ecd448741b01f5e49162, type: 2}
   subWeaponInstances: []
-  definition: {fileID: 11400000, guid: ac4f11976431f2344aff501b5d65c62d, type: 2}
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -54,19 +56,20 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871561430433861
-  attackInterval: 0
+  evolution: {fileID: 0}
+  evolved: 0
   references:
     version: 2
     RefIds:
-    - rid: 6460871561430433861
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 5
-        effectOperation:
-          rid: 6460871606461530318
-    - rid: 6460871606461530318
+    - rid: 1647346759578943572
       type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
         weaponData: {fileID: 11400000, guid: 5828018a8900ecd448741b01f5e49162, type: 2}
         spawnAtTarget: 0
         spawnAtSource: 1
+    - rid: 6460871561430433861
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 5
+        effectOperation:
+          rid: 1647346759578943572

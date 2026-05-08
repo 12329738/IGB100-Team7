@@ -45,6 +45,8 @@ MonoBehaviour:
   subWeaponData: []
   subWeaponInstances: []
   effects: []
+  evolution: {fileID: 11400000, guid: 55e9abfd9ed382b42833654c9433499a, type: 2}
+  evolved: 0
   references:
     version: 2
     RefIds: []

@@ -19,6 +19,11 @@ public class Orbit : WeaponBehaviour
         SetPosition(proj);
     }
 
+    public override void OnContact(Projectile proj, Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
+
     internal override void Move(Projectile proj, IProjectileState state)
     {
         OrbitState s = (OrbitState)state;

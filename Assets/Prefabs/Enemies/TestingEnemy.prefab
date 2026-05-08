@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6495538883026340603}
   - component: {fileID: -5676004252566367511}
   - component: {fileID: 2300889201646085803}
+  - component: {fileID: 4147060448246357442}
   m_Layer: 3
   m_Name: TestingEnemy
   m_TagString: Untagged
@@ -62,6 +63,7 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
+  dropsChest: 0
   references:
     version: 2
     RefIds: []
@@ -123,7 +125,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9fccfaff7691a4a956c40f7496eed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashDuration: 0.05
+--- !u!54 &4147060448246357442
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512271440442089338}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8520254631157217528
 GameObject:
   m_ObjectHideFlags: 0

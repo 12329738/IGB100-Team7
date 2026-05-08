@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee57880bbbb7b6542b4ddf59f7950ac1, type: 3}
+  m_Name: Phantom Blade Evolution
+  m_EditorClassIdentifier: 
+  newBehaviour: {fileID: 0}
+  addedBehaviour: {fileID: 0}
+  newEffect:
+    hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 7
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 1647346763963826240
+  improvedEffect:
+    hasTick: 0
+    tickInterval: 0
+    conditions: []
+    effectData: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1647346763963826240
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 11
+        effectOperation:
+          rid: 1647346763963826242
+    - rid: 1647346763963826242
+      type: {class: DestroyProjectileConfig, ns: , asm: Assembly-CSharp}
+      data: 

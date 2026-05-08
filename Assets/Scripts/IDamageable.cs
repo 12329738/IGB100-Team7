@@ -10,7 +10,7 @@ public interface IDamageable : IDamageSource
     float currentHealth { get; }
     float GetCurrentHealthPercent();
     float[] GetCurrentHealth();
-    public void KnockBack(float magnitude, Vector3 attackerPosition);
+    public void KnockBack(CombatIntent intent);
     public void Heal(float amount);
 
 }

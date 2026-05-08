@@ -21,7 +21,7 @@ public class DamageOverTimeConfig : EffectOperation
         {
             source = ctx.damageSource,
             target = ctx.target,
-            intent = EffectIntent.DealDamage,
+            intent = EffectIntent.DealDamageToTarget,
             value = value,
             context = ctx,
 

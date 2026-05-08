@@ -18,6 +18,11 @@ public class ArcBehaviour : WeaponBehaviour
 
     }
 
+    public override void OnContact(Projectile proj, Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
+
     internal override void Move(Projectile proj, IProjectileState state)
     {
         ArcState a = (ArcState)state;

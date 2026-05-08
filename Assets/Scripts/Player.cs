@@ -57,18 +57,6 @@ public class Player : Entity, IDamageable
     {
         animator = GetComponentInChildren<Animator>();
 
-        //foreach (EffectEntryNode node in transformation.effect.entries)
-        //{
-        //    currentTransformationEffects.Add(node);
-        //}
-        //foreach (TransformationUpgrade upgrade in currentTransformationUpgrades)
-        //{
-        //    foreach (EffectEntryNode node in upgrade.effects)
-        //    {
-        //        currentTransformationEffects.Add(node);
-        //    }
-        //}
-
         transformationStatusEffect = new StatusEffectDataInstance(transformation.effect);
 
         foreach (Weapon weapon in startingWeapons) 
@@ -314,6 +302,8 @@ public class Player : Entity, IDamageable
             if (hasModifiers || hasEffects)
             {
                 item.currentLevel++;
+                if (item.currentLevel == GameManager.instance.weaponUpgradeLimit && item is Weapon weapon)
+                    weapon.Evolve();
             }
         }
 

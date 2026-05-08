@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class ProjectileData
     public DamageSourceDefinition definition;
     public Vector3 location;
     public HitMode hitMode;
-
+    public StatModifier modifier;
     public ProjectileData(Weapon original)
     {
         stats = new Dictionary<StatType, float>();
@@ -43,7 +44,12 @@ public class ProjectileData
         behaviour = original.behaviour;
         isPiercing = original.isPiercing;
         hitInterval = original.hitInterval;
-        effects = original.effects;
+        effects = new();
+        foreach (var effect in original.effects)
+        {
+            effects.Add(new EffectEntryNode(effect));
+        }
+
         isHit = original.isHit;
         trackEnemy = original.trackEnemy;
         aimAtEnemy = original.aimAtEnemy;
@@ -52,6 +58,9 @@ public class ProjectileData
         definition = original.definition;
         spawnAtTarget = original.spawnOnTarget;
         hitMode = original.hitMode;
+
+        
+
     }
 
     public ProjectileData Clone()

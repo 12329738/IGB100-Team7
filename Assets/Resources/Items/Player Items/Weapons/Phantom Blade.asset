@@ -25,24 +25,27 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 68a5fe3672bb1cc459ab425a4e7a105d, type: 3}
   baseStats: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
   prefab: {fileID: 999691352028456364, guid: 1ba4bc67920c25642a68efd688208b59, type: 3}
-  randomAngleVariance: 0
   direction: 110
   hitInterval: 0.5
   isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0
   behaviour: {fileID: 11400000, guid: 7e3b9551ac95efe458b38a683ac2d0b9, type: 2}
   pattern: {fileID: 11400000, guid: f4f0e565dbebc334da52f880880ed394, type: 2}
   _statPreset: {fileID: 11400000, guid: ef9ab60cc6ef9614b8a0e857c54e6cba, type: 2}
+  definition: {fileID: 11400000, guid: 61d115f1a4b287444bafa013409d7864, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  definition: {fileID: 11400000, guid: 61d115f1a4b287444bafa013409d7864, type: 2}
   effects: []
-  attackInterval: 0
+  evolution: {fileID: 11400000, guid: fc4583bedc459f845bafc9dd3efedfb5, type: 2}
+  evolved: 0
   references:
     version: 2
     RefIds: []

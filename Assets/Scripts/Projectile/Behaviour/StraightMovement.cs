@@ -8,6 +8,11 @@ public class StraightMovement : WeaponBehaviour
        
     }
 
+    public override void OnContact(Projectile proj, Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
+
     internal override void Move(Projectile proj, IProjectileState state)
     {
         proj.transform.position += proj.data.finalDirection.normalized * proj.stats[StatType.MoveSpeed] * Time.deltaTime;

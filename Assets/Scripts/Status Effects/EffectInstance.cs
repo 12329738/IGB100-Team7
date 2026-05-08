@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EffectInstance
@@ -22,7 +23,10 @@ public class EffectInstance
             stacks = 1
         };
 
-
+        var node = entryNode.conditions.FirstOrDefault(x => x.triggerEvent == CombatEvent.OnEffectGained);
+        if (node != null)
+            foreach (EffectNodeData effect in entryNode.effectData)
+                effect.Execute(new EffectContext(), new List<CombatIntent>());
     }
 
     public void Tick(float now, EffectExecutor executor)

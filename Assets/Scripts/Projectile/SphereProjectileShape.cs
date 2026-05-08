@@ -41,4 +41,13 @@ public class SphereProjectileShape : MonoBehaviour, IProjectileShape
     {
         col.enabled = enabled;
     }
+
+    public Collider[] GetColliders()
+    {
+
+        Vector3 center = col.transform.position;
+        float radius = col.radius;
+
+        return Physics.OverlapSphere(center, radius);
+    }
 }

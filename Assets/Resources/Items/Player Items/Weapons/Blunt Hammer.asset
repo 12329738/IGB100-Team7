@@ -24,22 +24,24 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7ba0ab9883f4652439ff985be5b3eafa, type: 3}
   baseStats: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   prefab: {fileID: 999691352028456364, guid: b5c84459c25f7b64bade0c22e6438b07, type: 3}
-  randomAngleVariance: 0
   direction: 0
   hitInterval: 1
   isPiercing: 1
   trackEnemy: 0
   aimAtEnemy: 0
+  spawnOnTarget: 0
+  hitMode: 0
   baseUpgrade: {fileID: 0}
+  owner: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0
   behaviour: {fileID: 11400000, guid: 421035d2ae701c84d903dccab449e7e6, type: 2}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
+  definition: {fileID: 11400000, guid: 9568dfec1e94de043885de3395f4737b, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  definition: {fileID: 11400000, guid: 9568dfec1e94de043885de3395f4737b, type: 2}
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -50,17 +52,19 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871561430433869
-  attackInterval: 0
+  evolution: {fileID: 11400000, guid: abafad4175dadb1488869d29dd2b3b34, type: 2}
+  evolved: 0
   references:
     version: 2
     RefIds:
+    - rid: 1647346759578943569
+      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
+      data:
+        magnitude: 2
+        damageMultiplier: 0
     - rid: 6460871561430433869
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 1
         effectOperation:
-          rid: 6460871584670285966
-    - rid: 6460871584670285966
-      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
-      data:
-        magnitude: 2
+          rid: 1647346759578943569

@@ -35,9 +35,9 @@ MonoBehaviour:
   behaviour: {fileID: 0}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 4cb66081ada9a444cb7f06eab3ccca8f, type: 2}
+  definition: {fileID: 11400000, guid: f6beaa833d0b91e45b8e9cca40570265, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  definition: {fileID: 11400000, guid: f6beaa833d0b91e45b8e9cca40570265, type: 2}
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -57,6 +57,8 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871615362105413
+  evolution: {fileID: 11400000, guid: 0a67872805cd8b44781712cf55266ed5, type: 2}
+  evolved: 0
   references:
     version: 2
     RefIds:
