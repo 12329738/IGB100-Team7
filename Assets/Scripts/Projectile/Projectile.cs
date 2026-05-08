@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
@@ -17,8 +18,6 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     private Combat ownerCombat;
     [HideInInspector]
     public Transform visual;
-
-
 
     [HideInInspector]
     public virtual StatsPreset statPreset { get; set; }
@@ -39,9 +38,19 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     public Guid guid { get;set; }
 
     private readonly ModifierProvider provider = new ModifierProvider();
+    public float elapsed;
 
     public void Update()
-    {      
+    {
+        elapsed += Time.deltaTime;
+
+        if (elapsed >= stats[StatType.Duration])
+        {
+            Deactivate();
+            return;
+        }
+            
+
         if (data.behaviour != null)
         {
             data.behaviour.Move(this, state);
@@ -57,13 +66,14 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         guid = Guid.NewGuid();
         data = d;
-        stats = data.stats;
+        stats = new Dictionary<StatType, float>(d.stats);
+
         if (GetComponentInChildren<SpriteRenderer>() != null)
         {
             visual = GetComponentInChildren<SpriteRenderer>().transform;
-            ApplyAreaStat(TryGetStat(StatType.Area));
-        }
             
+        }
+        ApplyAreaStat(TryGetStat(StatType.Area));
 
         foreach (EffectEntryNode node in data.effects)
         {
@@ -72,31 +82,37 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         }
 
         ownerCombat = this.data.owner.GetComponent<Entity>().combat;
-
-
-        if (stats[StatType.Duration] > 0)
-        {
-            StartCoroutine(LifetimeRoutine());
-        }
-
         if (data.hitMode == HitMode.Instant)
         {
             StartCoroutine(InstantHit());
+        }
+
+        
+    }
+
+    public void RaiseSpawnEvent()
+    {
+        foreach (EffectEntryNode node in data.effects)
+        {
+            EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnSpawn };
+            List<CombatIntent> intents = new List<CombatIntent>();
+            if (node.conditions.Any(x => x.triggerEvent == CombatEvent.OnSpawn))
+            {
+                node.Execute(context, intents);
+                node.Modify(context, ref intents);
+            }
+            GameManager.instance.effectExecutor.Execute(intents);
         }
     }
 
     IEnumerator InstantHit()
     {
-        yield return new WaitForFixedUpdate();
         var shape = GetComponent<IProjectileShape>();
+        yield return new WaitForFixedUpdate();
+        
         shape.SetCollider(false);
     }
 
-    IEnumerator LifetimeRoutine()
-    {
-        yield return new WaitForSeconds(TryGetStat(StatType.Duration));
-        Deactivate();
-    }
 
     public void ApplyAreaStat(float area)
     {
@@ -109,6 +125,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             shape.SetCollider(true);
         }
     }
+
     public void Deactivate()
     {
         foreach (EffectEntryNode node in data.effects)
@@ -123,7 +140,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             GameManager.instance.effectExecutor.Execute(intents);
         }
         GameManager.instance.effectHandler.UnRegister(this);
-        StopAllCoroutines();
+        elapsed = 0;
+        state = null;
         ObjectPool.instance.ReturnObject(gameObject);
 
     }
@@ -136,8 +154,6 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     private void RaiseContactEvent(GameObject target)
     {
-        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
-            return;
 
         foreach (EffectEntryNode node in data.effects)
         {

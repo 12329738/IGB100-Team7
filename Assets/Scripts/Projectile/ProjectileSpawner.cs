@@ -126,6 +126,8 @@ public class ProjectileSpawner
             {
                 proj.data.behaviour.OnProjectileCreated(proj);
             }
+
+            proj.RaiseSpawnEvent();
         }
 
     }

@@ -56,7 +56,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     public float hitInterval { get => _hitInterval; set => _hitInterval = value; }
     public Guid guid { get; set; }
 
-    [SerializeField]
+    internal KnockBack knockBack;
 
     public void OnEnable()
     {
@@ -132,10 +132,15 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
         return healthAmount;
     }
 
-    public void KnockBack(float magnitude, Vector3 attackerPosition)
+    public void KnockBack(CombatIntent intent)
     {
-        knockbackDirection = (transform.position - attackerPosition).normalized;
-        knockbackRemaining = magnitude;
+        if (intent.behaviour is KnockBackConfig kb)
+        {
+            knockBack = kb.knockback;
+            knockbackDirection = (transform.position - knockBack.originPoint).normalized;
+            knockbackRemaining = knockBack.magnitude;
+        }
+            
     }
 
     public void Heal(float amount)

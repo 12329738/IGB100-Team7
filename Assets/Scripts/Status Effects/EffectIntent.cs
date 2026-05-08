@@ -3,7 +3,7 @@ public enum EffectIntent
     DamageOverTime,
     Knockback,
     ApplyStatusEffect,
-    DealDamage,
+    DealDamageToTarget,
     Heal,
     SpawnProjectile,
     ModifyStat,
@@ -11,4 +11,6 @@ public enum EffectIntent
     StackCount,
     ModifyMaxStacks,
     RemoveStatusEffect,
+    DestroyProjectile,
+    DealDamageToArea,
 }

@@ -13,7 +13,8 @@ public enum CombatEvent
     OnDeath,
     OnSpawn,
     OnStackCount,
-    IsTransformed
+    IsTransformed,
+    OnEffectGained
 }
 
 public enum ComparisonType

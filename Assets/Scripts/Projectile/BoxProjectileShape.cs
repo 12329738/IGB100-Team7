@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BoxProjectileShape : MonoBehaviour, IProjectileShape
 {
@@ -40,5 +41,18 @@ public class BoxProjectileShape : MonoBehaviour, IProjectileShape
     public void SetCollider(bool enabled)
     {
         col.enabled = enabled;
+    }
+
+    public Collider[] GetColliders()
+    {
+        Vector3 center = col.bounds.center;
+        Vector3 halfExtents = col.bounds.extents;
+        Quaternion rotation = transform.rotation;
+
+        return Physics.OverlapBox(
+            center,
+            halfExtents,
+            rotation
+        );
     }
 }

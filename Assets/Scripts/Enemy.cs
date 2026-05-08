@@ -36,9 +36,12 @@ public class Enemy : Entity, IDamageable
             transform.position += knockbackDirection * step;
 
             knockbackRemaining -= step;
+            if (knockbackRemaining < 0.01f)
+                knockBack = null;
 
             return; 
         }
+
 
         Move();
     }
@@ -53,31 +56,54 @@ public class Enemy : Entity, IDamageable
 
     private void OnTriggerStay(Collider other)
     {
-        
-        Player player = other.GetComponentInParent<Player>();
-        if (player != null)
+        var context = new EffectContext
+        {
+            damageSource = this,
+            target = other.GetComponent<IDamageSource>(),
+
+            value = stats.GetStat(StatType.Damage),
+        };
+
+        context.damageSource.definition = definition;
+        var intent = new CombatIntent
+        {
+            value = stats.GetStat(StatType.Damage),
+            source = this,
+            target = other.GetComponent<IDamageSource>(),
+            context = context
+        };
+
+        if (other.TryGetComponent<Player>(out Player player))
+        {
+            
+
+            combat.DealDamage(intent);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Enemy>(out Enemy enemy) && knockbackRemaining > 0.1f && knockBack.knockBackDamage > 0)
         {
             var context = new EffectContext
             {
                 damageSource = this,
                 target = other.GetComponent<IDamageSource>(),
 
-                value = stats.GetStat(StatType.Damage),
+                value = knockBack.knockBackDamage
             };
 
             context.damageSource.definition = definition;
             var intent = new CombatIntent
             {
-                value = stats.GetStat(StatType.Damage),
+                value = knockBack.knockBackDamage,
                 source = this,
                 target = other.GetComponent<IDamageSource>(),
                 context = context
             };
-
+            context.value = knockBack.knockBackDamage;
             combat.DealDamage(intent);
         }
-        
-        
     }
 
     internal override void Die()

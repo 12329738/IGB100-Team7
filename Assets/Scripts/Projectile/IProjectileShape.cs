@@ -8,4 +8,5 @@ public interface IProjectileShape
     void Initialize();
     void ResetSize();
     void SetCollider(bool enabled);
+    Collider[] GetColliders();
 }

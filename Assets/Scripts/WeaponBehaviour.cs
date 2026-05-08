@@ -5,4 +5,5 @@ public abstract class WeaponBehaviour : ScriptableObject
 {
     internal abstract void Move(Projectile proj, IProjectileState state);
     public abstract void OnProjectileCreated(Projectile proj);
+    public abstract void OnContact(Projectile proj, Collider other);
 }

@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+[Serializable]
 [CreateAssetMenu(menuName = "Status Effect Data")]
 public class StatusEffectData : ScriptableObject
 {

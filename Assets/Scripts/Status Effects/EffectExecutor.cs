@@ -18,11 +18,15 @@ public class EffectExecutor : MonoBehaviour
         {
             
         
-            case EffectIntent.DealDamage:
+            case EffectIntent.DealDamageToTarget:
                 comp.gameObject.GetComponent<Combat>().DealDamage(intent);
                 break;
 
-            case EffectIntent.Heal:
+            case EffectIntent.DealDamageToArea:
+                comp.gameObject.GetComponent<Combat>().DealDamage(intent);
+                break;
+
+                case EffectIntent.Heal:
                 comp.gameObject.GetComponent<Combat>().Heal(intent);
                 break;
 

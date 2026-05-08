@@ -7,4 +7,5 @@ public struct CombatIntent
     public IDamageSource target;
     public float value;
     public EffectContext context;
+    public EffectOperation behaviour;
 }

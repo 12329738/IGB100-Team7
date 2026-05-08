@@ -15,5 +15,6 @@ public enum StatType
     Collection,
     MaxTransformation,
     TransformationGainRate,
-    TransformationDecayRate
+    TransformationDecayRate,
+    DamageTaken
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Item/Weapon")]
@@ -38,7 +40,7 @@ public class Weapon : Item, IModifierReceiver
     [SerializeField]
     private StatsPreset _statPreset;
     public Guid Id = Guid.NewGuid();
-    bool isWeapon = true;
+
     
     public DamageSourceDefinition definition;
     public List<Weapon> subWeaponData;
@@ -51,6 +53,8 @@ public class Weapon : Item, IModifierReceiver
     public Stats stats { get => _stats; set => _stats = value; }
 
     public List<EffectEntryNode> effects;
+    public WeaponEvolution evolution;
+    public bool evolved = false;
     float attackInterval;
     public void Initialize(Entity e)
     {
@@ -103,9 +107,6 @@ public class Weapon : Item, IModifierReceiver
         {
             cooldownTimer -= attackInterval;
             SpawnProjectiles();
-
-            
-
         }
     }
 
@@ -138,6 +139,48 @@ public class Weapon : Item, IModifierReceiver
             GameManager.instance.projectileSpawner.CreateProjectile(data, count, position);
         }
         
+
+    }
+
+    public void Evolve()
+    {
+        if (evolution != null)
+        {
+            if (evolution.improvedEffect.conditions.Count > 0)
+            {
+                var match = effects.FirstOrDefault(e =>
+                    evolution.improvedEffect.conditions.All(x => e.conditions.Any(c => c.triggerEvent == x.triggerEvent)) &&
+                    evolution.improvedEffect.effectData.All(x => e.effectData.Any(d => d.effectOperation.Type == x.effectOperation.Type))
+                );
+
+                if (match != null)
+                {
+                    effects.Remove(match);
+                    effects.Add((evolution.improvedEffect));
+                }
+            }
+
+
+            if (evolution.newEffect.conditions.Count > 0)
+            {
+                effects.Add(evolution.newEffect);
+            }
+               
+
+            if (evolution.newBehaviour != null)
+                behaviour = evolution.newBehaviour;
+
+            if (evolution.newPattern != null)
+                pattern = evolution.newPattern;
+
+            if (evolution.modifiers != null)
+                AddModifier(evolution.modifiers);
+
+        }
+
+        foreach (Weapon subWeapon in subWeaponInstances)
+            if (subWeapon.evolution != null)
+                subWeapon.Evolve();
 
     }
 
