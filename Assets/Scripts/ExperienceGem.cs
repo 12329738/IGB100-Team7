@@ -3,12 +3,9 @@ using UnityEngine;
 public class ExperienceGem : Pickup
 {
     public float experienceValue;
-    internal override void PickUp(Collider other)
+    internal override void PickUp()
     {
-        if (other.GetComponent<Player>() == GameManager.instance.player)
-        {
-            GameManager.instance.player.AddExperience(experienceValue);
-            Destroy(gameObject);
-        }
+        GameManager.instance.player.AddExperience(experienceValue);
+        ObjectPool.instance.ReturnObject(this.gameObject);
     }
 }

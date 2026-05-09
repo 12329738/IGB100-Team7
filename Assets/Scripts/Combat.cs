@@ -80,7 +80,7 @@ public class Combat : MonoBehaviour
 
     public void Heal(CombatIntent intent)
     {
-        if (intent.context.target is IDamageable damageable)
+        if (intent.target is IDamageable damageable)
         {
             damageable.Heal(intent.value);
             DamagePopup.instance.ShowCombatText(intent);

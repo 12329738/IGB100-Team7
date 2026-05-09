@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
+using Random = System.Random;
 
 public class Enemy : Entity, IDamageable
 {
@@ -113,6 +114,10 @@ public class Enemy : Entity, IDamageable
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         if (dropsChest)
             SpawnerManager.instance.SpawnChest(transform.position);
+        float random = UnityEngine.Random.Range(0, 100);
+        if (random <= GameManager.instance.healthPickupDropRate)
+            SpawnerManager.instance.SpawnHealthPickup(transform.position);
+
         SpawnerManager.instance.UnregisterEnemy();
 
         weapon = null;
