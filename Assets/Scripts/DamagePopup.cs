@@ -68,7 +68,7 @@ public class DamagePopup : MonoBehaviour
             text.color = Color.green;
         }
 
-        if (intent.context.isCrit)
+        else if (intent.context.isCrit)
         {
             text.color = Color.yellow;
             text.fontSize = text.fontSize * 1.5f;
