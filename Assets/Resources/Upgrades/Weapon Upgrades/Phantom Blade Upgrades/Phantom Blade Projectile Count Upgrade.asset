@@ -18,11 +18,12 @@ MonoBehaviour:
   modifiers:
   - stat: 8
     amount: 25
-    isPercentage: 1
     type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   rarity: 0
   itemType: 0
-  levelsAvaliable: 02000000030000000400000005000000
+  levelsAvaliable: 02000000050000000700000009000000
   references:
     version: 2
     RefIds: []
