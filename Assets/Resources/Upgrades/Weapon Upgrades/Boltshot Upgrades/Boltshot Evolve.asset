@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Blunt Hammer Damage Up
+  m_Name: Boltshot Evolve
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Evolution
+  description: Evolves and becomes piercing. Bolts return to the player, dealing
+    damage on the return
   effects: []
   modifiers:
-  - stat: 2
-    amount: 20
-    type: 1
+  - stat: 5
+    amount: 5
+    type: 0
     appliedTo: {fileID: 0}
     duration: 0
   rarity: 0
-  itemType: 3
-  levelsAvaliable: 010000000200000003000000040000000500000006000000070000000800000009000000
+  itemType: 1
+  levelsAvaliable: 0a000000
   references:
     version: 2
     RefIds: []
