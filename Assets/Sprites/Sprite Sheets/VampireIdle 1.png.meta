@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a718ccf80a2857341a052e91818f4c1a
+guid: c4ea186317637a048917fe43c41b7c3c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerRun1_0
+      name: VampireIdle 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,21 +105,21 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2093fb2eecd86524b925264d54e44537
-      internalID: 840653846
+      spriteID: 040a87cfdd817654f835e71020656ca8
+      internalID: -405054340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_1
+      name: VampireIdle 1_1
       rect:
         serializedVersion: 2
         x: 320
@@ -127,21 +127,21 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4236dc3fbfcd974a8afe26fcdc75e0b
-      internalID: 794612654
+      spriteID: 411a770d0d366d3458bc676885ab21f1
+      internalID: 895745685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_2
+      name: VampireIdle 1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -149,37 +149,37 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd3eb91e8ebb8864ab3fc1b832ce35b9
-      internalID: -1019784747
+      spriteID: daadd46d36bd166498a9cd8b3b60a3cf
+      internalID: 461211548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_3
+      name: VampireIdle 1_3
       rect:
         serializedVersion: 2
-        x: 319
+        x: 320
         y: 0
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5283f4bba6c7f99409dd026a5152bcfb
-      internalID: 268219526
+      spriteID: e5a038e013d068144a99d88a0c2b44b4
+      internalID: 802572707
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: eceaff0970c4d354aa193027dbac44a7
+    spriteID: d916a394260ae994ab5c2c295a9f1364
     internalID: 0
     vertices: []
     indices: 
@@ -198,10 +198,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PlayerRun1_0: 840653846
-      PlayerRun1_1: 794612654
-      PlayerRun1_2: -1019784747
-      PlayerRun1_3: 268219526
+      VampireIdle 1_0: -405054340
+      VampireIdle 1_1: 895745685
+      VampireIdle 1_2: 461211548
+      VampireIdle 1_3: 802572707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
