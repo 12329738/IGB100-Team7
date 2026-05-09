@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: TransformationSprite
   m_Controller: {fileID: 9100000, guid: 07f629a65980dc64ea2339d7ac700ceb, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: f0f9e19c0427b9b4183e22845eb3ec07, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 16d58a8514b72ab4991d5d34ff210bee, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: e4ebbc40960f0464f8c53ffb458ee2a7, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 5286d2ff0c3c1894b89f287dea36a5a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cf1c935f2d10cd5419f8018ac407a3a8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f0f9e19c0427b9b4183e22845eb3ec07, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 638ad31513b49a6408e4be5e95ea8bf4, type: 2}

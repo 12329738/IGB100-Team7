@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a718ccf80a2857341a052e91818f4c1a
+guid: fbe1c3bbf5b75c74b9c632188d8f9086
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerRun1_0
+      name: VampireWalk 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,21 +105,21 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2093fb2eecd86524b925264d54e44537
-      internalID: 840653846
+      spriteID: bdc7201efd083ad418a02c167e1fdaaf
+      internalID: 443451050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_1
+      name: VampireWalk 1_1
       rect:
         serializedVersion: 2
         x: 320
@@ -127,21 +127,21 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4236dc3fbfcd974a8afe26fcdc75e0b
-      internalID: 794612654
+      spriteID: 2935ad4960686db4b8916d85e20dde7e
+      internalID: 349476389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_2
+      name: VampireWalk 1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -149,37 +149,37 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd3eb91e8ebb8864ab3fc1b832ce35b9
-      internalID: -1019784747
+      spriteID: a0cdfb38e76e9c4469023ea41838b011
+      internalID: -1036706541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRun1_3
+      name: VampireWalk 1_3
       rect:
         serializedVersion: 2
-        x: 319
+        x: 320
         y: 0
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5283f4bba6c7f99409dd026a5152bcfb
-      internalID: 268219526
+      spriteID: 8f97b67ae1c63e9499a774a5cd96b816
+      internalID: 759596343
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: eceaff0970c4d354aa193027dbac44a7
+    spriteID: 1e29c246158e05040b95ab8a1dc1aadb
     internalID: 0
     vertices: []
     indices: 
@@ -198,10 +198,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PlayerRun1_0: 840653846
-      PlayerRun1_1: 794612654
-      PlayerRun1_2: -1019784747
-      PlayerRun1_3: 268219526
+      VampireWalk 1_0: 443451050
+      VampireWalk 1_1: 349476389
+      VampireWalk 1_2: -1036706541
+      VampireWalk 1_3: 759596343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
