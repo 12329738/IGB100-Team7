@@ -17,12 +17,13 @@ MonoBehaviour:
   effects: []
   modifiers:
   - stat: 2
-    amount: 15
-    isPercentage: 1
+    amount: 10
     type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   rarity: 0
   itemType: 5
-  levelsAvaliable: 0100000002000000030000000400000005000000
+  levelsAvaliable: 010000000200000003000000040000000500000006000000070000000800000009000000
   references:
     version: 2
     RefIds: []
