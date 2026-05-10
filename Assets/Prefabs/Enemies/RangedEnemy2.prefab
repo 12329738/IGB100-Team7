@@ -146,7 +146,7 @@ MonoBehaviour:
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: 49c8e093270a9084ba6bf28b47a16cf4, type: 2}
   _hitInterval: 1
-  expAmount: 50
+  expAmount: 75
   weaponData: {fileID: 11400000, guid: 60c4525be69e97747804d788a2b30906, type: 2}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: ede0d59f96d4ec24da4bd0d93d336595, type: 2}

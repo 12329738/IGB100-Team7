@@ -3302,7 +3302,7 @@ MonoBehaviour:
       amount: 50
       spawnDuration: 60
       minAlive: 8
-      spawnDelay: 1
+      spawnDelay: 0.5
       currentAlive: 0
       spawnTimer: 0
     - enemyPrefab: {fileID: 146454749206447347, guid: 5fcb5486b7d98234ea1df2690835153c, type: 3}
@@ -3337,7 +3337,7 @@ MonoBehaviour:
       amount: 60
       spawnDuration: 60
       minAlive: 15
-      spawnDelay: 0.2
+      spawnDelay: 0.3
       currentAlive: 0
       spawnTimer: 0
     - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
@@ -3364,7 +3364,7 @@ MonoBehaviour:
       amount: 100
       spawnDuration: 60
       minAlive: 25
-      spawnDelay: 0.2
+      spawnDelay: 0.1
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
