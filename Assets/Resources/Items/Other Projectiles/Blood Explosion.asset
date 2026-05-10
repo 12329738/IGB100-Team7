@@ -43,17 +43,4 @@ MonoBehaviour:
   evolved: 0
   references:
     version: 2
-
-    RefIds:
-    - rid: 2962360533868609625
-      type: {class: AddModifier, ns: , asm: Assembly-CSharp}
-      data:
-        effect: {fileID: 0}
-        modifiers: []
-    - rid: 6460871606461530193
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 6
-        effectOperation:
-          rid: 2962360533868609625
-
+    RefIds: []
