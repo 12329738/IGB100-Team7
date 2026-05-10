@@ -26,7 +26,7 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
-  hitMode: 2
+  hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   isHit: 0
@@ -38,35 +38,9 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 1589b44a901b9ad438503cda5d6beb97, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  effects:
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 9
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 6460871606461530193
+  effects: []
   evolution: {fileID: 0}
   evolved: 0
   references:
     version: 2
-    RefIds:
-    - rid: 6460871606461530193
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 6
-        effectOperation:
-          rid: 6460871651864870983
-    - rid: 6460871651864870983
-      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
-      data:
-        type: 2
-        valueSource:
-          mode: 5
-          constant: 0
-          multiplier: 0
-          useTarget: 1
-          useSource: 0
-        modifiers: []
+    RefIds: []

@@ -30,6 +30,8 @@ public class EffectNodeData
         {
             effectOperation = EffectNodeDatabase.Create(type);
         }
+
+        effectOperation.Validate();
     }
 
 
