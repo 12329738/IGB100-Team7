@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0668fa778b3b474daa21bf573970111, type: 2}
   - {fileID: 11400000, guid: e75f8c266632b474ca7e3cb80dba0d72, type: 2}
   - {fileID: 11400000, guid: 1091215bd72dd814a96ce893e5d2adcd, type: 2}
+  - {fileID: 11400000, guid: 76d28e3ca908d8c4f8000cad4f2b953d, type: 2}
   _itemType: 5
   _name: Eternal Sword
   _description: Slash towards the nearest enemy, releasing a shockwave that pierces

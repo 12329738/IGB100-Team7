@@ -18,7 +18,7 @@ public class SpawnProjectileConfig : EffectOperation
         Weapon playerWeapon = null;
         foreach (Weapon weapon in GameManager.instance.player.weapons)
         {
-            playerWeapon = weapon.subWeaponInstances.Find(w => w.definition = weaponData.definition);
+            playerWeapon = weapon.subWeaponInstances.Find(w => w.definition == weaponData.definition);
             if (playerWeapon != null)
                 break;
         }
