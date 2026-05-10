@@ -14,10 +14,10 @@ public class AddModifier : EffectOperation
 
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        if (modifiers != null)
+        if (modifiers != null && modifiers.Count > 0)
             StatusEffectOverrides.AddModifier(effect, modifiers);
 
-        if (effects != null)
+        if (effects != null && effects.Count > 0)
             StatusEffectOverrides.AddEffects(effect, effects);
     }
 
