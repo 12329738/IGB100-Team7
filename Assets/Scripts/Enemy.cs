@@ -118,6 +118,10 @@ public class Enemy : Entity, IDamageable
         if (random <= GameManager.instance.healthPickupDropRate)
             SpawnerManager.instance.SpawnHealthPickup(transform.position);
 
+        random = UnityEngine.Random.Range(0, 100);
+        if (random <= GameManager.instance.magnetPickupDropRate)
+            SpawnerManager.instance.SpawnMagnetPickup(transform.position);
+
         SpawnerManager.instance.UnregisterEnemy();
 
         weapon = null;

@@ -1066,6 +1066,7 @@ MonoBehaviour:
   experienceGem: {fileID: 6009706109667482827, guid: d2ce20379f0c7c74c854e3e3c40b6bb4, type: 3}
   chest: {fileID: 6009706109667482827, guid: da1adacbfe3b73344a3372d18a8cb93c, type: 3}
   healthPickup: {fileID: 6009706109667482827, guid: 6606d884ba7461d4ebec6e02ee4358ed, type: 3}
+  magnetPickup: {fileID: 6009706109667482827, guid: d694523a71f35d34cb738766f00b3187, type: 3}
   padding: 5
 --- !u!4 &570029839
 Transform:
