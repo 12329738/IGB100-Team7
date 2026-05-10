@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 14
+  _itemType: 17
   _name: 
   _description: 
   icon: {fileID: 0}
@@ -26,7 +26,7 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
-  hitMode: 2
+  hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   isHit: 0
@@ -53,20 +53,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2962360533868609625
+      type: {class: AddModifier, ns: , asm: Assembly-CSharp}
+      data:
+        effect: {fileID: 0}
+        modifiers: []
     - rid: 6460871606461530193
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 6
         effectOperation:
-          rid: 6460871651864870983
-    - rid: 6460871651864870983
-      type: {class: ModifyStatConfig, ns: , asm: Assembly-CSharp}
-      data:
-        type: 2
-        valueSource:
-          mode: 5
-          constant: 0
-          multiplier: 0
-          useTarget: 1
-          useSource: 0
-        modifiers: []
+          rid: 2962360533868609625

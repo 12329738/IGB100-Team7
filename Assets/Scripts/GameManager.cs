@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public int transformationUpgradeInterval = 5;
     public float flashDuration = 0.05f;
     public float healthPickupDropRate = 5f;
+    public float magnetPickupDropRate = 1f;
 
     [HideInInspector]
     public Rarity[] rarities;

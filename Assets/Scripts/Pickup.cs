@@ -4,7 +4,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public abstract class Pickup : MonoBehaviour
 {
-    private bool pickedUp;
+    internal bool pickedUp;
     public float pickupSpeed = 10f;
     private void OnTriggerEnter(Collider other)
     {
