@@ -10,5 +10,6 @@ public class Magnet : Pickup
         {
             gem.pickedUp = true;
         }
+        ObjectPool.instance.ReturnObject(this.gameObject);
     }
 }
