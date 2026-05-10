@@ -26,51 +26,64 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871606461530199
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 12
-      useComparison: 1
-      comparisonType: 3
-      value: 5
-    effectData:
-    - rid: 6460871606461530279
-    - rid: 6460871651864870912
+    - rid: 1647346832547512389
   modifiers: []
   rarity: 0
   references:
     version: 2
     RefIds:
-    - rid: 6460871606461530199
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 9
-        effectOperation:
-          rid: 6460871606461530278
-    - rid: 6460871606461530278
+    - rid: 1647346829477281862
       type: {class: ModifyMaxStacks, ns: , asm: Assembly-CSharp}
       data:
         effect: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
         newMaxStacks: 5
-    - rid: 6460871606461530279
+    - rid: 1647346832547512389
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 6
+        effectOperation:
+          rid: 1647346832547512391
+    - rid: 1647346832547512391
+      type: {class: AddModifier, ns: , asm: Assembly-CSharp}
+      data:
+        effect: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
+        modifiers: []
+        effects:
+        - hasTick: 0
+          tickInterval: 0
+          conditions:
+          - triggerEvent: 12
+            useComparison: 1
+            comparisonType: 3
+            value: 5
+          effectData:
+          - rid: 1647346832547512392
+          - rid: 1647346832547512395
+    - rid: 1647346832547512392
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 10
         effectOperation:
-          rid: 6460871606461530287
-    - rid: 6460871606461530287
+          rid: 1647346832547512394
+    - rid: 1647346832547512394
       type: {class: RemoveStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         effect: {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
-    - rid: 6460871651864870912
+    - rid: 1647346832547512395
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 5
         effectOperation:
-          rid: 6460871651864870914
-    - rid: 6460871651864870914
+          rid: 1647346832547512397
+    - rid: 1647346832547512397
       type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
         weaponData: {fileID: 11400000, guid: ad3206fb688b1cf4887192ef3289b580, type: 2}
         spawnAtTarget: 1
         spawnAtSource: 0
+    - rid: 6460871606461530199
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 9
+        effectOperation:
+          rid: 1647346829477281862

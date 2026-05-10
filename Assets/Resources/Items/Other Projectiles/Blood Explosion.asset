@@ -38,29 +38,9 @@ MonoBehaviour:
   definition: {fileID: 11400000, guid: 1589b44a901b9ad438503cda5d6beb97, type: 2}
   subWeaponData: []
   subWeaponInstances: []
-  effects:
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 9
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 6460871606461530193
+  effects: []
   evolution: {fileID: 0}
   evolved: 0
   references:
     version: 2
-    RefIds:
-    - rid: 2962360533868609625
-      type: {class: AddModifier, ns: , asm: Assembly-CSharp}
-      data:
-        effect: {fileID: 0}
-        modifiers: []
-    - rid: 6460871606461530193
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 6
-        effectOperation:
-          rid: 2962360533868609625
+    RefIds: []

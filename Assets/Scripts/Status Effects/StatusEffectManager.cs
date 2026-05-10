@@ -57,6 +57,7 @@ public class StatusEffectManager : MonoBehaviour
     {
         StatusEffectInstance instance = effects.FirstOrDefault(i => i.data.definition == statusEffectData.definition);
         GameManager.instance.statusEffectRegistry.RemoveStacks(instance.data.definition, (int)instance.context.stacks);
+        Debug.Log($"Removed {instance.context.stacks} of {statusEffectData.name} from {gameObject}");
         effects.Remove(instance);
         if (gameObject.TryGetComponent<Entity>(out Entity e))
             e.provider.RemoveChild(instance.provider);

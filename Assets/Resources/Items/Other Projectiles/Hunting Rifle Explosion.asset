@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 0
+  _itemType: 17
   _name: Hunting Rifle Explosion
   _description: 
   icon: {fileID: 0}
