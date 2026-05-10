@@ -9,10 +9,28 @@ public class AddModifier : EffectOperation
     public override EffectIntent Type => EffectIntent.ModifyStat;
     public StatusEffectData effect;
     public List<StatModifier> modifiers;
+    public List<EffectEntryNode> effects;
 
 
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        StatusEffectOverrides.AddModifier(effect, modifiers);
+        if (modifiers != null && modifiers.Count > 0)
+            StatusEffectOverrides.AddModifier(effect, modifiers);
+
+        if (effects != null && effects.Count > 0)
+            StatusEffectOverrides.AddEffects(effect, effects);
     }
+
+    public override void Validate()
+    {
+        if (effects == null) return;
+
+        foreach (var entry in effects)
+        {
+            if (entry == null) continue;
+
+            entry.Validate();
+        }
+    }
+
 }

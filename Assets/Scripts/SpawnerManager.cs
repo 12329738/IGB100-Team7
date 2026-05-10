@@ -12,6 +12,7 @@ public class SpawnerManager : MonoBehaviour
     public GameObject experienceGem;
     public GameObject chest;
     public GameObject healthPickup;
+    public GameObject magnetPickup;
     public float padding;
     float timer;
     Camera cam;
@@ -140,6 +141,12 @@ public class SpawnerManager : MonoBehaviour
     internal void SpawnHealthPickup(Vector3 position)
     {
         GameObject obj = ObjectPool.instance.GetObject(healthPickup);
+        obj.transform.position = position;
+    }
+
+    internal void SpawnMagnetPickup(Vector3 position)
+    {
+        GameObject obj = ObjectPool.instance.GetObject(magnetPickup);
         obj.transform.position = position;
     }
 }

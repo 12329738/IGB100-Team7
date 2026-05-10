@@ -8,5 +8,10 @@ public abstract class EffectOperation
 
     public abstract void Generate(EffectContext ctx, List<CombatIntent> intents);
 
+    public virtual void Validate()
+    {
+
+    }
+
 
 }

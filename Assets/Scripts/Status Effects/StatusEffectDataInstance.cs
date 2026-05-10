@@ -30,6 +30,11 @@ public class StatusEffectDataInstance
             entries.Add(new EffectEntryNode(entry)); 
         }
 
+        foreach (var effect in StatusEffectOverrides.GetEffects(data))
+        {
+            entries.Add(new EffectEntryNode(effect));
+        }
+
         modifiers = new List<StatModifier>();
         foreach (var mod in StatusEffectOverrides.GetModifier(data))
         {

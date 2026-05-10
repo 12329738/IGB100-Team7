@@ -18,6 +18,6 @@ MonoBehaviour:
   source:
     mode: 5
     constant: 0
-    multiplier: 1
+    multiplier: 0.05
     useTarget: 1
     useSource: 0

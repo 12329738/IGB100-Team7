@@ -26,9 +26,5 @@ public class DamageOverTimeConfig : EffectOperation
             context = ctx,
 
         });
-        
-
-
-        Debug.Log($"{ctx.target} took {value} dmg from {ctx.stacks} stacks of {ctx.damageSource.definition}");
     }
 }
