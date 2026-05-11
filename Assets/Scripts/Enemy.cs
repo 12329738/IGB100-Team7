@@ -16,6 +16,7 @@ public class Enemy : Entity, IDamageable
     public Action OnDeathCallback;
     public bool dropsChest;
     public Image healthBar;
+    public bool isBoss;
 
     void Start()
     {
@@ -138,7 +139,7 @@ public class Enemy : Entity, IDamageable
         if (random <= GameManager.instance.magnetPickupDropRate)
             SpawnerManager.instance.SpawnMagnetPickup(transform.position);
 
-        SpawnerManager.instance.UnregisterEnemy();
+        SpawnManager.instance.UnregisterEnemy(isBoss);
 
         weapon = null;
 
@@ -161,7 +162,7 @@ public class Enemy : Entity, IDamageable
             weapon.Initialize(this);
         }
         
-        SpawnerManager.instance.RegisterEnemy();
+        SpawnManager.instance.RegisterEnemy(isBoss);
     }
 
 }
