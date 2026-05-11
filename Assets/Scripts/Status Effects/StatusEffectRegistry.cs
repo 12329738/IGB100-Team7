@@ -6,7 +6,8 @@ public class StatusEffectRegistry : MonoBehaviour
 {
     public static StatusEffectRegistry instance;
 
-    private Dictionary<DamageSourceDefinition, List<StatusEffectInstance>> totalInstances = new();
+    private Dictionary<DamageSourceDefinition, List<StatusEffectInstance>> totalInstances =
+        new Dictionary<DamageSourceDefinition, List<StatusEffectInstance>>();
 
     private void Awake()
     {

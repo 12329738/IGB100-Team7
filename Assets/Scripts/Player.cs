@@ -299,7 +299,7 @@ public class Player : Entity, IDamageable
                 }
             }
 
-            if (hasModifiers || hasEffects)
+            if (itemUpgrade.levelsAvaliable.Count >1)
             {
                 item.currentLevel++;
                 if (item.currentLevel == GameManager.instance.weaponUpgradeLimit && item is Weapon weapon)

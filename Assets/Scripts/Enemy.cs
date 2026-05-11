@@ -35,6 +35,7 @@ public class Enemy : Entity, IDamageable
     {
         if (knockbackRemaining > 0.1f)
         {
+            gameObject.layer = LayerMask.NameToLayer("Knockback");
             float step = GameManager.instance.knockBackSpeed * Time.deltaTime;
 
             step = Mathf.Min(step, knockbackRemaining);
@@ -43,7 +44,11 @@ public class Enemy : Entity, IDamageable
 
             knockbackRemaining -= step;
             if (knockbackRemaining < 0.01f)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Enemy");
                 knockBack = null;
+            }
+                
 
             return; 
         }
