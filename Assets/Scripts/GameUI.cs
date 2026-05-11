@@ -100,7 +100,7 @@ public class GameUI : MonoBehaviour
     private void DisplayExperienceAmount()
     {
         playerExperienceBar.fillAmount = player.currentExperience / GameManager.instance.GetExperienceAtLevel(player.level);
-        displayedPlayerLevel.text = $"Level {player.level.ToString()} {player.currentExperience}/{GameManager.instance.GetExperienceAtLevel(player.level)}";
+        displayedPlayerLevel.text = $"Level {player.level.ToString()} {(int)player.currentExperience}/{GameManager.instance.GetExperienceAtLevel(player.level)}";
     }
 
     public void DisplayHealthAmount()

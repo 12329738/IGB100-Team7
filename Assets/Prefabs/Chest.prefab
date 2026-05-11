@@ -783,7 +783,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSpeed: 10
-  upgradeAmount: 3
+  minUpgrades: 2
+  maxUpgrades: 4
 --- !u!65 &7681309295683663675
 BoxCollider:
   m_ObjectHideFlags: 0

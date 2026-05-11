@@ -8,6 +8,7 @@ public class StackCountModifier : EffectOperation, IIntentModifier
 {
     public float valuePerStack;
     public List<StatusEffectData> effects;
+    public bool countIndividualStacks;
     public ModifierType modifierType;
     public EffectIntent _effectToModify;
     public EffectIntent effectToModifiy { get => _effectToModify; set => _effectToModify = value; }
@@ -25,11 +26,20 @@ public class StackCountModifier : EffectOperation, IIntentModifier
             return;
         float total = 0;
 
-        foreach (var e in effects)
-        {
-            total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e.definition);
-        }
 
+        if (countIndividualStacks)
+        {
+            foreach (var e in effects)
+                total += GameManager.instance.statusEffectRegistry.GetStacksFromSource(e.definition);
+            
+        }
+        
+
+        else
+        {
+            foreach (var e in effects)
+                total += GameManager.instance.statusEffectRegistry.GetInstancesFromSource(e.definition);
+        }
 
         if (modifierType == ModifierType.Flat)
         {

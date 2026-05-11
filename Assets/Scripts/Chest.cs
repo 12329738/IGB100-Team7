@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class Chest : Pickup
 {
-    public int upgradeAmount = 3;
+    public int minUpgrades;
+    public int maxUpgrades;
     internal override void PickUp()
     {
         StartCoroutine(OpenChest());
@@ -14,7 +17,9 @@ public class Chest : Pickup
 
     private IEnumerator OpenChest()
     {
-        yield return StartCoroutine(GameManager.instance.player.ShowUpgrades(upgradeAmount));
+        int random = Random.Range(minUpgrades, maxUpgrades);
+
+        yield return StartCoroutine(GameManager.instance.player.ShowUpgrades(random));
         ObjectPool.instance.ReturnObject(this.gameObject);
     }
 }

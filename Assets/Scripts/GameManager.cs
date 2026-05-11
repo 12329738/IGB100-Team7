@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Rarity[] rarities;
     public Dictionary<RarityEnum, Color> rarityColors;
-
+    public Dictionary<RarityEnum, Sprite> raritySprites;
 
     public AnimationCurve experienceCurve;
     void Awake()
@@ -94,10 +94,10 @@ public class GameManager : MonoBehaviour
     }
     private void CreateRarityDictionary()
     {
-        rarityColors = new Dictionary<RarityEnum, Color>();
+        raritySprites = new Dictionary<RarityEnum, Sprite>();
         foreach (Rarity rarity in rarities)
         {
-            rarityColors[rarity.rarity] = rarity.color;
+            raritySprites[rarity.rarity] = rarity.upgradeImage;
         }
     }
 
