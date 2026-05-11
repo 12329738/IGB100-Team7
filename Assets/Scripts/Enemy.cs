@@ -134,7 +134,7 @@ public class Enemy : Entity, IDamageable
         if (random <= GameManager.instance.magnetPickupDropRate)
             SpawnerManager.instance.SpawnMagnetPickup(transform.position);
 
-        SpawnerManager.instance.UnregisterEnemy(isBoss);
+        SpawnManager.instance.UnregisterEnemy(isBoss);
 
         weapon = null;
 
@@ -157,7 +157,7 @@ public class Enemy : Entity, IDamageable
             weapon.Initialize(this);
         }
         
-        SpawnerManager.instance.RegisterEnemy(isBoss);
+        SpawnManager.instance.RegisterEnemy(isBoss);
     }
 
 }
