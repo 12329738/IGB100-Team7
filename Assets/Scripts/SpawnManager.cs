@@ -31,7 +31,8 @@ public class SpawnManager : MonoBehaviour
     private bool lastStandActive = false;
 
     [Header("Enemy Tracking")]
-    public int currentEnemies;
+    public int currentNormalEnemies;
+    public int currentBossEnemies;
     public int minimumEnemyNumber = 5;
 
     [Header("Spawning")]
@@ -43,7 +44,15 @@ public class SpawnManager : MonoBehaviour
     public float minSpawnInterval = 1f;
     private float minSpawnTimer;
 
+    [Header("Last Stand UI")]
+    public TextMeshProUGUI lastStandNotification;
+    public float notificationDuration = 3f;
+
+    [Header("Final Stand")]
+    public EnemySpawnData[] finalStandEnemies;
+
     private Camera cam;
+    private WaveData activeWave;
 
     void Awake()
     {
@@ -79,6 +88,13 @@ public class SpawnManager : MonoBehaviour
     void RunTimer()
     {
         currentTime -= Time.deltaTime;
+
+        if (currentTime <= 0)
+        {
+            currentTime = 0;
+            StartLastStand();
+            return;
+        }
         UpdateTimerUI();
         
         int minutePassed = Mathf.FloorToInt((startingTime - currentTime) / 60f);
@@ -95,13 +111,14 @@ public class SpawnManager : MonoBehaviour
     {
         if (timerText == null) return;
 
+        if (lastStandActive)
+        {
+            timerText.text = "FINAL STAND";
+            return;
+        }
+
         int min = Mathf.FloorToInt(currentTime / 60f);
         int sec = Mathf.FloorToInt(currentTime % 60f);
-
-        if (currentTime <= 0)
-        {
-            StartLastStand();
-        }
 
         timerText.text = $"{min:00}:{sec:00}";
     }
@@ -127,13 +144,32 @@ public class SpawnManager : MonoBehaviour
     {
         StopAllCoroutines(); // prevents stacking systems
 
+        activeWave = wave;
+
         foreach (var enemy in wave.enemies)
         {
             enemy.currentAlive = 0;
-            enemy.spawnTimer = 0f;
 
             StartCoroutine(ManageEnemyType(enemy));
         }
+
+        if (wave.isBossWave)
+        {
+            Debug.Log("Boss Wave!");
+        }
+    }
+
+    bool CanSpawnEnemy(bool isBoss)
+    {
+        // Bosses ignore cap
+        if (isBoss)
+            return true;
+
+        // No active wave yet
+        if (activeWave == null)
+            return true;
+
+        return currentNormalEnemies < activeWave.maxEnemiesOnScreen;
     }
 
     IEnumerator ManageEnemyType(EnemySpawnData enemy)
@@ -145,7 +181,11 @@ public class SpawnManager : MonoBehaviour
 
             for (int i = 0; i < enemy.amount; i++)
             {
-                SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+                if (CanSpawnEnemy(enemy.isBoss))
+                {
+                    SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+                }
+
                 yield return new WaitForSeconds(interval);
             }
         }
@@ -155,7 +195,10 @@ public class SpawnManager : MonoBehaviour
         {
             if (enemy.currentAlive < enemy.minAlive)
             {
-                SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+                if (CanSpawnEnemy(enemy.isBoss))
+                {
+                    SpawnEnemy(enemy.enemyPrefab, enemy.statsPreset, enemy);
+                }
             }
 
             yield return new WaitForSeconds(enemy.spawnDelay);
@@ -175,17 +218,49 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    IEnumerator ShowLastStandNotification()
+    {
+        if (lastStandNotification == null)
+            yield break;
+
+        lastStandNotification.gameObject.SetActive(true);
+
+        Color color = lastStandNotification.color;
+
+        // Fully visible first
+        color.a = 1f;
+        lastStandNotification.color = color;
+
+        yield return new WaitForSeconds(1f);
+
+        float timer = 0f;
+
+        while (timer < notificationDuration)
+        {
+            timer += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(1f, 0f, timer / notificationDuration);
+
+            color.a = alpha;
+            lastStandNotification.color = color;
+
+            yield return null;
+        }
+
+        lastStandNotification.gameObject.SetActive(false);
+    }
+
     // Last Stand
     void StartLastStand()
     {
+        if (lastStandActive) return;
+
         lastStandActive = true;
         currentTime = 0;
 
-        if (waveText != null)
-        {
-            waveText.text = "LAST STAND";
-            waveText.gameObject.SetActive(true);
-        }
+        UpdateTimerUI();
+
+        StartCoroutine(ShowLastStandNotification());
     }
 
     void RunLastStand()
@@ -211,11 +286,19 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnLastStandEnemy()
     {
-        if (waves.Length == 0) return;
+        if (finalStandEnemies.Length == 0)
+            return;
 
-        // Pick random enemy from ALL waves
-        WaveData randomWave = waves[Random.Range(0, waves.Length)];
-        var enemyData = randomWave.enemies[Random.Range(0, randomWave.enemies.Length)];
+        EnemySpawnData enemyData =
+            finalStandEnemies[Random.Range(0, finalStandEnemies.Length)];
+
+        // Prevents bosses in Final Stand (instead spawns a regular enemy)
+        while (enemyData.isBoss)
+        {
+            enemyData = finalStandEnemies[
+                Random.Range(0, finalStandEnemies.Length)
+            ];
+        }
 
         SpawnEnemy(enemyData.enemyPrefab, enemyData.statsPreset, enemyData);
     }
@@ -245,6 +328,7 @@ public class SpawnManager : MonoBehaviour
         Enemy enemy = obj.GetComponent<Enemy>();
         if (enemy != null)
         {
+            enemy.isBoss = data.isBoss;
             enemy.OnDeathCallback = () => data.currentAlive--;
         }
     }
@@ -277,12 +361,26 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Enemy Tracking
-    public void RegisterEnemy() => currentEnemies++;
-
-    public void UnregisterEnemy()
+    public void RegisterEnemy(bool isBoss)
     {
-        if (currentEnemies > 0)
-            currentEnemies--;
+        if (isBoss)
+            currentBossEnemies++;
+        else
+            currentNormalEnemies++;
+    }
+
+    public void UnregisterEnemy(bool isBoss)
+    {
+        if (isBoss)
+        {
+            if (currentBossEnemies > 0)
+                currentBossEnemies--;
+        }
+        else
+        {
+            if (currentNormalEnemies > 0)
+                currentNormalEnemies--;
+        }
     }
 
     // Exp
