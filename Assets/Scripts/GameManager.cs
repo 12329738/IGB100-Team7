@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public float flashDuration = 0.05f;
     public float healthPickupDropRate = 5f;
     public float magnetPickupDropRate = 1f;
+    private int pauseRequests = 0;
+
 
     [HideInInspector]
     public Rarity[] rarities;
@@ -126,5 +128,24 @@ public class GameManager : MonoBehaviour
     public float GetExperienceBetweenRange(float min, float max)
     {
         return experienceCurve.Evaluate(max) - experienceCurve.Evaluate(min);
+    }
+
+    public void PauseGame()
+    {
+        pauseRequests++;
+
+        if (pauseRequests > 0)
+            Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        pauseRequests--;
+
+        if (pauseRequests <= 0)
+        {
+            pauseRequests = 0;
+            Time.timeScale = 1f;
+        }
     }
 }
