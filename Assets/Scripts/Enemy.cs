@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 using Random = System.Random;
@@ -14,6 +15,7 @@ public class Enemy : Entity, IDamageable
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
     public bool dropsChest;
+    public Image healthBar;
 
     void Start()
     {
@@ -24,7 +26,10 @@ public class Enemy : Entity, IDamageable
     void Update()
     {
         HandleKnockbackOrMovement();
+        UpdateHealthBar();
     }
+
+   
 
     private void HandleKnockbackOrMovement()
     {
@@ -105,6 +110,12 @@ public class Enemy : Entity, IDamageable
             context.value = knockBack.knockBackDamage;
             combat.DealDamage(intent);
         }
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+            healthBar.fillAmount = GetCurrentHealthPercent();
     }
 
     internal override void Die()
