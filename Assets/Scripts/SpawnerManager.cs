@@ -16,6 +16,8 @@ public class SpawnerManager : MonoBehaviour
     public float padding;
     float timer;
     Camera cam;
+    public int currentNormalEnemies;
+    public int currentBossEnemies;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,17 +38,26 @@ public class SpawnerManager : MonoBehaviour
 
     }
 
-    public void RegisterEnemy()
+    public void RegisterEnemy(bool isBoss)
     {
-        currentEnemies++;
+        if (isBoss)
+            currentBossEnemies++;
+        else
+            currentNormalEnemies++;
     }
 
-    public void UnregisterEnemy()
+    public void UnregisterEnemy(bool isBoss)
     {
-        if (currentEnemies == 0)
-            return;
-            currentEnemies--;
-       
+        if (isBoss)
+        {
+            if (currentBossEnemies > 0)
+                currentBossEnemies--;
+        }
+        else
+        {
+            if (currentNormalEnemies > 0)
+                currentNormalEnemies--;
+        }
     }
 
     // Update is called once per frame

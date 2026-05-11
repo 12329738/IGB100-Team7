@@ -218,7 +218,7 @@ public class Player : Entity, IDamageable
 
         if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
-            StartCoroutine(ShowTransformationUpgrade());
+            yield return StartCoroutine(ShowTransformationUpgrade());
         }
 
         yield return null;
@@ -227,7 +227,7 @@ public class Player : Entity, IDamageable
 
     public IEnumerator ShowUpgrades(int number)
     {
-        Time.timeScale = 0f;
+        GameManager.instance.PauseGame();
 
         for (int i = 0; i < number; i++)
         {
@@ -243,16 +243,16 @@ public class Player : Entity, IDamageable
         }
         
         
-        Time.timeScale = 1f;
+        GameManager.instance.ResumeGame();
     }
 
     public IEnumerator ShowTransformationUpgrade()
     {
-        Time.timeScale = 0f;
+        GameManager.instance.PauseGame();
         GameManager.instance.gameUI.ShowUpgradeOptions(avaliableTransformationUpgrades);
         yield return new WaitUntil(() => upgradeChosen == true);
         upgradeChosen = false;
-        Time.timeScale = 1f;
+        GameManager.instance.ResumeGame();
     }
 
     public void ShowUpgradeScreen()

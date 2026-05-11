@@ -36,6 +36,11 @@ public class StatusEffectDataInstance
         }
 
         modifiers = new List<StatModifier>();
+
+        foreach (var mod in data.modifiers)
+        {
+            modifiers.Add(new StatModifier(mod));
+        }
         foreach (var mod in StatusEffectOverrides.GetModifier(data))
         {
             modifiers.Add(new StatModifier(mod)); 
