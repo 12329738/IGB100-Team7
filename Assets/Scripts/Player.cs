@@ -29,6 +29,8 @@ public class Player : Entity, IDamageable
     public Transformation transformation;
     [HideInInspector]
     public float currentTransformationAmount;
+    [HideInInspector]
+    public int kills;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
 
@@ -38,6 +40,7 @@ public class Player : Entity, IDamageable
     bool isFlipped;
     Animator animator;
     private StatusEffectDataInstance transformationStatusEffect;
+    
 
 
     Queue<int> levelUps = new();
@@ -396,6 +399,11 @@ public class Player : Entity, IDamageable
         animator.runtimeAnimatorController = animatorController;
     }
 
+    public void AddKill()
+    {
+        kills++;
+        GameManager.instance.gameUI.UpdateKillCount(kills);
+    }
 
     
 }
