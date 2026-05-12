@@ -19,7 +19,17 @@ public class Chest : Pickup
     {
         int random = Random.Range(minUpgrades, maxUpgrades);
 
-        yield return StartCoroutine(GameManager.instance.player.ShowUpgrades(random));
+        for (int i = 0; i < random; i++)
+            GameManager.instance.player.upgradeQueue.Enqueue(1);
+
+        if (GameManager.instance.player.upgradeCoroutine == null)
+        {        
+            yield return StartCoroutine(GameManager.instance.player.ShowUpgrades());
+        }
+
+        else
+            yield return GameManager.instance.player.upgradeCoroutine;
+
         ObjectPool.instance.ReturnObject(this.gameObject);
     }
 }

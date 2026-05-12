@@ -29,8 +29,6 @@ public class Player : Entity, IDamageable
     public Transformation transformation;
     [HideInInspector]
     public float currentTransformationAmount;
-    [HideInInspector]
-    public int kills;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
 
@@ -40,13 +38,14 @@ public class Player : Entity, IDamageable
     bool isFlipped;
     Animator animator;
     private StatusEffectDataInstance transformationStatusEffect;
-    
-
+    public Coroutine upgradeCoroutine;
+    int kills;
 
     Queue<int> levelUps = new();
     [HideInInspector]
     public bool upgradeChosen = false;
     private bool levelUpRoutineRunning;
+    public Queue<int> upgradeQueue = new();
 
     [HideInInspector]
     public float timeTransformed;
@@ -224,7 +223,10 @@ public class Player : Entity, IDamageable
     {
         level++;
 
-        yield return StartCoroutine(ShowUpgrades(1));
+        upgradeQueue.Enqueue(1);
+        if (upgradeCoroutine == null)
+           upgradeCoroutine = StartCoroutine(ShowUpgrades());
+        yield return upgradeCoroutine;
 
         if (level % GameManager.instance.transformationUpgradeInterval == 0 && avaliableTransformationUpgrades.Count > 0)
         {
@@ -235,11 +237,11 @@ public class Player : Entity, IDamageable
 
     }
 
-    public IEnumerator ShowUpgrades(int number)
+    public IEnumerator ShowUpgrades()
     {
         GameManager.instance.PauseGame();
 
-        for (int i = 0; i < number; i++)
+        while (upgradeQueue.Count > 0)
         {
             List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
 
@@ -250,6 +252,7 @@ public class Player : Entity, IDamageable
                 yield return new WaitUntil(() => upgradeChosen == true);
                 upgradeChosen = false;
             }
+            upgradeQueue.Dequeue();
         }
         
         
@@ -398,12 +401,11 @@ public class Player : Entity, IDamageable
         timeTransformed = 0;
         animator.runtimeAnimatorController = animatorController;
     }
-
     public void AddKill()
     {
         kills++;
         GameManager.instance.gameUI.UpdateKillCount(kills);
     }
 
-    
+
 }
