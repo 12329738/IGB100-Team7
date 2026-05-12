@@ -257,6 +257,7 @@ public class Player : Entity, IDamageable
         
         
         GameManager.instance.ResumeGame();
+        yield return null;
     }
 
     public IEnumerator ShowTransformationUpgrade()

@@ -24,11 +24,10 @@ public class Chest : Pickup
 
         if (GameManager.instance.player.upgradeCoroutine == null)
         {        
-            yield return StartCoroutine(GameManager.instance.player.ShowUpgrades());
+            GameManager.instance.player.upgradeCoroutine = StartCoroutine(GameManager.instance.player.ShowUpgrades());
         }
 
-        else
-            yield return GameManager.instance.player.upgradeCoroutine;
+        yield return GameManager.instance.player.upgradeCoroutine;
 
         ObjectPool.instance.ReturnObject(this.gameObject);
     }
