@@ -57,7 +57,7 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871615362105413
-  evolution: {fileID: 11400000, guid: 0a67872805cd8b44781712cf55266ed5, type: 2}
+  evolution: {fileID: 0}
   evolved: 0
   references:
     version: 2
