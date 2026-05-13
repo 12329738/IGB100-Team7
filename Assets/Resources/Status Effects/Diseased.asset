@@ -9,21 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
-  m_Name: Holy Water Evolve
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Diseased
   m_EditorClassIdentifier: 
-  name: Evolution
-  description: Evolves. The flask now creates pools during it's flight
-  effects: []
+  name: Diseased
+  description: 
+  duration: 3
+  maxStacks: 1
+  definition: {fileID: 11400000, guid: 68bad9ddd1e227e4386a751ed8ac6c92, type: 2}
   modifiers:
-  - stat: 3
-    amount: 15
+  - stat: 1
+    amount: -20
     type: 1
     appliedTo: {fileID: 0}
     duration: 0
-  rarity: 0
-  itemType: 4
-  levelsAvaliable: 0a000000
+  - stat: 0
+    amount: -15
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
+  hasTick: 0
+  tickInterval: 0
+  entries: []
   references:
     version: 2
     RefIds: []

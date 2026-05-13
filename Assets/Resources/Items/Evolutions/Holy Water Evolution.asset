@@ -15,10 +15,10 @@ MonoBehaviour:
   newBehaviour: {fileID: 0}
   addedBehaviour: {fileID: 0}
   newEffect:
-    hasTick: 0
-    tickInterval: 0
+    hasTick: 1
+    tickInterval: 0.75
     conditions:
-    - triggerEvent: 11
+    - triggerEvent: 5
       useComparison: 0
       comparisonType: 0
       value: 0
@@ -42,10 +42,12 @@ MonoBehaviour:
     - rid: 1647346759578943562
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 12
+        type: 5
         effectOperation:
-          rid: 1647346778407698508
-    - rid: 1647346778407698508
-      type: {class: DealDamageToArea, ns: , asm: Assembly-CSharp}
+          rid: 2962360602471694396
+    - rid: 2962360602471694396
+      type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
       data:
-        damageMultiplier: 2
+        weaponData: {fileID: 11400000, guid: 5828018a8900ecd448741b01f5e49162, type: 2}
+        spawnAtTarget: 0
+        spawnAtSource: 1

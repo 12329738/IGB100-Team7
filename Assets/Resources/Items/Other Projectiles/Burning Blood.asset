@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b7e309b377fbf84cbe3350fc2daecf4, type: 3}
-  m_Name: Holy Water Pool
+  m_Name: Burning Blood
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
@@ -19,11 +19,11 @@ MonoBehaviour:
   _description: 
   icon: {fileID: 0}
   baseStats: {fileID: 0}
-  prefab: {fileID: 6535610066460921345, guid: df54fc0339472c74fa481d9d1ec63213, type: 3}
+  prefab: {fileID: 9208433908844939968, guid: eb8e5c91680d02847b9f38b10bb03c7a, type: 3}
   direction: 0
   hitInterval: 1
-  isPiercing: 1
-  trackEnemy: 0
+  isPiercing: 0
+  trackEnemy: 1
   aimAtEnemy: 0
   spawnOnTarget: 0
   hitMode: 0
@@ -31,11 +31,11 @@ MonoBehaviour:
   owner: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
-  randomDirection: 0
-  behaviour: {fileID: 0}
+  randomDirection: 1
+  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
   pattern: {fileID: 0}
-  _statPreset: {fileID: 11400000, guid: 4cb66081ada9a444cb7f06eab3ccca8f, type: 2}
-  definition: {fileID: 11400000, guid: f6beaa833d0b91e45b8e9cca40570265, type: 2}
+  _statPreset: {fileID: 11400000, guid: 7d473d8701dd45843ad8725aed12caa5, type: 2}
+  definition: {fileID: 11400000, guid: 2be0d98db5c05ae47a427ec8aadbdba2, type: 2}
   subWeaponData: []
   subWeaponInstances: []
   effects:
@@ -47,38 +47,19 @@ MonoBehaviour:
       comparisonType: 0
       value: 0
     effectData:
-    - rid: 6460871615362105411
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 7
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 6460871615362105413
+    - rid: 2962360600588189700
   evolution: {fileID: 0}
   evolved: 0
   references:
     version: 2
     RefIds:
-    - rid: 6460871615362105411
+    - rid: 2962360600588189700
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
         type: 2
         effectOperation:
-          rid: 6460871615362105412
-    - rid: 6460871615362105412
+          rid: 2962360600588189701
+    - rid: 2962360600588189701
       type: {class: ApplyStatusConfig, ns: , asm: Assembly-CSharp}
       data:
         effectData: {fileID: 11400000, guid: a9ec01611c95d704c930d99dfa022593, type: 2}
-    - rid: 6460871615362105413
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        effectOperation:
-          rid: 6460871615362105415
-    - rid: 6460871615362105415
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 5
