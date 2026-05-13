@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.21108404, y: 0.21108404, z: 0.21108404}
+  m_LocalScale: {x: 0.0844711, y: 0.0844711, z: 0.0844711}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6217416225050200239}
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.5102753, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.15986292, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4879,7 +4879,7 @@ GameObject:
   - component: {fileID: -5353538149138135379}
   - component: {fileID: 3202411845240058434}
   m_Layer: 7
-  m_Name: Hunting Rifle Explosion
+  m_Name: Ranged Enemy Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4895,7 +4895,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.60402, y: 0.60402, z: 0.60402}
+  m_LocalScale: {x: 0.22181019, y: 0.22181019, z: 0.22181019}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6217416225050200239}
