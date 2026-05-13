@@ -63,7 +63,8 @@ MonoBehaviour:
   knockBackSpeed: 10
   transformationUpgradeInterval: 10
   flashDuration: 0.05
-  healthPickupDropRate: 1
+  healthPickupDropRate: 0.5
+  magnetPickupDropRate: 0.3
   rarities: []
   experienceCurve:
     serializedVersion: 2
