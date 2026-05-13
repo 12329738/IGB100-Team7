@@ -5,7 +5,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class EffectExecutor : MonoBehaviour
+public class EffectExecutor 
 {
     public Combat combat;
     public void Execute(CombatIntent intent)

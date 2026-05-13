@@ -19,6 +19,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI displayedPlayerLevel;
     public TextMeshProUGUI playerStats;
     public TextMeshProUGUI weaponStats;
+    public TextMeshProUGUI enemiesKilled;
     private IDamageable trackedDamageablePlayer;
     private Player player;
     public Image[] weaponInventory;
@@ -65,6 +66,11 @@ public class GameUI : MonoBehaviour
         DisplayPlayerStats();
         DisplayWeaponStats();
         UpdateInventory();
+    }
+
+    public void UpdateKillCount(int killCount)
+    {
+        enemiesKilled.text = $"Kills: {killCount}";
     }
 
     private void DisplayWeaponStats()
