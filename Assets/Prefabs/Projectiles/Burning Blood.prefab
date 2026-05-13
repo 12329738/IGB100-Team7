@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 3313636498380748347}
   - component: {fileID: 7886267338355227881}
   m_Layer: 0
-  m_Name: Diseased Blood
+  m_Name: Burning Blood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
