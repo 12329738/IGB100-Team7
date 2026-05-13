@@ -22,29 +22,15 @@ MonoBehaviour:
     amount: -20
     type: 1
     appliedTo: {fileID: 0}
-    duration: 3
+    duration: 0
+  - stat: 0
+    amount: -15
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   hasTick: 0
   tickInterval: 0
-  entries:
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 8
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 2962360600588189702
+  entries: []
   references:
     version: 2
-    RefIds:
-    - rid: 2962360600588189702
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        effectOperation:
-          rid: 2962360600588189773
-    - rid: 2962360600588189773
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
-      data:
-        amount: -25
+    RefIds: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blood Ritual
   description: Increases bleed damage by 25% each second you spend transformed. Resets
-    upon de-transforming.
+    upon de-transforming. Also quickly spawns Burning Blood while transformed
   effects:
   - hasTick: 0
     tickInterval: 0
@@ -25,11 +25,32 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871593909289039
+  - hasTick: 1
+    tickInterval: 0.15
+    conditions:
+    - triggerEvent: 5
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 2962360600588189801
   modifiers: []
   rarity: 0
   references:
     version: 2
     RefIds:
+    - rid: 2962360600588189801
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 5
+        effectOperation:
+          rid: 2962360600588189803
+    - rid: 2962360600588189803
+      type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
+      data:
+        weaponData: {fileID: 11400000, guid: 688001e699b096a44980c3a1596781be, type: 2}
+        spawnAtTarget: 0
+        spawnAtSource: 1
     - rid: 6460871593909289039
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
