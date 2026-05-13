@@ -60,7 +60,7 @@ MonoBehaviour:
   maxExp: 1000000
   maxLevel: 100
   knockBackSpeed: 10
-  transformationUpgradeInterval: 10
+  transformationUpgradeInterval: 1
   flashDuration: 0.05
   healthPickupDropRate: 0.5
   magnetPickupDropRate: 0.3
