@@ -14,6 +14,9 @@ public class EnemySpawnData
     public int minAlive = 3;          // Minimum number to maintain
     public float spawnDelay = 2f;     // Time between spawns
 
+    [Header("Special")]
+    public bool isBoss = false;
+
     // Runtime tracking (not shown in inspector)
     [HideInInspector] public int currentAlive = 0;
     [HideInInspector] public float spawnTimer = 0f;
@@ -26,4 +29,7 @@ public class WaveData
     public EnemySpawnData[] enemies;
 
     public bool isBossWave;
+
+    [Header("Wave Limits")]
+    public int maxEnemiesOnScreen = 30;
 }

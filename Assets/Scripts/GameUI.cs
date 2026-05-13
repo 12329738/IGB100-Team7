@@ -19,6 +19,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI displayedPlayerLevel;
     public TextMeshProUGUI playerStats;
     public TextMeshProUGUI weaponStats;
+    public TextMeshProUGUI enemiesKilled;
     private IDamageable trackedDamageablePlayer;
     private Player player;
     public Image[] weaponInventory;
@@ -67,6 +68,11 @@ public class GameUI : MonoBehaviour
         UpdateInventory();
     }
 
+    public void UpdateKillCount(int killCount)
+    {
+        enemiesKilled.text = $"Kills: {killCount}";
+    }
+
     private void DisplayWeaponStats()
     {
         StringBuilder sb = new StringBuilder();
@@ -100,7 +106,7 @@ public class GameUI : MonoBehaviour
     private void DisplayExperienceAmount()
     {
         playerExperienceBar.fillAmount = player.currentExperience / GameManager.instance.GetExperienceAtLevel(player.level);
-        displayedPlayerLevel.text = $"Level {player.level.ToString()} {player.currentExperience}/{GameManager.instance.GetExperienceAtLevel(player.level)}";
+        displayedPlayerLevel.text = $"Level {player.level.ToString()} {(int)player.currentExperience}/{GameManager.instance.GetExperienceAtLevel(player.level)}";
     }
 
     public void DisplayHealthAmount()

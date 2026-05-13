@@ -74,6 +74,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         }
 
         provider.Modifiers.AddRange(data.modifiers);
+        GameManager.instance.statusEffectRegistry.AddInstance(this);
 
 
     }
@@ -140,8 +141,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
 
     public void AddStack(int amount)
     {
-        if (context.stacks < data.maxStacks)
-            GameManager.instance.statusEffectRegistry.AddStacks(data.definition, 1);
+            
         context.stacks += amount;
         if (context.stacks > data.maxStacks)
             context.stacks = data.maxStacks;

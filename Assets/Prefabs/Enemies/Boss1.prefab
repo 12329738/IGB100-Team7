@@ -66,6 +66,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 1
+  healthBar: {fileID: 2182470769066128151}
   references:
     version: 2
     RefIds: []
@@ -398,3 +399,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3385491232303503819, guid: 2ec0cd62183245348906a37f51dfc2ee, type: 3}
   m_PrefabInstance: {fileID: 2974211503245484017}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2182470769066128151 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3967446985351359718, guid: 2ec0cd62183245348906a37f51dfc2ee, type: 3}
+  m_PrefabInstance: {fileID: 2974211503245484017}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 using Random = System.Random;
@@ -14,6 +15,8 @@ public class Enemy : Entity, IDamageable
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
     public bool dropsChest;
+    public Image healthBar;
+    public bool isBoss;
 
     void Start()
     {
@@ -24,12 +27,16 @@ public class Enemy : Entity, IDamageable
     void Update()
     {
         HandleKnockbackOrMovement();
+        UpdateHealthBar();
     }
+
+   
 
     private void HandleKnockbackOrMovement()
     {
         if (knockbackRemaining > 0.1f)
         {
+            gameObject.layer = LayerMask.NameToLayer("Knockback");
             float step = GameManager.instance.knockBackSpeed * Time.deltaTime;
 
             step = Mathf.Min(step, knockbackRemaining);
@@ -38,7 +45,11 @@ public class Enemy : Entity, IDamageable
 
             knockbackRemaining -= step;
             if (knockbackRemaining < 0.01f)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Enemy");
                 knockBack = null;
+            }
+                
 
             return; 
         }
@@ -107,6 +118,12 @@ public class Enemy : Entity, IDamageable
         }
     }
 
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+            healthBar.fillAmount = GetCurrentHealthPercent();
+    }
+
     internal override void Die()
     {
         OnDeathCallback?.Invoke();
@@ -122,7 +139,7 @@ public class Enemy : Entity, IDamageable
         if (random <= GameManager.instance.magnetPickupDropRate)
             SpawnerManager.instance.SpawnMagnetPickup(transform.position);
 
-        SpawnerManager.instance.UnregisterEnemy();
+        SpawnManager.instance.UnregisterEnemy(isBoss);
 
         weapon = null;
 
@@ -132,6 +149,7 @@ public class Enemy : Entity, IDamageable
         GameManager.instance.effectHandler.UnRegister(this);
         flashScript.ResetMaterial();
 
+        player.AddKill();
         ObjectPool.instance.ReturnObject(gameObject);
     }
 
@@ -145,7 +163,7 @@ public class Enemy : Entity, IDamageable
             weapon.Initialize(this);
         }
         
-        SpawnerManager.instance.RegisterEnemy();
+        SpawnManager.instance.RegisterEnemy(isBoss);
     }
 
 }

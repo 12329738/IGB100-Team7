@@ -6,38 +6,51 @@ public class StatusEffectRegistry : MonoBehaviour
 {
     public static StatusEffectRegistry instance;
 
-    private Dictionary<DamageSourceDefinition, int> totalStacks = new();
+    private Dictionary<DamageSourceDefinition, List<StatusEffectInstance>> totalInstances =
+        new Dictionary<DamageSourceDefinition, List<StatusEffectInstance>>();
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void AddStacks(DamageSourceDefinition type, int amount)
+    public void AddInstance(StatusEffectInstance instance)
     {
-        if (!totalStacks.ContainsKey(type))
-            totalStacks[type] = 0;
-
-        totalStacks[type] += amount;
+        if (!totalInstances.ContainsKey(instance.definition))
+            totalInstances[instance.definition] = new List<StatusEffectInstance> { instance };
+        else
+            totalInstances[instance.definition].Add(instance);
     }
 
-    public void RemoveStacks(DamageSourceDefinition type, int amount)
+    public void RemoveInstance(StatusEffectInstance instance)
     {
-        if (!totalStacks.ContainsKey(type))
+        if (!totalInstances.ContainsKey(instance.definition))
             return;
 
-        totalStacks[type] -= amount;
-        if (totalStacks[type] < 0)
-            totalStacks[type] = 0;
+        totalInstances[instance.definition].Remove(instance);
     }
 
     public int GetTotalStacks(DamageSourceDefinition type)
     {
-        return totalStacks.TryGetValue(type, out var value) ? value : 0;
+        totalInstances.TryGetValue(type, out var value);
+        int total = 0;
+        foreach (StatusEffectInstance instance in value)
+            total += (int)instance.context.stacks;
+        return total;
     }
 
     internal int GetStacksFromSource(DamageSourceDefinition effectData)
     {
-        return totalStacks.TryGetValue(effectData, out var value) ? value : 0;
+        totalInstances.TryGetValue(effectData, out var value);
+        int total = 0;
+        foreach (StatusEffectInstance instance in value)
+            total += (int)instance.context.stacks;
+        return total;
+    }
+
+    internal int GetInstancesFromSource(DamageSourceDefinition effectData)
+    {
+        totalInstances.TryGetValue(effectData, out var value);
+        return value.Count;
     }
 }

@@ -11,6 +11,7 @@ public class UpgradeUI : MonoBehaviour
     Upgrade upgrade;
     public TextMeshProUGUI uiText;
     public Image background;
+    public Image icon;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,18 +34,21 @@ public class UpgradeUI : MonoBehaviour
         if (upgrade is ItemUpgrade u)
         {
             itemUpgrade = u;
+            Item item = GameManager.instance.database.GetItem(itemUpgrade.itemType);
+            icon.sprite = item.icon;
             if (itemUpgrade.levelsAvaliable.Count == 0)
                 upgrade.rarity = RarityEnum.Common;
         }
 
-        background.color = GameManager.instance.rarityColors[upgrade.rarity];
+        background.sprite = GameManager.instance.raritySprites[upgrade.rarity];
+        
 
         
 
 
         if (upgrade is TransformationUpgrade)
         {
-            background.color = GameManager.instance.rarityColors[RarityEnum.Transformation];
+            background.sprite = GameManager.instance.raritySprites[RarityEnum.Transformation];
         }
         
         if (upgrade is ItemUpgrade)

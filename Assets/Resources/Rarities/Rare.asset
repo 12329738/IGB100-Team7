@@ -15,4 +15,5 @@ MonoBehaviour:
   rarity: 1
   chance: 35
   valueModifier: 1.5
-  color: {r: 0, g: 0.17847392, b: 0.9528302, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  upgradeImage: {fileID: 21300000, guid: 18568451f992978498ba03b0cbe68bad, type: 3}
