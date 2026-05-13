@@ -25,29 +25,26 @@ MonoBehaviour:
       value: 0
     effectData:
     - rid: 6460871593909289039
-  - hasTick: 1
-    tickInterval: 0.5
-    conditions:
-    - triggerEvent: 5
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 6460871593909289039
   modifiers: []
   rarity: 0
   references:
     version: 2
     RefIds:
-    - rid: 2962360600588189699
-      type: {class: SpawnProjectileConfig, ns: , asm: Assembly-CSharp}
-      data:
-        weaponData: {fileID: 11400000, guid: 688001e699b096a44980c3a1596781be, type: 2}
-        spawnAtTarget: 0
-        spawnAtSource: 1
     - rid: 6460871593909289039
       type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
       data:
-        type: 5
+        type: 7
         effectOperation:
-          rid: 2962360600588189699
+          rid: 6460871593909289041
+    - rid: 6460871593909289041
+      type: {class: SourceModifier, ns: , asm: Assembly-CSharp}
+      data:
+        targetTag: {fileID: 11400000, guid: 5ff474c2cea6a904097840e21543bf2e, type: 2}
+        multiplier: 25
+        valueSource:
+          mode: 4
+          constant: 0
+          multiplier: 1
+          useTarget: 0
+          useSource: 0
+        _effectToModify: 3
