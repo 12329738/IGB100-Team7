@@ -32,8 +32,15 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     [SerializeField]
     private Team _team;
     public virtual Team team { get => _team; set => _team = value; }
+
     [HideInInspector]
-    public float currentHealth { get; set; } = 1;
+    public float currentHealth
+    {
+        get => healthNormalized * stats.GetStat(StatType.MaxHealth);
+    }
+
+    private float healthNormalized = 1f;
+
     [HideInInspector]
     public readonly ModifierProvider provider = new ModifierProvider();
 
@@ -86,7 +93,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
         stats.Initialize(statPreset, definition);
         stats.AddModifierProvider(this.provider);
 
-        currentHealth = stats.GetStat(StatType.MaxHealth);
+        healthNormalized = 1;
         canBeDamaged = true;
         knockbackRemaining = 0;
 
@@ -102,7 +109,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     public virtual void TakeDamage(CombatIntent intent)
     {
 
-        currentHealth -= intent.value;
+        healthNormalized -= intent.value / stats.GetStat(StatType.MaxHealth);
         DamagePopup.instance.ShowCombatText(intent);
         if (flashScript != null)
         {
@@ -145,11 +152,8 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     public void Heal(float amount)
     {
-        currentHealth += amount;
-        if (currentHealth > stats.GetStat(StatType.MaxHealth))
-        {
-            currentHealth = stats.GetStat(StatType.MaxHealth);
-        }
+        healthNormalized += amount / stats.GetStat(StatType.MaxHealth);
+        healthNormalized = Mathf.Clamp01(healthNormalized);
 
     }
 
