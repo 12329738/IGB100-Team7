@@ -13,8 +13,8 @@ public enum StatType
     ProjectileCount,
     AttackSpeed,
     Collection,
-    MaxTransformation,
-    TransformationGainRate,
+    MaxEnergy,
+    EnergyRegeneration,
     TransformationDecayRate,
     DamageTaken
 }

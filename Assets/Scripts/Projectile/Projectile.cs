@@ -66,6 +66,11 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         guid = Guid.NewGuid();
         data = d;
+        if (owner is Enemy enemy)
+            gameObject.layer = LayerMask.NameToLayer("Enemy Projectile");
+        else
+            gameObject.layer = LayerMask.NameToLayer("Projectile");
+        
         stats = new Dictionary<StatType, float>(d.stats);
 
         if (GetComponentInChildren<SpriteRenderer>() != null)

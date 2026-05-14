@@ -61,7 +61,7 @@ public class DamagePopup : MonoBehaviour
 
         text.color = (comp.gameObject == GameManager.instance.player.gameObject)
             ? Color.red
-            : Color.white;
+            : intent.source.definition.textColour;
 
         if (intent.intent == EffectIntent.Heal)
         {

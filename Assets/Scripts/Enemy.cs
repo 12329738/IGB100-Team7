@@ -148,7 +148,7 @@ public class Enemy : Entity, IDamageable
 
         GameManager.instance.effectHandler.UnRegister(this);
         flashScript.ResetMaterial();
-
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
         player.AddKill();
         ObjectPool.instance.ReturnObject(gameObject);
     }
