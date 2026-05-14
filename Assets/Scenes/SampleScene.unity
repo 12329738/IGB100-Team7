@@ -2407,11 +2407,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88179356490d7ac45954ad5e3f2b0188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 7201779055758530220, guid: 3ee8e214bf9e76d4fbd01a3932482cda, type: 3}
+  damageTextPrefab: {fileID: 3401929159801788076, guid: 3ee8e214bf9e76d4fbd01a3932482cda, type: 3}
   textHeightOffset: 4
   floatSpeed: 0.1
   fadeTime: 1
+  textSize: 50
   damageCanvas: {fileID: 1966916003}
+  cameraForward: {x: 0, y: 0, z: 0}
 --- !u!4 &1340636558
 Transform:
   m_ObjectHideFlags: 0
@@ -4963,7 +4965,7 @@ PrefabInstance:
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8e2885f454e1f1a4a95ac1e046da15ae, type: 2}
+      objectReference: {fileID: 11400000, guid: 41df31b746c9c7a458fe6d53d2a0a375, type: 2}
     - target: {fileID: 4967002423649952269, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: 'startingWeapons.Array.data[1]'
       value: 
@@ -5047,6 +5049,10 @@ PrefabInstance:
     - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_Center.x
       value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 959
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5371764836284145618, guid: 18b479100e8786c449778e9920a26faa, type: 3}

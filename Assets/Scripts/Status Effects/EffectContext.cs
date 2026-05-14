@@ -5,7 +5,6 @@ using UnityEngine;
 public class EffectContext
 {
     public IDamageSource damageSource;
-    //public IDamageSource damageSourceOwner;
     public IDamageSource target;
     public EffectIntent intent;
     public CombatEvent trigger;

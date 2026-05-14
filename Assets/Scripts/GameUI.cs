@@ -100,7 +100,7 @@ public class GameUI : MonoBehaviour
 
     private void DisplayTransformationAmount()
     {
-        transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxTransformation);
+        transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxEnergy);
     }
 
     private void DisplayExperienceAmount()
