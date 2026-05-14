@@ -18,7 +18,7 @@ public class Combat : MonoBehaviour
         if (damageable == null || !damageable.IsDamageable())
             return;
 
-        if (!CanHit(intent))
+        if (!CanHit(intent.source, intent.target))
             return;
 
         intent.context.trigger = CombatEvent.OnDamage;
@@ -96,25 +96,40 @@ public class Combat : MonoBehaviour
 
     internal void TriggerContact(CombatIntent intent)
     {
-        if (!CanHit(intent))
+        if (!CanHit(intent.source, intent.target))
             return;
 
         if (intent.target is Component comp)
             GameManager.instance.effectHandler.Dispatch(intent.context);
     }
 
-    public bool CanHit(CombatIntent intent)
+    public bool CanHit(IDamageSource source, IDamageSource target)
     {
         float lastHit;
        
-        var effectKey = (intent.context.damageSource.guid, intent.context.target);
+        var effectKey = (source.guid, target);
         if (lastHitTimes.TryGetValue(effectKey, out lastHit))
         {
-            if (Time.time - lastHit < intent.context.damageSource.hitInterval)
+            if (Time.time - lastHit < source.hitInterval)
                 return false;
         }
         lastHitTimes[effectKey] = Time.time;
         return true;
 
     }
+
+    public bool CheckHitTime(IDamageSource source, IDamageSource target)
+    {
+        float lastHit;
+
+        var effectKey = (source.guid, target);
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
+        {
+            if (Time.time - lastHit < source.hitInterval)
+                return false;
+        }
+        return true;
+
+    }
+
 }

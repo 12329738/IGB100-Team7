@@ -146,7 +146,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         if (context.stacks > data.maxStacks)
             context.stacks = data.maxStacks;
         Refresh();
-        Debug.Log($"{context.target} has {context.stacks} stacks of {data.name}");
+        //Debug.Log($"{context.target} has {context.stacks} stacks of {data.name}");
         context.trigger = CombatEvent.OnStackCount;
         EmitEffects(context);
         GameManager.instance.effectHandler.Dispatch(context);    

@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6032084494713996804}
   - component: {fileID: 1680427877014524080}
+  - component: {fileID: 3401929159801788076}
   - component: {fileID: 6480004818100868819}
+  - component: {fileID: 4204465918750125166}
   m_Layer: 5
   m_Name: DamagePopupTextUI
   m_TagString: Untagged
@@ -45,6 +47,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7201779055758530220}
   m_CullTransparentMesh: 1
+--- !u!114 &3401929159801788076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201779055758530220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76019f6e89d73df439f1b66e97f7c770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 6480004818100868819}
+  canvasGroup: {fileID: 4204465918750125166}
 --- !u!114 &6480004818100868819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +152,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &4204465918750125166
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201779055758530220}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
