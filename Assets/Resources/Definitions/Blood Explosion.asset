@@ -18,6 +18,7 @@ MonoBehaviour:
   source:
     mode: 5
     constant: 0
-    multiplier: 0.05
+    multiplier: 0.025
     useTarget: 1
     useSource: 0
+  textColour: {r: 1, g: 1, b: 1, a: 1}
