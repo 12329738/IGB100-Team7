@@ -46,7 +46,7 @@ public class EffectExecutor
 
     public void Execute(List<CombatIntent> intents)
     {
-        foreach (CombatIntent intent in intents)
+        foreach (CombatIntent intent in intents.ToArray())
         {
             Execute(intent);
         }

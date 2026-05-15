@@ -43,7 +43,7 @@ public class StatusEffectManager : MonoBehaviour
         foreach (StatusEffectInstance instance in snapshot)
         {
 
-            instance.EmitEffects(context);
+            instance.ExecuteEffects(context);
         }
     }
 

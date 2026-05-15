@@ -14,7 +14,7 @@ public class SpawnProjectileConfig : EffectOperation
     public override EffectIntent Type => EffectIntent.SpawnProjectile;
     public override void Generate(EffectContext ctx, List<CombatIntent> intents)
     {
-        ctx.intent = EffectIntent.SpawnProjectile;
+        //ctx.intent = EffectIntent.SpawnProjectile;
         Weapon playerWeapon = null;
         foreach (Weapon weapon in GameManager.instance.player.weapons)
         {

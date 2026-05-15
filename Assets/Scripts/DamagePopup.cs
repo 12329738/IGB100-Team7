@@ -13,12 +13,13 @@ public class DamagePopup : MonoBehaviour
     public DamagePopupText damageTextPrefab; 
     public float textHeightOffset = 2f;  
     public float floatSpeed = 10f;        
-    public float fadeTime = 10f;
+    public float fadeTime = 3f;
     public float textSize = 50;
     public static DamagePopup instance;
     public Canvas damageCanvas;
     public Vector3 cameraForward;
-
+    public float maxPopupInstances = 200;
+    private List<DamagePopupText> activePopups = new();
     void Awake()
     {
         
@@ -29,9 +30,22 @@ public class DamagePopup : MonoBehaviour
         cameraForward = GameManager.instance.camera.transform.forward;
     }
 
+    void Update()
+    {
+        for (int i = activePopups.Count - 1; i >= 0; i--)
+        {
+            var popup = activePopups[i];
+            activePopups[i].Tick();
+            if (popup.finished)
+            {
+                activePopups.RemoveAt(i);
+            }
+        }
+    }
     public void ShowCombatText(CombatIntent intent)
     {
-
+        if (activePopups.Count >= maxPopupInstances)
+            return;
         if (intent.value < 1)
             return;
         Component comp = intent.target as Component;
@@ -64,12 +78,13 @@ public class DamagePopup : MonoBehaviour
         }
         textPopup.Setup(cameraForward, worldPosition,color,size,fadeTime, floatSpeed);
         textPopup.text.SetText("{0:0}", intent.value);
-
+        activePopups.Add(textPopup);
     }
 
     public void ShowStatusEffect(StatusEffectInstance instance)
     {
-
+        if (activePopups.Count >= maxPopupInstances)
+            return;
 
         Component comp = instance.context.target as Component;
 
@@ -87,9 +102,11 @@ public class DamagePopup : MonoBehaviour
        
         textPopup.Setup(cameraForward, worldPosition, Color.white, size, fadeTime, floatSpeed);
         textPopup.text.SetText(instance.data.name);
+        activePopups.Add(textPopup);
     }
 
 
 
-   
+
+
 }

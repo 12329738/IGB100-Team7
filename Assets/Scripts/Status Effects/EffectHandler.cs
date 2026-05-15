@@ -6,7 +6,7 @@ public class EffectHandler : MonoBehaviour
 {
     private readonly List<EffectInstance> effects = new();
     public EffectExecutor executor;
-
+    private List<CombatIntent> intents = new();
     void Awake()
     {
         executor = GameManager.instance.effectExecutor;
@@ -23,7 +23,7 @@ public class EffectHandler : MonoBehaviour
 
     public void Dispatch(EffectContext ctx)
     {
-        List<CombatIntent> intents = new();
+        intents.Clear();
 
         for (int i = 0; i < effects.Count; i++)
         {
@@ -57,7 +57,7 @@ public class EffectHandler : MonoBehaviour
     {
         effects.Add(instance);
 
-        List<CombatIntent> intents = new List<CombatIntent>();
+        intents.Clear();
         EffectContext context = new EffectContext { trigger = CombatEvent.OnApply };
         instance.entryNode.Execute(context, intents);
         instance.entryNode.Modify(context, ref intents);

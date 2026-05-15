@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     public Transform visual;
 
     private EffectContext context = new();
-    private CombatIntent intent = new();
+    private List<CombatIntent> intents = new();
     private Team ownerTeam;
     private readonly Dictionary<GameObject, TargetContact> targets = new();
     [HideInInspector]
@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
             gameObject.layer = LayerMask.NameToLayer("Projectile");
         
         stats = new Dictionary<StatType, float>(d.stats);
-
+        context.Reset();
         if (GetComponentInChildren<SpriteRenderer>() != null)
         {
             visual = GetComponentInChildren<SpriteRenderer>().transform;
@@ -108,7 +108,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnSpawn };
-            List<CombatIntent> intents = new List<CombatIntent>();
+            intents.Clear();
             if (node.conditions.Any(x => x.triggerEvent == CombatEvent.OnSpawn))
             {
                 node.Execute(context, intents);
@@ -163,7 +163,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnExpire };
-            List<CombatIntent> intents = new List<CombatIntent>();
+            intents.Clear();
             if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
                 node.Execute(context, intents);
@@ -211,12 +211,12 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
                 if (node.conditions[j].triggerEvent != CombatEvent.OnContact)
                     continue;
 
-                var context = new EffectContext
-                {
-                    damageSource = this,
-                    target = source,
-                    trigger = CombatEvent.OnContact,
-                };
+                context.Reset();
+
+                context.damageSource = this;
+                context.target = source;
+                context.trigger = CombatEvent.OnContact;
+                
 
                 var intent = new CombatIntent
                 {
@@ -240,13 +240,12 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
         
 
-        var context = new EffectContext
-        {
-            damageSource = this,
-            target = source,
-            value = TryGetStat(StatType.Damage),
-            isHit = data.isHit,
-        };
+        context.Reset();
+        context.damageSource = this;
+        context.target = source;
+        context.value = TryGetStat(StatType.Damage);
+        context.isHit = data.isHit;
+
 
         var intent = new CombatIntent
         {
