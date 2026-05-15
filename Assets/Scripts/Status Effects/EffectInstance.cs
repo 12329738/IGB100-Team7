@@ -8,6 +8,8 @@ public class EffectInstance
     public EffectState state;
     public EffectExecutor executor;
     public IDamageSource effectHolder;
+    private List<CombatIntent> intents = new();
+    private EffectContext context = new();
 
     public EffectInstance(EffectEntryNode def, IDamageSource source, IDamageSource target, IDamageSource effectCreator)
     {
@@ -26,7 +28,7 @@ public class EffectInstance
         var node = entryNode.conditions.FirstOrDefault(x => x.triggerEvent == CombatEvent.OnEffectGained);
         if (node != null)
             foreach (EffectNodeData effect in entryNode.effectData)
-                effect.Execute(new EffectContext(), new List<CombatIntent>());
+                effect.Execute(context, intents);
     }
 
     public void Tick(float now, EffectExecutor executor)
@@ -39,16 +41,16 @@ public class EffectInstance
 
         state.lastTickTime = now;
 
-        var ctx = new EffectContext
-        {
-            damageSource = state.source,
-            target = state.target,
-            trigger = CombatEvent.OnTick,
-            stacks = state.stacks
-        };
-        List<CombatIntent> intents = new List<CombatIntent>();
-        entryNode.Execute(ctx, intents);
-        entryNode.Modify(ctx, ref intents);
+        context.Reset();
+
+        context.damageSource = state.source;
+        context.target = state.target;
+        context.trigger = CombatEvent.OnTick;
+        context.stacks = state.stacks;
+        
+        intents.Clear();
+        entryNode.Execute(context, intents);
+        entryNode.Modify(context, ref intents);
 
 
         executor.Execute(intents);

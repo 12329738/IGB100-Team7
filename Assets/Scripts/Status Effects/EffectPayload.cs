@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EffectPayload
@@ -6,5 +7,11 @@ public class EffectPayload
     public Weapon weapon;
     public GameObject prefab;
 
-    public object custom;
+
+    internal void Reset()
+    {
+        status = null;
+        weapon = null;
+        prefab = null;
+    }
 }

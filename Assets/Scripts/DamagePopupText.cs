@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,8 +9,9 @@ public class DamagePopupText : MonoBehaviour
     private float lifetime;
     private float fadeTime;
     private float floatSpeed;
-
+    private Action onFinished;
     private Color startColor;
+    public bool finished;
 
     public void Setup(Vector3 cameraPosition, Vector3 position,
         Color color,
@@ -17,6 +19,7 @@ public class DamagePopupText : MonoBehaviour
         float fade,
         float speed)
     {
+        finished = false;
         text.color = color;
         text.fontSize = size;
 
@@ -37,7 +40,7 @@ public class DamagePopupText : MonoBehaviour
         transform.position = newPosition;
     }
 
-    private void Update()
+    public void Tick()
     {
         lifetime += Time.deltaTime;
 
@@ -50,6 +53,7 @@ public class DamagePopupText : MonoBehaviour
 
         if (lifetime >= fadeTime)
         {
+            finished = true;
             ObjectPool.instance.ReturnObject(gameObject);
         }
     }

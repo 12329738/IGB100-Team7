@@ -87,7 +87,13 @@ public class EffectEntryNode
 
     public bool CanExecute(EffectContext ctx)
     {
-        return conditions.Any(x => x.triggerEvent == ctx.trigger);
+        foreach (CombatCondition condition in conditions)
+        {
+            if (condition.triggerEvent == ctx.trigger)
+                return true;
+        }
+
+        return false;
     }
 
     public void Execute(EffectContext ctx, List<CombatIntent> intents)

@@ -14,34 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
-  effects:
-  - hasTick: 0
-    tickInterval: 0
-    conditions:
-    - triggerEvent: 6
-      useComparison: 0
-      comparisonType: 0
-      value: 0
-    effectData:
-    - rid: 6974428314434011402
+  effects: []
   modifiers:
   - stat: 0
     amount: 20
-    isPercentage: 1
     type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
   rarity: 1
   itemType: 6
   levelsAvaliable: 0100000002000000030000000400000005000000
   references:
     version: 2
-    RefIds:
-    - rid: 6974428314434011402
-      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
-      data:
-        type: 4
-        effectOperation:
-          rid: 6974428314434011404
-    - rid: 6974428314434011404
-      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
-      data:
-        amount: 20
+    RefIds: []
