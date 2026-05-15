@@ -9,6 +9,7 @@ public class Enemy : Entity, IDamageable
 {
     public float expAmount;
     Player player => GameManager.instance.player;
+    private IDamageSource playerDamageSource;
     public Weapon weaponData;
     [HideInInspector]
     public Weapon weapon;
@@ -17,10 +18,10 @@ public class Enemy : Entity, IDamageable
     public bool dropsChest;
     public Image healthBar;
     public bool isBoss;
-
+    private bool isTouchingPlayer;
     void Start()
     {
-
+        playerDamageSource = player.GetComponent<IDamageSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +29,8 @@ public class Enemy : Entity, IDamageable
     {
         HandleKnockbackOrMovement();
         UpdateHealthBar();
+        if (isTouchingPlayer)
+            TryHit();
     }
 
    
@@ -66,33 +69,6 @@ public class Enemy : Entity, IDamageable
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        var context = new EffectContext
-        {
-            damageSource = this,
-            target = other.GetComponent<IDamageSource>(),
-
-            value = stats.GetStat(StatType.Damage),
-        };
-
-        context.damageSource.definition = definition;
-        var intent = new CombatIntent
-        {
-            value = stats.GetStat(StatType.Damage),
-            source = this,
-            target = other.GetComponent<IDamageSource>(),
-            context = context
-        };
-
-        if (other.TryGetComponent<Player>(out Player player))
-        {
-            
-
-            combat.DealDamage(intent);
-        }
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Enemy>(out Enemy enemy) && knockbackRemaining > 0.1f && knockBack.knockBackDamage > 0)
@@ -116,8 +92,45 @@ public class Enemy : Entity, IDamageable
             context.value = knockBack.knockBackDamage;
             combat.DealDamage(intent);
         }
+
+        if (other.TryGetComponent<Player>(out Player player))
+        {
+            isTouchingPlayer = true;
+            TryHit();
+        }
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<Player>(out Player player))
+            isTouchingPlayer = false;
+    }
+
+    void TryHit()
+    {
+        if (!combat.CheckHitTime(this, playerDamageSource))
+            return;
+
+        var context = new EffectContext
+        {
+            damageSource = this,
+            target = playerDamageSource,
+
+            value = stats.GetStat(StatType.Damage),
+        };
+
+        context.damageSource.definition = definition;
+        var intent = new CombatIntent
+        {
+            value = stats.GetStat(StatType.Damage),
+            source = this,
+            target = playerDamageSource,
+            context = context
+        };
+
+
+        combat.DealDamage(intent);
+    }
     private void UpdateHealthBar()
     {
         if (healthBar != null)
@@ -148,8 +161,9 @@ public class Enemy : Entity, IDamageable
 
         GameManager.instance.effectHandler.UnRegister(this);
         flashScript.ResetMaterial();
-
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
         player.AddKill();
+        isTouchingPlayer = false;
         ObjectPool.instance.ReturnObject(gameObject);
     }
 

@@ -96,7 +96,7 @@ public class Player : Entity, IDamageable
 
     private void UpdateTransformationAmount()
     {
-        if (currentTransformationAmount < stats.GetStat(StatType.MaxTransformation) && transformationCoroutine == null)
+        if (currentTransformationAmount < stats.GetStat(StatType.MaxEnergy) && transformationCoroutine == null)
         {
             transformationCoroutine = StartCoroutine(TransformationCoroutine());
         }
@@ -110,7 +110,7 @@ public class Player : Entity, IDamageable
         {
             if (!isTransformed)
             {
-                regenAccumulator += stats.GetStat(StatType.TransformationGainRate) * Time.deltaTime;
+                regenAccumulator += stats.GetStat(StatType.EnergyRegeneration) * Time.deltaTime;
                 timeTransformed = Time.time - transformationStartTime;
             }
 
@@ -135,9 +135,9 @@ public class Player : Entity, IDamageable
     {
         currentTransformationAmount += regenAmount;
 
-        if (currentTransformationAmount > stats.GetStat(StatType.MaxTransformation))
+        if (currentTransformationAmount > stats.GetStat(StatType.MaxEnergy))
         {
-            currentTransformationAmount = stats.GetStat(StatType.MaxTransformation);
+            currentTransformationAmount = stats.GetStat(StatType.MaxEnergy);
         }
 
         if (currentTransformationAmount < 0)
@@ -151,13 +151,15 @@ public class Player : Entity, IDamageable
     private IEnumerator ProcessLevelUps()
     {
         levelUpRoutineRunning = true;
+        GameManager.instance.PauseGame();
         while (levelUps.Count > 0)
         {
+            
             levelUps.Dequeue();
 
             yield return StartCoroutine(LevelUp());
         }
-
+        GameManager.instance.ResumeGame();
         levelUpRoutineRunning = false;
     }
 
@@ -250,7 +252,7 @@ public class Player : Entity, IDamageable
         
         
         GameManager.instance.ResumeGame();
-        yield return null;
+        upgradeCoroutine = null;
     }
 
     public IEnumerator ShowTransformationUpgrade()
@@ -299,12 +301,13 @@ public class Player : Entity, IDamageable
                 }
             }
 
-            if (itemUpgrade.levelsAvaliable.Count >1)
-            {
-                item.currentLevel++;
-                if (item.currentLevel == GameManager.instance.weaponUpgradeLimit && item is Weapon weapon)
-                    weapon.Evolve();
-            }
+            if (!hasModifiers && item.currentLevel == 1)
+                return;
+            
+            item.currentLevel++;
+            if (item.currentLevel == GameManager.instance.weaponUpgradeLimit && item is Weapon weapon)
+                weapon.Evolve();
+        
         }
 
         else if (upgrade is TransformationUpgrade transformationUpgrade)

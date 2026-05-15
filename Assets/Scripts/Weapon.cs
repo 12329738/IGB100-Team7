@@ -22,6 +22,7 @@ public class Weapon : Item, IModifierReceiver
     public bool trackEnemy;
     public bool aimAtEnemy;
     public bool spawnOnTarget;
+    public bool isDamageOverTime = false;
     public HitMode hitMode;
     [HideInInspector]
     public ItemUpgrade baseUpgrade;

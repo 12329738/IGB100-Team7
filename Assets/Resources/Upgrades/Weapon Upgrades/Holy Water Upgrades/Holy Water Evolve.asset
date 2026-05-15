@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Holy Water Evolve
   m_EditorClassIdentifier: 
   name: Evolution
-  description: Evolves, dealing damage on impact equal to twice its base damage
+  description: Evolves. The flask now creates pools during it's flight
   effects: []
   modifiers:
   - stat: 3

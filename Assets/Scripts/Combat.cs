@@ -12,29 +12,31 @@ public class Combat : MonoBehaviour
 
     public void DealDamage(CombatIntent intent)
     {
-        
-        IDamageable damageable = intent.target as IDamageable;
 
-        if (damageable == null || !damageable.IsDamageable())
+        if (intent.target is not IDamageable damageable ||
+            !damageable.IsDamageable() ||
+            !CanHit(intent.source, intent.target))
+        {
             return;
-
-        if (!CanHit(intent))
-            return;
+        }
 
         intent.context.trigger = CombatEvent.OnDamage;
+        EffectContext context = intent.context;
+        IDamageSource damageSource = context.damageSource;
+        DamageSourceDefinition definition = damageSource.definition;
 
         Projectile proj = null;
 
-        if (intent.context.damageSource is Projectile p)
+        if (damageSource is Projectile p)
             proj = p;
         
 
-        if (intent.context.damageSource.definition.usesValueSource)
+        if (definition.usesValueSource)
         {
-            intent.value = intent.context.damageSource.definition.source.Evaluate(intent);
+            intent.value = definition.source.Evaluate(intent);
         }
 
-        if (!intent.context.damageSource.definition.ignoreModifiers)
+        if (definition.ignoreModifiers)
         {
             GameManager.instance.effectHandler.Modify(intent.context, ref intent);
         }
@@ -45,10 +47,14 @@ public class Combat : MonoBehaviour
             {
                 bool isCrit = UnityEngine.Random.Range(0f, 100f) < critChance;
                 intent.context.isCrit = isCrit;
-                if (isCrit)
-                    intent.value *= 1 + (proj.stats[StatType.CritDamage] / 100);
+
+                if (isCrit &&
+                    proj.stats.TryGetValue(StatType.CritDamage, out float critDamage))
+                {
+                    intent.value *= 1f + critDamage * 0.01f;
+                }
             }
-            
+
         }
 
         if (intent.target is Entity e)
@@ -72,8 +78,8 @@ public class Combat : MonoBehaviour
             ctx.trigger = CombatEvent.OnHit;
             GameManager.instance.effectHandler.Dispatch(ctx);
 
-            if (ctx.damageSource.owner is Component comp)
-              comp.gameObject.GetComponent<StatusEffectManager>().Dispatch(ctx);
+            if (damageSource.owner is Entity entity)
+              entity.status.Dispatch(ctx);
         }
 
     }
@@ -96,25 +102,40 @@ public class Combat : MonoBehaviour
 
     internal void TriggerContact(CombatIntent intent)
     {
-        if (!CanHit(intent))
+        if (!CanHit(intent.source, intent.target))
             return;
 
         if (intent.target is Component comp)
             GameManager.instance.effectHandler.Dispatch(intent.context);
     }
 
-    public bool CanHit(CombatIntent intent)
+    public bool CanHit(IDamageSource source, IDamageSource target)
     {
         float lastHit;
        
-        var effectKey = (intent.context.damageSource.guid, intent.context.target);
+        var effectKey = (source.guid, target);
         if (lastHitTimes.TryGetValue(effectKey, out lastHit))
         {
-            if (Time.time - lastHit < intent.context.damageSource.hitInterval)
+            if (Time.time - lastHit < source.hitInterval)
                 return false;
         }
         lastHitTimes[effectKey] = Time.time;
         return true;
 
     }
+
+    public bool CheckHitTime(IDamageSource source, IDamageSource target)
+    {
+        float lastHit;
+
+        var effectKey = (source.guid, target);
+        if (lastHitTimes.TryGetValue(effectKey, out lastHit))
+        {
+            if (Time.time - lastHit < source.hitInterval)
+                return false;
+        }
+        return true;
+
+    }
+
 }

@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e1075794bc168438f62830ca905826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectExecutor: {fileID: 0}
   effectHandler: {fileID: 0}
   player: {fileID: 0}
   camera: {fileID: 0}
@@ -63,8 +62,8 @@ MonoBehaviour:
   knockBackSpeed: 10
   transformationUpgradeInterval: 10
   flashDuration: 0.05
-  healthPickupDropRate: 0.5
-  magnetPickupDropRate: 0.3
+  healthPickupDropRate: 0.2
+  magnetPickupDropRate: 0.1
   rarities: []
   experienceCurve:
     serializedVersion: 2
@@ -102,4 +101,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fbfddd8af313e4eb6af5c1c349581b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  executor: {fileID: 0}

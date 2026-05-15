@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 using static UnityEngine.GraphicsBuffer;
 
 
@@ -19,6 +20,10 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     [HideInInspector]
     public Transform visual;
 
+    private EffectContext context = new();
+    private List<CombatIntent> intents = new();
+    private Team ownerTeam;
+    private readonly Dictionary<GameObject, TargetContact> targets = new();
     [HideInInspector]
     public virtual StatsPreset statPreset { get; set; }
 
@@ -55,6 +60,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         {
             data.behaviour.Move(this, state);
         }
+
+        CheckTargets();
     }
     public event Action OnDirty
     {
@@ -66,8 +73,13 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     {
         guid = Guid.NewGuid();
         data = d;
+        if (owner is Enemy enemy)
+            gameObject.layer = LayerMask.NameToLayer("Enemy Projectile");
+        else
+            gameObject.layer = LayerMask.NameToLayer("Projectile");
+        
         stats = new Dictionary<StatType, float>(d.stats);
-
+        context.Reset();
         if (GetComponentInChildren<SpriteRenderer>() != null)
         {
             visual = GetComponentInChildren<SpriteRenderer>().transform;
@@ -82,6 +94,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         }
 
         ownerCombat = this.data.owner.GetComponent<Entity>().combat;
+        ownerTeam = owner.GetComponent<IDamageable>().team;
         if (data.hitMode == HitMode.Instant)
         {
             StartCoroutine(InstantHit());
@@ -95,7 +108,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnSpawn };
-            List<CombatIntent> intents = new List<CombatIntent>();
+            intents.Clear();
             if (node.conditions.Any(x => x.triggerEvent == CombatEvent.OnSpawn))
             {
                 node.Execute(context, intents);
@@ -126,12 +139,31 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         }
     }
 
+    private void CheckTargets()
+    {
+
+        foreach (var kv in targets.Values.ToArray()) 
+        {
+            var t = kv;
+            if (!t.gameObject.activeSelf)
+                targets.Remove(t.gameObject);
+            else
+            {
+                if (!ownerCombat.CheckHitTime(this, t.source))
+                    continue;
+
+                TryHit(t.damageable, t.source, t.gameObject);
+                RaiseContactEvent(t.damageable, t.source, t.gameObject);
+            }
+        }
+    }
+
     public void Deactivate()
     {
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnExpire };
-            List<CombatIntent> intents = new List<CombatIntent>();
+            intents.Clear();
             if (node.conditions.Any(x=> x.triggerEvent == CombatEvent.OnExpire))
             {
                 node.Execute(context, intents);
@@ -142,87 +174,103 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
         GameManager.instance.effectHandler.UnRegister(this);
         elapsed = 0;
         state = null;
+        targets.Clear();
         ObjectPool.instance.ReturnObject(gameObject);
 
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        TryHit(other.gameObject);
-        RaiseContactEvent(other.gameObject);
+        if (!other.TryGetComponent<IDamageable>(out var damageable))
+            return;
+
+        if (!other.TryGetComponent<IDamageSource>(out var source))
+            return;
+
+        targets[other.gameObject] = (new TargetContact
+        {
+            gameObject = other.gameObject,
+            damageable = damageable,
+            source = source
+        });
     }
 
-    private void RaiseContactEvent(GameObject target)
+    private void OnTriggerExit(Collider other)
     {
+        targets.Remove(other.gameObject);
+    }
 
-        foreach (EffectEntryNode node in data.effects)
+    private void RaiseContactEvent(IDamageable damageable, IDamageSource source, GameObject target)
+    {
+        for (int i = 0; i < data.effects.Count; i++)
         {
-            if (node.conditions.Any(x => x.triggerEvent == CombatEvent.OnContact))
+            var node = data.effects[i];
+
+            for (int j = 0; j < node.conditions.Count; j++)
             {
-                var context = new EffectContext
-                {
-                    damageSource = this,
-                    target = target.GetComponent<IDamageSource>(),
-                    trigger = CombatEvent.OnContact,
-                };
+                if (node.conditions[j].triggerEvent != CombatEvent.OnContact)
+                    continue;
+
+                context.Reset();
+
+                context.damageSource = this;
+                context.target = source;
+                context.trigger = CombatEvent.OnContact;
+                
 
                 var intent = new CombatIntent
                 {
                     source = this,
-                    target = context.target,
+                    target = source,
                     context = context
                 };
 
                 ownerCombat.TriggerContact(intent);
             }
-
         }
-        
     }
 
-    private void TryHit(GameObject target)
+    private void TryHit(IDamageable damageable, IDamageSource source, GameObject target)
     {
         if (target == data.owner.gameObject)
             return;
 
-
-        if (!target.TryGetComponent<IDamageable>(out var targetDamageable))
+        if (damageable.team == ownerTeam)
             return;
-        if (targetDamageable.team == owner.GetComponent<IDamageable>().team)
-            return;
-        var context = new EffectContext
-        {
-            damageSource = this,
 
-            target = target.GetComponent<IDamageSource>(),
-            value = TryGetStat(StatType.Damage),
-            isHit = data.isHit,
-        };
+        
 
-        context.damageSource.definition = definition;
+        context.Reset();
+        context.damageSource = this;
+        context.target = source;
+        context.value = TryGetStat(StatType.Damage);
+        context.isHit = data.isHit;
+
 
         var intent = new CombatIntent
         {
             value = stats[StatType.Damage],
             source = this,
-            target = context.target,
+            target = source,
             context = context
         };
-
-
 
         ownerCombat.DealDamage(intent);
 
         if (!data.isPiercing)
-        {
             Deactivate();
-        }
-        
     }
 
     public float TryGetStat(StatType stat)
     {
         stats.TryGetValue(stat, out var value);
         return value;
+    }
+
+    private struct TargetContact
+    {
+        public GameObject gameObject;
+        public IDamageable damageable;
+        public IDamageSource source;
     }
 }

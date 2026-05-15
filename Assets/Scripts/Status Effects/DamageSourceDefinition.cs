@@ -7,4 +7,5 @@ public class DamageSourceDefinition : ScriptableObject
     public bool ignoreModifiers = false;
     public bool usesValueSource = false;
     public ValueSource source;
+    public Color textColour = Color.white;
 }

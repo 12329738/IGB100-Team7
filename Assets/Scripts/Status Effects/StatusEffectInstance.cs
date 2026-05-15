@@ -12,6 +12,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
     public EffectContext context;
     public EffectState state;
     public StatusEffectManager effectManager;
+    private List<CombatIntent> intents = new();
     public Entity _owner;
     public Entity owner { get => _owner; set => _owner = value; }
     public DamageSourceDefinition definition { get => data.definition; set => data.definition = value; }
@@ -82,7 +83,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
     public void OnApply(StatusEffectManager manager)
     {
         context.trigger = CombatEvent.OnApply;
-        EmitEffects(context);
+        ExecuteEffects(context);
     }
 
     public void AddRuntime(EffectEntryNode entry)
@@ -97,11 +98,6 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         runtimes.Add(runtime);
     }
 
-    public void AddRuntime(List<EffectEntryNode> entries)
-    {
-        foreach (var entry in entries)
-            AddRuntime(entry);
-    }
 
     public void Tick()
     {
@@ -123,13 +119,13 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         state.lastTickTime = Time.time;
 
         context.trigger = CombatEvent.OnTick;
-        EmitEffects(context);
+        ExecuteEffects(context);
                   
     }
 
-    public void EmitEffects(EffectContext context)
+    public void ExecuteEffects(EffectContext context)
     {
-        List<CombatIntent> intents = new List<CombatIntent>();
+        intents.Clear();
         foreach (EffectInstance instance in runtimes)
         {
             instance.entryNode.Execute(context, intents);                      
@@ -146,9 +142,9 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         if (context.stacks > data.maxStacks)
             context.stacks = data.maxStacks;
         Refresh();
-        Debug.Log($"{context.target} has {context.stacks} stacks of {data.name}");
+        //Debug.Log($"{context.target} has {context.stacks} stacks of {data.name}");
         context.trigger = CombatEvent.OnStackCount;
-        EmitEffects(context);
+        ExecuteEffects(context);
         GameManager.instance.effectHandler.Dispatch(context);    
     }
 
@@ -157,30 +153,7 @@ public class StatusEffectInstance : IDamageSource, IModifierProvider
         state.startTime = Time.time;
     }
 
-    public void HandleEvent(CombatEvent type, EffectContext ctx)
-    {
-        ExecuteEntries(type, ctx);
-    }
 
-    private void ExecuteEntries(CombatEvent type, EffectContext ctx)
-    {
-        var localCtx = ctx.Clone();
-        localCtx.stacks = state.stacks;
-
-        List<CombatIntent> intents = new List<CombatIntent>();
-        foreach (var entry in data.entries)
-        {
-            if (entry.conditions.Any(x=>x.triggerEvent == type))
-                continue;
-
-            foreach (var node in entry.effectData)
-            {
-                node.Execute(localCtx, intents);
-            }
-            
-        }
-        GameManager.instance.effectExecutor.Execute(intents);
-    }
 
     public void Remove() { }
 

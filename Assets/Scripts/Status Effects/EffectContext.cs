@@ -5,9 +5,7 @@ using UnityEngine;
 public class EffectContext
 {
     public IDamageSource damageSource;
-    //public IDamageSource damageSourceOwner;
     public IDamageSource target;
-    public EffectIntent intent;
     public CombatEvent trigger;
 
     public float value;
@@ -24,4 +22,17 @@ public class EffectContext
         return (EffectContext)this.MemberwiseClone();
     }
 
+    public void Reset()
+    {
+        damageSource = null;
+        target = null;
+        value = 0;
+        isHit = true;
+        isCrit = false;
+        stacks = 0;
+        modifiers = null;
+        payload.Reset();
+
+
+    }
 }

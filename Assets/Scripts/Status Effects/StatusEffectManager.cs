@@ -30,7 +30,7 @@ public class StatusEffectManager : MonoBehaviour
 
         instance.OnApply(this);
         DamagePopup.instance.ShowStatusEffect(instance);
-        Debug.Log($"{source} applied {instance.data.name} to {gameObject}");
+        //Debug.Log($"{source} applied {instance.data.name} to {gameObject}");
 
     }
 
@@ -41,7 +41,7 @@ public class StatusEffectManager : MonoBehaviour
         foreach (StatusEffectInstance instance in snapshot)
         {
 
-            instance.EmitEffects(context);
+            instance.ExecuteEffects(context);
         }
     }
 
@@ -57,7 +57,7 @@ public class StatusEffectManager : MonoBehaviour
     {
         StatusEffectInstance instance = effects.FirstOrDefault(i => i.data.definition == statusEffectData.definition);
         GameManager.instance.statusEffectRegistry.RemoveInstance(instance);
-        Debug.Log($"Removed {instance.context.stacks} of {statusEffectData.name} from {gameObject}");
+        //Debug.Log($"Removed {instance.context.stacks} of {statusEffectData.name} from {gameObject}");
         effects.Remove(instance);
         if (gameObject.TryGetComponent<Entity>(out Entity e))
             e.provider.RemoveChild(instance.provider);

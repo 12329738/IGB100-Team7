@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Diseased
+  m_EditorClassIdentifier: 
+  name: Diseased
+  description: 
+  duration: 3
+  maxStacks: 1
+  definition: {fileID: 11400000, guid: 68bad9ddd1e227e4386a751ed8ac6c92, type: 2}
+  modifiers:
+  - stat: 1
+    amount: -20
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
+  - stat: 0
+    amount: -15
+    type: 1
+    appliedTo: {fileID: 0}
+    duration: 0
+  hasTick: 0
+  tickInterval: 0
+  entries: []
+  references:
+    version: 2
+    RefIds: []

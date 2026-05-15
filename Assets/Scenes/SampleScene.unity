@@ -2407,11 +2407,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88179356490d7ac45954ad5e3f2b0188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 7201779055758530220, guid: 3ee8e214bf9e76d4fbd01a3932482cda, type: 3}
+  damageTextPrefab: {fileID: 3401929159801788076, guid: 3ee8e214bf9e76d4fbd01a3932482cda, type: 3}
   textHeightOffset: 4
   floatSpeed: 0.1
   fadeTime: 1
+  textSize: 50
   damageCanvas: {fileID: 1966916003}
+  cameraForward: {x: 0, y: 0, z: 0}
+  maxPopupInstances: 200
 --- !u!4 &1340636558
 Transform:
   m_ObjectHideFlags: 0
@@ -2687,7 +2690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 295.9, y: 183}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1496598836
@@ -3464,13 +3467,13 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       amount: 90
       spawnDuration: 60
-      minAlive: 15
+      minAlive: 20
       spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 50
   - waveName: Wave 2
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: dbbc83897d99616478273c96d0868bec, type: 3}
@@ -3492,7 +3495,7 @@ MonoBehaviour:
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 80
   - waveName: Wave 3
     enemies:
     - enemyPrefab: {fileID: 146454749206447347, guid: 3a109d30eb2f1694d8ad1024f813f14a, type: 3}
@@ -3501,15 +3504,15 @@ MonoBehaviour:
       spawnDuration: 1
       minAlive: 0
       spawnDelay: 0
-      isBoss: 0
+      isBoss: 1
       currentAlive: 0
       spawnTimer: 0
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       amount: 30
       spawnDuration: 60
-      minAlive: 5
-      spawnDelay: 0.3
+      minAlive: 8
+      spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3517,13 +3520,13 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
       amount: 60
       spawnDuration: 60
-      minAlive: 25
+      minAlive: 30
       spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 1
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 60
   - waveName: Wave 4
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
@@ -3531,7 +3534,7 @@ MonoBehaviour:
       amount: 120
       spawnDuration: 60
       minAlive: 30
-      spawnDelay: 0.2
+      spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3554,7 +3557,7 @@ MonoBehaviour:
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 100
   - waveName: Wave 5
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: dbbc83897d99616478273c96d0868bec, type: 3}
@@ -3562,14 +3565,14 @@ MonoBehaviour:
       amount: 80
       spawnDuration: 40
       minAlive: 20
-      spawnDelay: 0.2
+      spawnDelay: 0.25
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       amount: 100
-      spawnDuration: 45
+      spawnDuration: 60
       minAlive: 30
       spawnDelay: 0.2
       isBoss: 0
@@ -3579,21 +3582,21 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
       amount: 25
       spawnDuration: 60
-      minAlive: 4
-      spawnDelay: 0.4
+      minAlive: 5
+      spawnDelay: 0.25
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 110
   - waveName: Wave 6
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
       amount: 50
       spawnDuration: 60
-      minAlive: 8
-      spawnDelay: 0.5
+      minAlive: 10
+      spawnDelay: 0.3
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3603,20 +3606,20 @@ MonoBehaviour:
       spawnDuration: 1
       minAlive: 0
       spawnDelay: 0
-      isBoss: 0
+      isBoss: 1
       currentAlive: 0
       spawnTimer: 0
     - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
       statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
       amount: 120
       spawnDuration: 40
-      minAlive: 25
+      minAlive: 30
       spawnDelay: 0.15
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 1
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 100
   - waveName: Wave 7
     enemies:
     - enemyPrefab: {fileID: 3512271440442089338, guid: cb4d64e56f5626d4aba5dd8227e45385, type: 3}
@@ -3633,7 +3636,7 @@ MonoBehaviour:
       amount: 60
       spawnDuration: 60
       minAlive: 15
-      spawnDelay: 0.3
+      spawnDelay: 0.2
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3641,13 +3644,13 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
       amount: 10
       spawnDuration: 60
-      minAlive: 0
-      spawnDelay: 0
+      minAlive: 4
+      spawnDelay: 0.25
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 140
   - waveName: Wave 8
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
@@ -3669,7 +3672,7 @@ MonoBehaviour:
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 100
   - waveName: Wave 9
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
@@ -3677,7 +3680,7 @@ MonoBehaviour:
       amount: 20
       spawnDuration: 2
       minAlive: 15
-      spawnDelay: 0.75
+      spawnDelay: 0.25
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3686,7 +3689,7 @@ MonoBehaviour:
       amount: 60
       spawnDuration: 60
       minAlive: 15
-      spawnDelay: 0.4
+      spawnDelay: 0.3
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3700,7 +3703,7 @@ MonoBehaviour:
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 0
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 125
   - waveName: Wave 10
     enemies:
     - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
@@ -3716,7 +3719,7 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
       amount: 120
       spawnDuration: 60
-      minAlive: 35
+      minAlive: 40
       spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0
@@ -3725,8 +3728,8 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
       amount: 60
       spawnDuration: 60
-      minAlive: 5
-      spawnDelay: 0.1
+      minAlive: 10
+      spawnDelay: 0.2
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -3736,11 +3739,11 @@ MonoBehaviour:
       spawnDuration: 1
       minAlive: 0
       spawnDelay: 0
-      isBoss: 0
+      isBoss: 1
       currentAlive: 0
       spawnTimer: 0
     isBossWave: 1
-    maxEnemiesOnScreen: 30
+    maxEnemiesOnScreen: 150
   player: {fileID: 393413090}
   minSpawnDistance: 10
   spawnInterval: 1
@@ -3755,12 +3758,48 @@ MonoBehaviour:
   lastStandNotification: {fileID: 210193140}
   notificationDuration: 3
   finalStandEnemies:
-  - enemyPrefab: {fileID: 0}
-    statsPreset: {fileID: 0}
+  - enemyPrefab: {fileID: 4061204989553054452, guid: 82d2f16fef389554799dad3546554208, type: 3}
+    statsPreset: {fileID: 11400000, guid: b105efb8b9f2cff4f98f28e0f651a926, type: 2}
     amount: 0
     spawnDuration: 0
+    minAlive: 50
+    spawnDelay: 0.1
+    isBoss: 0
+    currentAlive: 0
+    spawnTimer: 0
+  - enemyPrefab: {fileID: 4061204989553054452, guid: 43a5c025de854804094d3ef0ca17a022, type: 3}
+    statsPreset: {fileID: 11400000, guid: df6ada4e81c76e644a2fd0194167edd0, type: 2}
+    amount: 0
+    spawnDuration: 0
+    minAlive: 30
+    spawnDelay: 0.1
+    isBoss: 0
+    currentAlive: 0
+    spawnTimer: 0
+  - enemyPrefab: {fileID: 4061204989553054452, guid: 3468d97b254aab247965309bfdc32ce0, type: 3}
+    statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
+    amount: 0
+    spawnDuration: 0
+    minAlive: 25
+    spawnDelay: 0.1
+    isBoss: 0
+    currentAlive: 0
+    spawnTimer: 0
+  - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
+    statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
+    amount: 35
+    spawnDuration: 0.1
     minAlive: 0
     spawnDelay: 0
+    isBoss: 0
+    currentAlive: 0
+    spawnTimer: 0
+  - enemyPrefab: {fileID: 4061204989553054452, guid: 91b7604141df08649b83343a083c32a8, type: 3}
+    statsPreset: {fileID: 11400000, guid: 3d8fdb1e4e9649748bde2cf6c1e8db64, type: 2}
+    amount: 0
+    spawnDuration: 0
+    minAlive: 20
+    spawnDelay: 0.1
     isBoss: 0
     currentAlive: 0
     spawnTimer: 0
@@ -5011,6 +5050,10 @@ PrefabInstance:
     - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_Center.x
       value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 959
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5371764836284145618, guid: 18b479100e8786c449778e9920a26faa, type: 3}
