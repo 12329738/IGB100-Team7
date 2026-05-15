@@ -23,16 +23,17 @@ MonoBehaviour:
   direction: 0
   hitInterval: 1
   isPiercing: 0
-  trackEnemy: 1
+  trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 1
-  behaviour: {fileID: 11400000, guid: f2596b263d79e22478894ac1e429d7ba, type: 2}
+  behaviour: {fileID: 11400000, guid: 3f723b73d1f5c4046ace0809ad5f80b1, type: 2}
   pattern: {fileID: 0}
   _statPreset: {fileID: 11400000, guid: 7d473d8701dd45843ad8725aed12caa5, type: 2}
   definition: {fileID: 11400000, guid: 2be0d98db5c05ae47a427ec8aadbdba2, type: 2}
