@@ -39,6 +39,8 @@ public class SpawnManager : MonoBehaviour
     public float padding = 2f;
     public GameObject experienceGem;
     public GameObject chest;
+    public GameObject healthPickup;
+    public GameObject magnetPickup;
 
     [Header("Minimum Spawn Control")]
     public float minSpawnInterval = 1f;
@@ -399,5 +401,39 @@ public class SpawnManager : MonoBehaviour
     public void SpawnChest(Vector3 position)
     {
         GameObject obj = ObjectPool.instance.GetObject(chest);
+
+        if (obj == null)
+            return;
+
+        obj.transform.position = position;
+        obj.transform.rotation = Quaternion.identity;
+
+        obj.SetActive(true);
+    }
+
+    public void SpawnHealthPickup(Vector3 position)
+    {
+        GameObject obj = ObjectPool.instance.GetObject(healthPickup);
+
+        if (obj == null)
+            return;
+
+        obj.transform.position = position;
+        obj.transform.rotation = Quaternion.identity;
+
+        obj.SetActive(true);
+    }
+
+    public void SpawnMagnetPickup(Vector3 position)
+    {
+        GameObject obj = ObjectPool.instance.GetObject(magnetPickup);
+
+        if (obj == null)
+            return;
+
+        obj.transform.position = position;
+        obj.transform.rotation = Quaternion.identity;
+
+        obj.SetActive(true);
     }
 }
