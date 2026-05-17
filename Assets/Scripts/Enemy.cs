@@ -140,7 +140,8 @@ public class Enemy : Entity, IDamageable
     internal override void Die()
     {
         OnDeathCallback?.Invoke();
-
+        if (deathSound != null)
+            AudioManager.instance.PlaySound(deathSound, transform.position);
         SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
         if (dropsChest)
             SpawnerManager.instance.SpawnChest(transform.position);

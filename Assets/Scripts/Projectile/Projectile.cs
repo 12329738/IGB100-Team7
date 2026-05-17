@@ -20,6 +20,10 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     [HideInInspector]
     public Transform visual;
 
+    public AudioClip expireSoundEffect;
+
+
+
     private EffectContext context = new();
     private List<CombatIntent> intents = new();
     private Team ownerTeam;
@@ -160,6 +164,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     public void Deactivate()
     {
+        if (expireSoundEffect != null)
+            AudioManager.instance.PlaySound(expireSoundEffect, transform.position);
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnExpire };

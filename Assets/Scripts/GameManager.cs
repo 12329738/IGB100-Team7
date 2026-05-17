@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     public float healthPickupDropRate = 5f;
     public float magnetPickupDropRate = 1f;
     private int pauseRequests = 0;
+    public float maxZ;
+    public float minZ;
+
 
 
     [HideInInspector]

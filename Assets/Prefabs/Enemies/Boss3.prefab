@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBeDamaged: 1
   flashScript: {fileID: -4230732711338121662}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 778dc4d788d7a4e45adce1274de35581, type: 3}
   status: {fileID: 0}
   effects: []
   _statPreset: {fileID: 11400000, guid: 584efd0ebbea9094f92403f55e26f44e, type: 2}
