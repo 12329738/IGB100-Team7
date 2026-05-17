@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     private readonly ModifierProvider provider = new ModifierProvider();
     public float elapsed;
 
-    public void Update()
+    void Update()
     {
         elapsed += Time.deltaTime;
 
@@ -67,6 +67,17 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
         CheckTargets();
     }
+
+    private void LateUpdate()
+    {
+        foreach (var kv in targets.Values.ToArray())
+        {
+            var t = kv;
+            if (!t.gameObject.activeSelf)
+                targets.Remove(t.gameObject);
+        }
+    }
+
     public event Action OnDirty
     {
         add => provider.OnDirty += value;

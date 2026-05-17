@@ -35,7 +35,7 @@ public class SpawnProjectileConfig : EffectOperation
         if (spawnAtSource)
             targetLocation = ctx.damageSource;
         Vector3 position = Vector3.forward;
-        if (targetLocation is Component comp)
+        if (targetLocation is Component comp && targetLocation != null)
             position = comp.gameObject.transform.position;
         playerWeapon.SpawnProjectiles(ctx, position);
         
