@@ -64,6 +64,8 @@ MonoBehaviour:
   flashDuration: 0.05
   healthPickupDropRate: 0.2
   magnetPickupDropRate: 0.1
+  maxZ: 15
+  minZ: -15
   rarities: []
   experienceCurve:
     serializedVersion: 2

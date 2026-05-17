@@ -5,7 +5,6 @@ public class BackgroundManager : MonoBehaviour
     public Transform[] tiles;
     private float tileSize;
     Vector3[] originalPositions;
-
     public Transform player => GameManager.instance.player.transform;
 
     void Awake()
