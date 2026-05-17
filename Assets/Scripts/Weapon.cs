@@ -28,6 +28,7 @@ public class Weapon : Item, IModifierReceiver
     public ItemUpgrade baseUpgrade;
     [HideInInspector]
     public Entity owner;
+    public AudioClip spawnSoundEffect;
     
 
 
@@ -122,6 +123,8 @@ public class Weapon : Item, IModifierReceiver
         if (count < 1)
             count = 1;
         GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+        if (spawnSoundEffect != null)
+            AudioManager.instance.PlaySound(spawnSoundEffect, owner.transform.position);
 
     }
 
@@ -139,7 +142,8 @@ public class Weapon : Item, IModifierReceiver
         {
             GameManager.instance.projectileSpawner.CreateProjectile(data, count, position);
         }
-        
+        AudioManager.instance.PlaySound(spawnSoundEffect, position);
+
 
     }
 

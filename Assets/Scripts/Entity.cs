@@ -13,7 +13,8 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
 
     internal Vector3 knockbackDirection;
     internal float knockbackRemaining;
-
+    public AudioClip damageSound;
+    public AudioClip deathSound;
     [HideInInspector]
     public Combat combat {  get; private set; }
     [HideInInspector]
@@ -116,13 +117,16 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
             flashScript.TriggerFlash();
         }
 
+        if (damageSound != null)
+            AudioManager.instance.PlaySound(damageSound, transform.position);
+
         if (currentHealth <= 0)
         {
             canBeDamaged = false;
             Die();
         }
     }
-
+        
     internal abstract void Die();
 
 

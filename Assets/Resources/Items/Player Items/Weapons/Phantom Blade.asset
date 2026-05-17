@@ -32,9 +32,11 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  spawnSoundEffect: {fileID: 8300000, guid: c37bea11f942884488c20eed70d2fffa, type: 3}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0

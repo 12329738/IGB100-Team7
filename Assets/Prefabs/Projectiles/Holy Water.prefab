@@ -133,3 +133,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
+  expireSoundEffect: {fileID: 8300000, guid: c7cf90bb00bdc27418fbbc8f81adf688, type: 3}
+  elapsed: 0
