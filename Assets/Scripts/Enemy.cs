@@ -16,7 +16,7 @@ public class Enemy : Entity, IDamageable
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
     public bool dropsChest;
-    public Image healthBar;
+
     public bool isBoss;
     private bool isTouchingPlayer;
     void Start()
@@ -131,11 +131,7 @@ public class Enemy : Entity, IDamageable
 
         combat.DealDamage(intent);
     }
-    private void UpdateHealthBar()
-    {
-        if (healthBar != null)
-            healthBar.fillAmount = GetCurrentHealthPercent();
-    }
+   
 
     internal override void Die()
     {

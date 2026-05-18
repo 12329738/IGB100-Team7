@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static UnityEngine.EventSystems.EventTrigger;
 
 
@@ -35,9 +36,10 @@ public class GameManager : MonoBehaviour
     public float healthPickupDropRate = 5f;
     public float magnetPickupDropRate = 1f;
     private int pauseRequests = 0;
+    [FormerlySerializedAs("maxZ")] public float maxCameraZ;
+    [FormerlySerializedAs("minZ")] public float minCameraZ;
     public float maxZ;
     public float minZ;
-
 
 
     [HideInInspector]

@@ -14,6 +14,10 @@ public class CameraController : MonoBehaviour
         if (player != null)
         {
             transform.position = player.transform.position + offset;
+            Vector3 pos = transform.position;
+
+            pos.z = Mathf.Clamp(pos.z, GameManager.instance.minCameraZ, GameManager.instance.maxCameraZ);
+            transform.position = pos;
         }
     }
 }
