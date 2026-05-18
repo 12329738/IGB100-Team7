@@ -2561,7 +2561,7 @@ MonoBehaviour:
   textSize: 50
   damageCanvas: {fileID: 1966916003}
   cameraForward: {x: 0, y: 0, z: 0}
-  maxPopupInstances: 200
+  maxPopupInstances: 300
 --- !u!4 &1340636558
 Transform:
   m_ObjectHideFlags: 0
