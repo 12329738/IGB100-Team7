@@ -211,7 +211,13 @@ public class Player : Entity, IDamageable
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-            transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+        
+        
+        transform.position += movement * stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+        Vector3 pos = transform.position;
+
+        pos.z = Mathf.Clamp(pos.z, GameManager.instance.minZ, GameManager.instance.maxZ);
+        transform.position = pos;
     }
 
     private IEnumerator LevelUp()

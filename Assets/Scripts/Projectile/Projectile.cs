@@ -20,6 +20,10 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     [HideInInspector]
     public Transform visual;
 
+    public AudioClip expireSoundEffect;
+
+
+
     private EffectContext context = new();
     private List<CombatIntent> intents = new();
     private Team ownerTeam;
@@ -45,7 +49,7 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
     private readonly ModifierProvider provider = new ModifierProvider();
     public float elapsed;
 
-    public void Update()
+    void Update()
     {
         elapsed += Time.deltaTime;
 
@@ -63,6 +67,17 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
         CheckTargets();
     }
+
+    private void LateUpdate()
+    {
+        foreach (var kv in targets.Values.ToArray())
+        {
+            var t = kv;
+            if (!t.gameObject.activeSelf)
+                targets.Remove(t.gameObject);
+        }
+    }
+
     public event Action OnDirty
     {
         add => provider.OnDirty += value;
@@ -160,6 +175,8 @@ public class Projectile : MonoBehaviour, IModifierProvider, IDamageSource
 
     public void Deactivate()
     {
+        if (expireSoundEffect != null)
+            AudioManager.instance.PlaySound(expireSoundEffect, transform.position);
         foreach (EffectEntryNode node in data.effects)
         {
             EffectContext context = new EffectContext { damageSource = this, trigger = CombatEvent.OnExpire };
