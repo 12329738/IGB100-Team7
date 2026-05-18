@@ -387,7 +387,9 @@ public class Player : Entity, IDamageable
 
     internal override void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        canBeDamaged = false;
+
+        Menus.instance.OpenDeathScreen();
     }
 
     internal void Transform()

@@ -142,16 +142,16 @@ public class Enemy : Entity, IDamageable
         OnDeathCallback?.Invoke();
         if (deathSound != null)
             AudioManager.instance.PlaySound(deathSound, transform.position);
-        SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
+        SpawnManager.instance.SpawnExperienceGem(transform.position, expAmount);
         if (dropsChest)
-            SpawnerManager.instance.SpawnChest(transform.position);
+            SpawnManager.instance.SpawnChest(transform.position);
         float random = UnityEngine.Random.Range(0, 100);
         if (random <= GameManager.instance.healthPickupDropRate)
-            SpawnerManager.instance.SpawnHealthPickup(transform.position);
+            SpawnManager.instance.SpawnHealthPickup(transform.position);
 
         random = UnityEngine.Random.Range(0, 100);
         if (random <= GameManager.instance.magnetPickupDropRate)
-            SpawnerManager.instance.SpawnMagnetPickup(transform.position);
+            SpawnManager.instance.SpawnMagnetPickup(transform.position);
 
         SpawnManager.instance.UnregisterEnemy(isBoss);
 
