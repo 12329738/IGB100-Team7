@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 
@@ -39,7 +40,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     {
         get => healthNormalized * stats.GetStat(StatType.MaxHealth);
     }
-
+    public Image healthBar;
     private float healthNormalized = 1f;
 
     [HideInInspector]
@@ -129,7 +130,11 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
         
     internal abstract void Die();
 
-
+    internal void UpdateHealthBar()
+    {
+        if (healthBar != null)
+            healthBar.fillAmount = GetCurrentHealthPercent();
+    }
 
     public float GetCurrentHealthPercent()
     {

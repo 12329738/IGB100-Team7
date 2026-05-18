@@ -92,6 +92,7 @@ public class Player : Entity, IDamageable
         CheckMovement();
         UpdateWeapons();
         UpdateTransformationAmount();
+        UpdateHealthBar();
     }
 
     private void UpdateTransformationAmount()
@@ -322,7 +323,8 @@ public class Player : Entity, IDamageable
             avaliableTransformationUpgrades.Remove(transformationUpgrade);
 
         }
-        
+        pickupCollider.radius = stats.GetStat(StatType.Collection);
+
     }
 
 
@@ -380,7 +382,9 @@ public class Player : Entity, IDamageable
 
     internal override void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        canBeDamaged = false;
+
+        Menus.instance.OpenDeathScreen();
     }
 
     internal void Transform()

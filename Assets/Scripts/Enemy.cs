@@ -16,7 +16,7 @@ public class Enemy : Entity, IDamageable
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
     public bool dropsChest;
-    public Image healthBar;
+
     public bool isBoss;
     private bool isTouchingPlayer;
     void Start()
@@ -131,27 +131,23 @@ public class Enemy : Entity, IDamageable
 
         combat.DealDamage(intent);
     }
-    private void UpdateHealthBar()
-    {
-        if (healthBar != null)
-            healthBar.fillAmount = GetCurrentHealthPercent();
-    }
+   
 
     internal override void Die()
     {
         OnDeathCallback?.Invoke();
         if (deathSound != null)
             AudioManager.instance.PlaySound(deathSound, transform.position);
-        SpawnerManager.instance.SpawnExperienceGem(transform.position, expAmount);
+        SpawnManager.instance.SpawnExperienceGem(transform.position, expAmount);
         if (dropsChest)
-            SpawnerManager.instance.SpawnChest(transform.position);
+            SpawnManager.instance.SpawnChest(transform.position);
         float random = UnityEngine.Random.Range(0, 100);
         if (random <= GameManager.instance.healthPickupDropRate)
-            SpawnerManager.instance.SpawnHealthPickup(transform.position);
+            SpawnManager.instance.SpawnHealthPickup(transform.position);
 
         random = UnityEngine.Random.Range(0, 100);
         if (random <= GameManager.instance.magnetPickupDropRate)
-            SpawnerManager.instance.SpawnMagnetPickup(transform.position);
+            SpawnManager.instance.SpawnMagnetPickup(transform.position);
 
         SpawnManager.instance.UnregisterEnemy(isBoss);
 
