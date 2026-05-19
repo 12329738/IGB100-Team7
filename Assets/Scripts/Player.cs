@@ -69,7 +69,7 @@ public class Player : Entity, IDamageable
         avaliableTransformationUpgrades.AddRange(transformation.upgrades);
 
 
-        pickupCollider.radius = stats.GetStat(StatType.Collection);
+        pickupCollider.radius = stats.GetStat(StatType.PickupRange);
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
 
@@ -330,7 +330,7 @@ public class Player : Entity, IDamageable
             avaliableTransformationUpgrades.Remove(transformationUpgrade);
 
         }
-        pickupCollider.radius = stats.GetStat(StatType.Collection);
+        pickupCollider.radius = stats.GetStat(StatType.PickupRange);
 
     }
 
