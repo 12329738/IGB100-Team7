@@ -129,7 +129,7 @@ public class Menus : MonoBehaviour
     {
         pauseMenu.SetActive(true);
 
-        Time.timeScale = 0f;
+        GameManager.instance.PauseGame();
 
         isPaused = true;
     }
@@ -141,7 +141,7 @@ public class Menus : MonoBehaviour
         helpMenu.SetActive(false);
         optionsMenu.SetActive(false);
 
-        Time.timeScale = 1f;
+        GameManager.instance.ResumeGame();
 
         isPaused = false;
     }
