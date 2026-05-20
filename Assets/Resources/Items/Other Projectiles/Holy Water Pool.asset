@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 17
+  _itemType: 18
   _name: 
   _description: 
   icon: {fileID: 0}
@@ -26,9 +26,11 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  spawnSoundEffect: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798420b53c508e640ad4bf5ae6a1342b, type: 3}
+  m_Name: Yang Stance
+  m_EditorClassIdentifier: 
+  name: Yang Stance
+  description: 
+  duration: 10000
+  maxStacks: 1
+  definition: {fileID: 11400000, guid: 2d950bf42f0670e4ea155bc253d9ea20, type: 2}
+  modifiers:
+  - stat: 2
+    amount: 40
+    type: 1
+    appliedTo: {fileID: 11400000, guid: 6f935a94315c2b944875cbbe73b34be5, type: 2}
+    duration: 0
+  - stat: 5
+    amount: 20
+    type: 0
+    appliedTo: {fileID: 11400000, guid: 6f935a94315c2b944875cbbe73b34be5, type: 2}
+    duration: 0
+  - stat: 14
+    amount: 0.3
+    type: 0
+    appliedTo: {fileID: 11400000, guid: 57d57d564818f9e408227d892a51cc75, type: 2}
+    duration: 0
+  - stat: 2
+    amount: 50
+    type: 1
+    appliedTo: {fileID: 11400000, guid: b6099dd77b7d94d439f122ebf83109eb, type: 2}
+    duration: 0
+  hasTick: 0
+  tickInterval: 0
+  entries: []
+  references:
+    version: 2
+    RefIds: []

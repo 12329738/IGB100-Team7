@@ -37,6 +37,8 @@ public enum ItemList
     MonstrousStamina,
     [Description("Recharger")]
     Recharger,
+    [Description("Dragon Claw")]
+    DragonClaw,
     None
 }
 
