@@ -197,9 +197,9 @@ public class Player : Entity, IDamageable
 
         if (Input.GetKeyDown("r"))
         {
-            if (!isTransformed)
+            if (!isTransformed && currentTransformationAmount >= stats.GetStat(StatType.MaxEnergy))
             Transform();
-            else
+            else if (isTransformed)
             {
                 StopTransformation();
             }
