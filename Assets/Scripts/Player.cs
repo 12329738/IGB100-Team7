@@ -62,7 +62,7 @@ public class Player : Entity, IDamageable
         avaliableTransformationUpgrades.AddRange(transformation.upgrades);
 
 
-        pickupCollider.radius = stats.GetStat(StatType.Collection);
+        pickupCollider.radius = stats.GetStat(StatType.PickupRange);
         transformationCoroutine = StartCoroutine(TransformationCoroutine());
     }
 
@@ -190,9 +190,9 @@ public class Player : Entity, IDamageable
 
         if (Input.GetKeyDown("r"))
         {
-            if (!isTransformed)
+            if (!isTransformed && currentTransformationAmount >= stats.GetStat(StatType.MaxEnergy))
             Transform();
-            else
+            else if (isTransformed)
             {
                 StopTransformation();
             }
@@ -323,7 +323,7 @@ public class Player : Entity, IDamageable
             avaliableTransformationUpgrades.Remove(transformationUpgrade);
 
         }
-        pickupCollider.radius = stats.GetStat(StatType.Collection);
+        pickupCollider.radius = stats.GetStat(StatType.PickupRange);
 
     }
 

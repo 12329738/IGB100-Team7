@@ -12,7 +12,7 @@ public enum StatType
     Duration,
     ProjectileCount,
     AttackSpeed,
-    Collection,
+    PickupRange,
     MaxEnergy,
     EnergyRegeneration,
     TransformationDecayRate,
