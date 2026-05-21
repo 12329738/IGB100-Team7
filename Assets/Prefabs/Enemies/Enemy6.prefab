@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2026023726, guid: c61481d4d8a7cf645ad24e72aa5337c6, type: 3}
+  m_Sprite: {fileID: 78469097, guid: f4f9b161d883b284b9636199a554d96b, type: 3}
   m_Color: {r: 0.5999999, g: 0.5999999, b: 0.5999999, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,15 +168,15 @@ MonoBehaviour:
   effects: []
   _statPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
   _team: 1
+  healthBar: {fileID: 0}
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
-  _hitInterval: 1
+  _hitInterval: 0.75
   expAmount: 175
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 0
-  healthBar: {fileID: 0}
   isBoss: 0
   references:
     version: 2
