@@ -16,8 +16,8 @@ MonoBehaviour:
   - statType: 0
     value: 4000
   - statType: 1
-    value: 3
+    value: 3.5
   - statType: 2
     value: 15
   - statType: 14
-    value: 1
+    value: 0.7
