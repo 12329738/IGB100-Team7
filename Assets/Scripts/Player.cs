@@ -216,8 +216,8 @@ public class Player : Entity, IDamageable
             isFlipped = false;
         }
             
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //    Application.Quit();
 
         
         
