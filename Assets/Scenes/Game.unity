@@ -12072,7 +12072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9017549256829329164, guid: 18b479100e8786c449778e9920a26faa, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 959
+      value: 1983
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5371764836284145618, guid: 18b479100e8786c449778e9920a26faa, type: 3}

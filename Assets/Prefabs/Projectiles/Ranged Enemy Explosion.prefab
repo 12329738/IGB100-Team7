@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9203041729188038609}
   - component: {fileID: 2092218758831271722}
   - component: {fileID: 671091078008035379}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6217416225050200239}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4878,7 +4878,7 @@ GameObject:
   - component: {fileID: 2244889084367336891}
   - component: {fileID: -5353538149138135379}
   - component: {fileID: 3202411845240058434}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Ranged Enemy Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4914,6 +4914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
+  expireSoundEffect: {fileID: 0}
   elapsed: 0
 --- !u!135 &2244889084367336891
 SphereCollider:
@@ -4934,7 +4935,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 2.11
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-5353538149138135379
 Rigidbody:
