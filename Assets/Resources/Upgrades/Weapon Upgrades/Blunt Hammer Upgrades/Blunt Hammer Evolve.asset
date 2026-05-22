@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Evolution
   description: Evolves. Knocked back enemies deal damage to other enemies they pass
-    through.
+    through
   effects: []
   modifiers:
   - stat: 3

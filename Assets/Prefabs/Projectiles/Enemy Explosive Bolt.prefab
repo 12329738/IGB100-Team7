@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8071236033994822163}
   - component: {fileID: 5028007883852948830}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8468003853796296888}
   - component: {fileID: 3666057331242603457}
   - component: {fileID: -7130437824042739702}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Enemy Explosive Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
+  expireSoundEffect: {fileID: 0}
   elapsed: 0
 --- !u!65 &8468003853796296888
 BoxCollider:

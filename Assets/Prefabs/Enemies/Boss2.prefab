@@ -59,15 +59,15 @@ MonoBehaviour:
   effects: []
   _statPreset: {fileID: 11400000, guid: ab4010e5455eefd44b3ab73a0bc27607, type: 2}
   _team: 1
+  healthBar: {fileID: 3528641350895661857}
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
-  _hitInterval: 1
+  _hitInterval: 0.5
   expAmount: 1000
   weaponData: {fileID: 0}
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 1
-  healthBar: {fileID: 3528641350895661857}
   isBoss: 0
   references:
     version: 2

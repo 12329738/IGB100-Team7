@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Vampire Upgrade 3
   m_EditorClassIdentifier: 
   name: Blood Ritual
-  description: Increases bleed damage by 25% each second you spend transformed. Resets
-    upon de-transforming. Also quickly spawns Burning Blood while transformed
+  description: While transformed, increase bleeding damage by 25% each second and
+    rapidly spawn small blood droplets that burn enemies
   effects:
   - hasTick: 0
     tickInterval: 0

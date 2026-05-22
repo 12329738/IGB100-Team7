@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 1
   _upgrades: []
-  _itemType: 1
+  _itemType: 17
   _name: Bolt Shot
   _description: Shoots 3 arrows in a cone towards the nearest enemy that knocback
     on hit.
@@ -27,9 +27,11 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 1
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  spawnSoundEffect: {fileID: 0}
   isHit: 0
   stickToPlayer: 0
   randomDirection: 0

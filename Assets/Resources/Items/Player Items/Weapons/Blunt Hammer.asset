@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c1a32bf1d9942e4687a4f941853bbef, type: 2}
   _itemType: 3
   _name: Blunt Hammer
-  _description: Hit enemies around you in a circle and knock them back.
+  _description: Hit enemies around you in a circle and knock them back
   icon: {fileID: 21300000, guid: 7ba0ab9883f4652439ff985be5b3eafa, type: 3}
   baseStats: {fileID: 11400000, guid: 913f71044ad0a444290abada125510ac, type: 2}
   prefab: {fileID: 999691352028456364, guid: b5c84459c25f7b64bade0c22e6438b07, type: 3}
@@ -31,9 +31,11 @@ MonoBehaviour:
   trackEnemy: 0
   aimAtEnemy: 0
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  spawnSoundEffect: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0

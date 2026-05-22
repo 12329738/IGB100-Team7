@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Boltshot Evolve
   m_EditorClassIdentifier: 
   name: Evolution
-  description: Evolves and becomes piercing. Bolts return to the player, dealing
-    damage on the return
+  description: Evolves, making bolts pierce enemies and return to the player when
+    reaching their max range, damaging enemies on the way
   effects: []
   modifiers:
   - stat: 5
