@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64485ebf6d8ab02418ec802fad030b7a, type: 2}
   _itemType: 12
   _name: Hunting Rifle
-  _description: Shoots 5 bullets each at a different target nearby.
+  _description: Shoots 3 bullets each at a different target nearby
   icon: {fileID: 21300000, guid: 8bf160104fac8774397d025f14cb4910, type: 3}
   baseStats: {fileID: 11400000, guid: 25ebf3562b0e99147bb671dc0f77ff94, type: 2}
   prefab: {fileID: 999691352028456364, guid: e185f3531a4be3d4aa1280894cbaf651, type: 3}
@@ -31,9 +31,11 @@ MonoBehaviour:
   trackEnemy: 1
   aimAtEnemy: 0
   spawnOnTarget: 0
+  isDamageOverTime: 0
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
+  spawnSoundEffect: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0

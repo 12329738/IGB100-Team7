@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Vampire Upgrade 1
   m_EditorClassIdentifier: 
   name: Blood Sucking
-  description: You heal 1 health per second per bleeding enemy (max 40 health per
-    second) while transformed.
+  description: You heal 1 health per second per bleeding enemy while transformed
   effects:
   - hasTick: 1
     tickInterval: 1
@@ -53,5 +52,6 @@ MonoBehaviour:
         valuePerStack: 1
         effects:
         - {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
+        countIndividualStacks: 0
         modifierType: 0
         _effectToModify: 4
