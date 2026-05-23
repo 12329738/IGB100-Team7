@@ -9004,10 +9004,10 @@ MonoBehaviour:
       spawnTimer: 0
     - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
       statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
-      amount: 10
+      amount: 20
       spawnDuration: 60
-      minAlive: 4
-      spawnDelay: 0.25
+      minAlive: 6
+      spawnDelay: 0.15
       isBoss: 0
       currentAlive: 0
       spawnTimer: 0
@@ -9019,7 +9019,7 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
       amount: 45
       spawnDuration: 60
-      minAlive: 10
+      minAlive: 15
       spawnDelay: 0.3
       isBoss: 0
       currentAlive: 0
@@ -9028,7 +9028,7 @@ MonoBehaviour:
       statsPreset: {fileID: 11400000, guid: a74e200194c0f144185e6b3a8dbcd17a, type: 2}
       amount: 100
       spawnDuration: 60
-      minAlive: 25
+      minAlive: 30
       spawnDelay: 0.1
       isBoss: 0
       currentAlive: 0

@@ -20,9 +20,9 @@ MonoBehaviour:
   - statType: 9
     value: 0.3
   - statType: 4
-    value: 6
+    value: 5
   - statType: 7
-    value: 1
+    value: 1.3
   - statType: 8
     value: 1
   - statType: 3
