@@ -285,6 +285,24 @@ public class Player : Entity, IDamageable
 
     public void AddUpgrade(Upgrade upgrade)
     {
+        if (upgrade.name == "Health Potion")
+        {
+            EffectContext ctx = new EffectContext
+            {
+                damageSource = this,
+                target = this,
+                trigger = CombatEvent.OnEffectGained
+            };
+            List<CombatIntent> intents = new(); 
+            foreach (EffectEntryNode effect in upgrade.effects)
+            {
+                effect.Execute(ctx, intents);
+            }
+
+            GameManager.instance.effectExecutor.Execute(intents);
+            return;
+        }
+
         if (upgrade is ItemUpgrade itemUpgrade)
         {
             Item item = TryGetItem(itemUpgrade.itemType);

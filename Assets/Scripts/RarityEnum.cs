@@ -7,7 +7,8 @@ public enum RarityEnum
     Rare,
     Epic,
     Legendary,
-    Transformation
+    Transformation,
+    None
        
   
 }

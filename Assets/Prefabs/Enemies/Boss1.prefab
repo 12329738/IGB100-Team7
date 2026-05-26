@@ -69,6 +69,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 1
+  sr: {fileID: 2769504492149505867}
   isBoss: 0
   references:
     version: 2
@@ -399,6 +400,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5789fdd104b713c4f929425e70d7572d, type: 3}
+--- !u!212 &2769504492149505867 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8133178734733009187, guid: 5789fdd104b713c4f929425e70d7572d, type: 3}
+  m_PrefabInstance: {fileID: 6246944987258216040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2769504493902344801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8133178734322347017, guid: 5789fdd104b713c4f929425e70d7572d, type: 3}

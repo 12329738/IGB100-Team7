@@ -11,6 +11,12 @@ public class MoveTowardPlayer : EnemyBehaviour
 
             Vector3 dir = player.transform.position - enemy.transform.position;
             enemy.transform.position += dir.normalized * enemy.stats.GetStat(StatType.MoveSpeed) * Time.deltaTime;
+            if (dir.normalized.x > 0)
+                enemy.transform.rotation = new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y, 180, enemy.transform.rotation.w);
+            else
+            {
+                enemy.transform.rotation = new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y, 0, enemy.transform.rotation.w);
+            }
         }
     }
 }

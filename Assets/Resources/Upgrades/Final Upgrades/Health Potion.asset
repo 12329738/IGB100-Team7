@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360a3566f19531d46b88678ff78e141f, type: 3}
+  m_Name: Health Potion
+  m_EditorClassIdentifier: 
+  name: Health Potion
+  description: Heals you for 50 health
+  effects:
+  - hasTick: 0
+    tickInterval: 0
+    conditions:
+    - triggerEvent: 14
+      useComparison: 0
+      comparisonType: 0
+      value: 0
+    effectData:
+    - rid: 1647347186528157769
+  modifiers: []
+  rarity: 0
+  itemType: 17
+  levelsAvaliable: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 1647347186528157769
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 4
+        effectOperation:
+          rid: 1647347186528157771
+    - rid: 1647347186528157771
+      type: {class: HealConfig, ns: , asm: Assembly-CSharp}
+      data:
+        amount: 50

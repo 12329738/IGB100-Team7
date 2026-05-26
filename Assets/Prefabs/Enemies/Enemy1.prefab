@@ -58,6 +58,7 @@ MonoBehaviour:
   effects: []
   _statPreset: {fileID: 11400000, guid: fd1e47fa87d076043abdd6ad695199cb, type: 2}
   _team: 1
+  healthBar: {fileID: 0}
   _owner: {fileID: 0}
   _definition: {fileID: 11400000, guid: aa7bd0574d2d75d42bdf65abd9bce580, type: 2}
   _hitInterval: 1
@@ -66,7 +67,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 0
-  healthBar: {fileID: 0}
+  sr: {fileID: 1105503735069629588}
   isBoss: 0
   references:
     version: 2
@@ -232,5 +233,10 @@ PrefabInstance:
 --- !u!4 &1105503735056389012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7464608448650086266, guid: 9f38cf9e63e10334a940839f33aaecc1, type: 3}
+  m_PrefabInstance: {fileID: 7548055101144585454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1105503735069629588 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7464608448672237690, guid: 9f38cf9e63e10334a940839f33aaecc1, type: 3}
   m_PrefabInstance: {fileID: 7548055101144585454}
   m_PrefabAsset: {fileID: 0}

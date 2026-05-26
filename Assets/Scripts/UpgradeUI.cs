@@ -31,6 +31,17 @@ public class UpgradeUI : MonoBehaviour
         StringBuilder sb = new StringBuilder();
 
         ItemUpgrade itemUpgrade = null;
+        if (upgrade.name == "Health Potion")
+        {
+            sb.AppendLine(upgrade.name);
+            sb.AppendLine(upgrade.description);
+            string txt = sb.ToString();
+
+            uiText.text = txt;
+            return;
+
+        }
+
         if (upgrade is ItemUpgrade u)
         {
             itemUpgrade = u;

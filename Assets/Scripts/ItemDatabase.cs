@@ -12,6 +12,7 @@ using System.ComponentModel;
 public class ItemDatabase : MonoBehaviour
 {
     public List<Item> itemDatabase;
+    private Upgrade healPlayerUpgrade;
 
     public Dictionary<ItemList, Item> itemDictionary;
 
@@ -28,6 +29,9 @@ public class ItemDatabase : MonoBehaviour
     {
         Item[] items = Resources.LoadAll<Item>("Items/Player Items");
         itemDatabase = new List<Item>(items);
+        ItemUpgrade[] upgrades = Resources.LoadAll<ItemUpgrade>("Upgrades/Final Upgrades");
+        healPlayerUpgrade = upgrades[0];
+        healPlayerUpgrade.rarity = RarityEnum.Common;
     }
 
     public void CreateDictionary()
@@ -121,6 +125,12 @@ public class ItemDatabase : MonoBehaviour
             pool.RemoveAt(index); 
         }
 
+        if (chosenUpgrades.Count == 0)
+        {
+
+            chosenUpgrades.Add(healPlayerUpgrade);
+        }
+            
         return chosenUpgrades;
     }
 

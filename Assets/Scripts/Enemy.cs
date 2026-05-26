@@ -16,7 +16,6 @@ public class Enemy : Entity, IDamageable
     public EnemyBehaviour behaviour;
     public Action OnDeathCallback;
     public bool dropsChest;
-
     public bool isBoss;
     private bool isTouchingPlayer;
     void Start()
