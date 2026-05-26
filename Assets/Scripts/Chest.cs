@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
@@ -8,6 +9,7 @@ public class Chest : Pickup
 {
     public int minUpgrades;
     public int maxUpgrades;
+    public Image enemy;
     internal override void PickUp()
     {
         StartCoroutine(OpenChest());

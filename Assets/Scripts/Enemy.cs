@@ -18,6 +18,7 @@ public class Enemy : Entity, IDamageable
     public bool dropsChest;
     public bool isBoss;
     private bool isTouchingPlayer;
+    public Image sprite;
     void Start()
     {
         playerDamageSource = player.GetComponent<IDamageSource>();
@@ -139,7 +140,7 @@ public class Enemy : Entity, IDamageable
             AudioManager.instance.PlaySound(deathSound, transform.position);
         SpawnManager.instance.SpawnExperienceGem(transform.position, expAmount);
         if (dropsChest)
-            SpawnManager.instance.SpawnChest(transform.position);
+            SpawnManager.instance.SpawnChest(transform.position, sprite);
         float random = UnityEngine.Random.Range(0, 100);
         if (random <= GameManager.instance.healthPickupDropRate)
             SpawnManager.instance.SpawnHealthPickup(transform.position);
@@ -167,6 +168,7 @@ public class Enemy : Entity, IDamageable
 
     void OnEnable()
     {
+        base.OnEnable();
         if (weaponData != null)
         {
             weapon = Instantiate(weaponData);

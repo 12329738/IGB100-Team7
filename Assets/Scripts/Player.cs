@@ -31,7 +31,7 @@ public class Player : Entity, IDamageable
     public float currentTransformationAmount;
     bool isTransformed = false;
     Coroutine transformationCoroutine;
-
+    public GameObject fullTransformationEffect;
     public Sprite regularSprite;
     public AnimatorController animatorController;
     public SpriteRenderer sr;
@@ -108,6 +108,11 @@ public class Player : Entity, IDamageable
         {
             transformationCoroutine = StartCoroutine(TransformationCoroutine());
         }
+        if (currentTransformationAmount < stats.GetStat(StatType.MaxEnergy))
+            fullTransformationEffect.SetActive(false);
+        else
+            fullTransformationEffect.SetActive(true);
+        
     }
 
     private IEnumerator TransformationCoroutine()

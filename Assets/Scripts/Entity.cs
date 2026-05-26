@@ -71,6 +71,7 @@ public abstract class Entity : MonoBehaviour, IModifierProvider, IModifierReceiv
     {
         guid = Guid.NewGuid();
         OnSpawned();
+        status.ResetStatusEffects();
     }
 
     public event Action OnDirty

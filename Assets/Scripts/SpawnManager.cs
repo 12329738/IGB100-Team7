@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -398,7 +399,7 @@ public class SpawnManager : MonoBehaviour
         obj.SetActive(true);
     }
 
-    public void SpawnChest(Vector3 position)
+    public void SpawnChest(Vector3 position, Image enemy)
     {
         GameObject obj = ObjectPool.instance.GetObject(chest);
 
@@ -407,7 +408,8 @@ public class SpawnManager : MonoBehaviour
 
         obj.transform.position = position;
         obj.transform.rotation = Quaternion.identity;
-
+        Chest chestObj = obj.GetComponent<Chest>();
+        chestObj.enemy = enemy;
         obj.SetActive(true);
     }
 

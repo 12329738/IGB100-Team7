@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject levelUpScreenPrefab;
-    public GameObject levelUpScreen;
+    public UpgradeScreen levelUpScreenPrefab;
+    public UpgradeScreen levelUpScreen;
     public Image playerHealthBar;
     public Image transformationBar;
     public Image miniHealthBar;
     public Image playerExperienceBar;
+    public Color baseTransformationColor;
+    public Color fullTransformationColor;
     public UpgradeUI upgradeUI;
     public TextMeshProUGUI displayedPlayerHealth;
     public TextMeshProUGUI displayedPlayerLevel;
@@ -39,16 +41,18 @@ public class GameUI : MonoBehaviour
         {
             SetVisible(false, image);
         }
+
+        baseTransformationColor = transformationBar.color;
     }
     public void ShowUpgradeOptions(List<Upgrade> upgrades)
     {
-        levelUpScreen = Instantiate(levelUpScreenPrefab);
+        levelUpScreen = Instantiate<UpgradeScreen>(levelUpScreenPrefab);
 
         levelUpScreen.transform.SetParent(this.transform, false);
 
         for (int i = 0; i < upgrades.Count; i++)
         {
-            UpgradeUI upgrade = Instantiate(upgradeUI, levelUpScreen.transform);
+            UpgradeUI upgrade = Instantiate(upgradeUI, levelUpScreen.upgradeArea);
             upgrade.Initialize(upgrades[i]);
         }
     }
@@ -101,6 +105,11 @@ public class GameUI : MonoBehaviour
     private void DisplayTransformationAmount()
     {
         transformationBar.fillAmount = player.currentTransformationAmount / player.stats.GetStat(StatType.MaxEnergy);
+        if (player.currentTransformationAmount >= player.stats.GetStat(StatType.MaxEnergy))
+            transformationBar.color = Color.white;
+        else
+            transformationBar.color = baseTransformationColor;
+        
     }
 
     private void DisplayExperienceAmount()
