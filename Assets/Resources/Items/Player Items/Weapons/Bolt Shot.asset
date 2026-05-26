@@ -54,9 +54,21 @@ MonoBehaviour:
       useComparison: 0
       comparisonType: 0
       value: 0
-    effectData: []
+    effectData:
+    - rid: 2962360827926020163
   evolution: {fileID: 11400000, guid: 51dda0bda3dcf7e498d7e2a88c778d8d, type: 2}
   evolved: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2962360827926020163
+      type: {class: EffectNodeData, ns: , asm: Assembly-CSharp}
+      data:
+        type: 1
+        effectOperation:
+          rid: 2962360827926020166
+    - rid: 2962360827926020166
+      type: {class: KnockBackConfig, ns: , asm: Assembly-CSharp}
+      data:
+        magnitude: 1
+        damageMultiplier: 0
