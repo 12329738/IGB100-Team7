@@ -813,7 +813,7 @@ GameObject:
   - component: {fileID: 171106395}
   - component: {fileID: 171106397}
   - component: {fileID: 171106398}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1725,7 @@ GameObject:
   - component: {fileID: 332334693}
   - component: {fileID: 332334695}
   - component: {fileID: 332334694}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 613479527}
   - component: {fileID: 613479529}
   - component: {fileID: 613479528}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2644,7 +2644,7 @@ GameObject:
   - component: {fileID: 631426838}
   - component: {fileID: 631426840}
   - component: {fileID: 631426839}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3744,7 +3744,7 @@ GameObject:
   - component: {fileID: 910914453}
   - component: {fileID: 910914455}
   - component: {fileID: 910914454}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5115,7 +5115,7 @@ GameObject:
   - component: {fileID: 1137018194}
   - component: {fileID: 1137018196}
   - component: {fileID: 1137018195}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6545,7 +6545,7 @@ GameObject:
   - component: {fileID: 1420275359}
   - component: {fileID: 1420275361}
   - component: {fileID: 1420275360}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6817,7 +6817,7 @@ GameObject:
   - component: {fileID: 1484336456}
   - component: {fileID: 1484336458}
   - component: {fileID: 1484336457}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8246,7 +8246,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825385040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -9382,8 +9382,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1006910528457635943, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006910528457635943, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378924910203834108, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1727119884298929382, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9417,6 +9425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon3
       objectReference: {fileID: 0}
+    - target: {fileID: 3941490433786157716, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4304077882292838004, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -9449,9 +9461,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 4979125646346545241, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5355699196118318644, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_Name
       value: InventoryContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355699196118318644, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472600513252453164, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6146014984605702074, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_LocalScale.x
@@ -9577,6 +9601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 6606475780010525786, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7051970554326426656, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -9585,10 +9613,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon4
       objectReference: {fileID: 0}
+    - target: {fileID: 7131900870997480575, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7706843383799975427, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 00b985fdd36a245458d7c842dfdf1062, type: 3}
+    - target: {fileID: 7833182398766458593, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284620665879468503, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8420187255373673292, guid: 0acfafaadbaa09d4da81191bfe24b326, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
@@ -10316,10 +10356,10 @@ RectTransform:
   - {fileID: 6347843599822706252}
   m_Father: {fileID: 5415466449620185577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2905162897826198860
 MonoBehaviour:
@@ -10588,15 +10628,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 88f76c1ad7484f1409f666812e240449, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
