@@ -117,7 +117,7 @@ public class Weapon : Item, IModifierReceiver
         ProjectileData data = BuildProjectileData();
 
 
-        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
+        float total = stats.GetStat(StatType.ProjectileSpawnRate) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
         if (count < 1)
@@ -133,7 +133,7 @@ public class Weapon : Item, IModifierReceiver
         ProjectileData data = BuildProjectileData();
         data.owner = owner;
 
-        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
+        float total = stats.GetStat(StatType.ProjectileSpawnRate) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
         if (count < 1)
