@@ -122,8 +122,8 @@ public class Weapon : Item, IModifierReceiver
         projectileRemainder = total - count;
         if (count < 1)
             count = 1;
-        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
-        if (spawnSoundEffect != null && count >= 1)
+        GameManager.instance.projectileSpawner.CreateProjectile(data, count, out bool projectileSpawned);
+        if (spawnSoundEffect != null && projectileSpawned)
             AudioManager.instance.PlaySound(spawnSoundEffect, owner.transform.position);
 
     }
@@ -138,11 +138,12 @@ public class Weapon : Item, IModifierReceiver
         projectileRemainder = total - count;
         if (count < 1)
             count = 1;
+        bool projectileSpawned = false;
         if (context.damageSource is Component comp)
         {
-            GameManager.instance.projectileSpawner.CreateProjectile(data, count, position);
+            GameManager.instance.projectileSpawner.CreateProjectile(data, count, out projectileSpawned,position);
         }
-        if (spawnSoundEffect != null && count >= 1)
+        if (spawnSoundEffect != null && projectileSpawned)
             AudioManager.instance.PlaySound(spawnSoundEffect, owner.transform.position);
 
 
