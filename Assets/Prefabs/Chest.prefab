@@ -137,6 +137,7 @@ MonoBehaviour:
   minUpgrades: 2
   maxUpgrades: 4
   enemy: {fileID: 0}
+  rarityMultiplier: 50
 --- !u!65 &7681309295683663675
 BoxCollider:
   m_ObjectHideFlags: 0
