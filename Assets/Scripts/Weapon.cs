@@ -117,13 +117,13 @@ public class Weapon : Item, IModifierReceiver
         ProjectileData data = BuildProjectileData();
 
 
-        float total = stats.GetStat(StatType.ProjectileSpawnRate) + projectileRemainder;
+        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
         if (count < 1)
             count = 1;
-        GameManager.instance.projectileSpawner.CreateProjectile(data, count, out bool projectileSpawned);
-        if (spawnSoundEffect != null && projectileSpawned)
+        GameManager.instance.projectileSpawner.CreateProjectile(data, count);
+        if (spawnSoundEffect != null)
             AudioManager.instance.PlaySound(spawnSoundEffect, owner.transform.position);
 
     }
@@ -133,18 +133,16 @@ public class Weapon : Item, IModifierReceiver
         ProjectileData data = BuildProjectileData();
         data.owner = owner;
 
-        float total = stats.GetStat(StatType.ProjectileSpawnRate) + projectileRemainder;
+        float total = stats.GetStat(StatType.ProjectileCount) + projectileRemainder;
         int count = Mathf.FloorToInt(total);
         projectileRemainder = total - count;
         if (count < 1)
             count = 1;
-        bool projectileSpawned = false;
         if (context.damageSource is Component comp)
         {
-            GameManager.instance.projectileSpawner.CreateProjectile(data, count, out projectileSpawned,position);
+            GameManager.instance.projectileSpawner.CreateProjectile(data, count, position);
         }
-        if (spawnSoundEffect != null && projectileSpawned)
-            AudioManager.instance.PlaySound(spawnSoundEffect, owner.transform.position);
+        AudioManager.instance.PlaySound(spawnSoundEffect, position);
 
 
     }

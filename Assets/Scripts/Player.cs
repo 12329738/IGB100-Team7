@@ -45,7 +45,7 @@ public class Player : Entity, IDamageable
     [HideInInspector]
     public bool upgradeChosen = false;
     private bool levelUpRoutineRunning;
-    public Queue<float> upgradeQueue = new();
+    public Queue<int> upgradeQueue = new();
 
     [HideInInspector]
     public float timeTransformed;
@@ -257,7 +257,7 @@ public class Player : Entity, IDamageable
 
         while (upgradeQueue.Count > 0)
         {
-            List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades(upgradeQueue.Peek());
+            List<Upgrade> chosenUpgrades = GameManager.instance.database.GetAvaliableUpgrades();
 
             if (chosenUpgrades.Count > 0)
             {
