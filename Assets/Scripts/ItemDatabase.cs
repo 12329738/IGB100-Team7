@@ -141,12 +141,13 @@ public class ItemDatabase : MonoBehaviour
             total += rarity.chance;
 
         float random = UnityEngine.Random.Range(0, total);
+        random /=  rarityMultiplier;
 
         float cumulative = 0f;
 
         for (int i = 0; i < rarities.Length; i++)
         {
-            cumulative += rarities[i].chance * (1 + -rarityMultiplier/100);
+            cumulative += rarities[i].chance ;
             if (random < cumulative)
                 return rarities[i];
         }
