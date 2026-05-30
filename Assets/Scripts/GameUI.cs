@@ -131,25 +131,47 @@ public class GameUI : MonoBehaviour
     {
         List<Weapon> weapons = player.weapons;
 
-        for (int i = 0; weapons.Count > i; i++)
+        for (int i = 0;
+             i < weapons.Count && i < weaponInventory.Length;
+             i++)
         {   
             if (weapons[i].icon != null)
             {
                 SetVisible(true, weaponInventory[i]);
                 weaponInventory[i].sprite = weapons[i].icon;
-            }
-                
-            
+
+                InventoryTooltip tooltip =
+                    weaponInventory[i].GetComponent<InventoryTooltip>();
+
+                if (tooltip != null)
+                {
+                    tooltip.item = weapons[i];
+                    tooltip.weapon = weapons[i];
+                    tooltip.passive = null;
+                }
+            }               
         }
 
         List<Passive> passives = player.passives;
 
-        for (int i = 0; passives.Count > i; i++)
+        for (int i = 0;
+             i < passives.Count && i < passiveInventory.Length;
+             i++)
         {
             if (passives[i].icon != null)
             {
                 SetVisible(true, passiveInventory[i]);
                 passiveInventory[i].sprite = passives[i].icon;
+
+                InventoryTooltip tooltip =
+                    passiveInventory[i].GetComponent<InventoryTooltip>();
+
+                if (tooltip != null)
+                {
+                    tooltip.item = passives[i];
+                    tooltip.weapon = null;
+                    tooltip.passive = passives[i];
+                }
             }        
         }
     }
