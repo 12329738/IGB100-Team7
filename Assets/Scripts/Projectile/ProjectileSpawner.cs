@@ -8,10 +8,10 @@ using static UnityEngine.UI.Image;
 public class ProjectileSpawner
 {
 
-    public void CreateProjectile(ProjectileData baseData, int count, out bool projectileSpawned, Vector3? startPosition = null )
+    public void CreateProjectile(ProjectileData baseData, int count, Vector3? startPosition = null)
     {
         float range = baseData.stats.TryGetValue(StatType.Range, out var r) ? r : 0f;
-        projectileSpawned = false;
+
         Entity target = null;
         List<Enemy> enemies = new();
         if (baseData.owner is Player player)
@@ -47,7 +47,6 @@ public class ProjectileSpawner
 
             ProjectileData data = baseData.Clone();
             proj.Initialize(data);
-            projectileSpawned = true;
 
 
             Vector3 origin = proj.data.owner.transform.position;

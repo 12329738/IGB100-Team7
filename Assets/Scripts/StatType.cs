@@ -10,7 +10,7 @@ public enum StatType
     CritChance,
     CritDamage,
     Duration,
-    ProjectileSpawnRate,
+    ProjectileCount,
     AttackSpeed,
     PickupRange,
     MaxEnergy,

@@ -36,7 +36,7 @@ MonoBehaviour:
   hitMode: 0
   baseUpgrade: {fileID: 0}
   owner: {fileID: 0}
-  spawnSoundEffect: {fileID: 8300000, guid: 6023a25e69f145344b470afed66b5a01, type: 3}
+  spawnSoundEffect: {fileID: 0}
   isHit: 1
   stickToPlayer: 0
   randomDirection: 0
