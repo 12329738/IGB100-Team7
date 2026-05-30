@@ -69,6 +69,7 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 1
   isBoss: 0
+  sprite: {fileID: 7363057962950073993, guid: b104f9e8403896443ba70af6a4dec4a7, type: 3}
   references:
     version: 2
     RefIds: []

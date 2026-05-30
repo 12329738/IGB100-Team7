@@ -49,7 +49,7 @@ public class ItemDatabase : MonoBehaviour
     }
 
 
-    public List<Upgrade> GetAvaliableUpgrades()
+    public List<Upgrade> GetAvaliableUpgrades(float rarityMultiplier)
     {
         Player player = GameManager.instance.player;
         List<ItemUpgrade> avaliableUpgrades = new List<ItemUpgrade>();
@@ -104,7 +104,7 @@ public class ItemDatabase : MonoBehaviour
             ItemUpgrade chosenUpgrade = Instantiate(pool[index]);
 
             Rarity[] rarities = GameManager.instance.rarities;
-            Rarity rarity = GenerateRarity(rarities);
+            Rarity rarity = GenerateRarity(rarities, rarityMultiplier);
 
 
 
@@ -134,19 +134,20 @@ public class ItemDatabase : MonoBehaviour
         return chosenUpgrades;
     }
 
-    public Rarity GenerateRarity(Rarity[] rarities)
+    public Rarity GenerateRarity(Rarity[] rarities, float rarityMultiplier)
     {
         float total = 0f;
         foreach (Rarity rarity in rarities)
             total += rarity.chance;
 
         float random = UnityEngine.Random.Range(0, total);
+        random /=  rarityMultiplier;
 
         float cumulative = 0f;
 
         for (int i = 0; i < rarities.Length; i++)
         {
-            cumulative += rarities[i].chance;
+            cumulative += rarities[i].chance ;
             if (random < cumulative)
                 return rarities[i];
         }

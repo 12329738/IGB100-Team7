@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
     private void CreateRarityDictionary()
     {
         raritySprites = new Dictionary<RarityEnum, Sprite>();
+        Array.Sort(rarities, (a,b) => a.chance.CompareTo(b.chance));
         foreach (Rarity rarity in rarities)
         {
             raritySprites[rarity.rarity] = rarity.upgradeImage;
