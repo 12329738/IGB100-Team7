@@ -49,7 +49,7 @@ MonoBehaviour:
     - rid: 6460871655503691852
       type: {class: StackCountModifier, ns: , asm: Assembly-CSharp}
       data:
-        valuePerStack: 30
+        valuePerStack: 20
         effects:
         - {fileID: 11400000, guid: 1b0d3e9c27ef815479fbf77df696d724, type: 2}
         countIndividualStacks: 0
