@@ -59,7 +59,7 @@ public class GameUI : MonoBehaviour
 
     public void HideLevelUpScreen()
     {
-        Destroy(levelUpScreen);
+        Destroy(levelUpScreen.gameObject);
     }
 
     private void LateUpdate()
