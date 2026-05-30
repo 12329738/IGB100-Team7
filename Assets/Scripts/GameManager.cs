@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static UnityEngine.EventSystems.EventTrigger;
+using Random = System.Random;
 
 
 public class GameManager : MonoBehaviour
@@ -40,13 +41,15 @@ public class GameManager : MonoBehaviour
     [FormerlySerializedAs("minZ")] public float minCameraZ;
     public float maxZ;
     public float minZ;
-
+    public Texture2D cursor;
 
     [HideInInspector]
     public Rarity[] rarities;
     public Dictionary<RarityEnum, Color> rarityColors;
     public Dictionary<RarityEnum, Sprite> raritySprites;
-
+    public List<AudioClip> mainMenuMusic;
+    public List<AudioClip> gameMusic;
+    public AudioSource currentMusic;
     public AnimationCurve experienceCurve;
     void Awake()
     {
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         ResetRuntimeState();
+        Cursor.SetCursor(cursor, new Vector2(cursor.width/2f ,0 ) , CursorMode.Auto);
 
         
     }
@@ -86,6 +90,19 @@ public class GameManager : MonoBehaviour
 
         CreateRarityDictionary();
     }
+
+    public void ChangeMusic(Scene scene)
+    {
+        if (scene.buildIndex == 0)
+        {
+            currentMusic.clip = mainMenuMusic[UnityEngine.Random.Range(0, mainMenuMusic.Count)];
+        }
+        else if (scene.buildIndex == 1)
+        {
+            currentMusic.clip = gameMusic[UnityEngine.Random.Range(0, gameMusic.Count)];
+        }
+        currentMusic.Play();
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneReference sceneRef = FindFirstObjectByType<SceneReference>();
@@ -94,7 +111,7 @@ public class GameManager : MonoBehaviour
         {
             SetSceneReferences(sceneRef);
         }
-
+        ChangeMusic(scene);
         ResetRuntimeState();
     }
     private void CreateRarityDictionary()
