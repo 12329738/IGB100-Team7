@@ -71,6 +71,7 @@ MonoBehaviour:
   dropsChest: 1
   isBoss: 0
   sprite: {fileID: 3191098885334603529, guid: a32a61ee6dc97314a84ef7ed263f79d3, type: 3}
+  spriteTransform: {fileID: 2769504493902344801}
   references:
     version: 2
     RefIds: []
