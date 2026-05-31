@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         ResetRuntimeState();
-        Cursor.SetCursor(cursor, new Vector2(cursor.width/2f ,cursor.height ) , CursorMode.Auto);
+        Cursor.SetCursor(cursor, new Vector2(cursor.width/2f ,-cursor.height ) , CursorMode.Auto);
 
         
     }
