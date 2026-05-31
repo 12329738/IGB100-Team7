@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class Menus : MonoBehaviour
 {
@@ -67,6 +68,11 @@ public class Menus : MonoBehaviour
     [Header("MAIN MENU INTRO")]
     public CanvasGroup logoGroup;
     public CanvasGroup mainButtonsGroup;
+
+    [Header("Death Screen")]
+    public TextMeshProUGUI finalKillsText;
+    public TextMeshProUGUI highScoreText;
+    public GameObject newHighScoreText;
 
     private int tutorialIndex;
     private bool isPaused;
@@ -584,15 +590,46 @@ public class Menus : MonoBehaviour
     // DEATH SCREEN
     // =========================================================
 
-    public void OpenDeathScreen()
+    public void OpenDeathScreen(int killCount)
     {
         deathScreen.SetActive(true);
 
         Time.timeScale = 0f;
+
+        finalKillsText.text =
+            $"Kills This Run: {killCount}";
+
+        int highScore =
+            PlayerPrefs.GetInt("HighScore", 0);
+
+        bool newRecord = false;
+
+        if (killCount > highScore)
+        {
+            highScore = killCount;
+
+            PlayerPrefs.SetInt(
+                "HighScore",
+                highScore
+            );
+
+            PlayerPrefs.Save();
+
+            newRecord = true;
+        }
+
+        highScoreText.text =
+            $"High Score: {highScore}";
+
+        if (newHighScoreText != null)
+            newHighScoreText.SetActive(newRecord);
     }
 
     public void RestartGame()
     {
+        if (newHighScoreText != null)
+            newHighScoreText.SetActive(false);
+        
         StartCoroutine(RestartRoutine());
     }
 
@@ -607,6 +644,9 @@ public class Menus : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        if (newHighScoreText != null)
+            newHighScoreText.SetActive(false);
+
         StartCoroutine(ReturnToMenuRoutine());
     }
 

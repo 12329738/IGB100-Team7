@@ -1,4 +1,3 @@
-
 using System;
 using System.Buffers.Text;
 using System.Collections;
@@ -101,8 +100,25 @@ public class GameManager : MonoBehaviour
         {
             currentMusic.clip = gameMusic[UnityEngine.Random.Range(0, gameMusic.Count)];
         }
+
+        currentMusic.loop = true;
+        
+        float musicVolume =
+            PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+        currentMusic.volume = musicVolume;
+
         currentMusic.Play();
     }
+
+    public void SetMusicVolume(float volume)
+    {
+        if (currentMusic != null)
+        {
+            currentMusic.volume = volume;
+        }
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneReference sceneRef = FindFirstObjectByType<SceneReference>();
@@ -114,6 +130,7 @@ public class GameManager : MonoBehaviour
         ChangeMusic(scene);
         ResetRuntimeState();
     }
+
     private void CreateRarityDictionary()
     {
         raritySprites = new Dictionary<RarityEnum, Sprite>();

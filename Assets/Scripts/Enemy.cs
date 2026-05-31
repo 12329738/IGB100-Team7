@@ -19,9 +19,12 @@ public class Enemy : Entity, IDamageable
     public bool isBoss;
     private bool isTouchingPlayer;
     public Image sprite;
+    public Transform spriteTransform;
+    public Vector3 baseScale;
     void Start()
     {
         playerDamageSource = player.GetComponent<IDamageSource>();
+        baseScale = spriteTransform.localScale;
     }
 
     // Update is called once per frame

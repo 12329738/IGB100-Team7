@@ -411,7 +411,7 @@ public class Player : Entity, IDamageable
     {
         canBeDamaged = false;
 
-        Menus.instance.OpenDeathScreen();
+        Menus.instance.OpenDeathScreen(kills);
     }
 
     internal void Transform()

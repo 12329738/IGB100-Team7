@@ -68,6 +68,8 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: 2d98bb714eea6f343a3d6de7ce396621, type: 2}
   dropsChest: 0
   isBoss: 0
+  sprite: {fileID: 0}
+  spriteTransform: {fileID: 94004912102785942}
   references:
     version: 2
     RefIds: []
