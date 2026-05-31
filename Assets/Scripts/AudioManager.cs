@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> mainMenuMusic;
     public List<AudioClip> gameMusic;
     public AudioSource currentMusic;
+    public float musicVolume = 1f;
+    public float sfxVolume = 1f;
     [SerializeField] GameObject audioSourcePrefab;
     void Awake()
     {
@@ -50,7 +52,7 @@ public class AudioManager : MonoBehaviour
 
         AudioSource aSource = pooledGO.GetComponent<AudioSource>();
         aSource.clip = clip;
-        aSource.volume = volume;
+        aSource.volume = volume * sfxVolume;
         aSource.Play();
 
         StartCoroutine(ReturnToPoolAfterPlay(pooledGO, clip.length));
@@ -60,5 +62,20 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         ObjectPool.instance.ReturnObject(go);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        musicVolume = volume;
+
+        if (currentMusic != null)
+        {
+            currentMusic.volume = musicVolume;
+        }
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        sfxVolume = volume;
     }
 }
