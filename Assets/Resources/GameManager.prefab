@@ -73,7 +73,6 @@ MonoBehaviour:
   rarities: []
   mainMenuMusic:
   - {fileID: 8300000, guid: 7a0bfe305af48fa4bb133c1ed0eb254e, type: 3}
-  - {fileID: 8300000, guid: f8a96e3cc7e948c40bbe1fd2788fcf52, type: 3}
   gameMusic:
   - {fileID: 8300000, guid: 5705c7c3018866b47adaa72b5230ca34, type: 3}
   - {fileID: 8300000, guid: ea42398c615870a42be157c6dc39d195, type: 3}
