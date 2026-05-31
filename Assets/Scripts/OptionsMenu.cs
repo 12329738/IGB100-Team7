@@ -47,16 +47,24 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetMusicVolume(float value)
     {
-        // Placeholder for future mixer integration
         PlayerPrefs.SetFloat("MusicVolume", value);
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SetMusicVolume(value);
+        }
 
         UpdateVolumeTexts();
     }
 
     public void SetSFXVolume(float value)
     {
-        // Placeholder for future mixer integration
         PlayerPrefs.SetFloat("SFXVolume", value);
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.SetSFXVolume(value);
+        }
 
         UpdateVolumeTexts();
     }
@@ -97,6 +105,13 @@ public class OptionsMenu : MonoBehaviour
         fullscreenToggle.isOn = fullscreen;
 
         AudioListener.volume = masterVolume;
+
+        if (AudioManager.instance != null)
+        {
+            GameManager.instance.SetMusicVolume(musicVolume);
+            AudioManager.instance.SetSFXVolume(sfxVolume);
+        }
+
         Screen.fullScreen = fullscreen;
     }
 
