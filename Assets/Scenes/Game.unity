@@ -5979,7 +5979,7 @@ MonoBehaviour:
   player: {fileID: 393413090}
   minSpawnDistance: 10
   spawnInterval: 1
-  difficultyRamp: 0.2
+  difficultyRamp: 0.3
   currentNormalEnemies: 0
   currentBossEnemies: 0
   minimumEnemyNumber: 10
@@ -6021,10 +6021,10 @@ MonoBehaviour:
     spawnTimer: 0
   - enemyPrefab: {fileID: 4061204989553054452, guid: d41f2bb5d1fde4646bd20b754e431ea6, type: 3}
     statsPreset: {fileID: 11400000, guid: 31c2f3874ab030145bad2b11b3021823, type: 2}
-    amount: 35
-    spawnDuration: 0.1
-    minAlive: 0
-    spawnDelay: 0
+    amount: 0
+    spawnDuration: 0
+    minAlive: 35
+    spawnDelay: 0.1
     isBoss: 0
     currentAlive: 0
     spawnTimer: 0
